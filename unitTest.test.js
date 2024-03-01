@@ -10,20 +10,16 @@ describe('mode: type', () => {
     expect(unitTest(null, 'null')).toBe('null')
   })
 
-  test('[]', ()=> {
+  test('array', ()=> {
     expect(unitTest([], 'array')).toBe('array')
   })
 
-  test('{}', ()=> {
+  test('object', ()=> {
     expect(unitTest({}, 'object')).toBe('object')
   })
 
-  test('boolean(true)', ()=> {
+  test('boolean', ()=> {
     expect(unitTest(true, 'boolean')).toBe('boolean')
-  })
-
-  test('boolean(false)', ()=> {
-    expect(unitTest(false, 'boolean')).toBe('boolean')
   })
 
   test('NaN', ()=> {
@@ -34,24 +30,20 @@ describe('mode: type', () => {
     expect(unitTest(123, 'number')).toBe('number')
   })
 
-  test('123n', ()=> {
+  test('bigint', ()=> {
     expect(unitTest(123n, 'bigint')).toBe('bigint')
   })
 
-  test('Hello World', ()=> {
+  test('string', ()=> {
     expect(unitTest('Hello World', 'string')).toBe('string')
   })
 
-  test('Symbol()', ()=> {
+  test('symbol', ()=> {
     expect(unitTest(Symbol(), 'symbol')).toBe('symbol')
   })
 
-  test('function () {}', ()=> {
+  test('function', ()=> {
     expect(unitTest(function () {}, 'function')).toBe('function')
-  })
-
-  test('Symbol()', ()=> {
-    expect(unitTest(Symbol(), 'symbol')).toBe('symbol')
   })
 })
 

@@ -208,13 +208,13 @@ const unitTestModule = {
       if (unitTestModule.data.ALLOW_TYPES.includes(mode)) {
         unitTestModule.in.deal_TypeMode(input, mode)
 
-        // for testing
+        // for testing purpose
         return mode
       }
       else if (unitTestModule.data.ALLOW_OPERATORS.includes(mode)) {
         unitTestModule.in.deal_OperatorMode(input, mode, input2, errorMessage)
 
-        // for testing
+        // for testing purpose
         return true
       }
     },
