@@ -1,4 +1,4 @@
-const unitTestModule = {
+const unitTest = {
   data: {
     ALLOW_OPERATORS: ['<', '<=', '>=', '>', '===', '!=='],
     ALLOW_TYPES: ['undefined', 'null', 'array', 'object', 'boolean', 'NaN', 'number', 'bigint', 'string', 'symbol', 'function'],
@@ -50,6 +50,7 @@ const unitTestModule = {
               // to remove the end of spacing and ,
               result = `[${result.trim().slice(0, -1)}]`
 
+              // [1, 'hello', [...]]
               return result
             }) ();
           case 'object':
@@ -67,6 +68,7 @@ const unitTestModule = {
               // to remove the end of spacing and , 
               result = `{${result.trim().slice(0, -1)}}`
 
+              // {1, 'hello', {...}}
               return result
             }) ();
           case 'bigint':
@@ -89,7 +91,7 @@ const unitTestModule = {
      */
     deal_OperatorMode(input, operator, input2, errorMessage = 'undefined error message (4th argument)') {
       {
-        if (!unitTestModule.data.ALLOW_OPERATORS.includes(operator)) {
+        if (!unitTest.data.ALLOW_OPERATORS.includes(operator)) {
           throw new Error(`❌ Your 2nd argument: ${this.reuse.fix_TextInLog(operator)}, ✅ ('<', '<=', '>=', '>', '===', '!==')`)
         }
         if (this.reuse.fix_LegacyType(input) !== 'number' || this.reuse.fix_LegacyType(input2) !== 'number') {
@@ -150,7 +152,7 @@ const unitTestModule = {
      */
     deal_TypeMode(input, type) {
       {
-        if (!unitTestModule.data.ALLOW_TYPES.includes(type)) {
+        if (!unitTest.data.ALLOW_TYPES.includes(type)) {
           throw new Error(`❌ Your 2nd argument: ${this.reuse.fix_TextInLog(type)}, ✅ ('undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function')`)
         }
       }
@@ -172,57 +174,59 @@ const unitTestModule = {
     }
   },
   out: {
-    /** 
-     * Achieving 100% function coverage will save your life.
-     * @param {*} input The testing value 
-     * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
-     * @param {Number} input2 The compared value (operator only)
-     * @param {String} [errorMessage] optional: custom your error message (operator only)
-     * @returns {Void|Error} PASS: void | FAIL: throw Error 
-     * @example 
-     * <PASS>
-     * - mode: type
-     * unitTest(undefined, 'undefined')
-     * unitTest(null, 'null')
-     * unitTest([], 'array')
-     * unitTest({}, 'object')
-     * unitTest(true, 'boolean')
-     * unitTest(NaN, 'NaN')
-     * unitTest(1, 'number')
-     * unitTest(1n, 'bigint')
-     * unitTest('Hello World', 'string')
-     * unitTest(Symbol(), 'symbol')
-     * unitTest(function () {}, 'function')
-     * 
-     * - mode: operator
-     * unitTest(1, '<', 5)
-     * unitTest(1, '<=', 5)
-     * unitTest(5, '>', 1)
-     * unitTest(5, '>=', 1)
-     * unitTest(1, '===', 1)
-     * unitTest([1,2], '!==', 'Hello world')
-    */
-    unitTest(input, mode, input2, errorMessage) { 
-      {
-        if (!unitTestModule.data.ALLOW_TYPES.includes(mode) && !unitTestModule.data.ALLOW_OPERATORS.includes(mode)) {
-          unitTestModule.in.deal_EdgeCases(mode)
+    es: {
+      /** 
+       * Achieving 100% function coverage will save your life.
+       * @param {*} input The testing value 
+       * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
+       * @param {Number} input2 The compared value (operator only)
+       * @param {String} [errorMessage] optional: custom your error message (operator only)
+       * @returns {Void|Error} PASS: void | FAIL: throw Error 
+       * @example 
+       * <PASS>
+       * - mode: type
+       * unitTest(undefined, 'undefined')
+       * unitTest(null, 'null')
+       * unitTest([], 'array')
+       * unitTest({}, 'object')
+       * unitTest(true, 'boolean')
+       * unitTest(NaN, 'NaN')
+       * unitTest(1, 'number')
+       * unitTest(1n, 'bigint')
+       * unitTest('Hello World', 'string')
+       * unitTest(Symbol(), 'symbol')
+       * unitTest(function () {}, 'function')
+       * 
+       * - mode: operator
+       * unitTest(1, '<', 5)
+       * unitTest(1, '<=', 5)
+       * unitTest(5, '>', 1)
+       * unitTest(5, '>=', 1)
+       * unitTest(1, '===', 1)
+       * unitTest([1,2], '!==', 'Hello world')
+      */
+      unitTest(input, mode, input2, errorMessage) { 
+        {
+          if (!unitTest.data.ALLOW_TYPES.includes(mode) && !unitTest.data.ALLOW_OPERATORS.includes(mode)) {
+            unitTest.in.deal_EdgeCases(mode)
+          }
         }
-      }
-          
-      if (unitTestModule.data.ALLOW_TYPES.includes(mode)) {
-        unitTestModule.in.deal_TypeMode(input, mode)
+            
+        if (unitTest.data.ALLOW_TYPES.includes(mode)) {
+          unitTest.in.deal_TypeMode(input, mode)
 
-        // for testing purpose
-        return mode
-      }
-      else if (unitTestModule.data.ALLOW_OPERATORS.includes(mode)) {
-        unitTestModule.in.deal_OperatorMode(input, mode, input2, errorMessage)
+          // for testing purpose
+          return mode
+        }
+        else if (unitTest.data.ALLOW_OPERATORS.includes(mode)) {
+          unitTest.in.deal_OperatorMode(input, mode, input2, errorMessage)
 
-        // for testing purpose
-        return true
-      }
-    },
+          // for testing purpose
+          return true
+        }
+      },
+    }
   }
 }
 
-export const { unitTest } = unitTestModule.out
+export const { es } = unitTest.out
