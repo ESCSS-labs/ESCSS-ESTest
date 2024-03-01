@@ -11,11 +11,15 @@ const unitTestModule = {
        * @returns 
        */
       fix_LegacyType(input) {
+        const isNull = input === null
+        const isArray = Array.isArray(input)
+        const isNaN = Number.isNaN(input)
+
         const typeMap = {
           'undefined': 'undefined',
-          'object': input === null ? 'null' : Array.isArray(input) ? 'array' : 'object',
+          'object': isNull? 'null': isArray? 'array': 'object',
           'boolean': 'boolean',
-          'number': Number.isNaN(input) ? 'NaN' : 'number',
+          'number': isNaN? 'NaN': 'number',
           'bigint': 'bigint',
           'string': 'string',
           'symbol': 'symbol',
