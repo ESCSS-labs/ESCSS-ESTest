@@ -160,7 +160,7 @@ const unitTestModule = {
         const inputInLog = this.reuse.fix_TextInLog(input)
         const inputFixedType = this.reuse.fix_LegacyType(input)
 
-        throw new Error(`❌ typeof ${inputInLog} === ${typeInLog}, ✅ '${inputFixedType}' --> ${typeInLog}`)
+        throw new Error(`❌ typeof ${inputInLog} === ${typeInLog}, ✅ type: '${inputFixedType}' --> ${typeInLog}`)
       }
     },
     /**
