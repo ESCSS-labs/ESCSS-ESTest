@@ -113,37 +113,58 @@ const unitTest = {
         }
       }
 
+      const inputInLog = this.reuse.fix_TextInLog(input)
+      const input2InLog = this.reuse.fix_TextInLog(input2)
+
       switch(operator) {
         case '<':
-          if (!(input < input2)) {
-            throw new Error(`❌ ${this.reuse.fix_TextInLog(input)} < ${this.reuse.fix_TextInLog(input2)}, errorMessage: ${errorMessage}`);
+          {
+            if (!(input < input2)) {
+              throw new Error(`❌ ${inputInLog} < ${input2InLog}, errorMessage: ${errorMessage}`);
+            }
           }
-          return 
+
+          break 
         case '<=':
-          if (!(input <= input2)) {
-            throw new Error(`❌ ${this.reuse.fix_TextInLog(input)} <= ${this.reuse.fix_TextInLog(input2)}, errorMessage: ${errorMessage}`);
+          {
+            if (!(input <= input2)) {
+              throw new Error(`❌ ${inputInLog} <= ${input2InLog}, errorMessage: ${errorMessage}`);
+            }
           }
-          return 
+
+          break 
         case '>=':
-          if (!(input >= input2)) {
-            throw new Error(`❌ ${this.reuse.fix_TextInLog(input)} >= ${this.reuse.fix_TextInLog(input2)}, errorMessage: ${errorMessage}`);
+          {
+            if (!(input >= input2)) {
+              throw new Error(`❌ ${inputInLog} >= ${input2InLog}, errorMessage: ${errorMessage}`);
+            }
           }
-          return 
+
+          break 
         case '>':
-          if (!(input > input2)) {
-            throw new Error(`❌ ${this.reuse.fix_TextInLog(input)} > ${this.reuse.fix_TextInLog(input2)}, errorMessage: ${errorMessage}`);
+          {
+            if (!(input > input2)) {
+              throw new Error(`❌ ${inputInLog} > ${input2InLog}, errorMessage: ${errorMessage}`);
+            }
           }
-          return 
+
+          break 
         case '===':
-          if (!(input === input2)) {
-            throw new Error(`❌ ${this.reuse.fix_TextInLog(input)} === ${this.reuse.fix_TextInLog(input2)}, errorMessage: ${errorMessage}`);
+          {
+            if (!(input === input2)) {
+              throw new Error(`❌ ${inputInLog} === ${input2InLog}, errorMessage: ${errorMessage}`);
+            }
           }
-          return 
+
+          break 
         case '!==':
-          if (!(input !== input2)) {
-            throw new Error(`❌ ${this.reuse.fix_TextInLog(input)} !== ${this.reuse.fix_TextInLog(input2)}, errorMessage: ${errorMessage}`);
+          {
+            if (!(input !== input2)) {
+              throw new Error(`❌ ${inputInLog} !== ${input2InLog}, errorMessage: ${errorMessage}`);
+            }
           }
-          return 
+
+          break 
         default:
           throw new Error(`❌ Error from deal_OperatorMode(), operator: ${operator}`);
       }
