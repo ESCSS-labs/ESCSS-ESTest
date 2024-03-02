@@ -34,43 +34,46 @@ const unitTest = {
        * @returns 
        */
       fix_TextInLog(input) {
+        const fix_ArrayLog = () => {
+          let result = ''
+
+          input.forEach(item => {
+            if (this.fix_LegacyType(item) === 'array') {
+              result += `[...], `
+            } else {
+              result += `${this.fix_TextInLog(item)}, `
+            }
+          })
+
+          // to remove the end of spacing and ,
+          result = `[${result.trim().slice(0, -1)}]`
+
+          // [1, 'hello', [...]]
+          return result
+        }
+        const fix_ObjectLog = () => {
+          let result = ''
+
+          for(const [key, value] of Object.entries(input)) {
+            if (this.fix_LegacyType(value) === 'object') {
+              result += `${key}: {...}, `
+            } else {
+              result += `${key}: ${this.fix_TextInLog(value)}, `
+            }
+          }
+
+          // to remove the end of spacing and , 
+          result = `{${result.trim().slice(0, -1)}}`
+
+          // {1, 'hello', {...}}
+          return result
+        }
+
         switch (this.fix_LegacyType(input)) {
           case 'array':
-            return (() => {
-              let result = ''
-
-              input.forEach(item => {
-                if (this.fix_LegacyType(item) === 'array') {
-                  result += `[...], `
-                } else {
-                  result += `${this.fix_TextInLog(item)}, `
-                }
-              })
-
-              // to remove the end of spacing and ,
-              result = `[${result.trim().slice(0, -1)}]`
-
-              // [1, 'hello', [...]]
-              return result
-            }) ();
+            return fix_ArrayLog();
           case 'object':
-            return (() => {
-              let result = ''
-
-              for(const [key, value] of Object.entries(input)) {
-                if (this.fix_LegacyType(value) === 'object') {
-                  result += `${key}: {...}, `
-                } else {
-                  result += `${key}: ${this.fix_TextInLog(value)}, `
-                }
-              }
-
-              // to remove the end of spacing and , 
-              result = `{${result.trim().slice(0, -1)}}`
-
-              // {1, 'hello', {...}}
-              return result
-            }) ();
+            return fix_ObjectLog();
           case 'bigint':
             return `${input}n`;
           case 'string':
