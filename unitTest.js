@@ -92,7 +92,7 @@ const unitTest = {
      * @param {String} [errorMessage] Custom your error message
      * @returns {Void | Error}
      */
-    deal_OperatorMode(input, operator, input2, errorMessage = 'undefined error message (4th argument)') {
+    use_OperatorMode(input, operator, input2, errorMessage = 'undefined error message (4th argument)') {
       {
         if (!unitTest.data.ALLOW_OPERATORS.includes(operator)) {
           throw new Error(`❌ Your 2nd argument: ${this.reuse.fix_TextInLog(operator)}, ✅ ('<', '<=', '>=', '>', '===', '!==')`)
@@ -166,7 +166,7 @@ const unitTest = {
 
           break 
         default:
-          throw new Error(`❌ Error from deal_OperatorMode(), operator: ${operator}`);
+          throw new Error(`❌ Error from use_OperatorMode(), operator: ${operator}`);
       }
     },
     /**
@@ -174,7 +174,7 @@ const unitTest = {
      * @param {'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'} type
      * @returns {Void | Error}
      */
-    deal_TypeMode(input, type) {
+    use_TypeMode(input, type) {
       {
         if (!unitTest.data.ALLOW_TYPES.includes(type)) {
           throw new Error(`❌ Your 2nd argument: ${this.reuse.fix_TextInLog(type)}, ✅ ('undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function')`)
@@ -193,7 +193,7 @@ const unitTest = {
      * @param {*} mode 
      * @returns {Error}
      */
-    deal_EdgeCases(mode) {
+    use_EdgeCases(mode) {
       throw new Error(`❌ Your 2nd argument: ${this.reuse.fix_TextInLog(mode)}, ✅ 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`)
     }
   },
@@ -232,18 +232,18 @@ const unitTest = {
       unitTest(input, mode, input2, errorMessage) { 
         {
           if (!unitTest.data.ALLOW_TYPES.includes(mode) && !unitTest.data.ALLOW_OPERATORS.includes(mode)) {
-            unitTest.in.deal_EdgeCases(mode)
+            unitTest.in.use_EdgeCases(mode)
           }
         }
             
         if (unitTest.data.ALLOW_TYPES.includes(mode)) {
-          unitTest.in.deal_TypeMode(input, mode)
+          unitTest.in.use_TypeMode(input, mode)
 
           // for testing purpose
           return mode
         }
         else if (unitTest.data.ALLOW_OPERATORS.includes(mode)) {
-          unitTest.in.deal_OperatorMode(input, mode, input2, errorMessage)
+          unitTest.in.use_OperatorMode(input, mode, input2, errorMessage)
 
           // for testing purpose
           return true
