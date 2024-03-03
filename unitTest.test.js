@@ -45,6 +45,10 @@ describe('mode: type', () => {
   test('function', ()=> {
     expect(es.unitTest(function () {}, 'function')).toBe('function')
   })
+
+  test('number w/ errMsg', ()=> {
+    expect(es.unitTest(123, 'number', 'number text')).toBe('number')
+  })
 })
 
 describe('mode: operator', () => {
@@ -90,11 +94,15 @@ describe('error situation', () => {
     expect(() => es.unitTest(1, '!=')).toThrow()
   })
   
-  test('operator input is not number type', ()=> {
-    expect(() => es.unitTest([], '<', 's')).toThrow()
+  test('operator input/input2 should be type number', ()=> {
+    expect(() => es.unitTest([], '<', 1)).toThrow()
   })
 
-  test('4th argument is not string type', ()=> {
-    expect(() => es.unitTest(10, '<', 1, 999)).toThrow()
+  test('type errMsg 3th argument should be type: string | undefined', ()=> {
+    expect(() => es.unitTest(10, 'number', {})).toThrow()
+  })
+
+  test('operator errMsg 4th argument should be type: string | undefined', ()=> {
+    expect(() => es.unitTest(10, '>', 1, {})).toThrow()
   })
 })
