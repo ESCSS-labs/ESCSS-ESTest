@@ -218,29 +218,29 @@ const UNITTEST = {
            * @example 
            * <PASS>
            * - type mode -
-           * test(undefined, 'undefined')
-           * test(null, 'null')
-           * test([], 'array')
-           * test({}, 'object')
-           * test(true, 'boolean')
-           * test(NaN, 'NaN')
-           * test(1, 'number')
-           * test(1n, 'bigint')
-           * test('Hello World', 'string')
-           * test(Symbol(), 'symbol')
-           * test(function () {}, 'function')
-           * test(1, 'object', 'foo') // custom error message
+           * ESTest(undefined, 'undefined')
+           * ESTest(null, 'null')
+           * ESTest([], 'array')
+           * ESTest({}, 'object')
+           * ESTest(true, 'boolean')
+           * ESTest(NaN, 'NaN')
+           * ESTest(1, 'number')
+           * ESTest(1n, 'bigint')
+           * ESTest('Hello World', 'string')
+           * ESTest(Symbol(), 'symbol')
+           * ESTest(function () {}, 'function')
+           * ESTest(1, 'object', 'foo') // custom error message
            * 
            * - operator mode -
-           * test(1, '<', 5)
-           * test(1, '<=', 5)
-           * test(5, '>', 1)
-           * test(5, '>=', 1)
-           * test(1, '===', 1)
-           * test(1, '!==', 2) 
-           * test(1, '>=', 100, 'foo') // custom error message
+           * ESTest(1, '<', 5)
+           * ESTest(1, '<=', 5)
+           * ESTest(5, '>', 1)
+           * ESTest(5, '>=', 1)
+           * ESTest(1, '===', 1)
+           * ESTest(1, '!==', 2) 
+           * ESTest(1, '>=', 100, 'foo') // custom error message
           */
-    test(input, mode, input2, errMsg) {
+    ESTest(input, mode, input2, errMsg) {
       {
         if (!UNITTEST.data.TYPES.includes(mode) && !UNITTEST.data.OPERATORS.includes(mode)) {
           UNITTEST.in.dealEdgeCases(mode)
@@ -263,7 +263,7 @@ const UNITTEST = {
   }
 }
 
-// I tried named test to unitTest, import type intelligent will lost, but feature is working, I think jsdoc/ts declaration is non-sensitive.
-const test = UNITTEST.out.test;
+// I tried named ESTest to unitTest, import type intelligent will lost, but feature is working, I think jsdoc/ts declaration is non-sensitive.
+const ESTest = UNITTEST.out.ESTest;
 
-export { test };
+export { ESTest };
