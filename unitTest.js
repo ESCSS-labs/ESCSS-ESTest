@@ -1,7 +1,7 @@
-const unitTest = {
+const UNITTEST = {
   data: {
-    ALLOW_OPERATORS: ['<', '<=', '>=', '>', '===', '!=='],
-    ALLOW_TYPES: ['undefined', 'null', 'array', 'object', 'boolean', 'NaN', 'number', 'bigint', 'string', 'symbol', 'function'],
+    OPERATORS: ['<', '<=', '>=', '>', '===', '!=='],
+    TYPES: ['undefined', 'null', 'array', 'object', 'boolean', 'NaN', 'number', 'bigint', 'string', 'symbol', 'function'],
   },
   in: {
     reuse: {
@@ -10,38 +10,38 @@ const unitTest = {
        * @param {*} input 
        * @returns 
        */
-      get_NewType(input) {
+      getNewType(input) {
         const isNull = input === null
         const isArray = Array.isArray(input)
         const isNaN = Number.isNaN(input)
 
         const typeMap = {
           'undefined': 'undefined',
-          'object': isNull? 'null': isArray? 'array': 'object',
+          'object': isNull ? 'null' : isArray ? 'array' : 'object',
           'boolean': 'boolean',
-          'number': isNaN? 'NaN': 'number',
+          'number': isNaN ? 'NaN' : 'number',
           'bigint': 'bigint',
           'string': 'string',
           'symbol': 'symbol',
           'function': 'function'
         }
 
-        return typeMap[typeof input] || `❌ Error from get_NewType(), input: ${input}`
+        return typeMap[typeof input] || `❌ Error from getNewType(), input: ${input}`
       },
       /**
        *  To correctly display text in the log.
        * @param {*} input 
        * @returns 
        */
-      fix_TextInLog(input) {
+      fixTextInLog(input) {
         const fix_ArrayLog = () => {
           let result = ''
 
           input.forEach(item => {
-            if (this.get_NewType(item) === 'array') {
+            if (UNITTEST.in.reuse.getNewType(item) === 'array') {
               result += `[...], `
             } else {
-              result += `${this.fix_TextInLog(item)}, `
+              result += `${UNITTEST.in.reuse.fixTextInLog(item)}, `
             }
           })
 
@@ -54,11 +54,11 @@ const unitTest = {
         const fix_ObjectLog = () => {
           let result = ''
 
-          for(const [key, value] of Object.entries(input)) {
-            if (this.get_NewType(value) === 'object') {
+          for (const [key, value] of Object.entries(input)) {
+            if (UNITTEST.in.reuse.getNewType(value) === 'object') {
               result += `${key}: {...}, `
             } else {
-              result += `${key}: ${this.fix_TextInLog(value)}, `
+              result += `${key}: ${UNITTEST.in.reuse.fixTextInLog(value)}, `
             }
           }
 
@@ -69,7 +69,7 @@ const unitTest = {
           return result
         }
 
-        switch (this.get_NewType(input)) {
+        switch (UNITTEST.in.reuse.getNewType(input)) {
           case 'array':
             return fix_ArrayLog();
           case 'object':
@@ -80,36 +80,28 @@ const unitTest = {
             return `'${input}'`;
           case 'symbol':
             return `Symbol(...)`;
-          default: 
+          default:
             return input
         }
       },
     },
     /**
-     * @param {Number} input The testing value 
+     * @param {*} input The testing value 
      * @param {'<'|'<='|'>='|'>'|'==='|'!=='} operator
-     * @param {Number} value2 The compared value
+     * @param {*} input2 The compared value
      * @param {undefined | String} [errMsg] Custom your error message
      * @returns {Void | Error}
      */
-    use_OperatorMode(input, operator, value2, errMsg) {
+    useOperatorMode(input, operator, input2, errMsg) {
       {
-        if (!unitTest.data.ALLOW_OPERATORS.includes(operator)) {
-          throw new Error(`❌ Your 2nd argument: ${this.reuse.fix_TextInLog(operator)}, ✅ ('<', '<=', '>=', '>', '===', '!==')`)
+        if (!UNITTEST.data.OPERATORS.includes(operator)) {
+          throw new Error(`❌ Your 2nd argument: ${UNITTEST.in.reuse.fixTextInLog(operator)}, ✅ ('<', '<=', '>=', '>', '===', '!==')`)
         }
-        if (!(['number'].includes(this.reuse.get_NewType(input)) && ['number'].includes(this.reuse.get_NewType(value2)))) {
-          const inputInLog = this.reuse.fix_TextInLog(input)
-          const inputNewType = this.reuse.get_NewType(input)
-          const inputInLog2 = this.reuse.fix_TextInLog(value2)
-          const inputNewType2 = this.reuse.get_NewType(value2)
-  
-          throw new Error(`❌ Your 1st input: ${inputInLog}('${inputNewType}'); 2nd input: ${inputInLog2}('${inputNewType2}'), ✅ both types should be 'number'`)
-        }
-        if (!['undefined' ,'string'].includes(this.reuse.get_NewType(errMsg))) {
-          const customErrType = this.reuse.get_NewType(errMsg)
-          const customErrInLog = this.reuse.fix_TextInLog(errMsg)
-  
-          throw new Error(`❌ Your error message: ${customErrInLog}('${customErrType}') , ✅ type should be 'string'`)
+        if (!['undefined', 'string'].includes(UNITTEST.in.reuse.getNewType(errMsg))) {
+          const customErrType = UNITTEST.in.reuse.getNewType(errMsg)
+          const customErrInLog = UNITTEST.in.reuse.fixTextInLog(errMsg)
+
+          throw new Error(`❌ Your error message: ${customErrInLog}('${customErrType}') , ✅ should be 'string' type`)
         }
       }
 
@@ -117,60 +109,60 @@ const unitTest = {
         errMsg = 'undefined error message (4th argument)'
       }
 
-      const inputInLog = this.reuse.fix_TextInLog(input)
-      const input2InLog = this.reuse.fix_TextInLog(value2)
+      const inputInLog = UNITTEST.in.reuse.fixTextInLog(input)
+      const input2InLog = UNITTEST.in.reuse.fixTextInLog(input2)
 
-      switch(operator) {
+      switch (operator) {
         case '<':
           {
-            if (!(input < value2)) {
+            if (!(input < input2)) {
               throw new Error(`❌ ${inputInLog} < ${input2InLog}, errMsg: ${errMsg}`);
             }
           }
 
-          break 
+          break
         case '<=':
           {
-            if (!(input <= value2)) {
+            if (!(input <= input2)) {
               throw new Error(`❌ ${inputInLog} <= ${input2InLog}, errMsg: ${errMsg}`);
             }
           }
 
-          break 
+          break
         case '>=':
           {
-            if (!(input >= value2)) {
+            if (!(input >= input2)) {
               throw new Error(`❌ ${inputInLog} >= ${input2InLog}, errMsg: ${errMsg}`);
             }
           }
 
-          break 
+          break
         case '>':
           {
-            if (!(input > value2)) {
+            if (!(input > input2)) {
               throw new Error(`❌ ${inputInLog} > ${input2InLog}, errMsg: ${errMsg}`);
             }
           }
 
-          break 
+          break
         case '===':
           {
-            if (!(input === value2)) {
+            if (!(input === input2)) {
               throw new Error(`❌ ${inputInLog} === ${input2InLog}, errMsg: ${errMsg}`);
             }
           }
 
-          break 
+          break
         case '!==':
           {
-            if (!(input !== value2)) {
+            if (!(input !== input2)) {
               throw new Error(`❌ ${inputInLog} !== ${input2InLog}, errMsg: ${errMsg}`);
             }
           }
 
-          break 
+          break
         default:
-          throw new Error(`❌ Error from use_OperatorMode(), operator: ${operator}`);
+          throw new Error(`❌ Error from useOperatorMode(), operator: ${operator}`);
       }
     },
     /**
@@ -179,94 +171,98 @@ const unitTest = {
      * @param {undefined | String} [errMsg] Custom your error message
      * @returns {Void | Error}
      */
-    use_TypeMode(input, type, value2) {
+    useTypeMode(input, type, errMsg) {
       {
-        if (!unitTest.data.ALLOW_TYPES.includes(type)) {
-          throw new Error(`❌ Your 2nd argument: ${this.reuse.fix_TextInLog(type)}, ✅ ('undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function')`)
+        if (!UNITTEST.data.TYPES.includes(type)) {
+          throw new Error(`❌ Your 2nd argument: ${UNITTEST.in.reuse.fixTextInLog(type)}, ✅ ('undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function')`)
         }
-        if (!(['undefined', 'string'].includes(this.reuse.get_NewType(value2)))) {
-          const customErrType = this.reuse.get_NewType(value2)
-          const customErrInLog = this.reuse.fix_TextInLog(value2)
-  
-          throw new Error(`❌ Your error message: ${customErrInLog}('${customErrType}') , ✅ type should be 'string'`)
+        if (!(['undefined', 'string'].includes(UNITTEST.in.reuse.getNewType(errMsg)))) {
+          const customErrType = UNITTEST.in.reuse.getNewType(errMsg)
+          const customErrInLog = UNITTEST.in.reuse.fixTextInLog(errMsg)
+
+          throw new Error(`❌ Your error message: ${customErrInLog}('${customErrType}') , ✅ should be 'string' type`)
         }
       }
-      
-      if (this.reuse.get_NewType(input) !== type) { 
-        const typeInLog = this.reuse.fix_TextInLog(type)
-        const inputInLog = this.reuse.fix_TextInLog(input)
-        const inputNewType = this.reuse.get_NewType(input)
-        
-        let defaultErrMsg = `❌ typeof ${inputInLog} === ${typeInLog}, ✅ type: '${inputNewType}' --> ${typeInLog}`
 
-        if (value2) {
-          throw new Error(`${defaultErrMsg} (${value2})`)
+      if (UNITTEST.in.reuse.getNewType(input) !== type) {
+        const fixTextInLogType = UNITTEST.in.reuse.fixTextInLog(type)
+        const fixTextInLogInput = UNITTEST.in.reuse.fixTextInLog(input)
+        const getNewType = UNITTEST.in.reuse.getNewType(input)
+
+        const defaultErrMsg = `❌ typeof ${fixTextInLogInput} === ${fixTextInLogType}, ✅ type: '${getNewType}' should be ${fixTextInLogType}`
+
+        if (errMsg) {
+          throw new Error(`${defaultErrMsg} (${errMsg})`)
         }
-        else throw new Error(defaultErrMsg)
+        else {
+          throw new Error(defaultErrMsg)
+        }
       }
     },
     /**
      * @param {*} mode 
      * @returns {Error}
      */
-    deal_EdgeCases(mode) {
-      throw new Error(`❌ Your 2nd argument: ${this.reuse.fix_TextInLog(mode)}, ✅ 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`)
+    dealEdgeCases(mode) {
+      throw new Error(`❌ Your 2nd argument: ${UNITTEST.in.reuse.fixTextInLog(mode)}, ✅ 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`)
     }
   },
   out: {
-    es: {
-      /** 
-       * Achieving 100% function coverage will save your life.
-       * @param {*} input The testing value 
-       * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
-       * @param {String | Number} value2 type : error message(optional) | operator: compared number
-       * @param {String} [errMsg] optional: custom your error message (operator only)
-       * @returns {Void|Error} PASS: void | FAIL: throw Error 
-       * @example 
-       * <PASS>
-       * - type:
-       * unitTest(undefined, 'undefined')
-       * unitTest(null, 'null')
-       * unitTest([], 'array')
-       * unitTest({}, 'object')
-       * unitTest(true, 'boolean')
-       * unitTest(NaN, 'NaN')
-       * unitTest(1, 'number')
-       * unitTest(1n, 'bigint')
-       * unitTest('Hello World', 'string')
-       * unitTest(Symbol(), 'symbol')
-       * unitTest(function () {}, 'function')
-       * 
-       * - operator:
-       * unitTest(1, '<', 5)
-       * unitTest(1, '<=', 5)
-       * unitTest(5, '>', 1)
-       * unitTest(5, '>=', 1)
-       * unitTest(1, '===', 1)
-       * unitTest([1,2], '!==', 'Hello world')
-      */
-      unitTest(input, mode, value2, errMsg) { 
-        {
-          if (!unitTest.data.ALLOW_TYPES.includes(mode) && !unitTest.data.ALLOW_OPERATORS.includes(mode)) {
-            unitTest.in.deal_EdgeCases(mode)
-          }
+    /** 
+           * Achieving 100% function coverage will save your life.
+           * @param {*} input The testing value 
+           * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
+           * @param {*} [input2] operator mode: input2 | type mode(optional): custom error message
+           * @param {undefined | String} [errMsg] operator mode(optional): custom error message
+           * @returns {Void|Error} PASS: void | FAIL: throw an Error 
+           * @example 
+           * <PASS>
+           * - type mode -
+           * unitTest(undefined, 'undefined')
+           * unitTest(null, 'null')
+           * unitTest([], 'array')
+           * unitTest({}, 'object')
+           * unitTest(true, 'boolean')
+           * unitTest(NaN, 'NaN')
+           * unitTest(1, 'number')
+           * unitTest(1n, 'bigint')
+           * unitTest('Hello World', 'string')
+           * unitTest(Symbol(), 'symbol')
+           * unitTest(function () {}, 'function')
+           * unitTest(1, 'object', 'foo') // custom error message
+           * 
+           * - operator mode -
+           * unitTest(1, '<', 5)
+           * unitTest(1, '<=', 5)
+           * unitTest(5, '>', 1)
+           * unitTest(5, '>=', 1)
+           * unitTest(1, '===', 1)
+           * unitTest(1, '!==', 2) 
+           * unitTest(1, '>=', 100, 'foo') // custom error message
+          */
+    unitTest(input, mode, input2, errMsg) {
+      {
+        if (!UNITTEST.data.TYPES.includes(mode) && !UNITTEST.data.OPERATORS.includes(mode)) {
+          UNITTEST.in.dealEdgeCases(mode)
         }
-            
-        if (unitTest.data.ALLOW_TYPES.includes(mode)) {
-          unitTest.in.use_TypeMode(input, mode, value2)
+      }
 
-          // for testing purpose
-          return mode
-        }
-        else if (unitTest.data.ALLOW_OPERATORS.includes(mode)) {
-          unitTest.in.use_OperatorMode(input, mode, value2, errMsg)
+      if (UNITTEST.data.TYPES.includes(mode)) {
+        UNITTEST.in.useTypeMode(input, mode, input2)
 
-          // for testing purpose
-          return true
-        }
-      },
+        // for testing purpose
+        return mode
+      }
+      else if (UNITTEST.data.OPERATORS.includes(mode)) {
+        UNITTEST.in.useOperatorMode(input, mode, input2, errMsg)
+
+        // for testing purpose
+        return true
+      }
     }
   }
 }
 
-export const { es } = unitTest.out
+const unitTest = UNITTEST.out.unitTest;
+
+export { unitTest };
