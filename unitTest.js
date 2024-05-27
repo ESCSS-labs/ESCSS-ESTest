@@ -209,7 +209,7 @@ const UNITTEST = {
   },
   out: {
     /** 
-           * Achieving 100% function coverage will save your life.
+           * Achieving 100% function coverage makes your life easier.
            * @param {*} input The testing value 
            * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
            * @param {*} [input2] operator mode: input2 | type mode(optional): custom error message
@@ -218,29 +218,29 @@ const UNITTEST = {
            * @example 
            * <PASS>
            * - type mode -
-           * unitTest(undefined, 'undefined')
-           * unitTest(null, 'null')
-           * unitTest([], 'array')
-           * unitTest({}, 'object')
-           * unitTest(true, 'boolean')
-           * unitTest(NaN, 'NaN')
-           * unitTest(1, 'number')
-           * unitTest(1n, 'bigint')
-           * unitTest('Hello World', 'string')
-           * unitTest(Symbol(), 'symbol')
-           * unitTest(function () {}, 'function')
-           * unitTest(1, 'object', 'foo') // custom error message
+           * test(undefined, 'undefined')
+           * test(null, 'null')
+           * test([], 'array')
+           * test({}, 'object')
+           * test(true, 'boolean')
+           * test(NaN, 'NaN')
+           * test(1, 'number')
+           * test(1n, 'bigint')
+           * test('Hello World', 'string')
+           * test(Symbol(), 'symbol')
+           * test(function () {}, 'function')
+           * test(1, 'object', 'foo') // custom error message
            * 
            * - operator mode -
-           * unitTest(1, '<', 5)
-           * unitTest(1, '<=', 5)
-           * unitTest(5, '>', 1)
-           * unitTest(5, '>=', 1)
-           * unitTest(1, '===', 1)
-           * unitTest(1, '!==', 2) 
-           * unitTest(1, '>=', 100, 'foo') // custom error message
+           * test(1, '<', 5)
+           * test(1, '<=', 5)
+           * test(5, '>', 1)
+           * test(5, '>=', 1)
+           * test(1, '===', 1)
+           * test(1, '!==', 2) 
+           * test(1, '>=', 100, 'foo') // custom error message
           */
-    unitTest(input, mode, input2, errMsg) {
+    test(input, mode, input2, errMsg) {
       {
         if (!UNITTEST.data.TYPES.includes(mode) && !UNITTEST.data.OPERATORS.includes(mode)) {
           UNITTEST.in.dealEdgeCases(mode)
@@ -263,6 +263,7 @@ const UNITTEST = {
   }
 }
 
-const unitTest = UNITTEST.out.unitTest;
+// I tried named test to unitTest, import type intelligent will lost, but feature is working, I think jsdoc/ts declaration is non-sensitive.
+const test = UNITTEST.out.test;
 
-export { unitTest };
+export { test };
