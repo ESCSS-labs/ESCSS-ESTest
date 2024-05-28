@@ -218,29 +218,29 @@ const UNITTEST = {
            * @example 
            * <PASS>
            * - type mode -
-           * ESTest(undefined, 'undefined')
-           * ESTest(null, 'null')
-           * ESTest([], 'array')
-           * ESTest({}, 'object')
-           * ESTest(true, 'boolean')
-           * ESTest(NaN, 'NaN')
-           * ESTest(1, 'number')
-           * ESTest(1n, 'bigint')
-           * ESTest('Hello World', 'string')
-           * ESTest(Symbol(), 'symbol')
-           * ESTest(function () {}, 'function')
-           * ESTest(1, 'object', 'foo') // custom error message
+           * unitTest(undefined, 'undefined')
+           * unitTest(null, 'null')
+           * unitTest([], 'array')
+           * unitTest({}, 'object')
+           * unitTest(true, 'boolean')
+           * unitTest(NaN, 'NaN')
+           * unitTest(1, 'number')
+           * unitTest(1n, 'bigint')
+           * unitTest('Hello World', 'string')
+           * unitTest(Symbol(), 'symbol')
+           * unitTest(function () {}, 'function')
+           * unitTest(1, 'object', 'foo') // custom error message
            * 
            * - operator mode -
-           * ESTest(1, '<', 5)
-           * ESTest(1, '<=', 5)
-           * ESTest(5, '>', 1)
-           * ESTest(5, '>=', 1)
-           * ESTest(1, '===', 1)
-           * ESTest(1, '!==', 2) 
-           * ESTest(1, '>=', 100, 'foo') // custom error message
+           * unitTest(1, '<', 5)
+           * unitTest(1, '<=', 5)
+           * unitTest(5, '>', 1)
+           * unitTest(5, '>=', 1)
+           * unitTest(1, '===', 1)
+           * unitTest(1, '!==', 2) 
+           * unitTest(1, '>=', 100, 'foo') // custom error message
           */
-    ESTest(input, mode, input2, errMsg) {
+    unitTest(input, mode, input2, errMsg) {
       {
         if (!UNITTEST.data.TYPES.includes(mode) && !UNITTEST.data.OPERATORS.includes(mode)) {
           UNITTEST.in.dealEdgeCases(mode)
@@ -263,7 +263,6 @@ const UNITTEST = {
   }
 }
 
-// I tried named ESTest to unitTest, import type intelligent will lost, but feature is working, I think jsdoc/ts declaration is non-sensitive.
-const ESTest = UNITTEST.out.ESTest;
+const unitTest = UNITTEST.out.unitTest;
 
-export { ESTest };
+export { unitTest };
