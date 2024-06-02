@@ -232,7 +232,6 @@ const UnitTest = {
         const fixTextInLogType = UnitTest.in.reuse.fixTextInLog(type);
         const fixTextInLogInput = UnitTest.in.reuse.fixTextInLog(input);
         const getNewType = UnitTest.in.reuse.getNewType(input);
-
         const defaultErrMsg = `❌ typeof ${fixTextInLogInput} === ${fixTextInLogType}, ✅ type: '${getNewType}' should be ${fixTextInLogType}`;
 
         if (errMsg) {
@@ -255,14 +254,8 @@ const UnitTest = {
   out: {
     /**
      * Achieving 100% function coverage makes your life easier.
-     * @param {*} input The testing value
-     * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
-     * @param {*} [input2] operator mode: input2 | type mode(optional): custom error message
-     * @param {undefined | String} [errMsg] operator mode(optional): custom error message
-     * @returns {Void|Error} PASS: void | FAIL: throw an Error
-     * @example
-     * <PASS>
-     * - type mode -
+     * ```js
+     * // type mode
      * unitTest(undefined, 'undefined')
      * unitTest(null, 'null')
      * unitTest([], 'array')
@@ -274,16 +267,22 @@ const UnitTest = {
      * unitTest('Hello World', 'string')
      * unitTest(Symbol(), 'symbol')
      * unitTest(function () {}, 'function')
-     * unitTest(1, 'object', 'foo') // custom error message
+     * unitTest(1, 'object', 'foo') // error & custom error message 'foo'
      *
-     * - operator mode -
+     * // operator mode
      * unitTest(1, '<', 5)
      * unitTest(1, '<=', 5)
      * unitTest(5, '>', 1)
      * unitTest(5, '>=', 1)
      * unitTest(1, '===', 1)
      * unitTest(1, '!==', 2)
-     * unitTest(1, '>=', 100, 'foo') // custom error message
+     * unitTest(1, '>=', 100, 'foo') // error & custom error message 'foo'
+     * ```
+     * @param {*} input The testing value
+     * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
+     * @param {*} [input2] operator mode: input2 | type mode(optional): custom error message
+     * @param {undefined | String} [errMsg] operator mode(optional): custom error message
+     * @returns {Void|Error} PASS: void | FAIL: throw an Error
      */
     unitTest(input, mode, input2, errMsg) {
       {
