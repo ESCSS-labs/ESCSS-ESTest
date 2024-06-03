@@ -1,4 +1,4 @@
-const UnitTest = {
+const ESTest = {
   data: {
     OPERATORS: ["<", "<=", ">=", ">", "===", "!=="],
     TYPES: [
@@ -52,10 +52,10 @@ const UnitTest = {
           let result = "";
 
           input.forEach((item) => {
-            if (UnitTest.in.reuse.getNewType(item) === "array") {
+            if (ESTest.in.reuse.getNewType(item) === "array") {
               result += `[...], `;
             } else {
-              result += `${UnitTest.in.reuse.fixTextInLog(item)}, `;
+              result += `${ESTest.in.reuse.fixTextInLog(item)}, `;
             }
           });
 
@@ -69,10 +69,10 @@ const UnitTest = {
           let result = "";
 
           for (const [key, value] of Object.entries(input)) {
-            if (UnitTest.in.reuse.getNewType(value) === "object") {
+            if (ESTest.in.reuse.getNewType(value) === "object") {
               result += `${key}: {...}, `;
             } else {
-              result += `${key}: ${UnitTest.in.reuse.fixTextInLog(value)}, `;
+              result += `${key}: ${ESTest.in.reuse.fixTextInLog(value)}, `;
             }
           }
 
@@ -83,7 +83,7 @@ const UnitTest = {
           return result;
         };
 
-        switch (UnitTest.in.reuse.getNewType(input)) {
+        switch (ESTest.in.reuse.getNewType(input)) {
           case "array":
             return fix_ArrayLog();
           case "object":
@@ -108,18 +108,16 @@ const UnitTest = {
      */
     useOperatorMode(input, operator, input2, errMsg) {
       {
-        if (!UnitTest.data.OPERATORS.includes(operator)) {
+        if (!ESTest.data.OPERATORS.includes(operator)) {
           throw new Error(
-            `❌ Your 2nd argument: ${UnitTest.in.reuse.fixTextInLog(operator)}, ✅ ('<', '<=', '>=', '>', '===', '!==')`,
+            `❌ Your 2nd argument: ${ESTest.in.reuse.fixTextInLog(operator)}, ✅ ('<', '<=', '>=', '>', '===', '!==')`,
           );
         }
         if (
-          !["undefined", "string"].includes(
-            UnitTest.in.reuse.getNewType(errMsg),
-          )
+          !["undefined", "string"].includes(ESTest.in.reuse.getNewType(errMsg))
         ) {
-          const customErrType = UnitTest.in.reuse.getNewType(errMsg);
-          const customErrInLog = UnitTest.in.reuse.fixTextInLog(errMsg);
+          const customErrType = ESTest.in.reuse.getNewType(errMsg);
+          const customErrInLog = ESTest.in.reuse.fixTextInLog(errMsg);
 
           throw new Error(
             `❌ Your error message: ${customErrInLog}('${customErrType}') , ✅ should be 'string' type`,
@@ -131,8 +129,8 @@ const UnitTest = {
         errMsg = "undefined error message (4th argument)";
       }
 
-      const inputInLog = UnitTest.in.reuse.fixTextInLog(input);
-      const input2InLog = UnitTest.in.reuse.fixTextInLog(input2);
+      const inputInLog = ESTest.in.reuse.fixTextInLog(input);
+      const input2InLog = ESTest.in.reuse.fixTextInLog(input2);
 
       switch (operator) {
         case "<":
@@ -209,18 +207,16 @@ const UnitTest = {
      */
     useTypeMode(input, type, errMsg) {
       {
-        if (!UnitTest.data.TYPES.includes(type)) {
+        if (!ESTest.data.TYPES.includes(type)) {
           throw new Error(
-            `❌ Your 2nd argument: ${UnitTest.in.reuse.fixTextInLog(type)}, ✅ ('undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function')`,
+            `❌ Your 2nd argument: ${ESTest.in.reuse.fixTextInLog(type)}, ✅ ('undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function')`,
           );
         }
         if (
-          !["undefined", "string"].includes(
-            UnitTest.in.reuse.getNewType(errMsg),
-          )
+          !["undefined", "string"].includes(ESTest.in.reuse.getNewType(errMsg))
         ) {
-          const customErrType = UnitTest.in.reuse.getNewType(errMsg);
-          const customErrInLog = UnitTest.in.reuse.fixTextInLog(errMsg);
+          const customErrType = ESTest.in.reuse.getNewType(errMsg);
+          const customErrInLog = ESTest.in.reuse.fixTextInLog(errMsg);
 
           throw new Error(
             `❌ Your error message: ${customErrInLog}('${customErrType}') , ✅ should be 'string' type`,
@@ -228,11 +224,12 @@ const UnitTest = {
         }
       }
 
-      if (UnitTest.in.reuse.getNewType(input) !== type) {
-        const fixTextInLogType = UnitTest.in.reuse.fixTextInLog(type);
-        const fixTextInLogInput = UnitTest.in.reuse.fixTextInLog(input);
-        const getNewType = UnitTest.in.reuse.getNewType(input);
-        const defaultErrMsg = `❌ typeof ${fixTextInLogInput} === ${fixTextInLogType}, ✅ type: '${getNewType}' should be ${fixTextInLogType}`;
+      if (ESTest.in.reuse.getNewType(input) !== type) {
+        const fixTextInLogType = ESTest.in.reuse.fixTextInLog(type);
+        const fixTextInLogInput = ESTest.in.reuse.fixTextInLog(input);
+        const getNewType = ESTest.in.reuse.getNewType(input);
+
+        const defaultErrMsg = `❌ typeof input === ${fixTextInLogType}, ✅ expects input('${getNewType}') to be ${fixTextInLogType}, input: ${fixTextInLogInput}`;
 
         if (errMsg) {
           throw new Error(`${defaultErrMsg} (${errMsg})`);
@@ -247,60 +244,62 @@ const UnitTest = {
      */
     dealEdgeCases(mode) {
       throw new Error(
-        `❌ Your 2nd argument: ${UnitTest.in.reuse.fixTextInLog(mode)}, ✅ 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`,
+        `❌ Your 2nd argument: ${ESTest.in.reuse.fixTextInLog(mode)}, ✅ 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`,
       );
     },
   },
   out: {
     /**
      * Achieving 100% function coverage makes your life easier.
-     * ```js
-     * // type mode
-     * unitTest(undefined, 'undefined')
-     * unitTest(null, 'null')
-     * unitTest([], 'array')
-     * unitTest({}, 'object')
-     * unitTest(true, 'boolean')
-     * unitTest(NaN, 'NaN')
-     * unitTest(1, 'number')
-     * unitTest(1n, 'bigint')
-     * unitTest('Hello World', 'string')
-     * unitTest(Symbol(), 'symbol')
-     * unitTest(function () {}, 'function')
-     * unitTest(1, 'object', 'foo') // error & custom error message 'foo'
-     *
-     * // operator mode
-     * unitTest(1, '<', 5)
-     * unitTest(1, '<=', 5)
-     * unitTest(5, '>', 1)
-     * unitTest(5, '>=', 1)
-     * unitTest(1, '===', 1)
-     * unitTest(1, '!==', 2)
-     * unitTest(1, '>=', 100, 'foo') // error & custom error message 'foo'
-     * ```
      * @param {*} input The testing value
      * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
      * @param {*} [input2] operator mode: input2 | type mode(optional): custom error message
      * @param {undefined | String} [errMsg] operator mode(optional): custom error message
      * @returns {Void|Error} PASS: void | FAIL: throw an Error
+     * @example
+     * <PASS>
+     * ```js
+     * // type mode
+     * esTest(undefined, 'undefined')
+     * esTest(null, 'null')
+     * esTest([], 'array')
+     * esTest({}, 'object')
+     * esTest(true, 'boolean')
+     * esTest(NaN, 'NaN')
+     * esTest(1, 'number')
+     * esTest(1n, 'bigint')
+     * esTest('Hello World', 'string')
+     * esTest(Symbol(), 'symbol')
+     * esTest(function () {}, 'function')
+     * esTest(1, 'object', 'foo') // error &  error message 'foo'
+     *
+     * // operator mode
+     * esTest(1, '<', 5)
+     * esTest(1, '<=', 5)
+     * esTest(5, '>', 1)
+     * esTest(5, '>=', 1)
+     * esTest(1, '===', 1)
+     * esTest(1, '!==', 2)
+     * esTest(1, '>=', 100, 'foo') // error & error message 'foo'
+     * ```
      */
-    unitTest(input, mode, input2, errMsg) {
+    esTest(input, mode, input2, errMsg) {
       {
         if (
-          !UnitTest.data.TYPES.includes(mode) &&
-          !UnitTest.data.OPERATORS.includes(mode)
+          !ESTest.data.TYPES.includes(mode) &&
+          !ESTest.data.OPERATORS.includes(mode)
         ) {
-          UnitTest.in.dealEdgeCases(mode);
+          ESTest.in.dealEdgeCases(mode);
         }
       }
 
-      if (UnitTest.data.TYPES.includes(mode)) {
-        UnitTest.in.useTypeMode(input, mode, input2);
+      if (ESTest.data.TYPES.includes(mode)) {
+        ESTest.in.useTypeMode(input, mode, input2);
 
         // for testing purpose
         return mode;
-      } else if (UnitTest.data.OPERATORS.includes(mode)) {
-        UnitTest.in.useOperatorMode(input, mode, input2, errMsg);
+      } else if (ESTest.data.OPERATORS.includes(mode)) {
+        ESTest.in.useOperatorMode(input, mode, input2, errMsg);
 
         // for testing purpose
         return true;
@@ -309,6 +308,6 @@ const UnitTest = {
   },
 };
 
-const unitTest = UnitTest.out.unitTest;
+const esTest = ESTest.out.esTest;
 
-export { unitTest };
+export { esTest };
