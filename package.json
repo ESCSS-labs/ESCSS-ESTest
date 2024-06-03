@@ -14,7 +14,7 @@
     "@eslint/js": "^9.3.0",
     "eslint": "9.x",
     "globals": "^15.3.0",
-    "prettier": "latest",
+    "prettier": "^3.3.0",
     "vite": "^5.0.8"
   }
 }
