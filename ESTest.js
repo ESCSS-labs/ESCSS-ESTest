@@ -40,7 +40,8 @@ const ESTest = {
 
         return (
           typeMap[typeof input] ||
-          `\n❌ Error from getNewType(), input: ${input}`
+          `
+          ❌ Error from getNewType(), input: ${input}`
         );
       },
       /**
@@ -111,7 +112,9 @@ const ESTest = {
       {
         if (!ESTest.data.OPERATORS.includes(operator)) {
           throw new Error(
-            `\n❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(operator)} \n✅ expects: '<' | '<=' | '>=' | '>' | '===' | '!=='`,
+            `
+            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(operator)} 
+            ✅ expects: '<' | '<=' | '>=' | '>' | '===' | '!=='`,
           );
         }
         if (
@@ -121,7 +124,9 @@ const ESTest = {
           const customErrInLog = ESTest.in.reuse.fixTextInLog(errMsg);
 
           throw new Error(
-            `\n❌ custom error message: ${customErrInLog}('${customErrType}')  \n✅ expects: 'string' type`,
+            `
+            ❌ custom error message: ${customErrInLog}('${customErrType}')  
+            ✅ expects: 'string' type`,
           );
         }
       }
@@ -132,37 +137,49 @@ const ESTest = {
       if (operator === "<") {
         if (!(input < input2)) {
           throw new Error(
-            `\n❌ ${inputInLog} < ${input2InLog} \n(custom error message: ${errMsg})`,
+            `
+            ❌ ${inputInLog} < ${input2InLog} 
+            (custom error message: ${errMsg})`,
           );
         }
       } else if (operator === "<=") {
         if (!(input <= input2)) {
           throw new Error(
-            `\n❌ ${inputInLog} <= ${input2InLog} \n(custom error message: ${errMsg})`,
+            `
+            ❌ ${inputInLog} <= ${input2InLog} 
+            (custom error message: ${errMsg})`,
           );
         }
       } else if (operator === ">=") {
         if (!(input >= input2)) {
           throw new Error(
-            `\n❌ ${inputInLog} >= ${input2InLog} \n(custom error message: ${errMsg})`,
+            `
+            ❌ ${inputInLog} >= ${input2InLog} 
+            (custom error message: ${errMsg})`,
           );
         }
       } else if (operator === ">") {
         if (!(input > input2)) {
           throw new Error(
-            `\n❌ ${inputInLog} > ${input2InLog} \n(custom error message: ${errMsg})`,
+            `
+            ❌ ${inputInLog} > ${input2InLog} 
+            (custom error message: ${errMsg})`,
           );
         }
       } else if (operator === "===") {
         if (!(input === input2)) {
           throw new Error(
-            `\n❌ ${inputInLog} === ${input2InLog} \n(custom error message: ${errMsg})`,
+            `
+            ❌ ${inputInLog} === ${input2InLog} 
+            (custom error message: ${errMsg})`,
           );
         }
       } else if (operator === "!==") {
         if (!(input !== input2)) {
           throw new Error(
-            `\n❌ ${inputInLog} !== ${input2InLog} \n(custom error message: ${errMsg})`,
+            `
+            ❌ ${inputInLog} !== ${input2InLog} 
+            (custom error message: ${errMsg})`,
           );
         }
       }
@@ -177,7 +194,9 @@ const ESTest = {
       {
         if (!ESTest.data.TYPES.includes(type)) {
           throw new Error(
-            `\n❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(type)} \n✅ expects: 'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'`,
+            `
+            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(type)} 
+            ✅ expects: 'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'`,
           );
         }
         if (
@@ -187,7 +206,9 @@ const ESTest = {
           const customErrInLog = ESTest.in.reuse.fixTextInLog(errMsg);
 
           throw new Error(
-            `\n❌ custom error message: ${customErrInLog}('${customErrType}') \n✅ expects: 'string' type`,
+            `
+            ❌ custom error message: ${customErrInLog}('${customErrType}') 
+            ✅ expects: 'string' type`,
           );
         }
       }
@@ -198,7 +219,11 @@ const ESTest = {
         const getNewType = ESTest.in.reuse.getNewType(input);
 
         throw new Error(
-          `\n❌ typeof input === ${fixTextInLogType} \n✅ expects: input('${getNewType}') -> ${fixTextInLogType} \ninput: ${fixTextInLogInput} \n(custom error message: ${errMsg})`,
+          `
+          ❌ typeof input('${getNewType}') === ${fixTextInLogType}
+          custom error message: ${errMsg}
+          input: ${fixTextInLogInput} 
+          `,
         );
       }
     },
@@ -208,7 +233,9 @@ const ESTest = {
      */
     dealEdgeCases(mode) {
       throw new Error(
-        `\n❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(mode)} \n✅ expects: 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`,
+        `
+        ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(mode)} 
+        ✅ expects: 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`,
       );
     },
   },
@@ -229,7 +256,7 @@ const ESTest = {
      * esTest(Symbol(), 'symbol')
      * esTest(function () {}, 'function')
      * esTest(1, 'object') // error
-     * esTest(1, 'object', 'foo') // error & custom error message 'foo'
+     * esTest(1, 'object', 'foo') // error &  custom error message
      *
      * // operator mode
      * esTest(1, '<', 5)
@@ -239,7 +266,7 @@ const ESTest = {
      * esTest(1, '===', 1)
      * esTest(1, '!==', 2)
      * esTest(1, '>=', 100) // error
-     * esTest(1, '>=', 100, 'foo') // error & custom error message 'foo'
+     * esTest(1, '>=', 100, 'foo') // error & custom error message
      * ```
      * @param {*} input
      * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
