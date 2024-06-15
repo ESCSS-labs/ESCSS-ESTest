@@ -105,28 +105,28 @@ const ESTest = {
      * @param {*} input The testing value
      * @param {'<'|'<='|'>='|'>'|'==='|'!=='} operator
      * @param {*} input2 The compared value
-     * @param {undefined | String} [errMsg] Custom your error message
+     * @param {undefined | String} [msg]
      * @returns {Void | Error}
      */
-    useOperatorMode(input, operator, input2, errMsg) {
+    useOperatorMode(input, operator, input2, msg) {
       {
         if (!ESTest.data.OPERATORS.includes(operator)) {
           throw new Error(
             `
-            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(operator)} 
-            ✅ expects: '<' | '<=' | '>=' | '>' | '===' | '!=='`,
+            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(operator)};
+            ✅ expects: '<' | '<=' | '>=' | '>' | '===' | '!=='`
           );
         }
         if (
-          !["undefined", "string"].includes(ESTest.in.reuse.getNewType(errMsg))
+          !["undefined", "string"].includes(ESTest.in.reuse.getNewType(msg))
         ) {
-          const customErrType = ESTest.in.reuse.getNewType(errMsg);
-          const customErrInLog = ESTest.in.reuse.fixTextInLog(errMsg);
+          const customErrType = ESTest.in.reuse.getNewType(msg);
+          const customErrInLog = ESTest.in.reuse.fixTextInLog(msg);
 
           throw new Error(
             `
-            ❌ custom error message: ${customErrInLog}('${customErrType}')  
-            ✅ expects: 'string' type`,
+            ❌ 📝 ${customErrInLog}('${customErrType}');
+            ✅ expects: 'string' type`
           );
         }
       }
@@ -138,48 +138,48 @@ const ESTest = {
         if (!(input < input2)) {
           throw new Error(
             `
-            ❌ ${inputInLog} < ${input2InLog} 
-            (custom error message: ${errMsg})`,
+            ❌ ${inputInLog} < ${input2InLog};
+            📝 ${msg}`,
           );
         }
       } else if (operator === "<=") {
         if (!(input <= input2)) {
           throw new Error(
             `
-            ❌ ${inputInLog} <= ${input2InLog} 
-            (custom error message: ${errMsg})`,
+            ❌ ${inputInLog} <= ${input2InLog};
+            📝 ${msg}`,
           );
         }
       } else if (operator === ">=") {
         if (!(input >= input2)) {
           throw new Error(
             `
-            ❌ ${inputInLog} >= ${input2InLog} 
-            (custom error message: ${errMsg})`,
+            ❌ ${inputInLog} >= ${input2InLog};
+            📝 ${msg}`,
           );
         }
       } else if (operator === ">") {
         if (!(input > input2)) {
           throw new Error(
             `
-            ❌ ${inputInLog} > ${input2InLog} 
-            (custom error message: ${errMsg})`,
+            ❌ ${inputInLog} > ${input2InLog};
+            📝 ${msg}`,
           );
         }
       } else if (operator === "===") {
         if (!(input === input2)) {
           throw new Error(
             `
-            ❌ ${inputInLog} === ${input2InLog} 
-            (custom error message: ${errMsg})`,
+            ❌ ${inputInLog} === ${input2InLog};
+            📝 ${msg}`,
           );
         }
       } else if (operator === "!==") {
         if (!(input !== input2)) {
           throw new Error(
             `
-            ❌ ${inputInLog} !== ${input2InLog} 
-            (custom error message: ${errMsg})`,
+            ❌ ${inputInLog} !== ${input2InLog};
+            📝 ${msg}`,
           );
         }
       }
@@ -187,27 +187,27 @@ const ESTest = {
     /**
      * @param {*} input The testing value
      * @param {'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'} type
-     * @param {undefined | String} [errMsg] Custom your error message
+     * @param {undefined | String} [msg]
      * @returns {Void | Error}
      */
-    useTypeMode(input, type, errMsg) {
+    useTypeMode(input, type, msg) {
       {
         if (!ESTest.data.TYPES.includes(type)) {
           throw new Error(
             `
-            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(type)} 
+            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(type)};
             ✅ expects: 'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'`,
           );
         }
         if (
-          !["undefined", "string"].includes(ESTest.in.reuse.getNewType(errMsg))
+          !["undefined", "string"].includes(ESTest.in.reuse.getNewType(msg))
         ) {
-          const customErrType = ESTest.in.reuse.getNewType(errMsg);
-          const customErrInLog = ESTest.in.reuse.fixTextInLog(errMsg);
+          const customErrType = ESTest.in.reuse.getNewType(msg);
+          const customErrInLog = ESTest.in.reuse.fixTextInLog(msg);
 
           throw new Error(
             `
-            ❌ custom error message: ${customErrInLog}('${customErrType}') 
+            ❌ 📝 ${customErrInLog}('${customErrType}');
             ✅ expects: 'string' type`,
           );
         }
@@ -220,9 +220,9 @@ const ESTest = {
 
         throw new Error(
           `
-          ❌ typeof input('${getNewType}') === ${fixTextInLogType}
-          custom error message: ${errMsg}
-          input: ${fixTextInLogInput} 
+          ❌ typeof 💣('${getNewType}') === ${fixTextInLogType};
+          📝 ${msg};
+          💣 ${fixTextInLogInput}
           `,
         );
       }
@@ -234,8 +234,8 @@ const ESTest = {
     dealEdgeCases(mode) {
       throw new Error(
         `
-        ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(mode)} 
-        ✅ expects: 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`,
+        ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(mode)};
+        ✅ expects: 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`
       );
     },
   },
@@ -256,7 +256,7 @@ const ESTest = {
      * esTest(Symbol(), 'symbol')
      * esTest(function () {}, 'function')
      * esTest(1, 'object') // error
-     * esTest(1, 'object', 'foo') // error &  custom error message
+     * esTest(1, 'object', 'foo') // error & message
      *
      * // operator mode
      * esTest(1, '<', 5)
@@ -266,15 +266,15 @@ const ESTest = {
      * esTest(1, '===', 1)
      * esTest(1, '!==', 2)
      * esTest(1, '>=', 100) // error
-     * esTest(1, '>=', 100, 'foo') // error & custom error message
+     * esTest(1, '>=', 100, 'foo') // error & message
      * ```
      * @param {*} input
      * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
-     * @param {*} [input2] operator mode -> input2 | type mode -> custom error message(optional)
-     * @param {undefined | String} [errMsg] custom error message(optional)
+     * @param {*} [input2]
+     * @param {undefined | String} [msg]
      * @returns {Void|Error} PASS: void | FAIL: throw an Error
      */
-    esTest(input, mode, input2, errMsg) {
+    esTest(input, mode, input2, msg) {
       {
         if (
           !ESTest.data.TYPES.includes(mode) &&
@@ -290,7 +290,7 @@ const ESTest = {
         // for testing purpose
         return mode;
       } else if (ESTest.data.OPERATORS.includes(mode)) {
-        ESTest.in.useOperatorMode(input, mode, input2, errMsg);
+        ESTest.in.useOperatorMode(input, mode, input2, msg);
 
         // for testing purpose
         return true;
