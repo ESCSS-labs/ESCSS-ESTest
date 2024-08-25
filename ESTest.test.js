@@ -1,83 +1,102 @@
 import { expect, test, describe } from "bun:test";
-import { esTest } from "./ESTest";
+import { esTest, _getTestResult } from "./esTest";
 
 describe("mode: type", () => {
   test("undefined", () => {
-    expect(esTest(undefined, "undefined")).toBe("undefined");
+    esTest(undefined, "undefined");
+    expect(_getTestResult()).toBe("undefined");
   });
 
   test("null", () => {
-    expect(esTest(null, "null")).toBe("null");
+    esTest(null, "null");
+    expect(_getTestResult()).toBe("null");
   });
 
   test("array", () => {
-    expect(esTest([], "array")).toBe("array");
+    esTest([], "array");
+    expect(_getTestResult()).toBe("array");
   });
 
   test("object", () => {
-    expect(esTest({}, "object")).toBe("object");
+    esTest({}, "object");
+    expect(_getTestResult()).toBe("object");
   });
 
   test("boolean", () => {
-    expect(esTest(true, "boolean")).toBe("boolean");
+    esTest(true, "boolean");
+    expect(_getTestResult()).toBe("boolean");
   });
 
   test("NaN", () => {
-    expect(esTest(NaN, "NaN")).toBe("NaN");
+    esTest(NaN, "NaN");
+    expect(_getTestResult()).toBe("NaN");
   });
 
   test("number", () => {
-    expect(esTest(123, "number")).toBe("number");
+    esTest(123, "number");
+    expect(_getTestResult()).toBe("number");
   });
 
   test("bigint", () => {
-    expect(esTest(123n, "bigint")).toBe("bigint");
+    esTest(123n, "bigint");
+    expect(_getTestResult()).toBe("bigint");
   });
 
   test("string", () => {
-    expect(esTest("Hello World", "string")).toBe("string");
+    esTest("Hello World", "string");
+    expect(_getTestResult()).toBe("string");
   });
 
   test("symbol", () => {
-    expect(esTest(Symbol(), "symbol")).toBe("symbol");
+    esTest(Symbol(), "symbol");
+    expect(_getTestResult()).toBe("symbol");
   });
 
   test("function", () => {
-    expect(esTest(function () {}, "function")).toBe("function");
+    esTest(function () {}, "function");
+    expect(_getTestResult()).toBe("function");
   });
 
   test("number w/ errMsg", () => {
-    expect(esTest(123, "number", "number text")).toBe("number");
+    esTest(123, "number", "number text");
+    expect(_getTestResult()).toBe("number");
   });
 });
 
 describe("mode: operator", () => {
   test("1 < 5", () => {
-    expect(esTest(1, "<", 5)).toBe(true);
+    esTest(1, "<", 5);
+    expect(_getTestResult()).toBe(true);
   });
 
   test("1 <= 5", () => {
-    expect(esTest(1, "<=", 5)).toBe(true);
+    esTest(1, "<=", 5);
+    expect(_getTestResult()).toBe(true);
   });
 
   test("5 > 1", () => {
-    expect(esTest(5, ">", 1)).toBe(true);
+    esTest(5, ">", 1);
+    expect(_getTestResult()).toBe(true);
   });
 
   test("5 >= 1", () => {
-    expect(esTest(5, ">=", 1)).toBe(true);
+    esTest(5, ">=", 1);
+    expect(_getTestResult()).toBe(true);
   });
 
   test("1 === 1", () => {
-    expect(esTest(1, "===", 1)).toBe(true);
+    esTest(1, "===", 1);
+    expect(_getTestResult()).toBe(true);
   });
 
   test("-1 !== 1", () => {
-    expect(esTest(-1, "!==", 1)).toBe(true);
+    esTest(-1, "!==", 1);
+    expect(_getTestResult()).toBe(true);
   });
 
   test("error message", () => {
-    expect(esTest(-1, "!==", 1, "word")).toBe(true);
+    esTest(-1, "!==", 1, "word");
+    expect(_getTestResult()).toBe(true);
   });
 });
 
@@ -94,11 +113,35 @@ describe("error situation", () => {
     expect(() => esTest(1, "!=")).toThrow();
   });
 
-  test("type errMsg 3th argument should be type: string | undefined", () => {
+  test("expect error 1 > 5", () => {
+    expect(() => esTest(1, ">", 5)).toThrow();
+  });
+
+  test("expect error 1 >= 5", () => {
+    expect(() => esTest(1, ">=", 5)).toThrow();
+  });
+
+  test("expect error 5 < 1", () => {
+    expect(() => esTest(5, "<", 1)).toThrow();
+  });
+
+  test("expect error 5 <= 1", () => {
+    expect(() => esTest(5, "<=", 1)).toThrow();
+  });
+
+  test("expect error 1 !== 1", () => {
+    expect(() => esTest(1, "!==", 1)).toThrow();
+  });
+
+  test("expect error -1 === 1", () => {
+    expect(() => esTest(-1, "===", 1)).toThrow();
+  });
+
+  test("type mode msg should be type: string | undefined", () => {
     expect(() => esTest(10, "number", {})).toThrow();
   });
 
-  test("operator errMsg 4th argument should be type: string | undefined", () => {
+  test("operator mode msg should be type: string | undefined", () => {
     expect(() => esTest(10, ">", 1, {})).toThrow();
   });
 });

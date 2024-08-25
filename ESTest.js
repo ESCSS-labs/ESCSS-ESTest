@@ -14,15 +14,31 @@ const ESTest = {
       "symbol",
       "function",
     ],
+    testResult: null,
+    report: {
+      total: 0,
+      undefined: 0,
+      null: 0,
+      array: 0,
+      object: 0,
+      boolean: 0,
+      NaN: 0,
+      number: 0,
+      bigint: 0,
+      string: 0,
+      symbol: 0,
+      function: 0,
+      lessThan: 0,
+      lessThanOrEqual: 0,
+      GreaterThanOrEqual: 0,
+      GreaterThan: 0,
+      StrictEquality: 0,
+      StrictInequality: 0,
+    },
   },
   in: {
     reuse: {
-      /**
-       * Fix legacy types in JavaScript and make them more specific.
-       * @param {*} input
-       * @returns
-       */
-      getNewType(input) {
+      fixLegacyType(input) {
         const isNull = input === null;
         const isArray = Array.isArray(input);
         const isNaN = Number.isNaN(input);
@@ -40,38 +56,31 @@ const ESTest = {
 
         return (
           typeMap[typeof input] ||
-          `
-          ❌ Error from getNewType(), input: ${input}`
+          `❌ Error from fixLegacyType(), input: ${input}`
         );
       },
-      /**
-       *  To correctly display text in the log.
-       * @param {*} input
-       * @returns
-       */
       fixTextInLog(input) {
         const fix_ArrayLog = () => {
           let result = "";
 
           input.forEach((item) => {
-            if (ESTest.in.reuse.getNewType(item) === "array") {
+            if (ESTest.in.reuse.fixLegacyType(item) === "array") {
               result += `[...], `;
             } else {
               result += `${ESTest.in.reuse.fixTextInLog(item)}, `;
             }
           });
 
-          // to remove the end of spacing and ,
+          // '[1, 'hello', [...]], '  -->  '[1, 'hello', [...]]'
           result = `[${result.trim().slice(0, -1)}]`;
 
-          // [1, 'hello', [...]]
           return result;
         };
         const fix_ObjectLog = () => {
           let result = "";
 
           for (const [key, value] of Object.entries(input)) {
-            if (ESTest.in.reuse.getNewType(value) === "object") {
+            if (ESTest.in.reuse.fixLegacyType(value) === "object") {
               result += `${key}: {...}, `;
             } else {
               result += `${key}: ${ESTest.in.reuse.fixTextInLog(value)}, `;
@@ -85,7 +94,7 @@ const ESTest = {
           return result;
         };
 
-        switch (ESTest.in.reuse.getNewType(input)) {
+        switch (ESTest.in.reuse.fixLegacyType(input)) {
           case "array":
             return fix_ArrayLog();
           case "object":
@@ -101,32 +110,101 @@ const ESTest = {
         }
       },
     },
-    /**
-     * @param {*} input The testing value
-     * @param {'<'|'<='|'>='|'>'|'==='|'!=='} operator
-     * @param {*} input2 The compared value
-     * @param {undefined | String} [msg]
-     * @returns {Void | Error}
-     */
-    useOperatorMode(input, operator, input2, msg) {
+    useTypeMode(input, mode, msg = "undefined error message") {
       {
-        if (!ESTest.data.OPERATORS.includes(operator)) {
+        if (!ESTest.data.TYPES.includes(mode)) {
           throw new Error(
             `
-            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(operator)};
-            ✅ expects: '<' | '<=' | '>=' | '>' | '===' | '!=='`
+            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(mode)}
+            ✅ expects: 'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'
+            `,
           );
         }
-        if (
-          !["undefined", "string"].includes(ESTest.in.reuse.getNewType(msg))
-        ) {
-          const customErrType = ESTest.in.reuse.getNewType(msg);
+        if (!["undefined", "string"].includes(typeof msg)) {
+          const customErrType = ESTest.in.reuse.fixLegacyType(msg);
           const customErrInLog = ESTest.in.reuse.fixTextInLog(msg);
 
           throw new Error(
             `
-            ❌ 📝 ${customErrInLog}('${customErrType}');
-            ✅ expects: 'string' type`
+            ❌ error message type: 📝 ${customErrInLog}('${customErrType}')
+            ✅ expects: 'string' type
+            `,
+          );
+        }
+      }
+
+      if (ESTest.in.reuse.fixLegacyType(input) !== mode) {
+        const fixTextInLogType = ESTest.in.reuse.fixTextInLog(mode);
+        const fixTextInLogInput = ESTest.in.reuse.fixTextInLog(input);
+        const fixLegacyType = ESTest.in.reuse.fixLegacyType(input);
+
+        throw new Error(
+          `
+          📝 ${msg}
+          ❌ error type: 💣('${fixLegacyType}') === ${fixTextInLogType}
+          💣 ${fixTextInLogInput}
+          `,
+        );
+      }
+
+      switch (mode) {
+        case "undefined":
+          ESTest.data.report.undefined += 1;
+          break;
+        case "null":
+          ESTest.data.report.null += 1;
+          break;
+        case "array":
+          ESTest.data.report.array += 1;
+          break;
+        case "object":
+          ESTest.data.report.object += 1;
+          break;
+        case "boolean":
+          ESTest.data.report.boolean += 1;
+          break;
+        case "NaN":
+          ESTest.data.report.NaN += 1;
+          break;
+        case "number":
+          ESTest.data.report.number += 1;
+          break;
+        case "bigint":
+          ESTest.data.report.bigint += 1;
+          break;
+        case "string":
+          ESTest.data.report.string += 1;
+          break;
+        case "symbol":
+          ESTest.data.report.symbol += 1;
+          break;
+        case "function":
+          ESTest.data.report.function += 1;
+          break;
+      }
+
+      ESTest.data.report.total += 1;
+      ESTest.data.testResult = mode;
+    },
+    useOperatorMode(input, mode, input2, msg = "undefined error message") {
+      {
+        if (!ESTest.data.OPERATORS.includes(mode)) {
+          throw new Error(
+            `
+            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(mode)}
+            ✅ expects: '<' | '<=' | '>=' | '>' | '===' | '!=='
+            `,
+          );
+        }
+        if (!["undefined", "string"].includes(typeof msg)) {
+          const customErrType = ESTest.in.reuse.fixLegacyType(msg);
+          const customErrInLog = ESTest.in.reuse.fixTextInLog(msg);
+
+          throw new Error(
+            `
+            ❌ error message type: 📝 ${customErrInLog}('${customErrType}')
+            ✅ expects: 'string' type
+            `,
           );
         }
       }
@@ -134,171 +212,131 @@ const ESTest = {
       const inputInLog = ESTest.in.reuse.fixTextInLog(input);
       const input2InLog = ESTest.in.reuse.fixTextInLog(input2);
 
-      if (operator === "<") {
-        if (!(input < input2)) {
-          throw new Error(
-            `
-            ❌ ${inputInLog} < ${input2InLog};
-            📝 ${msg}`,
-          );
-        }
-      } else if (operator === "<=") {
-        if (!(input <= input2)) {
-          throw new Error(
-            `
-            ❌ ${inputInLog} <= ${input2InLog};
-            📝 ${msg}`,
-          );
-        }
-      } else if (operator === ">=") {
-        if (!(input >= input2)) {
-          throw new Error(
-            `
-            ❌ ${inputInLog} >= ${input2InLog};
-            📝 ${msg}`,
-          );
-        }
-      } else if (operator === ">") {
-        if (!(input > input2)) {
-          throw new Error(
-            `
-            ❌ ${inputInLog} > ${input2InLog};
-            📝 ${msg}`,
-          );
-        }
-      } else if (operator === "===") {
-        if (!(input === input2)) {
-          throw new Error(
-            `
-            ❌ ${inputInLog} === ${input2InLog};
-            📝 ${msg}`,
-          );
-        }
-      } else if (operator === "!==") {
-        if (!(input !== input2)) {
-          throw new Error(
-            `
-            ❌ ${inputInLog} !== ${input2InLog};
-            📝 ${msg}`,
-          );
-        }
+      switch (mode) {
+        case "<":
+          if (!(input < input2)) {
+            throw new Error(
+              `
+              📝 ${msg}
+              ❌ ${inputInLog} < ${input2InLog}
+              `,
+            );
+          }
+
+          ESTest.data.report.lessThan += 1;
+          break;
+        case "<=":
+          if (!(input <= input2)) {
+            throw new Error(
+              `
+              📝 ${msg}
+              ❌ ${inputInLog} <= ${input2InLog}
+              `,
+            );
+          }
+
+          ESTest.data.report.lessThanOrEqual += 1;
+          break;
+        case ">=":
+          if (!(input >= input2)) {
+            throw new Error(
+              `
+              📝 ${msg}
+              ❌ ${inputInLog} >= ${input2InLog}
+              `,
+            );
+          }
+
+          ESTest.data.report.GreaterThanOrEqual += 1;
+          break;
+        case ">":
+          if (!(input > input2)) {
+            throw new Error(
+              `
+              📝 ${msg}
+              ❌ ${inputInLog} > ${input2InLog}
+              `,
+            );
+          }
+
+          ESTest.data.report.GreaterThan += 1;
+          break;
+        case "===":
+          if (!(input === input2)) {
+            throw new Error(
+              `
+              📝 ${msg}
+              ❌ ${inputInLog} === ${input2InLog}
+              `,
+            );
+          }
+
+          ESTest.data.report.StrictEquality += 1;
+          break;
+        case "!==":
+          if (!(input !== input2)) {
+            throw new Error(
+              `
+              📝 ${msg}
+              ❌ ${inputInLog} !== ${input2InLog}
+              `,
+            );
+          }
+
+          ESTest.data.report.StrictInequality += 1;
+          break;
       }
+
+      ESTest.data.report.total += 1;
+      ESTest.data.testResult = true;
     },
-    /**
-     * @param {*} input The testing value
-     * @param {'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'} type
-     * @param {undefined | String} [msg]
-     * @returns {Void | Error}
-     */
-    useTypeMode(input, type, msg) {
-      {
-        if (!ESTest.data.TYPES.includes(type)) {
-          throw new Error(
-            `
-            ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(type)};
-            ✅ expects: 'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'`,
-          );
-        }
-        if (
-          !["undefined", "string"].includes(ESTest.in.reuse.getNewType(msg))
-        ) {
-          const customErrType = ESTest.in.reuse.getNewType(msg);
-          const customErrInLog = ESTest.in.reuse.fixTextInLog(msg);
-
-          throw new Error(
-            `
-            ❌ 📝 ${customErrInLog}('${customErrType}');
-            ✅ expects: 'string' type`,
-          );
-        }
-      }
-
-      if (ESTest.in.reuse.getNewType(input) !== type) {
-        const fixTextInLogType = ESTest.in.reuse.fixTextInLog(type);
-        const fixTextInLogInput = ESTest.in.reuse.fixTextInLog(input);
-        const getNewType = ESTest.in.reuse.getNewType(input);
-
+  },
+  out: {
+    // internal test purpose
+    _getTestResult() {
+      return ESTest.data.testResult;
+    },
+    esTest(input, mode, input2, msg) {
+      if (ESTest.data.TYPES.includes(mode)) {
+        ESTest.in.useTypeMode(input, mode, input2); // input2 === msg in useTypeMode
+      } else if (ESTest.data.OPERATORS.includes(mode)) {
+        ESTest.in.useOperatorMode(input, mode, input2, msg);
+      } else {
         throw new Error(
           `
-          ❌ typeof 💣('${getNewType}') === ${fixTextInLogType};
-          📝 ${msg};
-          💣 ${fixTextInLogInput}
+          ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(mode)}
+          ✅ expects: 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'
           `,
         );
       }
     },
-    /**
-     * @param {*} mode
-     * @returns {Error}
-     */
-    dealEdgeCases(mode) {
-      throw new Error(
-        `
-        ❌ 2nd argument: ${ESTest.in.reuse.fixTextInLog(mode)};
-        ✅ expects: 'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'`
-      );
-    },
-  },
-  out: {
-    /**
-     * 100% function coverage makes your life easier.
-     * ```js
-     * // type mode
-     * esTest(undefined, 'undefined')
-     * esTest(null, 'null')
-     * esTest([], 'array')
-     * esTest({}, 'object')
-     * esTest(true, 'boolean')
-     * esTest(NaN, 'NaN')
-     * esTest(1, 'number')
-     * esTest(1n, 'bigint')
-     * esTest('Hello World', 'string')
-     * esTest(Symbol(), 'symbol')
-     * esTest(function () {}, 'function')
-     * esTest(1, 'object') // error
-     * esTest(1, 'object', 'foo') // error & message
-     *
-     * // operator mode
-     * esTest(1, '<', 5)
-     * esTest(1, '<=', 5)
-     * esTest(5, '>', 1)
-     * esTest(5, '>=', 1)
-     * esTest(1, '===', 1)
-     * esTest(1, '!==', 2)
-     * esTest(1, '>=', 100) // error
-     * esTest(1, '>=', 100, 'foo') // error & message
-     * ```
-     * @param {*} input
-     * @param {'undefined'|'null'|'array'|'object'|'boolean'|'NaN'|'number'|'bigint'|'string'|'symbol'|'function'|'==='|'!=='|'<'|'<='|'>='|'>'} mode
-     * @param {*} [input2]
-     * @param {undefined | String} [msg]
-     * @returns {Void|Error} PASS: void | FAIL: throw an Error
-     */
-    esTest(input, mode, input2, msg) {
-      {
-        if (
-          !ESTest.data.TYPES.includes(mode) &&
-          !ESTest.data.OPERATORS.includes(mode)
-        ) {
-          ESTest.in.dealEdgeCases(mode);
-        }
-      }
+    getReport() {
+      console.log(`
+        Total usage of esTest: ${ESTest.data.report.total}
 
-      if (ESTest.data.TYPES.includes(mode)) {
-        ESTest.in.useTypeMode(input, mode, input2);
+        - Type Mode - 
+        "undefined": ${ESTest.data.report.undefined}
+        "null": ${ESTest.data.report.null}
+        "array": ${ESTest.data.report.array}
+        "object": ${ESTest.data.report.object}
+        "boolean": ${ESTest.data.report.boolean}
+        "NaN": ${ESTest.data.report.NaN}
+        "number": ${ESTest.data.report.number}
+        "bigint": ${ESTest.data.report.bigint}
+        "string": ${ESTest.data.report.string}
+        "symbol": ${ESTest.data.report.symbol}
+        "function": ${ESTest.data.report.function}
 
-        // for testing purpose
-        return mode;
-      } else if (ESTest.data.OPERATORS.includes(mode)) {
-        ESTest.in.useOperatorMode(input, mode, input2, msg);
-
-        // for testing purpose
-        return true;
-      }
+        - Operator Mode -
+        "<": ${ESTest.data.report.lessThan}
+        "<=": ${ESTest.data.report.lessThanOrEqual}
+        ">=": ${ESTest.data.report.GreaterThanOrEqual}
+        ">": ${ESTest.data.report.GreaterThan}
+        "===": ${ESTest.data.report.StrictEquality}
+        "!==": ${ESTest.data.report.StrictInequality}
+        `);
     },
   },
 };
 
-const esTest = ESTest.out.esTest;
-
-export { esTest };
+export const { getReport, esTest, _getTestResult } = ESTest.out;
