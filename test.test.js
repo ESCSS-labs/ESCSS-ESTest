@@ -1,147 +1,147 @@
 import { expect, test, describe } from "bun:test";
-import { esTest, _getTestResult } from "./esTest";
+import { test as escssTest, _getTestResult } from "./test";
 
 describe("mode: type", () => {
   test("undefined", () => {
-    esTest(undefined, "undefined");
+    escssTest(undefined, "undefined");
     expect(_getTestResult()).toBe("undefined");
   });
 
   test("null", () => {
-    esTest(null, "null");
+    escssTest(null, "null");
     expect(_getTestResult()).toBe("null");
   });
 
   test("array", () => {
-    esTest([], "array");
+    escssTest([], "array");
     expect(_getTestResult()).toBe("array");
   });
 
   test("object", () => {
-    esTest({}, "object");
+    escssTest({}, "object");
     expect(_getTestResult()).toBe("object");
   });
 
   test("boolean", () => {
-    esTest(true, "boolean");
+    escssTest(true, "boolean");
     expect(_getTestResult()).toBe("boolean");
   });
 
   test("NaN", () => {
-    esTest(NaN, "NaN");
+    escssTest(NaN, "NaN");
     expect(_getTestResult()).toBe("NaN");
   });
 
   test("number", () => {
-    esTest(123, "number");
+    escssTest(123, "number");
     expect(_getTestResult()).toBe("number");
   });
 
   test("bigint", () => {
-    esTest(123n, "bigint");
+    escssTest(123n, "bigint");
     expect(_getTestResult()).toBe("bigint");
   });
 
   test("string", () => {
-    esTest("Hello World", "string");
+    escssTest("Hello World", "string");
     expect(_getTestResult()).toBe("string");
   });
 
   test("symbol", () => {
-    esTest(Symbol(), "symbol");
+    escssTest(Symbol(), "symbol");
     expect(_getTestResult()).toBe("symbol");
   });
 
   test("function", () => {
-    esTest(function () {}, "function");
+    escssTest(function () {}, "function");
     expect(_getTestResult()).toBe("function");
   });
 
   test("number w/ errMsg", () => {
-    esTest(123, "number", "number text");
+    escssTest(123, "number", "number text");
     expect(_getTestResult()).toBe("number");
   });
 });
 
 describe("mode: operator", () => {
   test("1 < 5", () => {
-    esTest(1, "<", 5);
+    escssTest(1, "<", 5);
     expect(_getTestResult()).toBe(true);
   });
 
   test("1 <= 5", () => {
-    esTest(1, "<=", 5);
+    escssTest(1, "<=", 5);
     expect(_getTestResult()).toBe(true);
   });
 
   test("5 > 1", () => {
-    esTest(5, ">", 1);
+    escssTest(5, ">", 1);
     expect(_getTestResult()).toBe(true);
   });
 
   test("5 >= 1", () => {
-    esTest(5, ">=", 1);
+    escssTest(5, ">=", 1);
     expect(_getTestResult()).toBe(true);
   });
 
   test("1 === 1", () => {
-    esTest(1, "===", 1);
+    escssTest(1, "===", 1);
     expect(_getTestResult()).toBe(true);
   });
 
   test("-1 !== 1", () => {
-    esTest(-1, "!==", 1);
+    escssTest(-1, "!==", 1);
     expect(_getTestResult()).toBe(true);
   });
 
   test("error message", () => {
-    esTest(-1, "!==", 1, "word");
+    escssTest(-1, "!==", 1, "word");
     expect(_getTestResult()).toBe(true);
   });
 });
 
 describe("error situation", () => {
   test("no params", () => {
-    expect(() => esTest()).toThrow();
+    expect(() => escssTest()).toThrow();
   });
 
   test("wrong 2nd argument", () => {
-    expect(() => esTest(1, 123)).toThrow();
-    expect(() => esTest(1, "s")).toThrow();
-    expect(() => esTest(1, [])).toThrow();
-    expect(() => esTest(1, "==")).toThrow();
-    expect(() => esTest(1, "!=")).toThrow();
+    expect(() => escssTest(1, 123)).toThrow();
+    expect(() => escssTest(1, "s")).toThrow();
+    expect(() => escssTest(1, [])).toThrow();
+    expect(() => escssTest(1, "==")).toThrow();
+    expect(() => escssTest(1, "!=")).toThrow();
   });
 
   test("expect error 1 > 5", () => {
-    expect(() => esTest(1, ">", 5)).toThrow();
+    expect(() => escssTest(1, ">", 5)).toThrow();
   });
 
   test("expect error 1 >= 5", () => {
-    expect(() => esTest(1, ">=", 5)).toThrow();
+    expect(() => escssTest(1, ">=", 5)).toThrow();
   });
 
   test("expect error 5 < 1", () => {
-    expect(() => esTest(5, "<", 1)).toThrow();
+    expect(() => escssTest(5, "<", 1)).toThrow();
   });
 
   test("expect error 5 <= 1", () => {
-    expect(() => esTest(5, "<=", 1)).toThrow();
+    expect(() => escssTest(5, "<=", 1)).toThrow();
   });
 
   test("expect error 1 !== 1", () => {
-    expect(() => esTest(1, "!==", 1)).toThrow();
+    expect(() => escssTest(1, "!==", 1)).toThrow();
   });
 
   test("expect error -1 === 1", () => {
-    expect(() => esTest(-1, "===", 1)).toThrow();
+    expect(() => escssTest(-1, "===", 1)).toThrow();
   });
 
   test("type mode msg should be type: string | undefined", () => {
-    expect(() => esTest(10, "number", {})).toThrow();
+    expect(() => escssTest(10, "number", {})).toThrow();
   });
 
   test("operator mode msg should be type: string | undefined", () => {
-    expect(() => esTest(10, ">", 1, {})).toThrow();
+    expect(() => escssTest(10, ">", 1, {})).toThrow();
   });
 });

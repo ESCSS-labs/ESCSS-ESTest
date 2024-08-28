@@ -1,6 +1,6 @@
 # What is ESCSS-estest?
 
-Achieve 100% test coverage and help your function become a pure function.
+Achieve 100% coverage makes your life easier
 
 ## Core Concept - Water Filter
 
@@ -18,29 +18,29 @@ function foo() {
 
 ```js
 // operator mode
-esTest(1, "<", 5);
-esTest(5, ">", 1);
-esTest(1, "<=", 5);
-esTest(5, ">=", 1);
-esTest(1, "!==", 2);
-esTest(1, "===", 1);
-esTest(1, "===", 100); // error
-esTest(1, "===", 100, "foo"); // error & message
+test(1, "<", 5);
+test(5, ">", 1);
+test(1, "<=", 5);
+test(5, ">=", 1);
+test(1, "!==", 2);
+test(1, "===", 1);
+test(1, "===", 100); // error
+test(1, "===", 100, "foo"); // error & message
 
 // type mode
-esTest(1, "number");
-esTest(1n, "bigint");
-esTest("foo", "string");
-esTest(true, "boolean");
-esTest([], "array"); // new type
-esTest({}, "object");
-esTest(NaN, "NaN"); // new type
-esTest(null, "null"); // new type
-esTest(undefined, "undefined"); // new type
-esTest(Symbol(), "symbol");
-esTest(function () {}, "function");
-esTest(1, "object"); // error
-esTest(1, "object", "foo"); // error & message
+test(1, "number");
+test(1n, "bigint");
+test("foo", "string");
+test(true, "boolean");
+test([], "array"); // new type
+test({}, "object");
+test(NaN, "NaN"); // new type
+test(null, "null"); // new type
+test(undefined, "undefined"); // new type
+test(Symbol(), "symbol");
+test(function () {}, "function");
+test(1, "object"); // error
+test(1, "object", "foo"); // error & message
 
 // get report (use it in root component)
 getReport();
@@ -52,8 +52,8 @@ getReport();
 // basic
 function sum(a, b) {
   {
-    esTest(a, "number");
-    esTest(b, "number");
+    test(a, "number");
+    test(b, "number");
   }
 
   return a + b;
@@ -66,16 +66,16 @@ async function getData() {
   const json = await response.json();
 
   {
-    esTest(
+    test(
       url,
       "===",
       "https://jsonplaceholder.typicode.com/todos/1",
       "url has been changed",
     );
-    esTest(json.completed, "boolean");
-    esTest(json.id, "number");
-    esTest(json.title, "string");
-    esTest(json.userId, "number");
+    test(json.completed, "boolean");
+    test(json.id, "number");
+    test(json.title, "string");
+    test(json.userId, "number");
   }
 
   console.log(json);
@@ -87,14 +87,14 @@ async function getData() {
 // 3. hit save for hot reload(Vite)
 // 4. get a console.log report in browser (step 1 - 3 async/await concern)
 //
-// Note: to get the correctest report esTest should be used in function, not outside(test in Vue 3)
+// Note: to get the correctest report test should be used in function, not outside(test in Vue 3)
 ```
 
 ## Q&A
 
 ### Does ESCSS-estest make my function a pure function?
 
-The purpose of using pure functions is to ensure predictability, which makes them easier to test.
+I Thinks so. The purpose of using pure functions is to ensure predictability, which makes them easier to test.
 
 ```js
 // Pure function - same input expects same output
@@ -119,12 +119,12 @@ getFinalPrice(100); // 10
 ```
 
 ```js
-// Pure function - same input in {} (unhappy path) expects same output
+// same input in {} (unhappy path) expects same output
 let discount = 1;
 function getFinalPrice(price) {
   {
-    esTest(price, "number");
-    esTest(discount, "===", 1);
+    test(price, "number");
+    test(discount, "===", 1);
   }
 
   return price * discount;

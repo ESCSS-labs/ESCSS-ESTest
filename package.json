@@ -8,7 +8,7 @@
     "name": "Mike Lee",
     "email": "cspkno005@gmail.com"
   },
-  "main": "./esTest.js",
+  "main": "./test.js",
   "keywords": [
     "escss",
     "testing",
