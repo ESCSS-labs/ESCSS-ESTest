@@ -1,4 +1,4 @@
-# What is ESCSS-estest?
+# What is ESCSS-test?
 
 Achieve 100% coverage makes your life easier
 
@@ -92,7 +92,7 @@ async function getData() {
 
 ## Q&A
 
-### Does ESCSS-estest make my function a pure function?
+### Does ESCSS-test make my function a pure function?
 
 I Thinks so. The purpose of using pure functions is to ensure predictability, which makes them easier to test.
 
@@ -138,15 +138,15 @@ getFinalPrice(100); // Throw an error if the discount is not 1; if changed to 1,
 ## Installation
 
 ```
-  npm install escss-estest
+  npm install escss-test
 ```
 
 ```
-  yarn add escss-estest
+  yarn add escss-test
 ```
 
 ```
-  bun add escss-estest
+  bun add escss-test
 ```
 
 ## Test Cases Guide
@@ -157,4 +157,4 @@ getFinalPrice(100); // Throw an error if the discount is not 1; if changed to 1,
 
 ## License
 
-Dual Licensing（ Commercial or AGPL 3.0 ）, see [LICENSE](./LICENSE.md)
+Dual Licensing（Commercial or AGPL 3.0）,see [LICENSE](./LICENSE)
