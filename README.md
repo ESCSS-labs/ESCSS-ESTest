@@ -66,12 +66,6 @@ async function getData() {
   const json = await response.json();
 
   {
-    test(
-      url,
-      "===",
-      "https://jsonplaceholder.typicode.com/todos/1",
-      "url has been changed",
-    );
     test(json.completed, "boolean");
     test(json.id, "number");
     test(json.title, "string");
