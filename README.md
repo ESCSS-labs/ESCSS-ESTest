@@ -92,6 +92,8 @@ I Thinks so. The purpose of using pure functions is to ensure predictability, wh
 
 ```js
 // Pure function - same input expects same output
+// input: price
+// real input: price
 function getFinalPrice(price) {
   return price * 1;
 }
@@ -102,6 +104,8 @@ getFinalPrice(100); // 100
 
 ```js
 // Not pure function - same input not expects same output
+// input: price
+// real input: price、discount
 let discount = 1;
 function getFinalPrice(price) {
   return price * discount;
@@ -113,7 +117,9 @@ getFinalPrice(100); // 10
 ```
 
 ```js
-// same input in {} (unhappy path) expects same output
+// same input in {} expects same output
+// input: price、discount (unhappy path)
+// real input: price、discount
 let discount = 1;
 function getFinalPrice(price) {
   {
