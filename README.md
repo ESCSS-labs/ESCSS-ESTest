@@ -14,6 +14,9 @@ function foo() {
 }
 ```
 
+## ## Requirements
+  vite >= 4.4.0
+
 ## Usage
 
 ```js
