@@ -94,7 +94,7 @@ async function getData() {
 I Thinks so. The purpose of using pure functions is to ensure predictability, which makes them easier to test.
 
 ```js
-// Pure function - same input expects same output
+// Pure function - same input === same output
 // input: price
 // real input: price
 function getFinalPrice(price) {
@@ -106,7 +106,7 @@ getFinalPrice(100); // 100
 ```
 
 ```js
-// Not pure function - same input not expects same output
+// Not pure function - same input !== same output
 // input: price
 // real input: price、discount
 let discount = 1;
@@ -114,28 +114,32 @@ function getFinalPrice(price) {
   return price * discount;
 }
 
+
 getFinalPrice(100); // 100
+
 discount = 0.1;
 getFinalPrice(100); // 10
 ```
 
 ```js
-// same input in {} expects same output
+// Pure function - same input in {} === same output
 // input: price、discount (unhappy path)
 // real input: price、discount
 let discount = 1;
 function getFinalPrice(price) {
   {
     test(price, "number");
-    test(discount, "===", 1);
+    test(discount, "number");
   }
 
   return price * discount;
 }
 
+
 getFinalPrice(100); // 100
+
 discount = 0.1;
-getFinalPrice(100); // Throw an error if the discount is not 1; if changed to 1, receive 100 as expected.
+getFinalPrice(100); // 10
 ```
 
 ## Installation
