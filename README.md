@@ -1,3 +1,4 @@
+![logo](./img/logo.png)
 # What is ESCSS-test?
 
 Achieve 100% coverage makes your life easier
@@ -14,7 +15,7 @@ function foo() {
 }
 ```
 
-## ## Requirements
+## Requirements
   vite >= 4.4.0
 
 ## Usage
