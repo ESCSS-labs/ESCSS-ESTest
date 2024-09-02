@@ -14,7 +14,7 @@ const TestModule = {
       "symbol",
       "function",
     ],
-    testResult: null,
+    testResult: null, // internal test required
     report: {
       total: 0,
       undefined: 0,
