@@ -92,7 +92,7 @@ async function getData() {
 
 ### Does ESCSS-test make my function a pure function?
 
-I Thinks so. The purpose of using pure functions is to ensure predictability, which makes them easier to test.
+The purpose of using pure functions is to ensure predictability, which makes them easier to test.
 
 ```js
 // Pure function - same input === same output
@@ -157,7 +157,7 @@ getFinalPrice(100); // 10
   bun add escss-test
 ```
 
-## Test Cases Guide
+## Run Test Cases
 
 1. clone project
 2. bun install

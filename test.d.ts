@@ -43,7 +43,7 @@ type Mode =
  * test(1, '!==', 2)
  * test(1, '===', 1)
  * test(1, '===', 100) // error
- * test(1, '===', 100, 'foo') // error & message
+ * test(1, '===', 100, 'Sep 05 2024 Mike 001') // The error message should provide a unique ID for troubleshooting
  * ```
  */
 export function test(
