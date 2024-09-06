@@ -1,7 +1,8 @@
 ![logo](./img/logo.png)
+
 # What is ESCSS-test?
 
-Achieve 100% coverage makes your life easier
+Inspired by TDD and TypeScript, it helps you achieve 100% function coverage.
 
 ## Core Concept - Water Filter
 
@@ -16,22 +17,31 @@ function foo() {
 ```
 
 ## Requirements
-  vite >= 4.4.0
+
+vite >= 4.4.0
+
+## Demo
+
+- pure vs impure function
+  ![example-1](./img/exmaple-pure-impure.png)
+
+- async/await & try-catch
+  ![example-2](./img/example-try-catch.png)
+
+- class
+  ![example-3](./img/example-class.png)
+
+- Get report
+  - The order of steps 1-3 is a concern regarding async/await.
+  1. start your dev server
+  2. use getReport() under root component
+  3. hit save for hot reload(Vite)
+  4. get a console.log report in browser
 
 ## Usage
 
 ```js
-// operator mode
-test(1, "<", 5);
-test(5, ">", 1);
-test(1, "<=", 5);
-test(5, ">=", 1);
-test(1, "!==", 2);
-test(1, "===", 1);
-test(1, "===", 100); // error
-test(1, "===", 100, "foo"); // error & message
-
-// type mode
+// Type mode
 test(1, "number");
 test(1n, "bigint");
 test("foo", "string");
@@ -44,116 +54,33 @@ test(undefined, "undefined"); // new type
 test(Symbol(), "symbol");
 test(function () {}, "function");
 test(1, "object"); // error
-test(1, "object", "foo"); // error & message
+test(1, "object", "mike 09062024 001"); // The error message should provide a unique ID for troubleshooting
 
-// get report (use it in root component)
+// Operator mode
+test(1, "<", 5);
+test(5, ">", 1);
+test(1, "<=", 5);
+test(5, ">=", 1);
+test(1, "!==", 2);
+test(1, "===", 1);
+test(1, "===", 100); // error
+test(1, "===", 100, "mike 09062024 001"); // The error message should provide a unique ID for troubleshooting
+
+// Get console.log report (Ｕse it in the root component)
 getReport();
-```
-
-## Examples
-
-```js
-// basic
-function sum(a, b) {
-  {
-    test(a, "number");
-    test(b, "number");
-  }
-
-  return a + b;
-}
-
-// async / await
-async function getData() {
-  const url = "https://jsonplaceholder.typicode.com/todos/1";
-  const response = await fetch(url);
-  const json = await response.json();
-
-  {
-    test(json.completed, "boolean");
-    test(json.id, "number");
-    test(json.title, "string");
-    test(json.userId, "number");
-  }
-
-  console.log(json);
-}
-
-// get report
-// 1. start your dev server
-// 2. use getReport() under root component
-// 3. hit save for hot reload(Vite)
-// 4. get a console.log report in browser (step 1 - 3 async/await concern)
-//
-// Note: to get the correctest report test should be used in function, not outside(test in Vue 3)
 ```
 
 ## Q&A
 
-### Does ESCSS-test make my function a pure function?
+### Will ESCSS-test become obsolete?
 
-The purpose of using pure functions is to ensure predictability, which makes them easier to test.
-
-```js
-// Pure function - same input === same output
-// input: price
-// real input: price
-function getFinalPrice(price) {
-  return price * 1;
-}
-
-getFinalPrice(100); // 100
-getFinalPrice(100); // 100
-```
-
-```js
-// Not pure function - same input !== same output
-// input: price
-// real input: price、discount
-let discount = 1;
-function getFinalPrice(price) {
-  return price * discount;
-}
-
-
-getFinalPrice(100); // 100
-
-discount = 0.1;
-getFinalPrice(100); // 10
-```
-
-```js
-// Pure function - same input in {} === same output
-// input: price、discount (unhappy path)
-// real input: price、discount
-let discount = 1;
-function getFinalPrice(price) {
-  {
-    test(price, "number");
-    test(discount, "number");
-  }
-
-  return price * discount;
-}
-
-
-getFinalPrice(100); // 100
-
-discount = 0.1;
-getFinalPrice(100); // 10
-```
+ESCSS-test is based on the 'null' type, which has been a legacy bug for decades. I don't believe this library will become obsolete. The core is complete, so significant changes are unlikely in the future.
 
 ## Installation
 
-```
+```shell
   npm install escss-test
-```
-
-```
   yarn add escss-test
-```
-
-```
   bun add escss-test
 ```
 

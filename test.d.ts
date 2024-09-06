@@ -33,7 +33,7 @@ type Mode =
  * test(Symbol(), 'symbol')
  * test(function () {}, 'function')
  * test(1, 'object') // error
- * test(1, 'object', 'foo') // error & message
+ * test(1, 'object', 'mike 09062024 1') // The error message should provide a unique ID for troubleshooting
  *
  * // operator mode
  * test(1, '<', 5)
@@ -43,7 +43,10 @@ type Mode =
  * test(1, '!==', 2)
  * test(1, '===', 1)
  * test(1, '===', 100) // error
- * test(1, '===', 100, 'Sep 05 2024 Mike 001') // The error message should provide a unique ID for troubleshooting
+ * test(1, '===', 100, 'mike 09062024 1') // The error message should provide a unique ID for troubleshooting
+ *
+ * // Get console.log report (Ｕse it in the root component)
+ * getReport();
  * ```
  */
 export function test(
@@ -54,11 +57,12 @@ export function test(
 ): void | Error;
 
 /**
+ * The order of steps 1-3 is a concern regarding async/await.
  * 1. start your dev server
  * 2. use getReport() under root component
  * 3. hit save for hot reload(Vite)
- * 4. get a correctly console.log report in browser (step 1 - 3 async/await concern)
+ * 4. get a correctly console.log report in browser
  *
- * Note: to get the correctest report test should be used in function, not outside(test in Vue 3)
+ * Note: For reference only, complete protection your codebase requires E2E
  */
 export function getReport(): void;
