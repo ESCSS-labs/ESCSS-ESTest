@@ -125,7 +125,7 @@ const TestModule = {
 
           throw new Error(
             `
-            ❌ error message type: 📝 ${customErrInLog}('${customErrType}')
+            ❌ custom error message type: 📝 ${customErrInLog}('${customErrType}')
             ✅ expects: 'string' type
             `,
           );
@@ -140,7 +140,7 @@ const TestModule = {
         throw new Error(
           `
           📝 ${msg}
-          ❌ error type: 💣('${fixLegacyType}') === ${fixTextInLogType}
+          ❌ type error: 💣('${fixLegacyType}') === ${fixTextInLogType}
           💣 ${fixTextInLogInput}
           `,
         );
@@ -201,7 +201,7 @@ const TestModule = {
 
           throw new Error(
             `
-            ❌ error message type: 📝 ${customErrInLog}('${customErrType}')
+            ❌ custom error message type: 📝 ${customErrInLog}('${customErrType}')
             ✅ expects: 'string' type
             `,
           );
@@ -217,7 +217,7 @@ const TestModule = {
             throw new Error(
               `
               📝 ${msg}
-              ❌ ${inputInLog} < ${input2InLog}
+              ❌ relational operators error: ${inputInLog} < ${input2InLog}
               `,
             );
           }
@@ -229,7 +229,7 @@ const TestModule = {
             throw new Error(
               `
               📝 ${msg}
-              ❌ ${inputInLog} <= ${input2InLog}
+              ❌ relational operators error: ${inputInLog} <= ${input2InLog}
               `,
             );
           }
@@ -241,7 +241,7 @@ const TestModule = {
             throw new Error(
               `
               📝 ${msg}
-              ❌ ${inputInLog} >= ${input2InLog}
+              ❌ relational operators error: ${inputInLog} >= ${input2InLog}
               `,
             );
           }
@@ -253,7 +253,7 @@ const TestModule = {
             throw new Error(
               `
               📝 ${msg}
-              ❌ ${inputInLog} > ${input2InLog}
+              ❌ relational operators error: ${inputInLog} > ${input2InLog}
               `,
             );
           }
@@ -265,7 +265,7 @@ const TestModule = {
             throw new Error(
               `
               📝 ${msg}
-              ❌ ${inputInLog} === ${input2InLog}
+              ❌ relational operators error: ${inputInLog} === ${input2InLog}
               `,
             );
           }
@@ -277,7 +277,7 @@ const TestModule = {
             throw new Error(
               `
               📝 ${msg}
-              ❌ ${inputInLog} !== ${input2InLog}
+              ❌ relational operators error: ${inputInLog} !== ${input2InLog}
               `,
             );
           }
