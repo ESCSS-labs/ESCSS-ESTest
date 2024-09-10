@@ -1,6 +1,6 @@
 const ESTestModule = {
   data: {
-    name: "ESTest",
+    AGPLv3_Program: 'escss-estest',
     testResult: null, // for internal testing
     OPERATORS: ["<", "<=", ">=", ">", "===", "!=="],
     TYPES: [
@@ -141,8 +141,7 @@ const ESTestModule = {
         throw new Error(
           `
           📝 ${msg}
-          ❌ type error: 💣('${fixLegacyType}') === ${fixTextInLogType}
-          💣 ${fixTextInLogInput}
+          ❌ type error: ${fixTextInLogInput} ('${fixLegacyType}') === ${fixTextInLogType}
           `,
         );
       }
