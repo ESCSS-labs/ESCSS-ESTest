@@ -2,7 +2,7 @@
 
 # What is ESCSS-ESTest?
 
-ESCSS-ESTest helps you to achieve 100% function coverage inspired by TDD and TypeScript.
+ESCSS-ESTest helps you to achieve 100% function coverage by taking the potential of TDD and TypeScript.
 
 ## Core Concept - Water Filter
 
@@ -21,6 +21,9 @@ function foo() {
 Vite >= 4.4.0 (if you use it)
 
 ## Demo
+
+### OOP Scenario
+![game dev](./img/gamedev.png)
 
 ### Pure vs Impure function
 
