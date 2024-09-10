@@ -1,5 +1,7 @@
 const ESTestModule = {
   data: {
+    name: "ESTest",
+    testResult: null, // for internal testing
     OPERATORS: ["<", "<=", ">=", ">", "===", "!=="],
     TYPES: [
       "undefined",
@@ -14,7 +16,6 @@ const ESTestModule = {
       "symbol",
       "function",
     ],
-    testResult: null, // internal test required
     report: {
       total: 0,
       undefined: 0,

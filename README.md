@@ -24,15 +24,73 @@ Vite >= 4.4.0 (if you use it)
 
 ### Pure vs Impure function
 
-![example-1](./img/exmaple-pure-impure.png)
+```js
+import { ESTest } from 'escss-estest';
 
-### Error handling: async/await & try-catch
+let isEnable = true
 
-![example-2](./img/example-try-catch.png)
+// impure function
+function getSum(a, b) {
+  if(!isEnable) return 0
+
+  return a + b
+}
+
+// pure function
+function getSum2(a, b) {
+  {
+    ESTest(a, 'number', 'mike 09102024 1')
+    ESTest(b, 'number', 'mike 09102024 2')
+    ESTest(isEnable, 'boolean', 'mike 09102024 3')
+  }
+
+  if(!isEnable) return 0
+
+  return a + b
+}
+```
+
+### Error handling: async/await
+```js
+import { ESTest } from 'escss-estest';
+
+async function getData() {
+  const url = "https://jsonplaceholder.typicode.com/todos/99999" // undefined api
+  const response = await fetch(url)
+  const json = await response.json()
+
+  {
+    ESTest(json.userId, 'number', 'mike 09102024 1')
+    ESTest(json.id, 'number', 'mike 09102024 2')
+    ESTest(json.title, 'string', 'mike 09102024 3')
+    ESTest(json.completed, 'boolean', 'mike 09102024 4')
+  }
+
+  console.log(json)
+}
+
+getData() // get error
+```
 
 ### Error handling: class
 
-![example-3](./img/example-class.png)
+```js
+import { ESTest } from 'escss-estest';
+
+class Animal {
+  constructor(name, gender) {
+    {
+      ESTest(name, 'string', 'mike 09102024 1')
+      ESTest(gender, 'string', 'mike 09102024 2')
+    }
+
+    this.name = name
+    this.gender = gender
+  }
+}
+
+new Animal('cat', 123) // get error
+```
 
 ### Get report
 
