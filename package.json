@@ -1,6 +1,6 @@
 {
-  "name": "escss-test",
-  "version": "1.0.0",
+  "name": "escss-estest",
+  "version": "1.2.0",
   "description": "100% coverage makes your life easier",
   "type": "module",
   "license": "Dual-licensing",
@@ -8,18 +8,13 @@
     "name": "Mike Lee",
     "email": "cspkno005@gmail.com"
   },
-  "main": "./test.js",
+  "main": "./ESTest.js",
   "keywords": [
     "escss",
-    "testing",
-    "unit-test",
+    "unit-testing",
     "typescript",
+    "clean-code",
+    "tdd-javascript",
     "zero-dependency"
-  ],
-  "scripts": {
-    "format": "bun prettier . --write --cache"
-  },
-  "devDependencies": {
-    "prettier": "^3.3.3"
-  }
+  ]
 }
