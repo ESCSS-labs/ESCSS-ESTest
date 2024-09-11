@@ -145,19 +145,19 @@ I initially started at v1.0.0 and experimented quite a bit, which led to some in
 
 ```bash
 ### npm
-  npm install escss-ESTest
+  npm install escss-estest
 
 ### yarn
-  yarn add escss-ESTest
+  yarn add escss-estest
 
 ### bun
-  bun add escss-ESTest
+  bun add escss-estest
 ```
 
 ## Run Test Cases
 
 1. clone project
-2. bun ESTest(I installed bun globally)
+2. bun test (I have installed bun globally)
 
 ## License
 
