@@ -21,10 +21,6 @@ function foo() {
 Vite >= 4.4.0 (if you use it)
 
 ## Demo
-
-### OOP Scenario
-![game dev](./img/gamedev.png)
-
 ### Pure vs Impure function
 
 ```js
