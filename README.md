@@ -1,4 +1,4 @@
-![logo](./img/logo.png)
+![logo](./src/img/logo.png)
 
 # What is ESCSS-ESTest?
 

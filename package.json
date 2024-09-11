@@ -8,7 +8,7 @@
     "name": "Mike Lee",
     "email": "cspkno005@gmail.com"
   },
-  "main": "./ESTest.js",
+  "main": "./src/ESTest.js",
   "keywords": [
     "escss",
     "unit-testing",
