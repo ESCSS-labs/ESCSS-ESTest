@@ -52,7 +52,7 @@ type Mode =
 export function ESTest(
   input: unknown,
   mode: Mode,
-  input2?: unknown,
+  msgOrInput2?: unknown,
   msg?: string,
 ): void | Error;
 

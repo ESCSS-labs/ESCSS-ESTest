@@ -295,11 +295,11 @@ const ESTestModule = {
     _getTestResult() {
       return ESTestModule.data.testResult;
     },
-    ESTest(input, mode, input2, msg) {
+    ESTest(input, mode, msgOrInput2, msg) {
       if (ESTestModule.data.TYPES.includes(mode)) {
-        ESTestModule.in.useTypeMode(input, mode, input2); // input2 === msg in useTypeMode
+        ESTestModule.in.useTypeMode(input, mode, msgOrInput2); // msg here
       } else if (ESTestModule.data.OPERATORS.includes(mode)) {
-        ESTestModule.in.useOperatorMode(input, mode, input2, msg);
+        ESTestModule.in.useOperatorMode(input, mode, msgOrInput2, msg); // input2 here
       } else {
         throw new Error(
           `
