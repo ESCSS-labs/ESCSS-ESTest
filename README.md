@@ -153,8 +153,4 @@ I initially started at v1.0.0 and experimented quite a bit, which led to some in
 ## Run Test Cases
 
 1. clone project
-2. bun test (I have installed bun globally)
-
-## License
-
-Dual Licensing（Commercial or AGPL 3.0）,see [LICENSE](./LICENSE)
+2. bun test
