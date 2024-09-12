@@ -1,6 +1,6 @@
 const ESTestModule = {
   data: {
-    AGPLv3_Program: 'escss-estest',
+    name: 'escss-estest',
     testResult: null, // for internal testing
     OPERATORS: ["<", "<=", ">=", ">", "===", "!=="],
     TYPES: [

@@ -20,7 +20,7 @@ This is a brief overview. For detailed information, please refer to AGPL-v3.0 an
       share modifications with others
       modify in a way that competes with the original software for customers
 
-[ESCSS-ESTest Commercial License Detail](./src/img/Basic-Perpetual.pdf)
+[ESCSS-ESTest Commercial License Detail](./src/assets/Basic-Yearly.pdf)
 
 [Buy it on opencollective](https://opencollective.com/escss)
 

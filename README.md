@@ -1,4 +1,4 @@
-![logo](./src/img/logo.png)
+![logo](./src/assets/logo.png)
 
 # What is ESCSS-ESTest?
 
@@ -35,7 +35,8 @@ function getSum(a, b) {
   return a + b
 }
 
-// pure function
+// --------------------------------------------------
+// pure function: test input by ESTest()
 function getSum2(a, b) {
   {
     ESTest(a, 'number', 'mike 09102024 1')
@@ -149,8 +150,3 @@ I initially started at v1.0.0 and experimented quite a bit, which led to some in
 ### bun
   bun add escss-estest
 ```
-
-## Run Test Cases
-
-1. clone project
-2. bun test
