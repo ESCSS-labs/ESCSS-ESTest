@@ -22,7 +22,7 @@ This is a brief overview. For detailed information, please refer to AGPL-v3.0 an
 
 [ESCSS-ESTest Commercial License Detail](./src/assets/Basic-Yearly.pdf)
 
-[Buy it on opencollective](https://opencollective.com/escss)
+[Acquire a Commercial License](https://opencollective.com/escss)
 
 [Source from dual-license-templates](https://github.com/lawndoc/dual-license-templates)
 
