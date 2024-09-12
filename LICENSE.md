@@ -20,11 +20,9 @@ This is a brief overview. For detailed information, please refer to AGPL-v3.0 an
       share modifications with others
       modify in a way that competes with the original software for customers
 
-[ESCSS-ESTest Commercial License Detail](./src/assets/Basic-Yearly.pdf)
+[ESCSS-ESTest Commercial License contract for detail](./src/assets/Basic-Yearly.pdf)
 
 [Acquire a Commercial License](https://opencollective.com/escss)
-
-[Source from dual-license-templates](https://github.com/lawndoc/dual-license-templates)
 
 ## 2. AGPL-v3.0 License:
     Copyright (C) 2024  Mike Lee <https://github.com/MikeLee0358>
@@ -41,3 +39,6 @@ This is a brief overview. For detailed information, please refer to AGPL-v3.0 an
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+## Reference
+[dual-license-templates](https://github.com/lawndoc/dual-license-templates)
