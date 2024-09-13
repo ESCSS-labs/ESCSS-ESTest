@@ -62,6 +62,8 @@ const ESTestModule = {
       },
       fixTextInLog(input) {
         const fix_ArrayInLog = () => {
+          // fix nesting array
+          // '[1, 'hello', [2, 3]]'  -->  '[1, 'hello', [...]]'
           let result = "";
 
           input.forEach((item) => {
@@ -79,6 +81,8 @@ const ESTestModule = {
           return result;
         };
         const fix_ObjectInLog = () => {
+          // fix nesting object
+          // '{a: 1, b: {c: 1, d: 2}}'  -->  '{a: 1, b: {...}}'
           let result = "";
 
           for (const [key, value] of Object.entries(input)) {
