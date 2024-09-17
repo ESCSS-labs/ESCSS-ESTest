@@ -24,9 +24,9 @@
       share modifications with others
       modify in a way that competes with the original software for customers
 
-[ESCSS-SCSS + ESCSS-ESTest Commercial License detail](./src/assets/Basic-Yearly.pdf)
-
 [Acquire a Commercial License](https://opencollective.com/escss)
+
+[ESCSS-SCSS + ESCSS-ESTest Commercial License detail](./src/assets/Basic-Yearly.pdf)
 
 ## 2. AGPL-v3.0 License:
 
