@@ -1,30 +1,35 @@
-# Dual License（Commercial or AGPL-v3.0）
+# Dual-Licensing（Commercial or AGPL-v3.0）
+
 ## Which license should I use?
+
     I want to protect business secrets. → Commercial License
     I want to share with everyone. → AGPL-3.0 License
 
-***Disclaimer*** 
-This is a brief overview. For detailed information, please refer to AGPL-v3.0 and consult a lawyer as needed.
+**_Note_**
+- Commercial License: sell both ESCSS-SCSS and ESCSS-ESTest together, not individually.
+- This is a brief overview. For detailed information, please refer to AGPL-v3.0 and consult a lawyer as needed.
 
 ## 1. Commercial License:
+
     Term: 1 Year (licensee must renew annually)
-    
+
     Support: No support (separate agreement)
-    
+
     Permissions:
       modification of original source code
       use as a component in a new software or service
-      
+
     Restrictions:
       sell, license, or sublicense the original software or documentation
       share modifications with others
       modify in a way that competes with the original software for customers
 
-[ESCSS-ESTest Commercial License contract for detail](./src/assets/Basic-Yearly.pdf)
+[ESCSS-SCSS + ESCSS-ESTest Commercial License detail](./src/assets/Basic-Yearly.pdf)
 
 [Acquire a Commercial License](https://opencollective.com/escss)
 
 ## 2. AGPL-v3.0 License:
+
     Copyright (C) 2024  Mike Lee <https://github.com/MikeLee0358>
 
     This program is free software: you can redistribute it and/or modify
