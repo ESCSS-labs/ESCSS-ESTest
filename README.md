@@ -146,12 +146,5 @@ Make sure you know what you are doing Before refactoring code base. When use ESC
 ## Installation
 
 ```bash
-### npm
-  npm install escss-estest
-
-### yarn
-  yarn add escss-estest
-
-### bun
-  bun add escss-estest
+  npm add escss-estest
 ```

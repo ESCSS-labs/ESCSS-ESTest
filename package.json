@@ -1,13 +1,11 @@
 {
   "name": "escss-estest",
   "version": "1.3.0",
-  "description": "100% coverage makes your life easier",
-  "type": "module",
-  "license": "Dual-licensing",
   "author": {
     "name": "Mike Lee"
   },
   "main": "./src/ESTest.js",
+  "description": "100% coverage makes your life easier",
   "keywords": [
     "escss",
     "unit-testing",
@@ -15,5 +13,7 @@
     "clean-code",
     "tdd-javascript",
     "zero-dependency"
-  ]
+  ],
+  "license": "Dual-licensing",
+  "type": "module"
 }
