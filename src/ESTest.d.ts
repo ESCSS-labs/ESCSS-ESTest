@@ -18,7 +18,7 @@ type Mode =
   | ">";
 
 /**
- * 100% function coverage makes your life easier.
+ * 100% coverage makes your life easier.
  * ```js
  * // type mode
  * ESTest(1, 'number')
