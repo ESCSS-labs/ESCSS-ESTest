@@ -136,7 +136,7 @@ getReport();
 ## Q&A
 ### Why not start at v1.0.0?
 
-I initially started at v1.0.0 and experimented quite a bit, which led to some inconsistencies. That's why the official versioning begins at v1.2.x.
+Because initially started at v1.0.0 and experimented quite a bit and messed around, that's why.
 
 ### How to refactor legacy codebase?
 Make sure you know what you are doing Before refactoring code base. When use ESCSS-ESTest make sure you have e2e、Backup branch and fellow's help, those tips will help a lot.
