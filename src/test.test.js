@@ -1,4 +1,4 @@
-import { expect, test, describe } from "bun:test";
+import { describe, test, expect } from "bun:test";
 import { ESTest, _getTestResult } from "./ESTest";
 
 describe("mode: type", () => {
