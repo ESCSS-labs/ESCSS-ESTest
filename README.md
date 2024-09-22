@@ -28,15 +28,14 @@ import { ESTest } from 'escss-estest';
 
 let isEnable = true
 
-// impure function
+// Impure function
 function getSum(a, b) {
   if(!isEnable) return 0
 
   return a + b
 }
 
-// --------------------------------------------------
-// pure function: test input by ESTest()
+// Pure function: test real input in {...}
 function getSum2(a, b) {
   {
     ESTest(a, 'number', 'mike 09102024 1')
@@ -47,6 +46,18 @@ function getSum2(a, b) {
   if(!isEnable) return 0
 
   return a + b
+}
+
+// Function test is not necessary
+function getTotalNumber(x) {
+  {
+    ESTest(x, 'number')
+    // If the function doesn't exist, it returns 'xxx is undefined.' it's pointless to test again.
+    // If the function exists, it will proceed to the getSum2 process to get value(type) when executed. So it doesn't need in here. 
+    ESTest(getSum2, 'function')  // it's redundant
+  }
+
+  return x + getSum2(1, 2)
 }
 ```
 
