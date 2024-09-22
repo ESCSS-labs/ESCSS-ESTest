@@ -16,26 +16,6 @@ const ESTestModule = {
       "symbol",
       "function",
     ],
-    report: {
-      total: 0,
-      undefined: 0,
-      null: 0,
-      array: 0,
-      object: 0,
-      boolean: 0,
-      NaN: 0,
-      number: 0,
-      bigint: 0,
-      string: 0,
-      symbol: 0,
-      function: 0,
-      lessThan: 0,
-      lessThanOrEqual: 0,
-      GreaterThanOrEqual: 0,
-      GreaterThan: 0,
-      StrictEquality: 0,
-      StrictInequality: 0,
-    },
   },
   in: {
     reuse: {
@@ -152,41 +132,29 @@ const ESTestModule = {
 
       switch (mode) {
         case "undefined":
-          ESTestModule.data.report.undefined += 1;
           break;
         case "null":
-          ESTestModule.data.report.null += 1;
           break;
         case "array":
-          ESTestModule.data.report.array += 1;
           break;
         case "object":
-          ESTestModule.data.report.object += 1;
           break;
         case "boolean":
-          ESTestModule.data.report.boolean += 1;
           break;
         case "NaN":
-          ESTestModule.data.report.NaN += 1;
           break;
         case "number":
-          ESTestModule.data.report.number += 1;
           break;
         case "bigint":
-          ESTestModule.data.report.bigint += 1;
           break;
         case "string":
-          ESTestModule.data.report.string += 1;
           break;
         case "symbol":
-          ESTestModule.data.report.symbol += 1;
           break;
         case "function":
-          ESTestModule.data.report.function += 1;
           break;
       }
 
-      ESTestModule.data.report.total += 1;
       ESTestModule.data.testResult = mode;
     },
     useOperatorMode(input, mode, input2, msg = "undefined error message") {
@@ -226,7 +194,6 @@ const ESTestModule = {
             );
           }
 
-          ESTestModule.data.report.lessThan += 1;
           break;
         case "<=":
           if (!(input <= input2)) {
@@ -238,7 +205,6 @@ const ESTestModule = {
             );
           }
 
-          ESTestModule.data.report.lessThanOrEqual += 1;
           break;
         case ">=":
           if (!(input >= input2)) {
@@ -250,7 +216,6 @@ const ESTestModule = {
             );
           }
 
-          ESTestModule.data.report.GreaterThanOrEqual += 1;
           break;
         case ">":
           if (!(input > input2)) {
@@ -262,7 +227,6 @@ const ESTestModule = {
             );
           }
 
-          ESTestModule.data.report.GreaterThan += 1;
           break;
         case "===":
           if (!(input === input2)) {
@@ -274,7 +238,6 @@ const ESTestModule = {
             );
           }
 
-          ESTestModule.data.report.StrictEquality += 1;
           break;
         case "!==":
           if (!(input !== input2)) {
@@ -286,11 +249,9 @@ const ESTestModule = {
             );
           }
 
-          ESTestModule.data.report.StrictInequality += 1;
           break;
       }
 
-      ESTestModule.data.report.total += 1;
       ESTestModule.data.testResult = true;
     },
   },
@@ -313,33 +274,7 @@ const ESTestModule = {
         );
       }
     },
-    getReport() {
-      console.log(`
-        Total usage of test: ${ESTestModule.data.report.total}
-
-        - Type Mode - 
-        "undefined": ${ESTestModule.data.report.undefined}
-        "null": ${ESTestModule.data.report.null}
-        "array": ${ESTestModule.data.report.array}
-        "object": ${ESTestModule.data.report.object}
-        "boolean": ${ESTestModule.data.report.boolean}
-        "NaN": ${ESTestModule.data.report.NaN}
-        "number": ${ESTestModule.data.report.number}
-        "bigint": ${ESTestModule.data.report.bigint}
-        "string": ${ESTestModule.data.report.string}
-        "symbol": ${ESTestModule.data.report.symbol}
-        "function": ${ESTestModule.data.report.function}
-
-        - Operator Mode -
-        "<": ${ESTestModule.data.report.lessThan}
-        "<=": ${ESTestModule.data.report.lessThanOrEqual}
-        ">=": ${ESTestModule.data.report.GreaterThanOrEqual}
-        ">": ${ESTestModule.data.report.GreaterThan}
-        "===": ${ESTestModule.data.report.StrictEquality}
-        "!==": ${ESTestModule.data.report.StrictInequality}
-        `);
-    },
   },
 };
 
-export const { getReport, ESTest, _getTestResult } = ESTestModule.out;
+export const { _getTestResult, ESTest } = ESTestModule.out;

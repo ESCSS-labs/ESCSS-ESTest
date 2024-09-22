@@ -44,9 +44,6 @@ type Mode =
  * ESTest(1, '===', 1)
  * ESTest(1, '===', 100) // error
  * ESTest(1, '===', 100, 'mike 09062024 1') // The error message should provide a unique ID for troubleshooting
- *
- * // Get console.log report (Ｕse it in the root component)
- * getReport();
  * ```
  */
 export function ESTest(
@@ -55,14 +52,3 @@ export function ESTest(
   msgOrInput2?: unknown,
   msg?: string,
 ): void | Error;
-
-/**
- * The order of steps 1-3 is a concern regarding async/await.
- * 1. start your dev server
- * 2. use getReport() under root component
- * 3. hit save for hot reload(Vite)
- * 4. get a correctly console.log report in browser
- *
- * Note: For reference only, complete protection your codebase requires E2E
- */
-export function getReport(): void;

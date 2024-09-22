@@ -92,15 +92,6 @@ class Animal {
 new Animal('cat', 123) // get error
 ```
 
-### Get report
-
-1. start your dev server
-2. use getReport() under root component
-3. hit save for hot reload(Vite)
-4. get a console.log report in browser
-
-**_The order of steps 1-3 is a concern regarding async/await. For reference only, complete protection your codebase requires E2E_**
-
 ## Usage
 
 ```js
@@ -128,9 +119,6 @@ ESTest(1, "!==", 2);
 ESTest(1, "===", 1);
 ESTest(1, "===", 100); // error
 ESTest(1, "===", 100, "mike 09062024 001"); // The error message should provide a unique ID for troubleshooting
-
-// Get console.log report (Ｕse it in the root component)
-getReport();
 ```
 
 ## Q&A
