@@ -148,3 +148,6 @@ Make sure you know what you are doing Before refactoring code base. When use ESC
 ```bash
   npm add escss-estest
 ```
+
+## LICENSE
+[see](https://github.com/ESCSS-labs/ESCSS-ESTest?tab=License-1-ov-file)
