@@ -6,7 +6,7 @@
     I want to share with everyone. → AGPL-3.0 License
 
 **_Note_**
-- Commercial License: sell both ESCSS-SCSS and ESCSS-ESTest together, not individually.
+- Commercial License: sell ESCSS-SCSS、ESCSS-ESTest and NUXT-ESCSS-ESTest together, not individually.
 - This is a brief overview. For detailed information, please refer to AGPL-v3.0 and consult a lawyer as needed.
 
 ## 1. Commercial License:
@@ -26,7 +26,7 @@
 
 [Acquire a Commercial License](https://opencollective.com/escss)
 
-[ESCSS-SCSS + ESCSS-ESTest Commercial License detail](./src/assets/Basic-Yearly.pdf)
+[ESCSS-SCSS + ESCSS-ESTest + NUXT-ESCSS-ESTest Commercial License detail](./src/assets/Basic-Yearly.pdf)
 
 ## 2. AGPL-v3.0 License:
 
