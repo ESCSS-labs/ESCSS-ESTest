@@ -103,6 +103,31 @@ class Animal {
 new Animal('cat', 123) // get error
 ```
 
+### Help with old API migrate
+```js
+// sum library
+// old one
+function sum() {
+  ESTest(
+    "duplicate",
+    "undefined",
+    "I got a cool name! try get_sum() instead, or see <url> for all changes"
+  );
+}
+
+function get_sum(a, b) {
+  {
+    ESTest(a, 'number', 'mike 09232024 1')
+    ESTest(b, 'number', 'mike 09232024 2')
+  }
+
+  return a + b
+}
+
+// when user use the old API - get hint to action
+sum(1, 2);
+```
+
 ## Usage
 
 ```js
