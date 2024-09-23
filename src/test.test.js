@@ -53,7 +53,7 @@ describe("mode: type", () => {
   });
 
   test("function", () => {
-    ESTest(function () {}, "function");
+    ESTest(function () { }, "function");
     expect(_getTestResult()).toBe("function");
   });
 

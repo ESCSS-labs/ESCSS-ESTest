@@ -26,7 +26,7 @@
 
 [Acquire a Commercial License](https://opencollective.com/escss)
 
-[ESCSS-SCSS + ESCSS-ESTest + NUXT-ESCSS-ESTest Commercial License detail](./src/assets/Basic-Yearly.pdf)
+[ESCSS-SCSS + ESCSS-ESTest + NUXT-ESCSS-ESTest Commercial License detail](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/commercial.pdf)
 
 ## 2. AGPL-v3.0 License:
 

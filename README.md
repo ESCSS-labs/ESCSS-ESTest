@@ -1,4 +1,4 @@
-![logo](./src/assets/logo.png)
+![logo](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/logo.png)
 
 # What is ESCSS-ESTest?
 
@@ -115,6 +115,7 @@ function sum() {
   );
 }
 
+// new one
 function get_sum(a, b) {
   {
     ESTest(a, 'number', 'mike 09232024 1')
