@@ -8,9 +8,8 @@
   "description": "100% coverage makes your life easier",
   "keywords": [
     "escss",
-    "typescript-library",
+    "library",
     "tdd",
-    "testing",
     "zero-dependency"
   ],
   "license": "Dual-licensing",
