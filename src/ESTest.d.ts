@@ -21,15 +21,15 @@ type Mode =
  * 100% coverage makes your life easier.
  * ```js
  * // type mode
+ * ESTest(null, 'null') // new
+ * ESTest([], 'array') // new
+ * ESTest(NaN, 'NaN') // new
+ * ESTest(undefined, 'undefined') // new
  * ESTest(1, 'number')
  * ESTest(1n, 'bigint')
  * ESTest('foo', 'string')
  * ESTest(true, 'boolean')
- * ESTest([], 'array')
  * ESTest({}, 'object')
- * ESTest(NaN, 'NaN')
- * ESTest(null, 'null')
- * ESTest(undefined, 'undefined')
  * ESTest(Symbol(), 'symbol')
  * ESTest(function () {}, 'function')
  * ESTest(1, 'object') // error
