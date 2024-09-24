@@ -16,10 +16,6 @@ function foo() {
 }
 ```
 
-## Requirements
-
-Vite >= 4.4.0 (if you use it)
-
 ## Demo
 ### Pure vs Impure function
 
