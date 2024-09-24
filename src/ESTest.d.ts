@@ -26,10 +26,10 @@ type Mode =
  * ESTest(NaN, 'NaN') // new
  * ESTest(undefined, 'undefined') // new
  * ESTest(1, 'number')
- * ESTest(1n, 'bigint')
  * ESTest('foo', 'string')
  * ESTest(true, 'boolean')
  * ESTest({}, 'object')
+ * ESTest(1n, 'bigint')
  * ESTest(Symbol(), 'symbol')
  * ESTest(function () {}, 'function')
  * ESTest(1, 'object') // error
