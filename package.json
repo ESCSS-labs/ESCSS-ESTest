@@ -13,5 +13,6 @@
     "zero-dependency"
   ],
   "license": "Dual-licensing",
-  "type": "module"
+  "type": "module",
+  "types": "./src/ESTest.d.ts"
 }
