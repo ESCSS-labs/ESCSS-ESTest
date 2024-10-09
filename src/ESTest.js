@@ -1,7 +1,7 @@
 const ESTestModule = {
   data: {
-    name: 'escss-estest',
-    testResult: null, // for internal testing
+    defaultErrMsg: 'undefined error message', 
+    testResult: null, // internal testing purpose
     OPERATORS: ["<", "<=", ">=", ">", "===", "!=="],
     TYPES: [
       "undefined",
@@ -94,7 +94,7 @@ const ESTestModule = {
         }
       },
     },
-    useTypeMode(input, mode, msg = "undefined error message") {
+    useTypeMode(input, mode, msg = ESTestModule.data.defaultErrMsg) {
       {
         if (!ESTestModule.data.TYPES.includes(mode)) {
           throw new Error(
@@ -157,7 +157,7 @@ const ESTestModule = {
 
       ESTestModule.data.testResult = mode;
     },
-    useOperatorMode(input, mode, input2, msg = "undefined error message") {
+    useOperatorMode(input, mode, input2, msg = ESTestModule.data.defaultErrMsg) {
       {
         if (!ESTestModule.data.OPERATORS.includes(mode)) {
           throw new Error(
