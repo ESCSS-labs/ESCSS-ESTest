@@ -1,5 +1,7 @@
 # Dual-Licensing（Commercial or AGPL-3.0-only）
+
 ## 1. Commercial License:
+
     Term: 1 Year (licensee must renew annually)
 
     Support: No support (separate agreement)
@@ -13,8 +15,8 @@
       share modifications with others
       modify in a way that competes with the original software for customers
 
-[Acquire a Commercial License](https://opencollective.com/escss)
-[Commercial License Detail (ESCSS-SCSS + ESCSS-ESTest + NUXT-ESCSS-ESTest)](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/commercial.pdf)
+ - [Acquire a Commercial License](https://opencollective.com/escss)
+ - [Commercial License Detail (ESCSS-SCSS + ESCSS-ESTest + NUXT-ESCSS-ESTest)](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/commercial.pdf)
 
 ## 2. AGPL-3.0-only License:
 
