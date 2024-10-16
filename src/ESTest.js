@@ -1,6 +1,6 @@
 const ESTestModule = {
   data: {
-    defaultErrMsg: 'undefined error message', 
+    defaultErrMsg: "undefined error message",
     testResult: null, // internal testing purpose
     OPERATORS: ["<", "<=", ">=", ">", "===", "!=="],
     TYPES: [
@@ -157,7 +157,12 @@ const ESTestModule = {
 
       ESTestModule.data.testResult = mode;
     },
-    useOperatorMode(input, mode, input2, msg = ESTestModule.data.defaultErrMsg) {
+    useOperatorMode(
+      input,
+      mode,
+      input2,
+      msg = ESTestModule.data.defaultErrMsg,
+    ) {
       {
         if (!ESTestModule.data.OPERATORS.includes(mode)) {
           throw new Error(

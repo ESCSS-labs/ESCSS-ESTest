@@ -1,3 +1,7 @@
 # Run Test Cases
-1. clone project
-2. bun test
+
+```shell
+  git clone https://github.com/ESCSS-labs/ESCSS-ESTest.git
+  cd ESCSS-ESTest
+  bun test
+```
