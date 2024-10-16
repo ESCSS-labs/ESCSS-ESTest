@@ -31,19 +31,19 @@ function foo() {
 
 ```js
 // Type mode
-ESTest(1, "number");
-ESTest(1n, "bigint");
-ESTest("foo", "string");
-ESTest(true, "boolean");
-ESTest([], "array"); // new type
-ESTest({}, "object");
-ESTest(NaN, "NaN"); // new type
-ESTest(null, "null"); // new type
-ESTest(undefined, "undefined"); // new type
-ESTest(Symbol(), "symbol");
-ESTest(function () {}, "function");
-ESTest(1, "object"); // error
-ESTest(1, "object", "mike 09062024 001"); // The error message should provide a unique ID for troubleshooting
+ESTest(NaN, 'NaN') // new
+ESTest([], 'array') // new
+ESTest(null, 'null') // new
+ESTest(undefined, 'undefined') // new
+ESTest(1, 'number')
+ESTest('foo', 'string')
+ESTest(true, 'boolean')
+ESTest({}, 'object')
+ESTest(1n, 'bigint')
+ESTest(Symbol(), 'symbol')
+ESTest(function () {}, 'function')
+ESTest(1, 'object') // error
+ESTest(1, 'object', 'mike 09062024 1') // The error message should provide a unique ID for troubleshooting
 
 // Operator mode
 ESTest(1, "<", 5);
@@ -56,21 +56,13 @@ ESTest(1, "===", 100); // error
 ESTest(1, "===", 100, "mike 09062024 001"); // The error message should provide a unique ID for troubleshooting
 ```
 
-### Pure vs Impure function
+### Pure vs Impure
 
 ```js
 import { ESTest } from "escss-estest";
-
 let isEnable = true;
 
-// Impure function
-function getSum(a, b) {
-  if (!isEnable) return 0;
-
-  return a + b;
-}
-
-// Pure function: test real input in {...}
+// Pure (input in {...})
 function getSum2(a, b) {
   {
     ESTest(a, "number", "mike 09102024 1");
@@ -83,13 +75,22 @@ function getSum2(a, b) {
   return a + b;
 }
 
-// Function test is not necessary
+// Impure
+function getSum(a, b) {
+  if (!isEnable) return 0;
+
+  return a + b;
+}
+
+
+// NOTE: the "function" type check is unnecessary.
 function getTotalNumber(x) {
   {
     ESTest(x, "number");
-    // If the function doesn't exist, it returns 'xxx is undefined.' it's pointless to test again.
-    // If the function exists, it will proceed to the getSum2 process to get value(type) when executed. So it doesn't need in here.
-    ESTest(getSum2, "function"); // it's redundant
+
+    // If the function doesn't exist, it will return 'xxx is undefined.' 
+    // If the function exists, getSum2(a, b) will handle type check, so the "function" check is redundant.
+    ESTest(getSum2, "function"); // not necessary.
   }
 
   return x + getSum2(1, 2);
@@ -116,7 +117,7 @@ async function getData() {
   console.log(json);
 }
 
-getData(); // get error
+getData(); // get error (undefined api from 99999)
 ```
 
 ### Error handling: class
@@ -125,18 +126,18 @@ getData(); // get error
 import { ESTest } from "escss-estest";
 
 class Animal {
-  constructor(name, gender) {
+  constructor(name, age) {
     {
       ESTest(name, "string", "mike 09102024 1");
-      ESTest(gender, "string", "mike 09102024 2");
+      ESTest(age, "number", "mike 09102024 2");
     }
 
     this.name = name;
-    this.gender = gender;
+    this.age = age;
   }
 }
 
-new Animal("cat", 123); // get error
+new Animal("cat", "10"); // get error ("10" should be number)
 ```
 
 ## Installation
