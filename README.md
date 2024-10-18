@@ -1,6 +1,10 @@
 ![logo](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/logo.png)
 
-# Quick Links
+# Language
+
+- [中文](./README-zh.md)
+
+## Quick Links
 
 - [What is ESCSS-ESTest?](#what-is-escss-estest)
 - [Core Concept - Water Filter](#core-concept---water-filter)
@@ -151,10 +155,6 @@ new Animal("cat", "10"); // get error ("10" should be number)
 ### Why not start at v1.0.0?
 
 Because initially started at v1.0.0 and experimented quite a bit and messed around, that's why.
-
-### What is the Ideal Situation?
-
-ESCSS-ESTest covers every function, while E2E tests address all scenarios to catch bugs.
 
 ## License
 
