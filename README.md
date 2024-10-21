@@ -10,7 +10,6 @@
 - [Core Concept - Water Filter](#core-concept---water-filter)
 - [Usages](#usages)
 - [Installation](#installation)
-- [Q&A](#qa)
 - [License](#license)
 
 ## What is ESCSS-ESTest?
@@ -159,12 +158,6 @@ new Animal("cat", "10"); // get error ("10" should be number)
   # Using bun
   bun add escss-estest
 ```
-
-## Q&A
-
-### Why not start at v1.0.0?
-
-Because initially started at v1.0.0 and experimented quite a bit and messed around, that's why.
 
 ## License
 
