@@ -42,39 +42,54 @@ const ESTestModule = {
       },
       fixTextInLog(input) {
         const fix_ArrayInLog = () => {
-          // fix nesting array
-          // '[1, 'hello', [2, 3]]'  -->  '[1, 'hello', [...]]'
+          // '[1, 'hello', [2, 3], {a: 1}]'  -->  '[1, 'hello', [...], {...}]'
           let result = "";
 
           input.forEach((item) => {
-            if (ESTestModule.in.reuse.fixLegacyType(item) === "array") {
+            const type = ESTestModule.in.reuse.fixLegacyType(item);
+            const content = ESTestModule.in.reuse.fixTextInLog(item)
+
+            if (type === "array") {
               result += `[...], `;
-            } else {
-              result += `${ESTestModule.in.reuse.fixTextInLog(item)}, `;
+            } 
+
+            else if (type === "object") {
+              result += `{...}, `;
+            }
+
+            else {
+              result += `${content}, `;
             }
           });
 
-          // to remove the end of spacing and ,
-          // '[1, 'hello', [...]], '  -->  '[1, 'hello', [...]]'
+          // Remove , and space
+          // '[1, 'hello', [...], {...}], '  -->  '[1, 'hello', [...], {...}]'
           result = `[${result.trim().slice(0, -1)}]`;
-
           return result;
         };
+
         const fix_ObjectInLog = () => {
-          // fix nesting object
-          // '{a: 1, b: {c: 1, d: 2}}'  -->  '{a: 1, b: {...}}'
+          // '{a: 1, b: {c: 1, d: 2}, c: [1, [2, 3]] }'  -->  '{a: 1, b: {...}, c: [...]}'
           let result = "";
 
           for (const [key, value] of Object.entries(input)) {
-            if (ESTestModule.in.reuse.fixLegacyType(value) === "object") {
+            const type = ESTestModule.in.reuse.fixLegacyType(value);
+            const content = ESTestModule.in.reuse.fixTextInLog(value);
+            
+            if (type === "array") {
+              result += `${key}: [...], `;
+            } 
+
+            else if (type === "object") {
               result += `${key}: {...}, `;
-            } else {
-              result += `${key}: ${ESTestModule.in.reuse.fixTextInLog(value)}, `;
+            }
+            
+            else {
+              result += `${key}: ${content}, `;
             }
           }
 
           result = `{${result.trim().slice(0, -1)}}`;
-
           return result;
         };
 
