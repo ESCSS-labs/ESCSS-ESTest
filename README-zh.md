@@ -42,7 +42,7 @@ ESTest(1n, 'bigint')
 ESTest(Symbol(), 'symbol')
 ESTest(function () {}, 'function')
 ESTest(1, 'object') // 錯誤
-ESTest(1, 'object', 'mike 09062024 1') // 提供唯一的 ID 錯誤信息，方便未來的錯誤定位
+ESTest(1, 'object', 'foo') // 錯誤信息
 
 // 對比模式
 ESTest(1, "<", 5);
@@ -52,7 +52,7 @@ ESTest(5, ">=", 1);
 ESTest(1, "!==", 2);
 ESTest(1, "===", 1);
 ESTest(1, "===", 100); // 錯誤
-ESTest(1, "===", 100, "mike 09062024 001"); // 提供唯一的 ID 錯誤信息，方便未來的錯誤定位
+ESTest(1, "===", 100, 'foo'); // 錯誤信息
 ```
 
 ### 純函數 vs 非純函數
@@ -64,9 +64,9 @@ let isEnable = true;
 // 純函數 (參數測試在 {...})
 function getSum2(a, b) {
   {
-    ESTest(a, "number", "mike 09102024 1");
-    ESTest(b, "number", "mike 09102024 2");
-    ESTest(isEnable, "boolean", "mike 09102024 3");
+    ESTest(a, "number");
+    ESTest(b, "number");
+    ESTest(isEnable, "boolean");
   }
 
   if (!isEnable) return 0;
@@ -107,10 +107,10 @@ async function getData() {
   const json = await response.json();
 
   {
-    ESTest(json.userId, "number", "mike 09102024 1");
-    ESTest(json.id, "number", "mike 09102024 2");
-    ESTest(json.title, "string", "mike 09102024 3");
-    ESTest(json.completed, "boolean", "mike 09102024 4");
+    ESTest(json.userId, "number");
+    ESTest(json.id, "number");
+    ESTest(json.title, "string");
+    ESTest(json.completed, "boolean");
   }
 
   console.log(json);
@@ -127,8 +127,8 @@ import { ESTest } from "escss-estest";
 class Animal {
   constructor(name, age) {
     {
-      ESTest(name, "string", "mike 09102024 1");
-      ESTest(age, "number", "mike 09102024 2");
+      ESTest(name, "string");
+      ESTest(age, "number");
     }
 
     this.name = name;
