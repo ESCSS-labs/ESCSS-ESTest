@@ -1,147 +1,99 @@
 import { describe, test, expect } from "bun:test";
-import { ESTest, _getTestResult } from "./ESTest";
+import { ESTest, internalTestToken, isLogVisible } from "./ESTest";
 
-describe("mode: type", () => {
+describe("Normal Cases", () => {
   test("undefined", () => {
     ESTest(undefined, "undefined");
-    expect(_getTestResult()).toBe("undefined");
+    expect(internalTestToken).toBe("undefined");
   });
 
   test("null", () => {
     ESTest(null, "null");
-    expect(_getTestResult()).toBe("null");
+    expect(internalTestToken).toBe("null");
   });
 
   test("array", () => {
     ESTest([], "array");
-    expect(_getTestResult()).toBe("array");
+    expect(internalTestToken).toBe("array");
   });
 
   test("object", () => {
     ESTest({}, "object");
-    expect(_getTestResult()).toBe("object");
+    expect(internalTestToken).toBe("object");
   });
 
   test("boolean", () => {
     ESTest(true, "boolean");
-    expect(_getTestResult()).toBe("boolean");
+    expect(internalTestToken).toBe("boolean");
   });
 
   test("NaN", () => {
     ESTest(NaN, "NaN");
-    expect(_getTestResult()).toBe("NaN");
+    expect(internalTestToken).toBe("NaN");
   });
 
   test("number", () => {
     ESTest(123, "number");
-    expect(_getTestResult()).toBe("number");
+    expect(internalTestToken).toBe("number");
   });
 
   test("bigint", () => {
     ESTest(123n, "bigint");
-    expect(_getTestResult()).toBe("bigint");
+    expect(internalTestToken).toBe("bigint");
   });
 
   test("string", () => {
     ESTest("Hello World", "string");
-    expect(_getTestResult()).toBe("string");
+    expect(internalTestToken).toBe("string");
   });
 
   test("symbol", () => {
     ESTest(Symbol(), "symbol");
-    expect(_getTestResult()).toBe("symbol");
+    expect(internalTestToken).toBe("symbol");
   });
 
   test("function", () => {
     ESTest(function () {}, "function");
-    expect(_getTestResult()).toBe("function");
+    expect(internalTestToken).toBe("function");
   });
 
-  test("number w/ errMsg", () => {
-    ESTest(123, "number", "number text");
-    expect(_getTestResult()).toBe("number");
-  });
-});
-
-describe("mode: operator", () => {
-  test("1 < 5", () => {
-    ESTest(1, "<", 5);
-    expect(_getTestResult()).toBe(true);
-  });
-
-  test("1 <= 5", () => {
-    ESTest(1, "<=", 5);
-    expect(_getTestResult()).toBe(true);
-  });
-
-  test("5 > 1", () => {
-    ESTest(5, ">", 1);
-    expect(_getTestResult()).toBe(true);
-  });
-
-  test("5 >= 1", () => {
-    ESTest(5, ">=", 1);
-    expect(_getTestResult()).toBe(true);
-  });
-
-  test("1 === 1", () => {
-    ESTest(1, "===", 1);
-    expect(_getTestResult()).toBe(true);
-  });
-
-  test("-1 !== 1", () => {
-    ESTest(-1, "!==", 1);
-    expect(_getTestResult()).toBe(true);
-  });
-
-  test("error message", () => {
-    ESTest(-1, "!==", 1, "word");
-    expect(_getTestResult()).toBe(true);
+  test("custom error msg", () => {
+    ESTest(123, "number", "foo");
+    expect(internalTestToken).toBe("number");
   });
 });
 
-describe("error situation", () => {
-  test("no params", () => {
-    expect(() => ESTest()).toThrow();
-  });
-
+describe("Error Cases", () => {
   test("wrong 2nd argument", () => {
-    expect(() => ESTest(1, 123)).toThrow();
-    expect(() => ESTest(1, "s")).toThrow();
-    expect(() => ESTest(1, [])).toThrow();
-    expect(() => ESTest(1, "==")).toThrow();
-    expect(() => ESTest(1, "!=")).toThrow();
+    expect(() => ESTest(123, "undefined")).toThrow();
+    expect(() => ESTest(123, "null")).toThrow();
+    expect(() => ESTest(123, "array")).toThrow();
+    expect(() => ESTest(123, "object")).toThrow();
+    expect(() => ESTest(123, "boolean")).toThrow();
+    expect(() => ESTest(123, "NaN")).toThrow();
+    expect(() => ESTest({}, "number")).toThrow();
+    expect(() => ESTest(123, "bigint")).toThrow();
+    expect(() => ESTest(123, "string")).toThrow();
+    expect(() => ESTest(123, "symbol")).toThrow();
+    expect(() => ESTest(123, "function")).toThrow();
+    expect(() => ESTest(123, "")).toThrow();
+    expect(() => ESTest(123, 123)).toThrow();
+    expect(() => ESTest(123, [])).toThrow();
+    expect(() => ESTest(123, {})).toThrow();
+    expect(() => ESTest(123, null)).toThrow();
+    expect(() => ESTest(123, undefined)).toThrow();
+    expect(() => ESTest(123)).toThrow();
   });
 
-  test("expect error 1 > 5", () => {
-    expect(() => ESTest(1, ">", 5)).toThrow();
-  });
-
-  test("expect error 1 >= 5", () => {
-    expect(() => ESTest(1, ">=", 5)).toThrow();
-  });
-
-  test("expect error 5 < 1", () => {
-    expect(() => ESTest(5, "<", 1)).toThrow();
-  });
-
-  test("expect error 5 <= 1", () => {
-    expect(() => ESTest(5, "<=", 1)).toThrow();
-  });
-
-  test("expect error 1 !== 1", () => {
-    expect(() => ESTest(1, "!==", 1)).toThrow();
-  });
-
-  test("expect error -1 === 1", () => {
-    expect(() => ESTest(-1, "===", 1)).toThrow();
-  });
-
-  test("type mode msg should be type: string | undefined", () => {
+  test("Error msg type only 'string' or 'undefined'", () => {
+    expect(() => ESTest(10, "number", [])).toThrow();
     expect(() => ESTest(10, "number", {})).toThrow();
-  });
-
-  test("operator mode msg should be type: string | undefined", () => {
-    expect(() => ESTest(10, ">", 1, {})).toThrow();
+    expect(() => ESTest(10, "number", 123)).toThrow();
   });
 });
+
+describe("Important", () => {
+  test("isLogVisible should be false to protect production data ", () => {
+    expect(isLogVisible).toBe(false);
+  });
+}) 

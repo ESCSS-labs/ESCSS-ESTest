@@ -21,10 +21,10 @@ ESCSS-ESTest helps you to achieve 100% coverage by taking the potential of TDD a
 ```js
 function foo() {
   {
-    // unhappy path(filter to throw error)
+    // unhappy path(throw error)
   }
 
-  // happy path(the result that you are expected)
+  // happy path
 }
 ```
 
@@ -34,29 +34,19 @@ function foo() {
 
 ```js
 // Type mode
-ESTest(NaN, 'NaN') // new
-ESTest([], 'array') // new
-ESTest(null, 'null') // new
-ESTest(undefined, 'undefined') // new
-ESTest(1, 'number')
-ESTest('foo', 'string')
-ESTest(true, 'boolean')
-ESTest({}, 'object')
-ESTest(1n, 'bigint')
-ESTest(Symbol(), 'symbol')
-ESTest(function () {}, 'function')
-ESTest(1, 'object') // error
-ESTest(1, 'object', 'foo') //  error message
-
-// Operator mode
-ESTest(1, "<", 5);
-ESTest(5, ">", 1);
-ESTest(1, "<=", 5);
-ESTest(5, ">=", 1);
-ESTest(1, "!==", 2);
-ESTest(1, "===", 1);
-ESTest(1, "===", 100); // error
-ESTest(1, "===", 100, 'foo'); // error message
+ESTest(NaN, "NaN"); // new
+ESTest([], "array"); // new
+ESTest(null, "null"); // new
+ESTest(undefined, "undefined"); // new
+ESTest(1, "number");
+ESTest("foo", "string");
+ESTest(true, "boolean");
+ESTest({}, "object");
+ESTest(1n, "bigint");
+ESTest(Symbol(), "symbol");
+ESTest(function () {}, "function");
+ESTest(1, "object"); // error
+ESTest(1, "object", "foo"); //  error message
 ```
 
 ### Pure vs Impure
@@ -85,13 +75,12 @@ function getSum(a, b) {
   return a + b;
 }
 
-
 // NOTE: the "function" type check is unnecessary.
 function getTotalNumber(x) {
   {
     ESTest(x, "number");
 
-    // If the function doesn't exist, it will return 'xxx is undefined.' 
+    // If the function doesn't exist, it will return 'xxx is undefined.'
     // If the function exists, getSum2(a, b) will handle type check, so the "function" check is redundant.
     ESTest(getSum2, "function"); // not necessary.
   }
@@ -140,7 +129,7 @@ class Animal {
   }
 }
 
-new Animal("cat", "10"); // get error ("10" should be number)
+new Animal("cat", "10"); // get error, "10" should be number
 ```
 
 ## Installation
