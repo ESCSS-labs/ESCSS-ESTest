@@ -1,6 +1,6 @@
 {
   "name": "escss-estest",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "author": {
     "name": "Mike Lee"
   },
@@ -17,5 +17,5 @@
   ],
   "license": "Dual-licensing",
   "type": "module",
-  "types": "./src/index.d.ts"
+  "types": "./src/ESTest.js"
 }
