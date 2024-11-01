@@ -84,6 +84,12 @@ function fixTextInLog(input) {
   }  
 }
 
+/**
+ * 
+ * @param {*} input 
+ * @param { "undefined" | "null" | "array" | "object" | "boolean" | "NaN" | "number" | "bigint" | "string" | "symbol" | "function" } type 
+ * @param {String} errMsg 
+ */
 function ESTest(input, type, errMsg = customErrMsg) {
   if (!types.includes(type)) {
     if (!isLogVisible) {
