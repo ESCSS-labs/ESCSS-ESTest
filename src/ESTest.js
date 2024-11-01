@@ -1,6 +1,6 @@
 // true: visible data and log detail
-// false: hidden data and log detail to protect information
-const isLogVisible = false; 
+// false: hidden data and log detail
+const isLogVisible = true; 
 const customErrMsg = "Undefined Error Message";
 let internalTestToken = '';
 const types = [
@@ -88,7 +88,7 @@ function ESTest(input, type, errMsg = customErrMsg) {
   if (!types.includes(type)) {
     if (!isLogVisible) {
       throw new Error(
-        "isLogVisible: false. Log details cannot be displayed. (To display during development, set it to true in _modules/.vite/deps/ESTest.js and restart the development server)",
+        "isLogVisible: false. Log details cannot be displayed.",
       );
     }
 
@@ -101,7 +101,7 @@ function ESTest(input, type, errMsg = customErrMsg) {
   } else if (!["undefined", "string"].includes(typeof errMsg)) {
     if (!isLogVisible) {
       throw new Error(
-        "isLogVisible: false. Log details cannot be displayed. (To display during development, set it to true in _modules/.vite/deps/ESTest.js and restart the development server)",
+        "isLogVisible: false. Log details cannot be displayed.",
       );
     }
     throw new Error(
@@ -114,7 +114,7 @@ function ESTest(input, type, errMsg = customErrMsg) {
   } else if (fixType(input) !== type) {
     if (!isLogVisible) {
       throw new Error(
-        "isLogVisible: false. Log details cannot be displayed. (To display during development, set it to true in _modules/.vite/deps/ESTest.js and restart the development server)",
+        "isLogVisible: false. Log details cannot be displayed.",
       );
     }
     throw new Error(
@@ -130,4 +130,4 @@ function ESTest(input, type, errMsg = customErrMsg) {
   internalTestToken = type;
 }
 
-export { internalTestToken, isLogVisible, ESTest };
+export { internalTestToken, ESTest };

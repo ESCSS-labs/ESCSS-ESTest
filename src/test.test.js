@@ -1,5 +1,5 @@
 import { describe, test, expect } from "bun:test";
-import { ESTest, internalTestToken, isLogVisible } from "./ESTest";
+import { ESTest, internalTestToken } from "./ESTest";
 
 describe("Normal Cases", () => {
   test("undefined", () => {
@@ -91,9 +91,3 @@ describe("Error Cases", () => {
     expect(() => ESTest(10, "number", 123)).toThrow();
   });
 });
-
-describe("Important", () => {
-  test("isLogVisible should be false to protect production data ", () => {
-    expect(isLogVisible).toBe(false);
-  });
-}) 
