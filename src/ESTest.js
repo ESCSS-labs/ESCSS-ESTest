@@ -1,7 +1,6 @@
 // true: visible data and log detail
 // false: hidden data and log detail
 const isLogVisible = true; 
-const customErrMsg = "undefined error message";
 let internalTestToken = '';
 const types = [
   "undefined",
@@ -35,7 +34,7 @@ function fixType(input) {
 
   return (
     typeMap[typeof input] ||
-    `❌ Internal Error from fixType, please send issue back. input: ${input}.`
+    `❌ Internal Error from fixType, please send issue https://github.com/ESCSS-labs/ESCSS-ESTest/issues. input: ${input}.`
   );
 }
 
@@ -104,7 +103,7 @@ function fixTextInLog(input) {
  * ESTest(1, 'object') // error
  * ESTest(1, 'object', 'foo') // error & message "foo"
  */
-function ESTest(input, type, errMsg = customErrMsg) {
+function ESTest(input, type, errMsg = 'undefined error message') {
   if (!types.includes(type)) {
     if (!isLogVisible) {
       throw new Error(
