@@ -1,21 +1,26 @@
 {
-  "name": "escss-estest",
-  "version": "1.4.4",
-  "author": {
-    "name": "Mike Lee"
-  },
-  "main": "./src/ESTest.js",
-  "description": "100% input coverage makes your life easier",
+  "name": "mike-a",
+  "version": "0.0.5",
+  "description": "100% function coverage for easier life.",
   "keywords": [
     "escss",
     "escss-estest",
-    "library",
     "testing",
     "javascript",
     "tdd",
     "zero-dependency"
   ],
-  "license": "Dual-licensing",
+  "homepage": "https://github.com/ESCSS-labs/",
+  "bugs": "https://github.com/ESCSS-labs/ESCSS-ESTest/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ESCSS-labs/ESCSS-ESTest"
+  },
+  "funding": "https://opencollective.com/escss",
+  "license": "(AGPL-3.0-only OR Commercial)",
+  "author": "Mike Lee <cspkno005@gmail.com> (https://github.com/ESCSS-labs)",
   "type": "module",
-  "types": "./src/ESTest.js"
+  "exports": "./lib/index.js",
+  "main": "./lib/index.js",
+  "types": "./lib/index.js"
 }
