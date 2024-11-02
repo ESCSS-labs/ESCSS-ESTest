@@ -1,7 +1,7 @@
 // true: visible data and log detail
 // false: hidden data and log detail
 const isLogVisible = true; 
-const customErrMsg = "Undefined Error Message";
+const customErrMsg = "undefined error message";
 let internalTestToken = '';
 const types = [
   "undefined",
@@ -114,9 +114,11 @@ function ESTest(input, type, errMsg = customErrMsg) {
 
     throw new Error(
       `
-        ✅ Expected 2nd Argument: 'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'
+        ✅ Expected 2nd Argument: 
+          'undefined' | 'null' | 'array' | 'object' | 'boolean' |
+          'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'
         ❌ Received: ${fixTextInLog(type)}
-        `,
+      `
     );
   } else if (!["undefined", "string"].includes(typeof errMsg)) {
     if (!isLogVisible) {
@@ -126,10 +128,10 @@ function ESTest(input, type, errMsg = customErrMsg) {
     }
     throw new Error(
       `
-        ✅ Expected Error Message: 'string' type
-        ❌ Received: '${fixType(errMsg)}' type
-        📦 ${fixTextInLog(errMsg)}
-        `,
+        ✅ Expected Error Message type: 'string'
+        ❌ Received: '${fixType(errMsg)}' 
+        💣 ${fixTextInLog(errMsg)}
+      `
     );
   } else if (fixType(input) !== type) {
     if (!isLogVisible) {
@@ -139,10 +141,11 @@ function ESTest(input, type, errMsg = customErrMsg) {
     }
     throw new Error(
       `
-        ❗ ${errMsg}
-        ❌ Error Type -> Expected: ${fixTextInLog(type)}, Received: '${fixType(input)}'
-        📦 ${fixTextInLog(input)}
-        `,
+        📝 ${errMsg}
+        ✅ Expected: ${fixTextInLog(type)} 
+        ❌ Received: '${fixType(input)}'     
+        💣 ${fixTextInLog(input)}
+      `
     );
   }
 
