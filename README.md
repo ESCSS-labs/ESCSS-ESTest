@@ -30,10 +30,9 @@ function foo() {
 
 ## Usage
 
-### All Use Cases
+### Use Cases
 
 ```js
-// Type mode
 ESTest(NaN, "NaN"); // new
 ESTest([], "array"); // new
 ESTest(null, "null"); // new
@@ -56,7 +55,7 @@ import { ESTest } from "escss-estest";
 let isEnable = true;
 
 // Pure (input in {...})
-function getSum2(a, b) {
+function pureSum(a, b) {
   {
     ESTest(a, "number");
     ESTest(b, "number");
@@ -69,30 +68,30 @@ function getSum2(a, b) {
 }
 
 // Impure
-function getSum(a, b) {
+function impureSum(a, b) {
   if (!isEnable) return 0;
 
   return a + b;
 }
 
 // NOTE: the "function" type check is unnecessary.
-function getTotalNumber(x) {
+function total(x) {
   {
     ESTest(x, "number");
 
     // If the function doesn't exist, it will return 'xxx is undefined.'
-    // If the function exists, getSum2(a, b) will handle type check, so the "function" check is redundant.
-    ESTest(getSum2, "function"); // not necessary.
+    // If the function exists, pureSum(a, b) will handle type check, so the "function" check is redundant.
+    ESTest(pureSum, "function"); // not necessary.
   }
 
-  return x + getSum2(1, 2);
+  return x + pureSum(1, 2);
 }
 ```
 
 ### Error handling: async/await
 
 ```js
-import { ESTest, getData } from "escss-estest";
+import { ESTest } from "escss-estest";
 
 async function getData() {
   const url = "https://jsonplaceholder.typicode.com/todos/99999"; // undefined api
@@ -100,6 +99,7 @@ async function getData() {
   const json = await response.json();
 
   {
+    ESTest(json, 'object')
     ESTest(json.userId, "number");
     ESTest(json.id, "number");
     ESTest(json.title, "string");

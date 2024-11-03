@@ -26,10 +26,9 @@ function foo() {
 
 ## 使用方式
 
-### 全部的使用例子
+### 例子
 
 ```js
-// 型別模式
 ESTest(NaN, "NaN"); // 新增
 ESTest([], "array"); // 新增
 ESTest(null, "null"); // 新增
@@ -52,7 +51,7 @@ import { ESTest } from "escss-estest";
 let isEnable = true;
 
 // 純函數 (參數測試在 {...})
-function getSum2(a, b) {
+function pureSum(a, b) {
   {
     ESTest(a, "number");
     ESTest(b, "number");
@@ -65,30 +64,30 @@ function getSum2(a, b) {
 }
 
 // 非純函數
-function getSum(a, b) {
+function impureSum(a, b) {
   if (!isEnable) return 0;
 
   return a + b;
 }
 
 // 注意： "function" 類型檢查是不必要的。
-function getTotalNumber(x) {
+function total(x) {
   {
     ESTest(x, "number");
 
     // 如果函數不存在，將返回 'xxx is undefined.'
     // 如果函數存在，getSum2(a, b) 將處理類型檢查，因此 "function" 檢查是多餘的。
-    ESTest(getSum2, "function"); // 沒必要
+    ESTest(pureSum, "function"); // not necessary.
   }
 
-  return x + getSum2(1, 2);
+  return x + pureSum(1, 2);
 }
 ```
 
 ### 錯誤處理: async/await
 
 ```js
-import { ESTest, getData } from "escss-estest";
+import { ESTest } from "escss-estest";
 
 async function getData() {
   const url = "https://jsonplaceholder.typicode.com/todos/99999"; // 不存在的 api
@@ -96,6 +95,7 @@ async function getData() {
   const json = await response.json();
 
   {
+    ESTest(json, 'object')
     ESTest(json.userId, "number");
     ESTest(json.id, "number");
     ESTest(json.title, "string");

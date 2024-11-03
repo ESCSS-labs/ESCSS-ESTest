@@ -1,23 +1,5 @@
-# Dual-Licensing（Commercial or AGPL-3.0-only）
-
-## 1. Commercial License:
-
-    Term: 1 Year (licensee must renew annually)
-
-    Support: No support (separate agreement)
-
-    Permissions:
-      modification of original source code
-      use as a component in a new software or service
-
-    Restrictions:
-      sell, license, or sublicense the original software or documentation
-      share modifications with others
-      modify in a way that competes with the original software for customers
-
-- [Commercial License Detail (ESCSS-SCSS + ESCSS-ESTest + NUXT-ESCSS-ESTest)](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/commercial.pdf)
-
-## 2. AGPL-3.0-only License:
+# Dual-Licensing（AGPL-3.0-only OR Commercial）
+## 1. AGPL-3.0-only License:
 
     Copyright (C) 2024 Mike Lee <https://github.com/MikeLee0358>
 
@@ -33,6 +15,23 @@
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+## 2. Commercial License:
+
+    Term: 1 Year (licensee must renew annually)
+
+    Support: No support (separate agreement)
+
+    Permissions:
+      modification of original source code
+      use as a component in a new software or service
+
+    Restrictions:
+      sell, license, or sublicense the original software or documentation
+      share modifications with others
+      modify in a way that competes with the original software for customers
+
+- [Commercial License Detail (ESCSS-SCSS + ESCSS-ESTest + NUXT-ESCSS-ESTest)](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/commercial.pdf)
 
 ## Reference
 
