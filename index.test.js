@@ -1,6 +1,6 @@
 // Run test command (bun required): bun test
 import { describe, test, expect } from "bun:test";
-import { ESTest, isLogVisible, _internalTestToken } from ".";
+import { ESTest, isLogVisible, _internalTestToken } from "./lib";
 
 describe("Normal Cases", () => {
   test("undefined", () => {
@@ -93,7 +93,7 @@ describe("Error Cases", () => {
   });
 });
 
-describe("Setting", () => {
+describe("To protect sensitive data", () => {
   test("isLogVisible: false", () => {
     expect(isLogVisible).toBe(false);
   });

@@ -22,5 +22,6 @@
   "type": "module",
   "exports": "./lib/index.js",
   "main": "./lib/index.js",
-  "types": "./lib/index.js"
+  "types": "./lib/index.js",
+  "files": ["lib"]
 }
