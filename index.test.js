@@ -1,6 +1,6 @@
 // Run test command (bun required): bun test
 import { describe, test, expect } from "bun:test";
-import { ESTest, isLogVisible, internalTestToken } from "./index.js";
+import { ESTest, isLogVisible, internalTestToken } from ".";
 
 describe("Normal Cases", () => {
   test("undefined", () => {
