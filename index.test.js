@@ -1,66 +1,66 @@
 // Run test command (bun required): bun test
 import { describe, test, expect } from "bun:test";
-import { ESTest, isLogVisible, _internalTestToken } from "./lib";
+import { ESTest, isLogVisible, internalTestToken } from "./lib";
 
 describe("Normal Cases", () => {
   test("undefined", () => {
     ESTest(undefined, "undefined");
-    expect(_internalTestToken).toBe("undefined");
+    expect(internalTestToken).toBe("undefined");
   });
 
   test("null", () => {
     ESTest(null, "null");
-    expect(_internalTestToken).toBe("null");
+    expect(internalTestToken).toBe("null");
   });
 
   test("array", () => {
     ESTest([], "array");
-    expect(_internalTestToken).toBe("array");
+    expect(internalTestToken).toBe("array");
   });
 
   test("object", () => {
     ESTest({}, "object");
-    expect(_internalTestToken).toBe("object");
+    expect(internalTestToken).toBe("object");
   });
 
   test("boolean", () => {
     ESTest(true, "boolean");
-    expect(_internalTestToken).toBe("boolean");
+    expect(internalTestToken).toBe("boolean");
   });
 
   test("NaN", () => {
     ESTest(NaN, "NaN");
-    expect(_internalTestToken).toBe("NaN");
+    expect(internalTestToken).toBe("NaN");
   });
 
   test("number", () => {
     ESTest(123, "number");
-    expect(_internalTestToken).toBe("number");
+    expect(internalTestToken).toBe("number");
   });
 
   test("bigint", () => {
     ESTest(123n, "bigint");
-    expect(_internalTestToken).toBe("bigint");
+    expect(internalTestToken).toBe("bigint");
   });
 
   test("string", () => {
     ESTest("Hello World", "string");
-    expect(_internalTestToken).toBe("string");
+    expect(internalTestToken).toBe("string");
   });
 
   test("symbol", () => {
     ESTest(Symbol(), "symbol");
-    expect(_internalTestToken).toBe("symbol");
+    expect(internalTestToken).toBe("symbol");
   });
 
   test("function", () => {
     ESTest(function () {}, "function");
-    expect(_internalTestToken).toBe("function");
+    expect(internalTestToken).toBe("function");
   });
 
   test("custom error msg", () => {
     ESTest(123, "number", "foo");
-    expect(_internalTestToken).toBe("number");
+    expect(internalTestToken).toBe("number");
   });
 });
 
