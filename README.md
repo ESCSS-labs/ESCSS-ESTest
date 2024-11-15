@@ -148,6 +148,11 @@ new Animal("cat", "10"); // get error, "10" should be number
   bun add escss-estest
 ```
 
+```bash
+  # Nuxt 3
+  npx nuxi module add nuxt-escss-estest
+```
+
 ## License
 
 [see](https://github.com/ESCSS-labs/ESCSS-ESTest?tab=License-1-ov-file)

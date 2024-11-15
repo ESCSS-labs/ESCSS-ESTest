@@ -1,0 +1,62 @@
+{
+  "name": "nuxt-escss-estest",
+  "version": "1.4.8",
+  "description": "100% function coverage for easier life.",
+  "keywords": [
+    "escss",
+    "escss-estest",
+    "testing",
+    "javascript",
+    "tdd",
+    "nuxt"
+  ],
+  "homepage": "https://github.com/ESCSS-labs/",
+  "bugs": "https://github.com/ESCSS-labs/NUXT-ESCSS-ESTest/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ESCSS-labs/NUXT-ESCSS-ESTest.git"
+  },
+  "funding": "https://opencollective.com/escss",
+  "license": "(AGPL-3.0-only OR Commercial)",
+  "author": "Mike Lee <cspkno005@gmail.com> (https://github.com/ESCSS-labs)",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "lint": "eslint .",
+    "prepack": "nuxt-module-build build",
+    "release": "npm run lint && npm run prepack && npm publish",
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.13.2",
+    "escss-estest": "^1.4.8"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^1.6.0",
+    "@nuxt/eslint-config": "^0.6.1",
+    "@nuxt/module-builder": "^0.8.4",
+    "@nuxt/schema": "^3.13.2",
+    "@nuxt/test-utils": "^3.14.4",
+    "@types/node": "^22.8.7",
+    "changelogen": "^0.5.7",
+    "eslint": "^9.14.0",
+    "nuxt": "^3.13.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4",
+    "vue-tsc": "^2.1.10"
+  }
+}

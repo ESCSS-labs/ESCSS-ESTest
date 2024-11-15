@@ -144,6 +144,12 @@ new Animal("cat", "10"); // 產生錯誤，"10" 應為數字型別
   bun add escss-estest
 ```
 
+```bash
+  # Nuxt 3
+  npx nuxi module add nuxt-escss-estest
+```
+
+
 ## 許可證
 
 [參見](https://github.com/ESCSS-labs/ESCSS-ESTest?tab=License-1-ov-file)
