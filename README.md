@@ -134,27 +134,23 @@ new Animal("cat", "10"); // get error, "10" should be number
 
 ## Installation
 
-// Using npm
 ```bash
   npm add escss-estest
 ```
 
-// Using yarn
 ```bash
   yarn add escss-estest
 ```
 
-// Using pnpm
 ```bash
   pnpm add escss-estest
 ```
 
-// Using bun
 ```bash
   bun add escss-estest
 ```
 
-// Nuxt 3
+Nuxt 3
 ```bash
   npx nuxi module add nuxt-escss-estest
 ```

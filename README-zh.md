@@ -130,27 +130,26 @@ new Animal("cat", "10"); // 產生錯誤，"10" 應為數字型別
 
 ## 安裝方式
 
-// Using npm
+
+## Installation
+
 ```bash
   npm add escss-estest
 ```
 
-// Using yarn
 ```bash
   yarn add escss-estest
 ```
 
-// Using pnpm
 ```bash
   pnpm add escss-estest
 ```
 
-// Using bun
 ```bash
   bun add escss-estest
 ```
 
-// Nuxt 3
+Nuxt 3
 ```bash
   npx nuxi module add nuxt-escss-estest
 ```
