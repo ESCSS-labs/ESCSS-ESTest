@@ -1,6 +1,6 @@
 {
   "name": "nuxt-escss-estest",
-  "version": "1.4.13",
+  "version": "1.4.14",
   "description": "100% function coverage for easier life.",
   "keywords": [
     "escss",
@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.13.2",
-    "escss-estest": "1.4.13"
+    "escss-estest": "^1.4.14"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.6.0",
