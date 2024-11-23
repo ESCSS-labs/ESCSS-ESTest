@@ -1,66 +1,66 @@
 // Run test command (bun required): bun test
 import { describe, test, expect } from "bun:test";
-import { ESTest, isLogVisible, internalTestToken } from ".";
+import { ESTest, _typeToken } from ".";
 
 describe("Normal Cases", () => {
   test("undefined", () => {
     ESTest(undefined, "undefined");
-    expect(internalTestToken).toBe("undefined");
+    expect(_typeToken).toBe("undefined");
   });
 
   test("null", () => {
     ESTest(null, "null");
-    expect(internalTestToken).toBe("null");
+    expect(_typeToken).toBe("null");
   });
 
   test("array", () => {
     ESTest([], "array");
-    expect(internalTestToken).toBe("array");
+    expect(_typeToken).toBe("array");
   });
 
   test("object", () => {
     ESTest({}, "object");
-    expect(internalTestToken).toBe("object");
+    expect(_typeToken).toBe("object");
   });
 
   test("boolean", () => {
     ESTest(true, "boolean");
-    expect(internalTestToken).toBe("boolean");
+    expect(_typeToken).toBe("boolean");
   });
 
   test("NaN", () => {
     ESTest(NaN, "NaN");
-    expect(internalTestToken).toBe("NaN");
+    expect(_typeToken).toBe("NaN");
   });
 
   test("number", () => {
     ESTest(123, "number");
-    expect(internalTestToken).toBe("number");
+    expect(_typeToken).toBe("number");
   });
 
   test("bigint", () => {
     ESTest(123n, "bigint");
-    expect(internalTestToken).toBe("bigint");
+    expect(_typeToken).toBe("bigint");
   });
 
   test("string", () => {
     ESTest("Hello World", "string");
-    expect(internalTestToken).toBe("string");
+    expect(_typeToken).toBe("string");
   });
 
   test("symbol", () => {
     ESTest(Symbol(), "symbol");
-    expect(internalTestToken).toBe("symbol");
+    expect(_typeToken).toBe("symbol");
   });
 
   test("function", () => {
     ESTest(function () {}, "function");
-    expect(internalTestToken).toBe("function");
+    expect(_typeToken).toBe("function");
   });
 
   test("custom error msg", () => {
     ESTest(123, "number", "foo");
-    expect(internalTestToken).toBe("number");
+    expect(_typeToken).toBe("number");
   });
 });
 
@@ -90,11 +90,5 @@ describe("Error Cases", () => {
     expect(() => ESTest(10, "number", [])).toThrow();
     expect(() => ESTest(10, "number", {})).toThrow();
     expect(() => ESTest(10, "number", 123)).toThrow();
-  });
-});
-
-describe("To protect sensitive data", () => {
-  test("isLogVisible: false", () => {
-    expect(isLogVisible).toBe(false);
   });
 });
