@@ -150,9 +150,21 @@ new Animal("cat", "10"); // get error, "10" should be number
   bun add escss-estest
 ```
 
+```javascript
+import { ESTest } from "escss-estest";
+
+ESTest('Happy Coding!', 'string') // pass
+```
+
 Nuxt 3
 ```bash
   npx nuxi module add nuxt-escss-estest
+```
+
+```vue
+<script setup>
+ESTest('Happy Coding!', 'string') // pass
+</script>
 ```
 
 ## License
