@@ -14,7 +14,7 @@
   "bugs": "https://github.com/ESCSS-labs/ESCSS-ESTest/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ESCSS-labs/ESCSS-ESTest"
+    "url": "git+https://github.com/ESCSS-labs/ESCSS-ESTest.git"
   },
   "funding": "https://opencollective.com/escss",
   "license": "(AGPL-3.0-only OR Commercial)",
@@ -23,5 +23,7 @@
   "exports": "./lib/index.js",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "files": ["lib"]
+  "files": [
+    "lib"
+  ]
 }
