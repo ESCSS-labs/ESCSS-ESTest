@@ -14,7 +14,7 @@
 
 ## What is ESCSS-ESTest?
 
-ESCSS-ESTest helps you to achieve 100% coverage by taking the potential of TDD and TypeScript.
+ESCSS-ESTest is a runtime testing library inspired by TDD and TypeScript to achieve 100% coverage.
 
 ## Core Concept - Water Filter
 
@@ -30,7 +30,7 @@ function foo() {
 
 ## Usage
 
-### Use Cases
+### Examples
 
 ```js
 ESTest(NaN, "NaN"); // new
@@ -48,71 +48,51 @@ ESTest(1, "object"); // error
 ESTest(1, "object", "foo"); // error message
 ```
 
-### Pure vs Impure
+### General
 
 ```js
 import { ESTest } from "escss-estest";
+
 let isEnable = true;
 
-// Pure (input in {...})
-function pureSum(a, b) {
+// Testing input in {...}
+function sum(a, b) {
   {
     ESTest(a, "number");
     ESTest(b, "number");
     ESTest(isEnable, "boolean");
   }
 
-  if (!isEnable) return 0;
+  if (!isEnable) return;
 
   return a + b;
-}
-
-// Impure
-function impureSum(a, b) {
-  if (!isEnable) return 0;
-
-  return a + b;
-}
-
-// NOTE: the "function" type check is unnecessary.
-function total(x) {
-  {
-    ESTest(x, "number");
-
-    // If the function doesn't exist, it will return 'xxx is undefined.'
-    // If the function exists, pureSum(a, b) will handle type check, so the "function" check is redundant.
-    ESTest(pureSum, "function"); // not necessary.
-  }
-
-  return x + pureSum(1, 2);
 }
 ```
 
-### Error handling: async/await
+### async/await
 
 ```js
 import { ESTest } from "escss-estest";
 
 async function getData() {
-  const url = "https://jsonplaceholder.typicode.com/todos/99999"; // undefined api
-  const response = await fetch(url);
-  const json = await response.json();
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  const data = await response.json();
 
   {
-    ESTest(json, 'object')
-    ESTest(json.userId, "number");
-    ESTest(json.id, "number");
-    ESTest(json.title, "string");
-    ESTest(json.completed, "boolean");
+    ESTest(data, 'object')
+    ESTest(data.userId, "number");
+    ESTest(data.id, "number");
+    ESTest(data.title, "string");
+    ESTest(data.completed, "boolean");
   }
 
-  console.log(json);
+  console.log(data);
 }
 
-getData(); // get error (undefined api from 99999)
+getData(); // pass: response data is as expected
 ```
 
-### Error handling: class
+### Class
 
 ```js
 import { ESTest } from "escss-estest";
@@ -129,7 +109,7 @@ class Animal {
   }
 }
 
-new Animal("cat", "10"); // get error, "10" should be number
+new Animal("cat", 10); // pass: response data is as expected
 ```
 
 ## Installation

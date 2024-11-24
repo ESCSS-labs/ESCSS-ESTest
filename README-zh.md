@@ -10,7 +10,7 @@
 
 ## 什麼是 ESCSS-ESTest?
 
-ESCSS-ESTest 是藉由 TDD 和 TypeScript 的潛力來實現 100% 的覆蓋率。
+ESCSS-ESTest 是一個運行時期的測試工具，受 TDD 和 TypeScript 的啟發，實現 100% 的覆蓋率。
 
 ## 核心概念 - 濾水器
 
@@ -20,7 +20,7 @@ function foo() {
     // 丟出錯誤
   }
 
-  // 正常寫法
+  // 常見寫法
 }
 ```
 
@@ -44,71 +44,51 @@ ESTest(1, "object"); // 錯誤
 ESTest(1, "object", "foo"); // 錯誤信息
 ```
 
-### 純函數 vs 非純函數
+### 常見情況
 
 ```js
 import { ESTest } from "escss-estest";
+
 let isEnable = true;
 
-// 純函數 (參數測試在 {...})
-function pureSum(a, b) {
+// Testing input in {...}
+function sum(a, b) {
   {
     ESTest(a, "number");
     ESTest(b, "number");
     ESTest(isEnable, "boolean");
   }
 
-  if (!isEnable) return 0;
+  if (!isEnable) return;
 
   return a + b;
-}
-
-// 非純函數
-function impureSum(a, b) {
-  if (!isEnable) return 0;
-
-  return a + b;
-}
-
-// 注意： "function" 類型檢查是不必要的。
-function total(x) {
-  {
-    ESTest(x, "number");
-
-    // 如果函數不存在，將返回 'xxx is undefined.'
-    // 如果函數存在，getSum2(a, b) 將處理類型檢查，因此 "function" 檢查是多餘的。
-    ESTest(pureSum, "function"); // not necessary.
-  }
-
-  return x + pureSum(1, 2);
 }
 ```
 
-### 錯誤處理: async/await
+### async/await
 
 ```js
 import { ESTest } from "escss-estest";
 
 async function getData() {
-  const url = "https://jsonplaceholder.typicode.com/todos/99999"; // 不存在的 api
-  const response = await fetch(url);
-  const json = await response.json();
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  const data = await response.json();
 
   {
-    ESTest(json, 'object')
-    ESTest(json.userId, "number");
-    ESTest(json.id, "number");
-    ESTest(json.title, "string");
-    ESTest(json.completed, "boolean");
+    ESTest(data, 'object')
+    ESTest(data.userId, "number");
+    ESTest(data.id, "number");
+    ESTest(data.title, "string");
+    ESTest(data.completed, "boolean");
   }
 
-  console.log(json);
+  console.log(data);
 }
 
-getData(); // 產生錯誤 (api 99999 實際上是不存在的)
+getData(); // 通過: 回傳資料如預期一樣
 ```
 
-### 錯誤處理: class
+### Class
 
 ```js
 import { ESTest } from "escss-estest";
@@ -125,7 +105,7 @@ class Animal {
   }
 }
 
-new Animal("cat", "10"); // 產生錯誤，"10" 應為數字型別
+new Animal("cat", 10); // 通過: 回傳資料如預期一樣
 ```
 
 ## 安裝方式

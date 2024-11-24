@@ -1,6 +1,6 @@
 type TYPES = 'undefined' | 'null' | 'array' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'
 /**
- * 100% function coverage for easier life. More: https://github.com/ESCSS-labs/ESCSS-ESTest
+ * A runtime testing library inspired by TDD and TypeScript to achieve 100% coverage
  * ```js
  * ESTest(NaN, 'NaN')
  * ESTest([], 'array')
