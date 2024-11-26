@@ -1,4 +1,4 @@
-// Run test command (bun required): bun test
+// Run test command: bun test
 import { describe, test, expect } from "bun:test";
 import { ESTest, _testToken } from ".";
 
@@ -66,29 +66,29 @@ describe("Normal Cases", () => {
 
 describe("Error Cases", () => {
   test("Invalid 2nd argument", () => {
-    expect(() => ESTest(123, "undefined")).toThrow();
-    expect(() => ESTest(123, "null")).toThrow();
-    expect(() => ESTest(123, "array")).toThrow();
-    expect(() => ESTest(123, "object")).toThrow();
-    expect(() => ESTest(123, "boolean")).toThrow();
-    expect(() => ESTest(123, "NaN")).toThrow();
-    expect(() => ESTest({}, "number")).toThrow();
-    expect(() => ESTest(123, "bigint")).toThrow();
-    expect(() => ESTest(123, "string")).toThrow();
-    expect(() => ESTest(123, "symbol")).toThrow();
-    expect(() => ESTest(123, "function")).toThrow();
-    expect(() => ESTest(123, "")).toThrow();
-    expect(() => ESTest(123, 123)).toThrow();
-    expect(() => ESTest(123, [])).toThrow();
-    expect(() => ESTest(123, {})).toThrow();
-    expect(() => ESTest(123, null)).toThrow();
-    expect(() => ESTest(123, undefined)).toThrow();
-    expect(() => ESTest(123)).toThrow();
+    expect(ESTest(123, "undefined")).toBe(undefined);
+    expect(ESTest(123, "null")).toBe(undefined);
+    expect(ESTest(123, "array")).toBe(undefined);
+    expect(ESTest(123, "object")).toBe(undefined);
+    expect(ESTest(123, "boolean")).toBe(undefined);
+    expect(ESTest(123, "NaN")).toBe(undefined);
+    expect(ESTest({}, "number")).toBe(undefined);
+    expect(ESTest(123, "bigint")).toBe(undefined);
+    expect(ESTest(123, "string")).toBe(undefined);
+    expect(ESTest(123, "symbol")).toBe(undefined);
+    expect(ESTest(123, "function")).toBe(undefined);
+    expect(ESTest(123, "")).toBe(undefined);
+    expect(ESTest(123, 123)).toBe(undefined);
+    expect(ESTest(123, [])).toBe(undefined);
+    expect(ESTest(123, {})).toBe(undefined);
+    expect(ESTest(123, null)).toBe(undefined);
+    expect(ESTest(123, undefined)).toBe(undefined);
+    expect(ESTest(123)).toBe(undefined);
   });
 
   test("Error messages type only accepts 'string' or 'undefined'", () => {
-    expect(() => ESTest(10, "number", [])).toThrow();
-    expect(() => ESTest(10, "number", {})).toThrow();
-    expect(() => ESTest(10, "number", 123)).toThrow();
+    expect(ESTest(10, "number", [])).toBe(undefined);
+    expect(ESTest(10, "number", {})).toBe(undefined);
+    expect(ESTest(10, "number", 123)).toBe(undefined);
   });
 });
