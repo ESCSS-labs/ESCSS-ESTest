@@ -1,4 +1,4 @@
-type TYPES = 'undefined' | 'null' | 'array' | 'date' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'
+type TYPES = 'undefined' | 'null' | 'array' | 'date' | 'regexp' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'
 /**
  * A runtime testing library inspired by TDD and TypeScript to achieve 100% coverage
  * ```js
@@ -7,6 +7,7 @@ type TYPES = 'undefined' | 'null' | 'array' | 'date' | 'object' | 'boolean' | 'N
  * ESTest(null, 'null')
  * ESTest(undefined, 'undefined')
  * ESTest(new Date(), 'date')
+ * ESTest(new RegExp(), 'regexp')
  * ESTest(1, 'number')
  * ESTest('foo', 'string')
  * ESTest(true, 'boolean')

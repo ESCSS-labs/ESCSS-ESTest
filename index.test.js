@@ -3,8 +3,13 @@ import { describe, test, expect, vi } from "bun:test";
 import { ESTest, _testToken } from ".";
 
 describe("Normal Cases", () => {
+  test("regexp", () => {
+    ESTest(new RegExp(), "regexp");
+    expect(_testToken).toBe("regexp");
+  });
+  
   test("date", () => {
-    ESTest(new Date, "date");
+    ESTest(new Date(), "date");
     expect(_testToken).toBe("date");
   });
 
