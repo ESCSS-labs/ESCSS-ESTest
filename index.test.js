@@ -1,8 +1,13 @@
 // Run test command: bun test
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect, vi } from "bun:test";
 import { ESTest, _testToken } from ".";
 
 describe("Normal Cases", () => {
+  test("date", () => {
+    ESTest(new Date, "date");
+    expect(_testToken).toBe("date");
+  });
+
   test("undefined", () => {
     ESTest(undefined, "undefined");
     expect(_testToken).toBe("undefined");
@@ -66,29 +71,49 @@ describe("Normal Cases", () => {
 
 describe("Error Cases", () => {
   test("Invalid 2nd argument", () => {
-    expect(ESTest(123, "undefined")).toBe(undefined);
-    expect(ESTest(123, "null")).toBe(undefined);
-    expect(ESTest(123, "array")).toBe(undefined);
-    expect(ESTest(123, "object")).toBe(undefined);
-    expect(ESTest(123, "boolean")).toBe(undefined);
-    expect(ESTest(123, "NaN")).toBe(undefined);
-    expect(ESTest({}, "number")).toBe(undefined);
-    expect(ESTest(123, "bigint")).toBe(undefined);
-    expect(ESTest(123, "string")).toBe(undefined);
-    expect(ESTest(123, "symbol")).toBe(undefined);
-    expect(ESTest(123, "function")).toBe(undefined);
-    expect(ESTest(123, "")).toBe(undefined);
-    expect(ESTest(123, 123)).toBe(undefined);
-    expect(ESTest(123, [])).toBe(undefined);
-    expect(ESTest(123, {})).toBe(undefined);
-    expect(ESTest(123, null)).toBe(undefined);
-    expect(ESTest(123, undefined)).toBe(undefined);
-    expect(ESTest(123)).toBe(undefined);
+    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    
+    ESTest(123, "undefined")
+    ESTest(123, "null")
+    ESTest(123, "array")
+    ESTest(123, "object")
+    ESTest(123, "boolean")
+    ESTest(123, "NaN")
+    ESTest({}, "number")
+    ESTest(123, "bigint")
+    ESTest(123, "string")
+    ESTest(123, "symbol")
+    ESTest(123, "function")
+    ESTest(123, "")
+    ESTest(123, 123)
+    ESTest(123, [])
+    ESTest(123, {})
+    ESTest(123, null)
+    ESTest(123, undefined)
+    ESTest(123)
+
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(18);
+    consoleErrorSpy.mockRestore();
   });
 
   test("Error messages type only accepts 'string' or 'undefined'", () => {
-    expect(ESTest(10, "number", [])).toBe(undefined);
-    expect(ESTest(10, "number", {})).toBe(undefined);
-    expect(ESTest(10, "number", 123)).toBe(undefined);
+    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    ESTest(10, "number", []);
+    ESTest(10, "number", {});
+    ESTest(10, "number", 123);
+
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(3);
+    consoleErrorSpy.mockRestore();
+  });
+
+  test("Invalid Date", () => {
+    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    ESTest(new Date('aaa'), 'date');
+
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+    consoleErrorSpy.mockRestore();
   });
 });
+
