@@ -37,6 +37,8 @@ ESTest(NaN, "NaN"); // new
 ESTest([], "array"); // new
 ESTest(null, "null"); // new
 ESTest(undefined, "undefined"); // new
+ESTest(new Date(), 'date') // new
+ESTest(new RegExp(), 'regexp') // new
 ESTest(1, "number");
 ESTest("foo", "string");
 ESTest(true, "boolean");
@@ -48,7 +50,7 @@ ESTest(1, "object"); // error
 ESTest(1, "object", "foo"); // error message
 ```
 
-### General
+### general
 
 ```js
 import { ESTest } from "escss-estest";
@@ -92,7 +94,7 @@ async function getData() {
 getData(); // pass: response data is as expected
 ```
 
-### Class
+### class
 
 ```js
 import { ESTest } from "escss-estest";
