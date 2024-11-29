@@ -1,6 +1,6 @@
 {
   "name": "escss-estest",
-  "version": "1.4.22",
+  "version": "1.4.23",
   "description": "A runtime testing library inspired by TDD and TypeScript to achieve 100% coverage.",
   "keywords": [
     "escss",
