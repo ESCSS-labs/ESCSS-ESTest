@@ -1,5 +1,5 @@
 // Run test command: bun test
-import { describe, test, expect, vi } from "bun:test";
+import { describe, test, expect, spyOn, mock } from "bun:test";
 import { ESTest, _testToken } from ".";
 
 describe("Normal Cases", () => {
@@ -76,7 +76,8 @@ describe("Normal Cases", () => {
 
 describe("Error Cases", () => {
   test("Invalid 2nd argument", () => {
-    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    mock.restore();
+    const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
     
     ESTest(123, "undefined")
     ESTest(123, "null")
@@ -98,27 +99,26 @@ describe("Error Cases", () => {
     ESTest(123)
 
     expect(consoleErrorSpy).toHaveBeenCalledTimes(18);
-    consoleErrorSpy.mockRestore();
   });
 
   test("Error messages type only accepts 'string' or 'undefined'", () => {
-    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    mock.restore();
+    const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
 
     ESTest(10, "number", []);
     ESTest(10, "number", {});
     ESTest(10, "number", 123);
 
     expect(consoleErrorSpy).toHaveBeenCalledTimes(3);
-    consoleErrorSpy.mockRestore();
   });
 
   test("Invalid Date", () => {
-    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    mock.restore();
+    const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
 
     ESTest(new Date('aaa'), 'date');
 
     expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
-    consoleErrorSpy.mockRestore();
   });
 });
 
