@@ -1,6 +1,6 @@
 // Run test command: bun test
 import { describe, test, expect, spyOn, mock } from "bun:test";
-import { ESTest, _testToken } from ".";
+import { ESTest, _testToken, _isDisabled } from ".";
 
 describe("Normal Cases", () => {
   test("regexp", () => {
@@ -72,6 +72,8 @@ describe("Normal Cases", () => {
     ESTest(123, "number", "foo");
     expect(_testToken).toBe("number");
   });
+
+
 });
 
 describe("Error Cases", () => {
@@ -122,3 +124,8 @@ describe("Error Cases", () => {
   });
 });
 
+describe("Default Setting", () => {
+  test('_isDisabled should be false', () => {
+    expect(_isDisabled).toBe(false);
+  })
+});
