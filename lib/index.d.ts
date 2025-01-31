@@ -1,22 +1,22 @@
-type TYPES = 'undefined' | 'null' | 'array' | 'date' | 'regexp' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'
+type ALLOWED_TOKEN_TYPES = 'Undefined' | 'Null' | 'Array' | 'Date' | 'Object' | 'Boolean' | 'NaN' | 'Number' | 'BigInt' | 'String' | 'Symbol' | 'Function' | 'RegExp'
 /**
- * A runtime testing library inspired by TDD and TypeScript to achieve 100% coverage
+ * A JavaScript runtime testing library inspired by TDD, Joi, and Zod.
  * ```js
  * ESTest(NaN, 'NaN')
- * ESTest([], 'array')
- * ESTest(null, 'null')
- * ESTest(undefined, 'undefined')
- * ESTest(new Date(), 'date')
- * ESTest(new RegExp(), 'regexp')
- * ESTest(1, 'number')
- * ESTest('foo', 'string')
- * ESTest(true, 'boolean')
- * ESTest({}, 'object')
- * ESTest(1n, 'bigint')
- * ESTest(Symbol(), 'symbol')
- * ESTest(function () {}, 'function')
- * ESTest(1, 'object') // error
- * ESTest(1, 'object', 'foo') // error & message "foo"
+ * ESTest([], 'Array')
+ * ESTest(null, 'Null')
+ * ESTest(undefined, 'Undefined')
+ * ESTest(new Date(), 'Date')
+ * ESTest(new RegExp(), 'RegExp')
+ * ESTest(1, 'Number')
+ * ESTest('foo', 'String')
+ * ESTest(true, 'Boolean')
+ * ESTest({}, 'Object')
+ * ESTest(1n, 'BigInt')
+ * ESTest(Symbol(), 'Symbol')
+ * ESTest(function () {}, 'Function')
+ * ESTest(1, 'Object') // error
+ * ESTest(1, 'Object', 'foo') // public message "foo"
  * ```
  */
-export declare function ESTest(input: unknown, type: TYPES, errMsg?: string): void
+export declare function ESTest(input: unknown, tokenType: ALLOWED_TOKEN_TYPES, pubMsg?: string): void
