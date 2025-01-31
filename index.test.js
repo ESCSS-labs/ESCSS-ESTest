@@ -3,16 +3,6 @@ import { describe, test, expect, spyOn } from "bun:test";
 import { ESTest, _testToken, _isDisabledESTest } from ".";
 
 describe("Normal Cases", () => {  
-  test("RegExp", () => {
-    ESTest(new RegExp(), "RegExp");
-    expect(_testToken).toBe("RegExp");
-  });
-
-  test("Date", () => {
-    ESTest(new Date(), "Date");
-    expect(_testToken).toBe("Date");
-  });
-
   test("Undefined", () => {
     ESTest(undefined, "Undefined");
     expect(_testToken).toBe("Undefined");
@@ -26,6 +16,11 @@ describe("Normal Cases", () => {
   test("Array", () => {
     ESTest([], "Array");
     expect(_testToken).toBe("Array");
+  });
+
+  test("Date", () => {
+    ESTest(new Date(), "Date");
+    expect(_testToken).toBe("Date");
   });
 
   test("Object", () => {
@@ -68,9 +63,9 @@ describe("Normal Cases", () => {
     expect(_testToken).toBe("Function");
   });
 
-  test("custom error msg", () => {
-    ESTest(123, "Number", "foo");
-    expect(_testToken).toBe("Number");
+  test("RegExp", () => {
+    ESTest(new RegExp(), "RegExp");
+    expect(_testToken).toBe("RegExp");
   });
 });
 
@@ -78,10 +73,10 @@ describe("Error Cases", () => {
   test("Invalid 2nd argument", () => {
     const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
     
-    ESTest(123, "RegExp")
     ESTest(123, "Undefined")
     ESTest(123, "Null")
     ESTest(123, "Array")
+    ESTest(123, "Date")
     ESTest(123, "Object")
     ESTest(123, "Boolean")
     ESTest(123, "NaN")
@@ -90,34 +85,44 @@ describe("Error Cases", () => {
     ESTest(123, "String")
     ESTest(123, "Symbol")
     ESTest(123, "Function")
-    ESTest(123, "")
-    ESTest(123, 123)
+    ESTest(123, "RegExp")
+    ESTest(123, undefined)
+    ESTest(123, null)
     ESTest(123, [])
     ESTest(123, {})
-    ESTest(123, null)
-    ESTest(123, undefined)
-    ESTest(123)
+    ESTest(123, true)
+    ESTest(123, NaN)
+    ESTest(123, 123)
+    ESTest(123, 123n)
+    ESTest(123, 'test')
+    ESTest(123, Symbol('test'))
+    ESTest(123, () => alert('test'))
+    ESTest(123, /test/)
 
-    expect(consoleErrorSpy).toHaveBeenCalledTimes(19);
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(25);
     consoleErrorSpy.mockRestore();
   });
 
   test("Invalid 3rd argument", () => {
     const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
 
-    ESTest(10, "Number", []);
-    ESTest(10, "Number", {});
-    ESTest(10, "Number", 123);
-    ESTest(10, "Number", true);
-    ESTest(10, "Number", null);
-    ESTest(10, "Number", NaN);
-    ESTest(10, "Number", 10n);
-    ESTest(10, "Number", /test/);
-    ESTest(10, "Number", () => alert('HACK!'));
-    ESTest(10, "Number", new Date());
-    ESTest(10, "Number", Symbol('test'));
+    // all pass situations
+    ESTest(123, 'Number', 'test')
+    ESTest(123, 'Number', undefined) // use defaultPubMsg('String')
+    
+    // all error situations
+    ESTest(123, 'Number', null)
+    ESTest(123, 'Number', [])
+    ESTest(123, 'Number', {})
+    ESTest(123, 'Number', true)
+    ESTest(123, 'Number', NaN)
+    ESTest(123, 'Number', 123)
+    ESTest(123, 'Number', 123n)
+    ESTest(123, 'Number', Symbol('test'))
+    ESTest(123, 'Number', () => alert('test'))
+    ESTest(123, 'Number', /test/)
 
-    expect(consoleErrorSpy).toHaveBeenCalledTimes(11);
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(10);
     consoleErrorSpy.mockRestore();
   });
 
