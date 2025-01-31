@@ -3,34 +3,34 @@ import { describe, test, expect, spyOn, mock } from "bun:test";
 import { ESTest, _testToken, _isDisabledESTest } from ".";
 
 describe("Normal Cases", () => {  
-  test("date", () => {
-    ESTest(new Date(), "date");
-    expect(_testToken).toBe("date");
+  test("Date", () => {
+    ESTest(new Date(), "Date");
+    expect(_testToken).toBe("Date");
   });
 
-  test("undefined", () => {
-    ESTest(undefined, "undefined");
-    expect(_testToken).toBe("undefined");
+  test("Undefined", () => {
+    ESTest(undefined, "Undefined");
+    expect(_testToken).toBe("Undefined");
   });
 
-  test("null", () => {
-    ESTest(null, "null");
-    expect(_testToken).toBe("null");
+  test("Null", () => {
+    ESTest(null, "Null");
+    expect(_testToken).toBe("Null");
   });
 
-  test("array", () => {
-    ESTest([], "array");
-    expect(_testToken).toBe("array");
+  test("Array", () => {
+    ESTest([], "Array");
+    expect(_testToken).toBe("Array");
   });
 
-  test("object", () => {
-    ESTest({}, "object");
-    expect(_testToken).toBe("object");
+  test("Object", () => {
+    ESTest({}, "Object");
+    expect(_testToken).toBe("Object");
   });
 
-  test("boolean", () => {
-    ESTest(true, "boolean");
-    expect(_testToken).toBe("boolean");
+  test("Boolean", () => {
+    ESTest(true, "Boolean");
+    expect(_testToken).toBe("Boolean");
   });
 
   test("NaN", () => {
@@ -38,34 +38,34 @@ describe("Normal Cases", () => {
     expect(_testToken).toBe("NaN");
   });
 
-  test("number", () => {
-    ESTest(123, "number");
-    expect(_testToken).toBe("number");
+  test("Number", () => {
+    ESTest(123, "Number");
+    expect(_testToken).toBe("Number");
   });
 
-  test("bigint", () => {
-    ESTest(123n, "bigint");
-    expect(_testToken).toBe("bigint");
+  test("BigInt", () => {
+    ESTest(123n, "BigInt");
+    expect(_testToken).toBe("BigInt");
   });
 
-  test("string", () => {
-    ESTest("Hello World", "string");
-    expect(_testToken).toBe("string");
+  test("String", () => {
+    ESTest("Hello World", "String");
+    expect(_testToken).toBe("String");
   });
 
-  test("symbol", () => {
-    ESTest(Symbol(), "symbol");
-    expect(_testToken).toBe("symbol");
+  test("Symbol", () => {
+    ESTest(Symbol(), "Symbol");
+    expect(_testToken).toBe("Symbol");
   });
 
-  test("function", () => {
-    ESTest(function () {}, "function");
-    expect(_testToken).toBe("function");
+  test("Function", () => {
+    ESTest(function () {}, "Function");
+    expect(_testToken).toBe("Function");
   });
 
   test("custom error msg", () => {
-    ESTest(123, "number", "foo");
-    expect(_testToken).toBe("number");
+    ESTest(123, "Number", "foo");
+    expect(_testToken).toBe("Number");
   });
 
 
@@ -76,17 +76,17 @@ describe("Error Cases", () => {
     mock.restore();
     const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
     
-    ESTest(123, "undefined")
-    ESTest(123, "null")
-    ESTest(123, "array")
-    ESTest(123, "object")
-    ESTest(123, "boolean")
+    ESTest(123, "Undefined")
+    ESTest(123, "Null")
+    ESTest(123, "Array")
+    ESTest(123, "Object")
+    ESTest(123, "Boolean")
     ESTest(123, "NaN")
-    ESTest({}, "number")
-    ESTest(123, "bigint")
-    ESTest(123, "string")
-    ESTest(123, "symbol")
-    ESTest(123, "function")
+    ESTest({}, "Number")
+    ESTest(123, "BigInt")
+    ESTest(123, "String")
+    ESTest(123, "Symbol")
+    ESTest(123, "Function")
     ESTest(123, "")
     ESTest(123, 123)
     ESTest(123, [])
@@ -102,9 +102,9 @@ describe("Error Cases", () => {
     mock.restore();
     const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
 
-    ESTest(10, "number", []);
-    ESTest(10, "number", {});
-    ESTest(10, "number", 123);
+    ESTest(10, "Number", []);
+    ESTest(10, "Number", {});
+    ESTest(10, "Number", 123);
 
     expect(consoleErrorSpy).toHaveBeenCalledTimes(3);
   });
