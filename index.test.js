@@ -3,6 +3,11 @@ import { describe, test, expect, spyOn, mock } from "bun:test";
 import { ESTest, _testToken, _isDisabledESTest } from ".";
 
 describe("Normal Cases", () => {  
+  test("RegExp", () => {
+    ESTest(new RegExp(), "RegExp");
+    expect(_testToken).toBe("RegExp");
+  });
+
   test("Date", () => {
     ESTest(new Date(), "Date");
     expect(_testToken).toBe("Date");
@@ -76,6 +81,7 @@ describe("Error Cases", () => {
     mock.restore();
     const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
     
+    ESTest(123, "RegExp")
     ESTest(123, "Undefined")
     ESTest(123, "Null")
     ESTest(123, "Array")
@@ -95,7 +101,7 @@ describe("Error Cases", () => {
     ESTest(123, undefined)
     ESTest(123)
 
-    expect(consoleErrorSpy).toHaveBeenCalledTimes(18);
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(19);
   });
 
   test("Error messages type only accepts 'string' or 'undefined'", () => {
