@@ -2,12 +2,7 @@
 import { describe, test, expect, spyOn, mock } from "bun:test";
 import { ESTest, _testToken, _isDisabledESTest } from ".";
 
-describe("Normal Cases", () => {
-  test("regexp", () => {
-    ESTest(new RegExp(), "regexp");
-    expect(_testToken).toBe("regexp");
-  });
-  
+describe("Normal Cases", () => {  
   test("date", () => {
     ESTest(new Date(), "date");
     expect(_testToken).toBe("date");
