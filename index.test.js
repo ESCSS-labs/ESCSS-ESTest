@@ -70,6 +70,15 @@ describe("Normal Cases", () => {
 });
 
 describe("Error Cases", () => {
+  test("Invalid 1st argument (Invalid Date)", () => {
+    const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
+
+    ESTest(new Date('aaa'), 'date');
+
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+    consoleErrorSpy.mockRestore();
+  });
+
   test("Invalid 2nd argument", () => {
     const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
     
@@ -123,15 +132,6 @@ describe("Error Cases", () => {
     ESTest(123, 'Number', /test/)
 
     expect(consoleErrorSpy).toHaveBeenCalledTimes(10);
-    consoleErrorSpy.mockRestore();
-  });
-
-  test("Invalid Date", () => {
-    const consoleErrorSpy = spyOn(console, "error").mockImplementation(() => {});
-
-    ESTest(new Date('aaa'), 'date');
-
-    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
     consoleErrorSpy.mockRestore();
   });
 });
