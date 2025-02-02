@@ -38,7 +38,7 @@ ESTest([], "array"); // new
 ESTest(null, "null"); // new
 ESTest(undefined, "undefined"); // new
 ESTest(new Date(), 'date') // new
-ESTest(new RegExp(), 'regexp') // new
+ESTest(new regex(), 'regexp') // new
 ESTest(1, "number");
 ESTest("foo", "string");
 ESTest(true, "boolean");

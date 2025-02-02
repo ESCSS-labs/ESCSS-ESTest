@@ -34,7 +34,7 @@ ESTest([], "array"); // 新增
 ESTest(null, "null"); // 新增
 ESTest(undefined, "undefined"); // 新增
 ESTest(new Date(), 'date') // 新增
-ESTest(new RegExp(), 'regexp') // 新增
+ESTest(new regex(), 'regexp') // 新增
 ESTest(1, "number");
 ESTest("foo", "string");
 ESTest(true, "boolean");

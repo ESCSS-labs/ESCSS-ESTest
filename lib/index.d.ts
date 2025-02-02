@@ -1,22 +1,24 @@
-type ALLOWED_TOKEN_TYPES = 'Undefined' | 'Null' | 'Array' | 'Date' | 'Object' | 'Boolean' | 'NaN' | 'Number' | 'BigInt' | 'String' | 'Symbol' | 'Function' | 'RegExp'
+type ALLOWED_TOKEN_TYPES = 'undefined' | 'null' | 'array' | 'date' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'regex'
 /**
  * A JavaScript runtime testing library inspired by TDD, Joi, and Zod.
  * ```js
  * ESTest(NaN, 'NaN')
- * ESTest([], 'Array')
- * ESTest(null, 'Null')
- * ESTest(undefined, 'Undefined')
- * ESTest(new Date(), 'Date')
- * ESTest(new RegExp(), 'RegExp')
- * ESTest(1, 'Number')
- * ESTest('foo', 'String')
- * ESTest(true, 'Boolean')
- * ESTest({}, 'Object')
- * ESTest(1n, 'BigInt')
- * ESTest(Symbol(), 'Symbol')
- * ESTest(function () {}, 'Function')
- * ESTest(1, 'Object') // error
- * ESTest(1, 'Object', 'foo') // public message "foo"
+ * ESTest([], 'array')
+ * ESTest(null, 'null')
+ * ESTest(undefined, 'undefined')
+ * ESTest(new Date(), 'date')
+ * ESTest(new RegExp(), 'regex')
+ * ESTest(1, 'number')
+ * ESTest('foo', 'string')
+ * ESTest(true, 'boolean')
+ * ESTest({}, 'object')
+ * ESTest(1n, 'bigint')
+ * ESTest(Symbol(), 'symbol')
+ * ESTest(function () {}, 'function')
+ * ESTest(1, 'object') // error
+ * ESTest(1, 'object', 'foo') // public message "foo"
  * ```
  */
-export declare function ESTest(input: unknown, tokenType: ALLOWED_TOKEN_TYPES, pubMsg?: string): void
+export declare function ESTest(input: unknown, type: ALLOWED_TOKEN_TYPES, pubMsg?: string): void
+
+
