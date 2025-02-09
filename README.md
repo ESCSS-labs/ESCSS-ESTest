@@ -47,7 +47,7 @@ ESTest(1n, "bigint");
 ESTest(Symbol(), "symbol");
 ESTest(function () {}, "function");
 ESTest(1, "object"); // error
-ESTest(1, "object", "foo"); // error message
+ESTest(1, "object", "foo"); // public message 'foo'
 ```
 
 ### general

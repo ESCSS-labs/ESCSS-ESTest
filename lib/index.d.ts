@@ -16,7 +16,7 @@ declare type ALLOWED_TOKEN_TYPES = 'undefined' | 'null' | 'array' | 'date' | 'ob
  * ESTest(Symbol(), 'symbol')
  * ESTest(function () {}, 'function')
  * ESTest(1, 'object') // error
- * ESTest(1, 'object', 'foo') // public message "foo"
+ * ESTest(1, 'object', 'foo')  // public message 'foo'
  * ```
  */
 
@@ -218,5 +218,5 @@ type ReturnClassType<T extends ALLOWED_TOKEN_TYPES> = T extends 'string'
   ? typeof chainRegex
   : never;
 
-declare function ESTest<T extends ALLOWED_TOKEN_TYPES>(input: string, type: T, msg?: string): ReturnClassType<T>;
+declare function ESTest<T extends ALLOWED_TOKEN_TYPES>(input: string, type: T, pubMsg?: string): ReturnClassType<T>;
 
