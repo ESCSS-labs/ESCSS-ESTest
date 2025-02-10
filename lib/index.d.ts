@@ -190,7 +190,7 @@ declare class C {
   static test3(): void;
 }
 
-type ReturnClassType<T extends ALLOWED_TOKEN_TYPES> = T extends 'string'
+declare type ReturnClassType<T extends ALLOWED_TOKEN_TYPES> = T extends 'string'
   ? typeof chainString
   : T extends 'number'
   ? typeof chainNumber
@@ -218,5 +218,6 @@ type ReturnClassType<T extends ALLOWED_TOKEN_TYPES> = T extends 'string'
   ? typeof chainRegex
   : never;
 
-declare function ESTest<T extends ALLOWED_TOKEN_TYPES>(input: string, type: T, pubMsg?: string): ReturnClassType<T>;
+declare function ESTest<T extends ALLOWED_TOKEN_TYPES>(input: unknown, type: T, pubMsg?: string): ReturnClassType<T>;
 
+declare function unsafeESTest<T extends ALLOWED_TOKEN_TYPES>(input: unknown, type: T, pubMsg?: string): ReturnClassType<T>;
