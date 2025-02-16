@@ -220,4 +220,4 @@ declare type ReturnClassType<T extends ALLOWED_TOKEN_TYPES> = T extends 'string'
 
 declare function ESTest<T extends ALLOWED_TOKEN_TYPES>(input: unknown, type: T, pubMsg?: string): ReturnClassType<T>;
 
-declare function unsafeESTest<T extends ALLOWED_TOKEN_TYPES>(input: unknown, type: T, pubMsg?: string): ReturnClassType<T>;
+declare function unSafeESTest<T extends ALLOWED_TOKEN_TYPES>(input: unknown, type: T, pubMsg?: string): ReturnClassType<T>;

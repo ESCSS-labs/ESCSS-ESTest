@@ -1,4 +1,4 @@
-import { ESTest, unsafeESTest } from '.';
+import { ESTest, unSafeESTest } from '.';
 
 /* test command:
   - npm install bun --global
@@ -61,58 +61,58 @@ describe('ESTest', () => {
   })
 })
 
-describe('unsafeESTest', () => {
+describe('unSafeESTest', () => {
   describe('return object', () => {
     test('Undefined', () => {
-      expect(typeof unsafeESTest(undefined, 'undefined')).toBe('object')
+      expect(typeof unSafeESTest(undefined, 'undefined')).toBe('object')
     })
 
     test('Null', () => {
-      expect(typeof unsafeESTest(null, 'null')).toBe('object')
+      expect(typeof unSafeESTest(null, 'null')).toBe('object')
     })
 
     test('Array', () => {
-      expect(typeof unsafeESTest([1, 2, 3], 'array')).toBe('object')
+      expect(typeof unSafeESTest([1, 2, 3], 'array')).toBe('object')
     })
 
     test('Date', () => {
-      expect(typeof unsafeESTest(new Date(), 'date')).toBe('object')
+      expect(typeof unSafeESTest(new Date(), 'date')).toBe('object')
     })
 
     test('object', () => {
-      expect(typeof unsafeESTest({}, 'object')).toBe('object')
+      expect(typeof unSafeESTest({}, 'object')).toBe('object')
     })
 
     test('Boolean', () => {
-      expect(typeof unsafeESTest(true, 'boolean')).toBe('object')
+      expect(typeof unSafeESTest(true, 'boolean')).toBe('object')
     })
 
     test('NaN', () => {
-      expect(typeof unsafeESTest(NaN, 'NaN')).toBe('object')
+      expect(typeof unSafeESTest(NaN, 'NaN')).toBe('object')
     })
 
     test('Number', () => {
-      expect(typeof unsafeESTest(1, 'number')).toBe('object')
+      expect(typeof unSafeESTest(1, 'number')).toBe('object')
     })
 
     test('Bigint', () => {
-      expect(typeof unsafeESTest(1n, 'bigint')).toBe('object')
+      expect(typeof unSafeESTest(1n, 'bigint')).toBe('object')
     })
 
     test('string', () => {
-      expect(typeof unsafeESTest('Hello World', 'string')).toBe('object')
+      expect(typeof unSafeESTest('Hello World', 'string')).toBe('object')
     })
 
     test('Symbol', () => {
-      expect(typeof unsafeESTest(Symbol('foo'), 'symbol')).toBe('object')
+      expect(typeof unSafeESTest(Symbol('foo'), 'symbol')).toBe('object')
     })
 
     test('Function', () => {
-      expect(typeof unsafeESTest(function test() { }, 'function')).toBe('object')
+      expect(typeof unSafeESTest(function test() { }, 'function')).toBe('object')
     })
 
     test('Regex', () => {
-      expect(typeof unsafeESTest(/foo/, 'regex')).toBe('object')
+      expect(typeof unSafeESTest(/foo/, 'regex')).toBe('object')
     })
   })
 })
