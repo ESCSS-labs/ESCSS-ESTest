@@ -186,44 +186,86 @@ declare class chainRegex {
 /**
  * A JavaScript runtime testing library inspired by TDD, Joi, and Zod.
  * ```js
- * ESTest(NaN, 'NaN')
- * ESTest([], 'array')
- * ESTest(null, 'null')
- * ESTest(undefined, 'undefined')
- * ESTest(new Date(), 'date')
- * ESTest(new RegExp(), 'regex')
+ * // core
+ * Water filter: handle filter error and proceed with the happy path
+ * ESTest(): console.error(...) // for general usage to achieve 100% coverage
+ * unSafeESTest(): throw new Error(...) // for backend api validate (try... catch)
+ * 
+ * // basic usage
  * ESTest(1, 'number')
  * ESTest('foo', 'string')
- * ESTest(true, 'boolean')
  * ESTest({}, 'object')
- * ESTest(1n, 'bigint')
- * ESTest(Symbol(), 'symbol')
- * ESTest(function () {}, 'function')
- * ESTest(1, 'object') // error
- * ESTest(1, 'object', 'foo')  // public message 'foo'
- * ```
+ * ESTest([], 'array')
+ * ...
+ * 
+ * // advance usage
+ * ESTest(1, 'number').min(1)
+ * ESTest(1, 'number').min(1).max(10)
+ * ESTest(1, 'string').email()
+ * ESTest(1, 'string').regex(/foo/)
+ * ...
+ *
+ * // Received feedback (public message will be visible in both dev and prod.)
+ * ESTest(input, 'string', 'secret number: 12345') // custom you want
+ * ESTest(input, 'string', '[libraryName] welcomes you to submit the issue at [target].') // for library author to get feedback
+ * ESTest(input, 'string', 'Please note when the issue occurred and send the details to [target].') // for PM or non-tech users to get feedback
+ * 
+ * // use case (general usage)
+ * function sum(a, b) {
+ *  {
+ *    ESTest(a, 'number)
+ *    ESTest(a, 'number) 
+ *  }
+ * 
+ *  return a + b
+ * }
+ * 
  */
 export declare function ESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T, pubMsg?: string): ChainType<T>
 
 /**
  * A JavaScript runtime testing library inspired by TDD, Joi, and Zod.
  * ```js
- * ESTest(NaN, 'NaN')
- * ESTest([], 'array')
- * ESTest(null, 'null')
- * ESTest(undefined, 'undefined')
- * ESTest(new Date(), 'date')
- * ESTest(new RegExp(), 'regex')
+ * // core
+ * Water filter: handle filter error and proceed with the happy path
+ * ESTest(): console.error(...) // for general usage to achieve 100% coverage
+ * unSafeESTest(): throw new Error(...) // for backend api validate (try... catch)
+ * 
+ * // basic usage
  * ESTest(1, 'number')
  * ESTest('foo', 'string')
- * ESTest(true, 'boolean')
  * ESTest({}, 'object')
- * ESTest(1n, 'bigint')
- * ESTest(Symbol(), 'symbol')
- * ESTest(function () {}, 'function')
- * ESTest(1, 'object') // error
- * ESTest(1, 'object', 'foo')  // public message 'foo'
- * ```
+ * ESTest([], 'array')
+ * ...
+ * 
+ * // advance usage
+ * ESTest(1, 'number').min(1)
+ * ESTest(1, 'number').min(1).max(10)
+ * ESTest(1, 'string').email()
+ * ESTest(1, 'string').regex(/foo/)
+ * ...
+ *
+ * // Received feedback (public message will be visible in both dev and prod.)
+ * ESTest(input, 'string', 'secret number: 12345') // custom you want
+ * ESTest(input, 'string', '[libraryName] welcomes you to submit the issue at [target].') // for library author to get feedback
+ * ESTest(input, 'string', 'Please note when the issue occurred and send the details to [target].') // for PM or non-tech users to get feedback
+ * 
+ * // use case (API validation)
+ * app.post('/validate', async (req, res) => {
+ *  try {
+ *    const data = req.body
+ *    {
+ *      unSafeESTest(data.name, 'string').min(3) // default public message
+ *      unSafeESTest(data.email, 'string').email() 
+ *      unSafeESTest(data.age, 'number', 'Age must be at least 18').min(18) // custom public message
+ *    }
+ * 
+ *    res.json({ message: 'Validation passed' })
+ *  } catch (error) {
+ *    res.status(400).json({ errors: error }) // public message(error message) from try {}
+ *  }
+ * })
+ * 
  */
 export declare function unSafeESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T, pubMsg?: string): ChainType<T>
 
