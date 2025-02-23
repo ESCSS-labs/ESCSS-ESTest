@@ -1,4 +1,4 @@
-import { ESTest, unSafeESTest } from '.';
+import { ESTest, unSafeESTest, config } from '.';
 
 /* test command:
   - npm install bun --global
@@ -114,5 +114,11 @@ describe('unSafeESTest', () => {
     test('Regex', () => {
       expect(typeof unSafeESTest(/foo/, 'regex')).toBe('object')
     })
+  })
+})
+
+describe('config', () => {
+  test('publicMessage', () => {
+    expect(config.publicMessage).toBe('Customize your public message, visible in development / production.')
   })
 })

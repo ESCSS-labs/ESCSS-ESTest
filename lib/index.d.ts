@@ -1,5 +1,6 @@
 declare type _ALLOWED_TYPES = 'undefined' | 'null' | 'array' | 'date' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'regex'
 
+
 declare type ChainType<T extends _ALLOWED_TYPES> =
   T extends 'undefined' ? typeof chainUndefined
   : T extends 'null' ? typeof chainNull
@@ -225,3 +226,17 @@ export declare function ESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T
  * ```
  */
 export declare function unSafeESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T, pubMsg?: string): ChainType<T>
+
+export declare const config: { 
+  /**
+   * Designed to help debug
+   * @example 
+   * // for library author
+   * [libraryName] welcomes you to submit the issue at [target].
+   * 
+   * @example
+   * // for company (PMs or non-tech users)
+   * Please note when the issue occurred and send the details to [target].
+   */
+  publicMessage: string 
+}
