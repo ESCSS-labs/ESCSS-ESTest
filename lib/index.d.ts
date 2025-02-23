@@ -189,7 +189,7 @@ declare class chainRegex {
  * // core
  * Water filter: handle filter error and proceed with the happy path
  * ESTest(): console.error(...) // for general usage to achieve 100% coverage
- * unSafeESTest(): throw new Error(...) // for backend api validate (try... catch)
+ * unSafeESTest(): throw new Error(...) // for backend API validation. (try... catch)
  * 
  * // basic usage
  * ESTest(1, 'number')
@@ -213,8 +213,8 @@ declare class chainRegex {
  * // use case (general usage)
  * function sum(a, b) {
  *  {
- *    ESTest(a, 'number)
- *    ESTest(a, 'number) 
+ *    ESTest(a, 'number')
+ *    ESTest(a, 'number') 
  *  }
  * 
  *  return a + b
@@ -229,7 +229,7 @@ export declare function ESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T
  * // core
  * Water filter: handle filter error and proceed with the happy path
  * ESTest(): console.error(...) // for general usage to achieve 100% coverage
- * unSafeESTest(): throw new Error(...) // for backend api validate (try... catch)
+ * unSafeESTest(): throw new Error(...) // for backend API validation. (try... catch)
  * 
  * // basic usage
  * ESTest(1, 'number')
