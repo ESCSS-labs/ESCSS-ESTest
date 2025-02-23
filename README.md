@@ -1,119 +1,91 @@
 ![logo](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/logo.png)
 
-# Language
-
-- [中文](./README-zh.md)
-
-## Quick Links
-
-- [What is ESCSS-ESTest?](#what-is-escss-estest)
-- [Core Concept - Water Filter](#core-concept---water-filter)
-- [Usage](#usage)
-- [Installation](#installation)
-- [License](#license)
-
 ## What is ESCSS-ESTest?
 
-ESCSS-ESTest is a runtime testing library inspired by TDD and TypeScript to achieve 100% coverage.
+ESCSS-ESTest is a runtime testing library inspired by TDD, Joi, and Zod to achieve 100% coverage.
 
-## Core Concept - Water Filter
-
+## Usage
 ```js
-function foo() {
+// basic usage
+ESTest(1, 'number')
+ESTest('foo', 'string')
+ESTest({}, 'object')
+ESTest([], 'array')
+...
+
+// advance usage
+ESTest(1, 'number').min(1)
+ESTest(1, 'number').min(1).max(10)
+ESTest(1, 'string').email()
+ESTest(1, 'string').regex(/foo/)
+...
+
+// Received feedback (public message will be visible in both dev and prod.)
+ESTest(input, 'string', 'secret number: 12345') // custom you want
+ESTest(input, 'string', '[libraryName] welcomes you to submit the issue at [target].') // for library author to get feedback
+ESTest(input, 'string', 'Please note when the issue occurred and send the details to [target].') // for PM or non-tech users to get feedback
+```
+
+
+## Core Concepts
+### Water filter
+```js
+function demo() {
   {
-    // unhappy path(throw error)
+    ESTest(...) // filter error
   }
 
   // happy path
 }
 ```
 
-## Usage
-
-### Examples
-
+### ESTest()
+- console.error(...): for general usage to achieve 100% coverage **without breaking your codebase**
 ```js
-ESTest(NaN, "NaN"); // new
-ESTest([], "array"); // new
-ESTest(null, "null"); // new
-ESTest(undefined, "undefined"); // new
-ESTest(new Date(), 'date') // new
-ESTest(new regex(), 'regexp') // new
-ESTest(1, "number");
-ESTest("foo", "string");
-ESTest(true, "boolean");
-ESTest({}, "object");
-ESTest(1n, "bigint");
-ESTest(Symbol(), "symbol");
-ESTest(function () {}, "function");
-ESTest(1, "object"); // error
-ESTest(1, "object", "foo"); // public message 'foo'
-```
+import { ESTest } from 'escss-estest'
 
-### general
-
-```js
-import { ESTest } from "escss-estest";
-
-let isEnable = true;
-
-// Testing input in {...}
 function sum(a, b) {
-  {
-    ESTest(a, "number");
-    ESTest(b, "number");
-    ESTest(isEnable, "boolean");
-  }
+ {
+   ESTest(a, 'number')
+   ESTest(a, 'number') 
+ }
 
-  if (!isEnable) return;
-
-  return a + b;
+ return a + b
 }
 ```
 
-### async/await
-
+### unSafeESTest()
+- throw new Error(...): for backend API validation. (try... catch)
 ```js
-import { ESTest } from "escss-estest";
+import { unSafeESTest } from 'escss-estest'
 
-async function getData() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  const data = await response.json();
+app.post('/validate', async (req, res) => {
+ try {
+   const data = req.body
+   {
+     unSafeESTest(data.name, 'string').min(3) // default public message
+     unSafeESTest(data.email, 'string').email() 
+     unSafeESTest(data.age, 'number', 'Age must be at least 18').min(18) // custom public message
+   }
 
-  {
-    ESTest(data, 'object')
-    ESTest(data.userId, "number");
-    ESTest(data.id, "number");
-    ESTest(data.title, "string");
-    ESTest(data.completed, "boolean");
-  }
-
-  console.log(data);
-}
-
-getData(); // pass: response data is as expected
+   res.json({ message: 'Validation passed' })
+ } catch (error) {
+   res.status(400).json({ errors: error }) // public message(error message) from try {}
+ }
+})
 ```
 
-### class
-
+### config
+- set default public message to get feedback from others
 ```js
-import { ESTest } from "escss-estest";
+import { config } from 'escss-estest'
 
-class Animal {
-  constructor(name, age) {
-    {
-      ESTest(name, "string");
-      ESTest(age, "number");
-    }
+// for library author
+config.publicMessage = '[libraryName] welcomes you to submit the issue at [target].'
 
-    this.name = name;
-    this.age = age;
-  }
-}
-
-new Animal("cat", 10); // pass: response data is as expected
+// for company (PMs or non-tech users)
+config.publicMessage = 'Please note when the issue occurred and send the details to [target].'
 ```
-
 ## Installation
 
 ```bash
@@ -132,21 +104,9 @@ new Animal("cat", 10); // pass: response data is as expected
   bun add escss-estest
 ```
 
-```javascript
-import { ESTest } from "escss-estest";
-
-ESTest('Happy Coding!', 'string') // pass
-```
-
 Nuxt 3
 ```bash
   npx nuxi module add nuxt-escss-estest
-```
-
-```vue
-<script setup>
-ESTest('Happy Coding!', 'string') // pass
-</script>
 ```
 
 ## License
