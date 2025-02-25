@@ -2,28 +2,28 @@ declare type _ALLOWED_TYPES = 'undefined' | 'null' | 'array' | 'date' | 'object'
 
 
 declare type ChainType<T extends _ALLOWED_TYPES> =
-  T extends 'undefined' ? typeof chainUndefined
-  : T extends 'null' ? typeof chainNull
-  : T extends 'array' ? typeof chainArray
-  : T extends 'date' ? typeof chainDate
-  : T extends 'object' ? typeof chainObject
-  : T extends 'boolean' ? typeof chainBoolean
-  : T extends 'NaN' ? typeof chainNaN
-  : T extends 'number' ? typeof chainNumber
-  : T extends 'bigint' ? typeof chainBigint
-  : T extends 'string' ? typeof chainString
-  : T extends 'symbol' ? typeof chainSymbol
-  : T extends 'function' ? typeof chainFunction
-  : T extends 'regex' ? typeof chainRegex
+  T extends 'undefined' ? typeof ChainUndefined
+  : T extends 'null' ? typeof ChainNull
+  : T extends 'array' ? typeof ChainArray
+  : T extends 'date' ? typeof ChainDate
+  : T extends 'object' ? typeof ChainObject
+  : T extends 'boolean' ? typeof ChainBoolean
+  : T extends 'NaN' ? typeof ChainNaN
+  : T extends 'number' ? typeof ChainNumber
+  : T extends 'bigint' ? typeof ChainBigint
+  : T extends 'string' ? typeof ChainString
+  : T extends 'symbol' ? typeof ChainSymbol
+  : T extends 'function' ? typeof ChainFunction
+  : T extends 'regex' ? typeof ChainRegex
   : never
 
-declare class chainUndefined {
+declare class ChainUndefined {
 }
 
-declare class chainNull {
+declare class ChainNull {
 }
 
-declare class chainArray {
+declare class ChainArray {
   /**
    * @example 
    * // [1, 2, 3].length >= 3
@@ -47,19 +47,19 @@ declare class chainArray {
 
 }
 
-declare class chainDate {
+declare class ChainDate {
 }
 
-declare class chainObject {
+declare class ChainObject {
 }
 
-declare class chainBoolean {
+declare class ChainBoolean {
 }
 
-declare class chainNaN {
+declare class ChainNaN {
 }
 
-declare class chainNumber {
+declare class ChainNumber {
   /**
    * @example 
    * // 5 < 10
@@ -117,10 +117,10 @@ declare class chainNumber {
   static multiple(): ChainType<'number'>
 }
 
-declare class chainBigint {
+declare class ChainBigint {
 }
 
-declare class chainString {
+declare class ChainString {
   /**
    * @example 
    * // 'foo'.length <= 10
@@ -174,13 +174,13 @@ declare class chainString {
   static ip(): ChainType<'string'>
 }
 
-declare class chainSymbol {
+declare class ChainSymbol {
 }
 
-declare class chainFunction {
+declare class ChainFunction {
 }
 
-declare class chainRegex {
+declare class ChainRegex {
 }
 
 /**
@@ -268,17 +268,3 @@ export declare function ESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T
  * 
  */
 export declare function unSafeESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T, pubMsg?: string): ChainType<T>
-
-export declare const config: { 
-  /**
-   * Designed to help debug
-   * @example 
-   * // for library author
-   * [libraryName] welcomes you to submit the issue at [target].
-   * 
-   * @example
-   * // for company (PMs or non-tech users)
-   * Please note when the issue occurred and send the details to [target].
-   */
-  publicMessage: string 
-}
