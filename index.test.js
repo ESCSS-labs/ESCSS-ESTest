@@ -1,4 +1,4 @@
-import { ESTest, unSafeESTest, config } from '.';
+import { ESTest, unSafeESTest } from '.';
 
 /* test command:
   - npm install bun --global
@@ -117,8 +117,14 @@ describe('unSafeESTest', () => {
   })
 })
 
-describe('config', () => {
+describe('globalThis config', () => {
+  test('name', () => {
+    expect(globalThis.escssESTest.name).toBe('escss-estest')
+  })
+  test('description', () => {
+    expect(globalThis.escssESTest.description).toBe('Copyright (c) 2024 Mike Lee, AGPL-3.0-only OR Commercial')
+  })
   test('publicMessage', () => {
-    expect(config.publicMessage).toBe('Customize your public message, visible in development / production.')
+    expect(globalThis.escssESTest.publicMessage).toBe('Customize your public message, visible in development / production.')
   })
 })
