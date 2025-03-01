@@ -2,185 +2,185 @@ declare type _ALLOWED_TYPES = 'string' | 'number' | 'array' | 'object' | 'boolea
 
 
 declare type ChainType<T extends _ALLOWED_TYPES> =
-  T extends 'undefined' ? typeof ChainUndefined
-  : T extends 'null' ? typeof ChainNull
-  : T extends 'array' ? typeof ChainArray
-  : T extends 'date' ? typeof ChainDate
-  : T extends 'object' ? typeof ChainObject
-  : T extends 'boolean' ? typeof ChainBoolean
-  : T extends 'NaN' ? typeof ChainNaN
-  : T extends 'number' ? typeof ChainNumber
-  : T extends 'bigint' ? typeof ChainBigint
-  : T extends 'string' ? typeof ChainString
-  : T extends 'symbol' ? typeof ChainSymbol
-  : T extends 'function' ? typeof ChainFunction
-  : T extends 'regex' ? typeof ChainRegex
+  T extends 'undefined' ? ChainUndefined
+  : T extends 'null' ? ChainNull
+  : T extends 'array' ? ChainArray
+  : T extends 'date' ? ChainDate
+  : T extends 'object' ? ChainObject
+  : T extends 'boolean' ? ChainBoolean
+  : T extends 'NaN' ? ChainNaN
+  : T extends 'number' ? ChainNumber
+  : T extends 'bigint' ? ChainBigint
+  : T extends 'string' ? ChainString
+  : T extends 'symbol' ? ChainSymbol
+  : T extends 'function' ? ChainFunction
+  : T extends 'regex' ? ChainRegex
   : never
 
-declare class ChainUndefined {
+declare interface ChainUndefined {
 }
 
-declare class ChainNull {
+declare interface ChainNull {
 }
 
-declare class ChainArray {
+declare interface ChainArray {
   /**
    * @example 
    * // [1, 2, 3].length >= 3
    * ESTest([1, 2, 3], 'array').min(3) // pass
    */
-  static min(): ChainType<'array'>
+  min(): ChainType<'array'>
 
   /**
    * @example 
    * // [1, 2, 3].length <= 3
    * ESTest([1, 2, 3], 'array').max(3) // pass
    */
-  static max(): ChainType<'array'>
+  max(): ChainType<'array'>
 
   /**
    * @example 
    * // [1, 2, 3].length === 3
    * ESTest([1, 2, 3], 'array').length(3) // pass
    */
-  static length(): ChainType<'array'>
+  length(): ChainType<'array'>
 
 }
 
-declare class ChainDate {
+declare interface ChainDate {
 }
 
-declare class ChainObject {
+declare interface ChainObject {
 }
 
-declare class ChainBoolean {
+declare interface ChainBoolean {
 }
 
-declare class ChainNaN {
+declare interface ChainNaN {
 }
 
-declare class ChainNumber {
+declare interface ChainNumber {
   /**
    * @example 
    * // 5 < 10
    * ESTest(5, 'number').less(10) // pass
    */
-  static less(): ChainType<'number'>
+  less(): ChainType<'number'>
 
   /**
    * @example 
    * // 5 <= 10
    * ESTest(5, 'number').max(10) // pass
    */
-  static max(): ChainType<'number'>
+  max(): ChainType<'number'>
 
   /**
    * @example 
    * // 15 > 10
    * ESTest(15, 'number').greater(10) // pass
    */
-  static greater(): ChainType<'number'>
+  greater(): ChainType<'number'>
 
   /**
    * @example 
    * // 15 >= 10
    * ESTest(15, 'number').min(10) // pass
    */
-  static min(): ChainType<'number'>
+  min(): ChainType<'number'>
 
   /**
    * @example 
    * // Number.isInteger(15)
    * ESTest(15, 'number').integer // pass 
    */
-  static integer(): ChainType<'number'>
+  integer(): ChainType<'number'>
 
   /**
    * @example 
    * // 15 > 0
    * ESTest(15, 'number').positive // pass 
    */
-  static positive(): ChainType<'number'>
+  positive(): ChainType<'number'>
 
   /**
    * @example 
    * // -15 < 0
    * ESTest(-15, 'number').negative // pass 
    */
-  static negative(): ChainType<'number'>
+  negative(): ChainType<'number'>
 
   /**
    * @example 
    * // 15 % 3 === 0
    * ESTest(15, 'number').multiple(3) // pass 
    */
-  static multiple(): ChainType<'number'>
+  multiple(): ChainType<'number'>
 }
 
-declare class ChainBigint {
+declare interface ChainBigint {
 }
 
-declare class ChainString {
+declare interface ChainString {
   /**
    * @example 
    * // 'foo'.length <= 10
    * ESTest('foo', 'string').max(10) // pass
    */
-  static max(): ChainType<'string'>
+  max(): ChainType<'string'>
 
   /**
    * @example 
    * // 'foo'.length >= 10
    * ESTest('foo', 'string').min(10) // pass
    */
-  static min(): ChainType<'string'>
+  min(): ChainType<'string'>
 
   /**
    * @example 
    * // 'foo'.length === 10
    * ESTest('foo', 'string').length(10) // pass
    */
-  static length(): ChainType<'string'>
+  length(): ChainType<'string'>
 
   /**
    * @example 
    * ESTest('foobar@gmail.com', 'string').email() // pass
    */
-  static email(): ChainType<'string'>
+  email(): ChainType<'string'>
 
   /**
    * @example 
    * ESTest(crypto.randomUUID(), 'string').uuid() // pass
    */
-  static uuid(): ChainType<'string'>
+  uuid(): ChainType<'string'>
 
   /**
    * @example 
    * ESTest('foo bar', 'string').regex(/(foo|bar)/) // pass
    */
-  static regex(): ChainType<'string'>
+  regex(): ChainType<'string'>
 
   /**
    * @example 
    * ESTest('SGVsbG8gd29ybGQh', 'string').base64() // pass
    */
-  static base64(): ChainType<'string'>
+  base64(): ChainType<'string'>
 
   /**
    * @example 
    * ESTest('192.168.1.1', 'string').ip() // pass ipv4
    * ESTest('2001:0db8:85a3:0000:0000:8a2e:0370:7334', 'string').ip() // pass ipv6
    */
-  static ip(): ChainType<'string'>
+  ip(): ChainType<'string'>
 }
 
-declare class ChainSymbol {
+declare interface ChainSymbol {
 }
 
-declare class ChainFunction {
+declare interface ChainFunction {
 }
 
-declare class ChainRegex {
+declare interface ChainRegex {
 }
 
 /**
