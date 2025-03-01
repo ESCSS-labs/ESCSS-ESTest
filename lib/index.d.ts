@@ -1,4 +1,4 @@
-declare type _ALLOWED_TYPES = 'undefined' | 'null' | 'array' | 'date' | 'object' | 'boolean' | 'NaN' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'regex'
+declare type _ALLOWED_TYPES = 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex'
 
 
 declare type ChainType<T extends _ALLOWED_TYPES> =
