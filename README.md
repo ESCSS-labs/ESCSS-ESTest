@@ -75,16 +75,15 @@ app.post('/validate', async (req, res) => {
 })
 ```
 
-### config
-- set default public message to get feedback from others
+### get feedback from others
+- set default publicMessage to get feedback from others
 ```js
-import { config } from 'escss-estest'
 
 // for library author
-config.publicMessage = '[libraryName] welcomes you to submit the issue at [target].'
+globalThis.__ESCSS_ESTEST.publicMessage = '[libraryName] welcomes you to submit the issue at [target].'
 
 // for company (PMs or non-tech users)
-config.publicMessage = 'Please note when the issue occurred and send the details to [target].'
+globalThis.__ESCSS_ESTEST.publicMessage = 'Please note when the issue occurred and send the details to [target].'
 ```
 ## Installation
 
