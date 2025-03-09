@@ -1,3 +1,3 @@
-import { ESTest } from 'escss-estest'
+import { ESTest } from "escss-estest";
 
-export { ESTest }
+export { ESTest };

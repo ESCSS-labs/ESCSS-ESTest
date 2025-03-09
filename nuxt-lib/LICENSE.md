@@ -1,4 +1,5 @@
 # Dual-Licensing（AGPL-3.0-only OR Commercial）
+
 ## 1. AGPL-3.0-only License:
 
     Copyright (C) 2024 Mike Lee <https://github.com/MikeLee0358>

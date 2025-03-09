@@ -25,5 +25,11 @@
   "types": "./lib/index.d.ts",
   "files": [
     "lib"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  },
+  "scripts": {
+    "format": "prettier . --write --cache"
+  }
 }

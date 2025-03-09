@@ -5,6 +5,7 @@
 ESCSS-ESTest is a runtime testing library inspired by TDD, Joi, and Zod to achieve 100% coverage.
 
 ## Usage
+
 ```js
 // basic usage
 ESTest(1, 'number')
@@ -26,9 +27,10 @@ ESTest(input, 'string', '[libraryName] welcomes you to submit the issue at [targ
 ESTest(input, 'string', 'Please note when the issue occurred and send the details to [target].') // for PM or non-tech users to get feedback
 ```
 
-
 ## Core Concepts
+
 ### Water filter
+
 ```js
 function demo() {
   {
@@ -40,51 +42,59 @@ function demo() {
 ```
 
 ### ESTest()
+
 - console.error(...): for general usage to achieve 100% coverage **without breaking your codebase**
+
 ```js
-import { ESTest } from 'escss-estest'
+import { ESTest } from "escss-estest";
 
 function sum(a, b) {
- {
-   ESTest(a, 'number')
-   ESTest(a, 'number') 
- }
+  {
+    ESTest(a, "number");
+    ESTest(a, "number");
+  }
 
- return a + b
+  return a + b;
 }
 ```
 
 ### unSafeESTest()
+
 - throw new Error(...): for backend API validation. (try... catch)
+
 ```js
-import { unSafeESTest } from 'escss-estest'
+import { unSafeESTest } from "escss-estest";
 
-app.post('/validate', async (req, res) => {
- try {
-   const data = req.body
-   {
-     unSafeESTest(data.name, 'string').min(3) // default public message
-     unSafeESTest(data.email, 'string').email() 
-     unSafeESTest(data.age, 'number', 'Age must be at least 18').min(18) // custom public message
-   }
+app.post("/validate", async (req, res) => {
+  try {
+    const data = req.body;
+    {
+      unSafeESTest(data.name, "string").min(3); // default public message
+      unSafeESTest(data.email, "string").email();
+      unSafeESTest(data.age, "number", "Age must be at least 18").min(18); // custom public message
+    }
 
-   res.json({ message: 'Validation passed' })
- } catch (error) {
-   res.status(400).json({ errors: error }) // public message(error message) from try {}
- }
-})
+    res.json({ message: "Validation passed" });
+  } catch (error) {
+    res.status(400).json({ errors: error }); // public message(error message) from try {}
+  }
+});
 ```
 
 ### get feedback from others
-- A template message to get feedback from others
-```js
 
+- A template message to get feedback from others
+
+```js
 // for library author
-globalThis.__ESCSS_ESTEST__.publicMessage = '[libraryName] welcomes you to submit the issue at [link].'
+globalThis.__ESCSS_ESTEST__.publicMessage =
+  "[libraryName] welcomes you to submit the issue at [link].";
 
 // for company (PMs or non-tech users)
-globalThis.__ESCSS_ESTEST__.publicMessage = 'Please note when the issue occurred and send the details to [link].'
+globalThis.__ESCSS_ESTEST__.publicMessage =
+  "Please note when the issue occurred and send the details to [link].";
 ```
+
 ## Installation
 
 ```bash
@@ -104,6 +114,7 @@ globalThis.__ESCSS_ESTEST__.publicMessage = 'Please note when the issue occurred
 ```
 
 Nuxt 3
+
 ```bash
   npx nuxi module add nuxt-escss-estest
 ```

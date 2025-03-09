@@ -1,7 +1,9 @@
 # NUXT-ESCSS-ESTest
+
 A wrapper for ESCSS-ESTest to use globally in Nuxt 3
 
 ## Features
+
 - ⛰ &nbsp;Global use in Nuxt 3
 - 🚠 &nbsp;Same as [ESCSS-ESTest](https://github.com/ESCSS-labs/ESCSS-ESTest)
 
@@ -17,9 +19,10 @@ That's it! You can write code without import ✨
 
 ```vue
 <script setup>
-ESTest('Happy Coding!', 'string')
+ESTest("Happy Coding!", "string");
 </script>
 ```
 
 ## License
+
 [see](https://github.com/ESCSS-labs/ESCSS-ESTest?tab=License-1-ov-file)
