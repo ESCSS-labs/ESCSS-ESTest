@@ -121,8 +121,8 @@ describe('globalThis config', () => {
   test('name', () => {
     expect(globalThis.__ESCSS_ESTEST.name).toBe('escss-estest')
   })
-  test('description', () => {
-    expect(globalThis.__ESCSS_ESTEST.description).toBe('Copyright (c) 2024 Mike Lee, AGPL-3.0-only OR Commercial')
+  test('license', () => {
+    expect(globalThis.__ESCSS_ESTEST.license).toBe('Copyright (c) 2024 Mike Lee, AGPL-3.0-only OR Commercial')
   })
   test('publicMessage', () => {
     expect(globalThis.__ESCSS_ESTEST.publicMessage).toBe('Customize your public message, visible in development / production.')

@@ -276,3 +276,19 @@ export declare function ESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T
  * 
  */
 export declare function unSafeESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T, pubMsg?: string): _Chain<T>
+
+declare global {
+  var __ESCSS_ESTEST: {
+    /**
+     * @example 
+     * // A template message to get feedback from others 
+     * 
+     * // for library author: 
+     * '[libraryName] welcomes you to submit the issue at [link].'
+     * 
+     * // for company: 
+     * 'Please note when the issue occurred and send the details to [link].'
+     */
+    publicMessage: string
+  };
+}
