@@ -1,8 +1,5 @@
-import { ESTest, unSafeESTest } from ".";
-/* test command:
-  - npm install bun --global
-  - bun test
-*/
+import { describe, test, expect } from "vitest";
+import { ESTest, unSafeESTest } from "../lib/index.js";
 
 describe("ESTest", () => {
   describe("return object", () => {
