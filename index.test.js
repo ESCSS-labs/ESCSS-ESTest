@@ -1,5 +1,4 @@
 import { ESTest, unSafeESTest } from '.';
-
 /* test command:
   - npm install bun --global
   - bun test
@@ -7,55 +6,55 @@ import { ESTest, unSafeESTest } from '.';
 
 describe('ESTest', () => {
   describe('return object', () => {
-    test('Undefined', () => {
-      expect(typeof ESTest(undefined, 'undefined')).toBe('object')
+    test('string', () => {
+      expect(typeof ESTest('Hello World', 'string')).toBe('object')
     })
 
-    test('Null', () => {
-      expect(typeof ESTest(null, 'null')).toBe('object')
+    test('number', () => {
+      expect(typeof ESTest(1, 'number')).toBe('object')
     })
 
-    test('Array', () => {
+    test('array', () => {
       expect(typeof ESTest([1, 2, 3], 'array')).toBe('object')
-    })
-
-    test('Date', () => {
-      expect(typeof ESTest(new Date(), 'date')).toBe('object')
     })
 
     test('object', () => {
       expect(typeof ESTest({}, 'object')).toBe('object')
     })
 
-    test('Boolean', () => {
+    test('boolean', () => {
       expect(typeof ESTest(true, 'boolean')).toBe('object')
+    })
+
+    test('date', () => {
+      expect(typeof ESTest(new Date(), 'date')).toBe('object')
+    })
+
+    test('bigint', () => {
+      expect(typeof ESTest(1n, 'bigint')).toBe('object')
+    })
+
+    test('undefined', () => {
+      expect(typeof ESTest(undefined, 'undefined')).toBe('object')
+    })
+
+    test('null', () => {
+      expect(typeof ESTest(null, 'null')).toBe('object')
     })
 
     test('NaN', () => {
       expect(typeof ESTest(NaN, 'NaN')).toBe('object')
     })
 
-    test('Number', () => {
-      expect(typeof ESTest(1, 'number')).toBe('object')
-    })
-
-    test('Bigint', () => {
-      expect(typeof ESTest(1n, 'bigint')).toBe('object')
-    })
-
-    test('string', () => {
-      expect(typeof ESTest('Hello World', 'string')).toBe('object')
-    })
-
-    test('Symbol', () => {
+    test('symbol', () => {
       expect(typeof ESTest(Symbol('foo'), 'symbol')).toBe('object')
     })
 
-    test('Function', () => {
+    test('function', () => {
       expect(typeof ESTest(function test() { }, 'function')).toBe('object')
     })
 
-    test('Regex', () => {
+    test('regex', () => {
       expect(typeof ESTest(/foo/, 'regex')).toBe('object')
     })
   })
@@ -63,55 +62,55 @@ describe('ESTest', () => {
 
 describe('unSafeESTest', () => {
   describe('return object', () => {
-    test('Undefined', () => {
-      expect(typeof unSafeESTest(undefined, 'undefined')).toBe('object')
+    test('string', () => {
+      expect(typeof unSafeESTest('Hello World', 'string')).toBe('object')
     })
 
-    test('Null', () => {
-      expect(typeof unSafeESTest(null, 'null')).toBe('object')
+    test('number', () => {
+      expect(typeof unSafeESTest(1, 'number')).toBe('object')
     })
 
-    test('Array', () => {
+    test('array', () => {
       expect(typeof unSafeESTest([1, 2, 3], 'array')).toBe('object')
-    })
-
-    test('Date', () => {
-      expect(typeof unSafeESTest(new Date(), 'date')).toBe('object')
     })
 
     test('object', () => {
       expect(typeof unSafeESTest({}, 'object')).toBe('object')
     })
 
-    test('Boolean', () => {
+    test('boolean', () => {
       expect(typeof unSafeESTest(true, 'boolean')).toBe('object')
+    })
+
+    test('date', () => {
+      expect(typeof unSafeESTest(new Date(), 'date')).toBe('object')
+    })
+
+    test('bigint', () => {
+      expect(typeof unSafeESTest(1n, 'bigint')).toBe('object')
+    })
+
+    test('undefined', () => {
+      expect(typeof unSafeESTest(undefined, 'undefined')).toBe('object')
+    })
+
+    test('null', () => {
+      expect(typeof unSafeESTest(null, 'null')).toBe('object')
     })
 
     test('NaN', () => {
       expect(typeof unSafeESTest(NaN, 'NaN')).toBe('object')
     })
 
-    test('Number', () => {
-      expect(typeof unSafeESTest(1, 'number')).toBe('object')
-    })
-
-    test('Bigint', () => {
-      expect(typeof unSafeESTest(1n, 'bigint')).toBe('object')
-    })
-
-    test('string', () => {
-      expect(typeof unSafeESTest('Hello World', 'string')).toBe('object')
-    })
-
-    test('Symbol', () => {
+    test('symbol', () => {
       expect(typeof unSafeESTest(Symbol('foo'), 'symbol')).toBe('object')
     })
 
-    test('Function', () => {
+    test('function', () => {
       expect(typeof unSafeESTest(function test() { }, 'function')).toBe('object')
     })
 
-    test('Regex', () => {
+    test('regex', () => {
       expect(typeof unSafeESTest(/foo/, 'regex')).toBe('object')
     })
   })
