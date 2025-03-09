@@ -111,21 +111,21 @@ declare interface _Number extends _Common<'number'> {
   /**
    * @example 
    * // Number.isInteger(15)
-   * ESTest(15, 'number').integer // pass 
+   * ESTest(15, 'number').integer() // pass 
    */
   integer(): _Chain<'number'>
 
   /**
    * @example 
    * // 15 > 0
-   * ESTest(15, 'number').positive // pass 
+   * ESTest(15, 'number').positive() // pass 
    */
   positive(): _Chain<'number'>
 
   /**
    * @example 
    * // -15 < 0
-   * ESTest(-15, 'number').negative // pass 
+   * ESTest(-15, 'number').negative() // pass 
    */
   negative(): _Chain<'number'>
 
