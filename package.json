@@ -27,9 +27,11 @@
     "lib"
   ],
   "devDependencies": {
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "vitest": "^3.0.8"
   },
   "scripts": {
+    "test": "vitest",
     "format": "prettier . --write --cache"
   }
 }
