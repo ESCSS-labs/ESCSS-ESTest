@@ -80,10 +80,10 @@ app.post('/validate', async (req, res) => {
 ```js
 
 // for library author
-globalThis.__ESCSS_ESTEST.publicMessage = '[libraryName] welcomes you to submit the issue at [link].'
+globalThis.__ESCSS_ESTEST__.publicMessage = '[libraryName] welcomes you to submit the issue at [link].'
 
 // for company (PMs or non-tech users)
-globalThis.__ESCSS_ESTEST.publicMessage = 'Please note when the issue occurred and send the details to [link].'
+globalThis.__ESCSS_ESTEST__.publicMessage = 'Please note when the issue occurred and send the details to [link].'
 ```
 ## Installation
 

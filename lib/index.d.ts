@@ -278,7 +278,7 @@ export declare function ESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T
 export declare function unSafeESTest<T extends _ALLOWED_TYPES>(input: unknown, type: T, pubMsg?: string): _Chain<T>
 
 declare global {
-  var __ESCSS_ESTEST: {
+  var __ESCSS_ESTEST__: {
     /**
      * @example 
      * // A template message to get feedback from others 
