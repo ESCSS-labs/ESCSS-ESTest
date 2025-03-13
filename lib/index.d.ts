@@ -312,5 +312,9 @@ declare global {
      * 'Please note when the issue occurred and send the details to [link].'
      */
     publicMessage: string;
+    /**
+     * To disable ESTest / unSafeESTest, return undefined
+     */
+    isDisabled: boolean;
   };
 }

@@ -1091,4 +1091,7 @@ describe("globalThis config", () => {
       "Customize your public message, visible in development / production.",
     );
   });
+  test("isDisabled", () => {
+    expect(globalThis.__ESCSS_ESTEST__.isDisabled).toBe(false);
+  });
 });
