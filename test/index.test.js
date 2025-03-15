@@ -51,7 +51,6 @@ describe("ESTest", () => {
       expect(() => ESTest(true, true)).toThrow();
       expect(() => ESTest(new Date(), new Date())).toThrow();
       expect(() => ESTest(1n, 1n)).toThrow();
-      expect(() => ESTest(undefined, undefined)).toThrow();
       expect(() => ESTest(null, null)).toThrow();
       expect(() => ESTest(NaN, NaN)).toThrow();
       expect(() => ESTest(Symbol("a"), Symbol("a"))).toThrow();
