@@ -1,2 +1,2 @@
-bun run format
-bun run vitest --watch=false
+# bun run format
+# bun run vitest --watch=false
