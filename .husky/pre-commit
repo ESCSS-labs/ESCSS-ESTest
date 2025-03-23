@@ -1,2 +1,1 @@
-bun run format
-bun run vitest --watch=false
+pnpm run test

@@ -32,7 +32,7 @@
     "vitest": "^3.0.8"
   },
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --watch=false",
     "format": "prettier . --write --cache",
     "format:check": "prettier --check --cache .",
     "prepare": "husky"
