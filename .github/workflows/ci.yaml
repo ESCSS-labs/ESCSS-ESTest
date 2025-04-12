@@ -1,15 +1,12 @@
 name: ci
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
 
 jobs:
-  autofix:
+  format-checking:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -28,8 +25,8 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Run Prettier Check
-        run: pnpm run format:check
+      - name: Check Prettier & ESLint
+        run: pnpm run check
 
       - name: Run test Check
         run: pnpm run test
