@@ -16,9 +16,6 @@ importers:
       globals:
         specifier: ^16.0.0
         version: 16.0.0
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
@@ -910,14 +907,6 @@ packages:
         integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==,
       }
     engines: { node: ">=8" }
-
-  husky@9.1.7:
-    resolution:
-      {
-        integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==,
-      }
-    engines: { node: ">=18" }
-    hasBin: true
 
   ignore@5.3.2:
     resolution:
@@ -1816,8 +1805,6 @@ snapshots:
   globals@16.0.0: {}
 
   has-flag@4.0.0: {}
-
-  husky@9.1.7: {}
 
   ignore@5.3.2: {}
 
