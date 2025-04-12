@@ -1090,7 +1090,19 @@ describe("globalThis config", () => {
       "Customize message (visible in dev/production)",
     );
   });
-  test("isDisabled", () => {
-    expect(globalThis.__ESCSS_ESTEST__.isDisabled).toBe(false);
+  test("isESTestDisabled", () => {
+    expect(globalThis.__ESCSS_ESTEST__.isESTestDisabled).toBe(false);
+  });
+  test("ESTest can be disabled to get undefined", () => {
+    globalThis.__ESCSS_ESTEST__.isESTestDisabled = true;
+    expect(ESTest(1, "string")).toBe(undefined);
+  });
+  test("ESTest can be disabled to get undefined - 2", () => {
+    globalThis.__ESCSS_ESTEST__.isESTestDisabled = true;
+    expect(ESTest("1", "string")).toBe(undefined);
+  });
+  test("unSafeESTest should not be affected by isESTestDisabled (security)", () => {
+    globalThis.__ESCSS_ESTEST__.isESTestDisabled = true;
+    expect(() => unSafeESTest(1, "string")).toThrow();
   });
 });

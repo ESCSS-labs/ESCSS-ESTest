@@ -315,6 +315,6 @@ declare global {
     /**
      * To disable ESTest / unSafeESTest, return undefined
      */
-    isDisabled: boolean;
+    isESTestDisabled: boolean;
   };
 }
