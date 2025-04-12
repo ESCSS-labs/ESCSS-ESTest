@@ -45,7 +45,6 @@ describe("ESTest", () => {
       expect(privateMessage).toHaveBeenCalledTimes(13);
 
       expect(() => ESTest("a", "aa")).toThrow();
-      expect(() => ESTest(1, a)).toThrow();
       expect(() => ESTest([], [])).toThrow();
       expect(() => ESTest({}, {})).toThrow();
       expect(() => ESTest(true, true)).toThrow();
@@ -763,7 +762,6 @@ describe("unSafeESTest", () => {
       expect(() => unSafeESTest(() => {}, "regex")).toThrow();
 
       expect(() => unSafeESTest("a", "aa")).toThrow();
-      expect(() => unSafeESTest(1, a)).toThrow();
       expect(() => unSafeESTest([], [])).toThrow();
       expect(() => unSafeESTest({}, {})).toThrow();
       expect(() => unSafeESTest(true, true)).toThrow();
