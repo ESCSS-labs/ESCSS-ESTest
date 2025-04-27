@@ -690,8 +690,9 @@ function _typeof(input) {
         newType = "regex";
       else newType = "object";
       break;
+
+    // 'undefined' | 'boolean' | 'bigint' | 'string' | 'symbol' | 'function'
     default:
-      // 'undefined' | 'boolean' | 'bigint' | 'string' | 'symbol' | 'function'
       newType = typeof input;
       break;
   }
@@ -775,13 +776,14 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   }
 
   function privateMsg() {
-    if (isUnSafe)
-      return; // if backend receive lots invalid api from frontend, privateMsg is redundant, because throw Error(...) handle it.
+    // if backend receive lots invalid api from frontend, privateMsg is redundant, because throw Error(...) handle it.
+    if (isUnSafe) return;
     else {
       if (process.env.NODE_ENV === "production") _ESTestLog.hiddenMsg("error");
-      else if (typeof window === "object")
-        _ESTestLog[logToken]("error"); // browser: console.error(...) - for looking nice
-      else _ESTestLog[logToken]("trace"); // node / web worker: console.trace(...) - for bug tracking in terminal
+      // browser: console.error(...) - for looking nice
+      else if (typeof window === "object") _ESTestLog[logToken]("error");
+      // node / web worker: console.trace(...) - for bug tracking in terminal
+      else _ESTestLog[logToken]("trace");
     }
   }
 }
