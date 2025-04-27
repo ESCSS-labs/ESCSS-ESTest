@@ -305,16 +305,20 @@ declare global {
      * @example
      * // A template message to get feedback from others
      *
-     * // for library author:
+     * // Example 1: for library author:
      * '[libraryName] welcomes you to submit the issue at [link].'
      *
-     * // for company:
+     * // Example 2: for company:
      * 'Please note when the issue occurred and send the details to [link].'
      */
     publicMessage: string;
     /**
-     * To disable ESTest / unSafeESTest, return undefined
+     * // Note: unSafeESTest is not available to disable for security.
+     * @example
+     * // To disable ESTest return undefined (default: false)
+     * globalThis.__ESCSS_ESTEST__.isESTestDisabled = true
      */
     isESTestDisabled: boolean;
   };
 }
+
