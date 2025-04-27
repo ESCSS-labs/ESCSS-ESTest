@@ -113,12 +113,6 @@ globalThis.__ESCSS_ESTEST__.publicMessage =
   bun add escss-estest
 ```
 
-Nuxt 3
-
-```bash
-  npx nuxi module add nuxt-escss-estest
-```
-
 ## License
 
 [see](https://github.com/ESCSS-labs/ESCSS-ESTest?tab=License-1-ov-file)
