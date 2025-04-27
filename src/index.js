@@ -704,7 +704,7 @@ function _typeof(input) {
  * @param {*} input
  * @param {string} type
  * @param {string} [pubMsg]
- * @param {boolean} isUnSafe true: blocking error; false: non-blocking error
+ * @param {boolean} isUnSafe true: blocking error (throw new Error()); false: non-blocking error (console.error)
  * @param {string} logToken
  * @param {*} value variable for chain methods
  * @param {*} value2 variable for chain methods
