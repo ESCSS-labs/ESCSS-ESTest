@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from "vitest";
-import { ESTest, unSafeESTest } from "../lib/index.js";
+import { ESTest, unSafeESTest } from "../src/index.js";
 
 describe("ESTest", () => {
   describe("1st / 2nd argument", () => {
@@ -1085,7 +1085,7 @@ describe("globalThis config", () => {
   });
   test("publicMessage", () => {
     expect(globalThis.__ESCSS_ESTEST__.publicMessage).toBe(
-      "Customize message (visible in dev/production)",
+      "Set 'globalThis.__ESCSS_ESTEST__.publicMessage' for customize message",
     );
   });
   test("isESTestDisabled", () => {
