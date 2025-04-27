@@ -206,42 +206,7 @@ declare interface _Function {}
 declare interface _Regex {}
 
 /**
- * A JavaScript runtime testing library inspired by TDD, Joi, and Zod.
- * ```js
- * // core
- * Water filter: handle filter error and proceed with the happy path
- * ESTest(): console.error(...) // for general usage to achieve 100% coverage
- * unSafeESTest(): throw new Error(...) // for backend API validation. (try... catch)
- *
- * // basic usage
- * ESTest(1, 'number')
- * ESTest('foo', 'string')
- * ESTest({}, 'object')
- * ESTest([], 'array')
- * ...
- *
- * // advance usage
- * ESTest(1, 'number').min(1)
- * ESTest(1, 'number').min(1).max(10)
- * ESTest(1, 'string').email()
- * ESTest(1, 'string').regex(/foo/)
- * ...
- *
- * // Received feedback (public message will be visible in both dev and prod.)
- * ESTest(input, 'string', 'secret number: 12345') // custom you want
- * ESTest(input, 'string', '[libraryName] welcomes you to submit the issue at [target].') // for library author to get feedback
- * ESTest(input, 'string', 'Please note when the issue occurred and send the details to [target].') // for PM or non-tech users to get feedback
- *
- * // use case (general usage)
- * function sum(a, b) {
- *  {
- *    ESTest(a, 'number')
- *    ESTest(a, 'number')
- *  }
- *
- *  return a + b
- * }
- *
+ * @see https://github.com/ESCSS-labs/ESCSS-ESTest
  */
 export declare function ESTest<T extends _ALLOWED_TYPES>(
   input: unknown,
@@ -250,48 +215,7 @@ export declare function ESTest<T extends _ALLOWED_TYPES>(
 ): _Chain<T>;
 
 /**
- * A JavaScript runtime testing library inspired by TDD, Joi, and Zod.
- * ```js
- * // core
- * Water filter: handle filter error and proceed with the happy path
- * ESTest(): console.error(...) // for general usage to achieve 100% coverage
- * unSafeESTest(): throw new Error(...) // for backend API validation. (try... catch)
- *
- * // basic usage
- * ESTest(1, 'number')
- * ESTest('foo', 'string')
- * ESTest({}, 'object')
- * ESTest([], 'array')
- * ...
- *
- * // advance usage
- * ESTest(1, 'number').min(1)
- * ESTest(1, 'number').min(1).max(10)
- * ESTest(1, 'string').email()
- * ESTest(1, 'string').regex(/foo/)
- * ...
- *
- * // Received feedback (public message will be visible in both dev and prod.)
- * ESTest(input, 'string', 'secret number: 12345') // custom you want
- * ESTest(input, 'string', '[libraryName] welcomes you to submit the issue at [target].') // for library author to get feedback
- * ESTest(input, 'string', 'Please note when the issue occurred and send the details to [target].') // for PM or non-tech users to get feedback
- *
- * // use case (API validation)
- * app.post('/validate', async (req, res) => {
- *  try {
- *    const data = req.body
- *    {
- *      unSafeESTest(data.name, 'string').min(3) // default public message
- *      unSafeESTest(data.email, 'string').email()
- *      unSafeESTest(data.age, 'number', 'Age must be at least 18').min(18) // custom public message
- *    }
- *
- *    res.json({ message: 'Validation passed' })
- *  } catch (error) {
- *    res.status(400).json({ errors: error }) // public message(error message) from try {}
- *  }
- * })
- *
+ * @see https://github.com/ESCSS-labs/ESCSS-ESTest
  */
 export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
   input: unknown,
