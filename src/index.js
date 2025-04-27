@@ -29,13 +29,13 @@ class _Common {
    * @param {string} input
    * @param {string} type
    * @param {string} pubMsg
-   * @param {boolean} isUnsafe
+   * @param {boolean} isUnSafe
    */
-  constructor(input, type, pubMsg, isUnsafe) {
+  constructor(input, type, pubMsg, isUnSafe) {
     this.input = input;
     this.type = type;
     this.pubMsg = pubMsg;
-    this.isUnsafe = isUnsafe;
+    this.isUnSafe = isUnSafe;
   }
 
   // for user to description more info
@@ -45,7 +45,7 @@ class _Common {
         this.input,
         this.type,
         this.pubMsg,
-        this.isUnsafe,
+        this.isUnSafe,
         "typeCheck",
         value,
         "string",
@@ -68,7 +68,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -80,7 +80,7 @@ const _chain = {
           this.input.length,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "max",
           value,
         );
@@ -95,7 +95,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -107,7 +107,7 @@ const _chain = {
           this.input.length,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "min",
           value,
         );
@@ -122,7 +122,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -134,7 +134,7 @@ const _chain = {
           this.input.length,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "length",
           value,
         );
@@ -153,7 +153,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "invalidInput",
         );
       }
@@ -172,7 +172,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "invalidInput",
         );
       }
@@ -186,7 +186,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "regex",
@@ -198,7 +198,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "invalidInput",
         );
       }
@@ -216,7 +216,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "invalidInput",
         );
       }
@@ -239,7 +239,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "invalidInput",
         );
       }
@@ -259,7 +259,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -271,7 +271,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "less",
           value,
         );
@@ -287,7 +287,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -295,7 +295,7 @@ const _chain = {
       }
 
       if (this.input <= value === false) {
-        _error(this.input, this.type, this.pubMsg, this.isUnsafe, "max", value);
+        _error(this.input, this.type, this.pubMsg, this.isUnSafe, "max", value);
       }
 
       return this;
@@ -308,7 +308,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -320,7 +320,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "greater",
           value,
         );
@@ -336,7 +336,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -344,7 +344,7 @@ const _chain = {
       }
 
       if (this.input >= value === false) {
-        _error(this.input, this.type, this.pubMsg, this.isUnsafe, "min", value);
+        _error(this.input, this.type, this.pubMsg, this.isUnSafe, "min", value);
       }
 
       return this;
@@ -352,7 +352,7 @@ const _chain = {
 
     integer() {
       if (Number.isInteger(this.input) === false) {
-        _error(this.input, this.type, this.pubMsg, this.isUnsafe, "integer");
+        _error(this.input, this.type, this.pubMsg, this.isUnSafe, "integer");
       }
 
       return this;
@@ -360,7 +360,7 @@ const _chain = {
 
     positive() {
       if (this.input > 0 === false) {
-        _error(this.input, this.type, this.pubMsg, this.isUnsafe, "positive");
+        _error(this.input, this.type, this.pubMsg, this.isUnSafe, "positive");
       }
 
       return this;
@@ -368,7 +368,7 @@ const _chain = {
 
     negative() {
       if (this.input < 0 === false) {
-        _error(this.input, this.type, this.pubMsg, this.isUnsafe, "negative");
+        _error(this.input, this.type, this.pubMsg, this.isUnSafe, "negative");
       }
 
       return this;
@@ -380,7 +380,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -392,7 +392,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "multiple",
           value,
         );
@@ -412,7 +412,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -424,7 +424,7 @@ const _chain = {
           this.input.length,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "min",
           value,
         );
@@ -439,7 +439,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -451,7 +451,7 @@ const _chain = {
           this.input.length,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "max",
           value,
         );
@@ -466,7 +466,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "number",
@@ -478,7 +478,7 @@ const _chain = {
           this.input.length,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "length",
           value,
         );
@@ -502,7 +502,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "bigint",
@@ -514,7 +514,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "less",
           value,
         );
@@ -530,7 +530,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "bigint",
@@ -538,7 +538,7 @@ const _chain = {
       }
 
       if (this.input <= value === false) {
-        _error(this.input, this.type, this.pubMsg, this.isUnsafe, "max", value);
+        _error(this.input, this.type, this.pubMsg, this.isUnSafe, "max", value);
       }
 
       return this;
@@ -551,7 +551,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "bigint",
@@ -563,7 +563,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "greater",
           value,
         );
@@ -579,7 +579,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "bigint",
@@ -587,7 +587,7 @@ const _chain = {
       }
 
       if (this.input >= value === false) {
-        _error(this.input, this.type, this.pubMsg, this.isUnsafe, "min", value);
+        _error(this.input, this.type, this.pubMsg, this.isUnSafe, "min", value);
       }
 
       return this;
@@ -595,7 +595,7 @@ const _chain = {
 
     positive() {
       if (this.input > 0 === false) {
-        _error(this.input, this.type, this.pubMsg, this.isUnsafe, "positive");
+        _error(this.input, this.type, this.pubMsg, this.isUnSafe, "positive");
       }
 
       return this;
@@ -603,7 +603,7 @@ const _chain = {
 
     negative() {
       if (this.input < 0 === false) {
-        _error(this.input, this.type, this.pubMsg, this.isUnsafe, "negative");
+        _error(this.input, this.type, this.pubMsg, this.isUnSafe, "negative");
       }
 
       return this;
@@ -615,7 +615,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "typeCheck",
           value,
           "bigint",
@@ -627,7 +627,7 @@ const _chain = {
           this.input,
           this.type,
           this.pubMsg,
-          this.isUnsafe,
+          this.isUnSafe,
           "multiple",
           value,
         );
@@ -704,12 +704,12 @@ function _typeof(input) {
  * @param {*} input
  * @param {string} type
  * @param {string} [pubMsg]
- * @param {boolean} isUnsafe true: blocking error; false: non-blocking error
+ * @param {boolean} isUnSafe true: blocking error; false: non-blocking error
  * @param {string} logToken
  * @param {*} value variable for chain methods
  * @param {*} value2 variable for chain methods
  */
-function _error(input, type, pubMsg, isUnsafe, logToken, value, value2) {
+function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   // bigint in Template strings will be changed: `1n` -> `1`, so add "n" back
   const isBigint = typeof value === "bigint" ? value + "n" : value;
 
@@ -770,12 +770,12 @@ function _error(input, type, pubMsg, isUnsafe, logToken, value, value2) {
 
   function publicMsg() {
     // backend error msg require more official, because error msg will display to user through frontend form
-    if (isUnsafe) throw new Error(_unSafeESTestLog[logToken]);
+    if (isUnSafe) throw new Error(_unSafeESTestLog[logToken]);
     else console.error(` 📝 Public Message: ${pubMsg}`);
   }
 
   function privateMsg() {
-    if (isUnsafe)
+    if (isUnSafe)
       return; // if backend receive lots invalid api from frontend, privateMsg is redundant, because throw Error(...) handle it.
     else {
       if (process.env.NODE_ENV === "production") _ESTestLog.hiddenMsg("error");
