@@ -710,7 +710,7 @@ function _typeof(input) {
  * @param {*} value2 variable for chain methods
  */
 function _error(input, type, pubMsg, isUnsafe, logToken, value, value2) {
-  // bigint in Template strings will be changed: `1n` -> `1`, so add 'n back'
+  // bigint in Template strings will be changed: `1n` -> `1`, so add "n" back
   const isBigint = typeof value === "bigint" ? value + "n" : value;
 
   const _ESTestLog = {
