@@ -6,13 +6,30 @@ ESCSS-ESTest is a runtime testing library inspired by TDD, Joi, and Zod to achie
 
 ## Features
 
-- 1️⃣ Never Kidnap your app.
-- 2️⃣ TypeScript autocompletion.
-- 3️⃣ Designed with DX first in mind.
-- 5️⃣ Manual Testing and E2E Integration.
-- 6️⃣ Effortless integration with your codebase.
-- 4️⃣ Only 1.9 kB (minified + gzipped), 0 dependency.
-- 7️⃣ Runtime testing without performance loss. [see](#globalthisescss_estestisestestdisabled)
+- 🪄 TypeScript autocompletion.
+- 🎨 Designed with DX first in mind.
+- ⚙️ Manual Testing and E2E Integration.
+- 👌 Effortless integration with your codebase.
+- 📦 1.9 kB (minified + gzipped), 0 dependency.
+- 🚀 Optional runtime testing without performance overhead.
+
+## Installation
+
+```bash
+  npm add escss-estest
+```
+
+```bash
+  yarn add escss-estest
+```
+
+```bash
+  pnpm add escss-estest
+```
+
+```bash
+  bun add escss-estest
+```
 
 ## Core Concepts
 
@@ -47,7 +64,7 @@ function sum(a, b) {
 }
 ```
 
-- Frontend Validation -> console.error
+- For Frontend Validation -> console.error
 
 ```js
 import { ESTest } from "escss-estest";
@@ -90,7 +107,7 @@ async function getApi(a, b) {
 
 ### unSafeESTest()
 
-- Backend Validation -> throw new Error()
+- For Backend Validation -> throw new Error()
 
 ```js
 import { unSafeESTest } from "escss-estest";
@@ -107,12 +124,8 @@ app.post("/validate", async (req, res) => {
      */
 
     {
-      unSafeESTest(
-        data.name,
-        "string",
-        "Name must be at least 3 characters",
-      ).min(3);
-      unSafeESTest(data.email, "string").email();
+      unSafeESTest(data.name, "string").min(3);
+      unSafeESTest(data.email, "string", "your email is invalid").email();
     }
 
     res.json({ message: "Validation passed" });
@@ -167,25 +180,3 @@ function sum(a, b) {
   return a + b;
 }
 ```
-
-## Installation
-
-```bash
-  npm add escss-estest
-```
-
-```bash
-  yarn add escss-estest
-```
-
-```bash
-  pnpm add escss-estest
-```
-
-```bash
-  bun add escss-estest
-```
-
-## License
-
-[see](https://github.com/ESCSS-labs/ESCSS-ESTest?tab=License-1-ov-file)
