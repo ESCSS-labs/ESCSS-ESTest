@@ -185,25 +185,25 @@ declare interface _Array extends _Common<"array"> {
   length(): _Chain<"array">;
 }
 
-declare interface _Object {}
+declare interface _Object extends _Common<"object"> {}
 
-declare interface _Boolean {}
+declare interface _Boolean extends _Common<"boolean"> {}
 
-declare interface _Date {}
+declare interface _Date extends _Common<"date"> {}
 
-declare interface _Bigint {}
+declare interface _Bigint extends _Common<"bigint"> {}
 
-declare interface _Undefined {}
+declare interface _Undefined extends _Common<"undefined"> {}
 
-declare interface _Null {}
+declare interface _Null extends _Common<"null"> {}
 
-declare interface _NaN {}
+declare interface _NaN extends _Common<"NaN"> {}
 
-declare interface _Symbol {}
+declare interface _Symbol extends _Common<"symbol"> {}
 
-declare interface _Function {}
+declare interface _Function extends _Common<"function"> {}
 
-declare interface _Regex {}
+declare interface _Regex extends _Common<"regex"> {}
 
 /**
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
