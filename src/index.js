@@ -785,14 +785,14 @@ function ESTest(
 
   // check 3rd argument
   if (typeof pubMsg !== "string") {
+    // edge case (prevent crazy usage): throw new Error()
     _error(input, type, pubMsg, true, "errArg3");
-    return;
   }
 
   // check 2nd argument
   else if (_ALLOWED_TYPES.includes(type) === false) {
+    // edge case (prevent crazy usage): throw new Error()
     _error(input, type, pubMsg, true, "errArg2");
-    return;
   }
 
   // check 1st argument
