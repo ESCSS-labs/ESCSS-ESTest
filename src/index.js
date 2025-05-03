@@ -794,20 +794,19 @@ function ESTest(
 
   // check 3rd argument
   if (typeof pubMsg !== "string") {
-    // edge case (prevent crazy usage): throw new Error()
+    // edge case: throw new Error()
     _error(input, type, pubMsg, true, "errArg3");
   }
 
   // check 2nd argument
   else if (_ALLOWED_TYPES.includes(type) === false) {
-    // edge case (prevent crazy usage): throw new Error()
+    // edge case: throw new Error()
     _error(input, type, pubMsg, true, "errArg2");
   }
 
   // check 1st argument
   else if (_typeof(input) !== type) {
     _error(input, type, pubMsg, false, "errArg1");
-    return;
   }
 
   // ESTest(...).[method](), e.g. ESTest(1, 'number).max(10)
