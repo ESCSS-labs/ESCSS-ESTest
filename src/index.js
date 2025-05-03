@@ -707,6 +707,12 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
         ` \n ✅ Expected ESTest() 1st Argument: '${type}' \n ❌ Received ESTest() 1st Argument: '${_typeof(input)}' \n`,
         input,
       ),
+    errArg2: (logType) =>
+      console[logType](
+        ` \n ✅ Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' \n`,
+      ),
+    errArg3: (logType) =>
+      console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
     typeCheck: (logType) =>
       console[logType](
         ` \n ❌ Expected ESTest().method(value) value type: '${value2}', got: '${_typeof(value)}'`,
@@ -736,8 +742,8 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 
   const _unSafeESTestLog = {
     errArg1: `The value must be a/an '${type}'`,
-    errArg2: `Expected ESTest() / unSafeESTest() 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex'`,
-    errArg3: `Expected ESTest() / unSafeESTest() 3rd Argument: 'string'`,
+    errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex'`,
+    errArg3: `Expected 3rd Argument: 'string'`,
     typeCheck: `Expected unSafeESTest().method(value), value type: '${value2}'`,
     less: `The value must be less than ${isBigint}`,
     max: `The value must be less than or equal to ${isBigint}`,
@@ -757,22 +763,17 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   function publicMsg() {
     if (isUnSafe) {
       // customized error message
-      if (pubMsg !== globalThis.__ESCSS_ESTEST__.publicMessage) {
+      if (pubMsg !== globalThis.__ESCSS_ESTEST__.publicMessage)
         throw new Error(pubMsg);
-      }
-
       // default error message
-      else {
-        throw new Error(_unSafeESTestLog[logToken]);
-      }
-    } else {
-      console.error(` 📝 Public Message: ${pubMsg}`);
-    }
+      else throw new Error(_unSafeESTestLog[logToken]);
+    } else console.error(` 📝 Public Message: ${pubMsg}`);
   }
 
   function privateMsg() {
     if (isUnSafe) return;
     else {
+      // production: console.error(...)
       if (process.env.NODE_ENV === "production") _ESTestLog.hiddenMsg("error");
       // browser: console.error(...) - for looking nice
       else if (typeof window === "object") _ESTestLog[logToken]("error");
@@ -794,18 +795,20 @@ function ESTest(
 
   // check 3rd argument
   if (typeof pubMsg !== "string") {
-    // edge case: throw new Error()
-    _error(input, type, pubMsg, true, "errArg3");
+    _error(input, type, pubMsg, false, "errArg3");
+    return;
   }
 
   // check 2nd argument
   else if (_ALLOWED_TYPES.includes(type) === false) {
-    // edge case: throw new Error()
-    _error(input, type, pubMsg, true, "errArg2");
+    _error(input, type, pubMsg, false, "errArg2");
+    return;
   }
 
   // check 1st argument
   else if (_typeof(input) !== type) {
+    // Not early return in this case
+    // ESTest() needs return an object to chain methods, otherwise undefined.method() will stop the program
     _error(input, type, pubMsg, false, "errArg1");
   }
 

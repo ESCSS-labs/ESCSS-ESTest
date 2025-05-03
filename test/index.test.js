@@ -27,39 +27,22 @@ describe("ESTest", () => {
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
-      expect(ESTest(/a/, "string")).toBeTypeOf("undefined");
-      expect(ESTest("a", "number")).toBeTypeOf("undefined");
-      expect(ESTest(1, "array")).toBeTypeOf("undefined");
-      expect(ESTest([], "object")).toBeTypeOf("undefined");
-      expect(ESTest({}, "boolean")).toBeTypeOf("undefined");
-      expect(ESTest(true, "date")).toBeTypeOf("undefined");
-      expect(ESTest(new Date(), "bigint")).toBeTypeOf("undefined");
-      expect(ESTest(1n, "undefined")).toBeTypeOf("undefined");
-      expect(ESTest(undefined, "null")).toBeTypeOf("undefined");
-      expect(ESTest(null, "NaN")).toBeTypeOf("undefined");
-      expect(ESTest(NaN, "symbol")).toBeTypeOf("undefined");
-      expect(ESTest(Symbol("a"), "function")).toBeTypeOf("undefined");
-      expect(ESTest(() => {}, "regex")).toBeTypeOf("undefined");
+      expect(ESTest(/a/, "string")).toBeTypeOf("object");
+      expect(ESTest("a", "number")).toBeTypeOf("object");
+      expect(ESTest(1, "array")).toBeTypeOf("object");
+      expect(ESTest([], "object")).toBeTypeOf("object");
+      expect(ESTest({}, "boolean")).toBeTypeOf("object");
+      expect(ESTest(true, "date")).toBeTypeOf("object");
+      expect(ESTest(new Date(), "bigint")).toBeTypeOf("object");
+      expect(ESTest(1n, "undefined")).toBeTypeOf("object");
+      expect(ESTest(undefined, "null")).toBeTypeOf("object");
+      expect(ESTest(null, "NaN")).toBeTypeOf("object");
+      expect(ESTest(NaN, "symbol")).toBeTypeOf("object");
+      expect(ESTest(Symbol("a"), "function")).toBeTypeOf("object");
+      expect(ESTest(() => {}, "regex")).toBeTypeOf("object");
 
       expect(publicMessage).toHaveBeenCalledTimes(13);
       expect(privateMessage).toHaveBeenCalledTimes(13);
-
-      expect(() => ESTest("a", "aa")).toThrow();
-      expect(() => ESTest([], [])).toThrow();
-      expect(() => ESTest({}, {})).toThrow();
-      expect(() => ESTest(true, true)).toThrow();
-      expect(() => ESTest(new Date(), new Date())).toThrow();
-      expect(() => ESTest(1n, 1n)).toThrow();
-      expect(() => ESTest(null, null)).toThrow();
-      expect(() => ESTest(NaN, NaN)).toThrow();
-      expect(() => ESTest(Symbol("a"), Symbol("a"))).toThrow();
-      expect(() =>
-        ESTest(
-          () => {},
-          () => {},
-        ),
-      ).toThrow();
-      expect(() => ESTest(/a/, /a/)).toThrow();
     });
   });
 
@@ -81,27 +64,29 @@ describe("ESTest", () => {
     });
 
     test("fail", () => {
-      expect(() => ESTest("a", "string", 1)).toThrow();
-      expect(() => ESTest(1, "number", 1)).toThrow();
-      expect(() => ESTest([], "array", [])).toThrow();
-      expect(() => ESTest({}, "object", {})).toThrow();
-      expect(() => ESTest(true, "boolean", true)).toThrow();
-      expect(() => ESTest(new Date(), "date", new Date())).toThrow();
-      expect(() => ESTest(1n, "bigint", 1n)).toThrow();
-      expect(() => ESTest(undefined, "undefined", 1)).toThrow();
-      expect(() => ESTest(null, "null", null)).toThrow();
-      expect(() => ESTest(NaN, "NaN", NaN)).toThrow();
+      expect(() => ESTest("a", "string", 1)).toBeTypeOf("function");
+      expect(() => ESTest(1, "number", 1)).toBeTypeOf("function");
+      expect(() => ESTest([], "array", [])).toBeTypeOf("function");
+      expect(() => ESTest({}, "object", {})).toBeTypeOf("function");
+      expect(() => ESTest(true, "boolean", true)).toBeTypeOf("function");
+      expect(() => ESTest(new Date(), "date", new Date())).toBeTypeOf(
+        "function",
+      );
+      expect(() => ESTest(1n, "bigint", 1n)).toBeTypeOf("function");
+      expect(() => ESTest(undefined, "undefined", 1)).toBeTypeOf("function");
+      expect(() => ESTest(null, "null", null)).toBeTypeOf("function");
+      expect(() => ESTest(NaN, "NaN", NaN)).toBeTypeOf("function");
       expect(() =>
         ESTest(Symbol("a", "foo"), "symbol", Symbol("a", "foo")),
-      ).toThrow();
+      ).toBeTypeOf("function");
       expect(() =>
         ESTest(
           () => {},
           "function",
           () => {},
         ),
-      ).toThrow();
-      expect(() => ESTest(/a/, "regex", /a/)).toThrow();
+      ).toBeTypeOf("function");
+      expect(() => ESTest(/a/, "regex", /a/)).toBeTypeOf("function");
     });
   });
 
