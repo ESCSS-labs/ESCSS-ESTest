@@ -803,20 +803,26 @@ function ESTest(
 
   // check 3rd argument
   if (typeof pubMsg !== "string") {
+    // console.error
     _error(input, type, pubMsg, true, "errArg3");
+    return;
   }
 
   // check 2nd argument
   else if (_ALLOWED_TYPES.includes(type) === false) {
+    // console.error
     _error(input, type, pubMsg, true, "errArg2");
+    return;
   }
 
   // check 1st argument
   else if (_typeof(input) !== type) {
+    // console.error
     _error(input, type, pubMsg, false, "errArg1");
+    return;
   }
 
-  // To chain methods (non-blocking error)
+  // ESTest(...).[method](), e.g. ESTest(1, 'number).max(10)
   return new _chain[type](input, type, pubMsg, false);
 }
 
@@ -833,20 +839,23 @@ function unSafeESTest(
 ) {
   // check 3rd argument
   if (typeof pubMsg !== "string") {
+    // throw new Error()
     _error(input, type, pubMsg, true, "errArg3");
   }
 
   // check 2nd argument
   else if (_ALLOWED_TYPES.includes(type) === false) {
+    // throw new Error()
     _error(input, type, pubMsg, true, "errArg2");
   }
 
   // check 1st argument
   else if (_typeof(input) !== type) {
+    // throw new Error()
     _error(input, type, pubMsg, true, "errArg1");
   }
 
-  // To chain methods (blocking error)
+  // ESTest(...).[method](), e.g. ESTest(1, 'number).max(10)
   return new _chain[type](input, type, pubMsg, true);
 }
 

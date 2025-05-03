@@ -27,19 +27,19 @@ describe("ESTest", () => {
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
-      expect(ESTest(/a/, "string")).toBeTypeOf("object");
-      expect(ESTest("a", "number")).toBeTypeOf("object");
-      expect(ESTest(1, "array")).toBeTypeOf("object");
-      expect(ESTest([], "object")).toBeTypeOf("object");
-      expect(ESTest({}, "boolean")).toBeTypeOf("object");
-      expect(ESTest(true, "date")).toBeTypeOf("object");
-      expect(ESTest(new Date(), "bigint")).toBeTypeOf("object");
-      expect(ESTest(1n, "undefined")).toBeTypeOf("object");
-      expect(ESTest(undefined, "null")).toBeTypeOf("object");
-      expect(ESTest(null, "NaN")).toBeTypeOf("object");
-      expect(ESTest(NaN, "symbol")).toBeTypeOf("object");
-      expect(ESTest(Symbol("a"), "function")).toBeTypeOf("object");
-      expect(ESTest(() => {}, "regex")).toBeTypeOf("object");
+      expect(ESTest(/a/, "string")).toBeTypeOf("undefined");
+      expect(ESTest("a", "number")).toBeTypeOf("undefined");
+      expect(ESTest(1, "array")).toBeTypeOf("undefined");
+      expect(ESTest([], "object")).toBeTypeOf("undefined");
+      expect(ESTest({}, "boolean")).toBeTypeOf("undefined");
+      expect(ESTest(true, "date")).toBeTypeOf("undefined");
+      expect(ESTest(new Date(), "bigint")).toBeTypeOf("undefined");
+      expect(ESTest(1n, "undefined")).toBeTypeOf("undefined");
+      expect(ESTest(undefined, "null")).toBeTypeOf("undefined");
+      expect(ESTest(null, "NaN")).toBeTypeOf("undefined");
+      expect(ESTest(NaN, "symbol")).toBeTypeOf("undefined");
+      expect(ESTest(Symbol("a"), "function")).toBeTypeOf("undefined");
+      expect(ESTest(() => {}, "regex")).toBeTypeOf("undefined");
 
       expect(publicMessage).toHaveBeenCalledTimes(13);
       expect(privateMessage).toHaveBeenCalledTimes(13);
