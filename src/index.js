@@ -1,6 +1,6 @@
 globalThis.__ESCSS_ESTEST__ = {
   name: "escss-estest",
-  version: "2.1.1",
+  version: "2.1.2",
   license: "Copyright (c) 2024 Mike Lee, AGPL-3.0-only OR Commercial",
   publicMessage:
     "Set 'globalThis.__ESCSS_ESTEST__.publicMessage' for customize message",
