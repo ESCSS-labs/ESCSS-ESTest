@@ -755,9 +755,19 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   privateMsg();
 
   function publicMsg() {
-    // backend error msg require more official, because error msg will display to user through frontend form
-    if (isUnSafe) throw new Error(_unSafeESTestLog[logToken]);
-    else console.error(` 📝 Public Message: ${pubMsg}`);
+    if (isUnSafe) {
+      // customized error message
+      if (pubMsg !== globalThis.__ESCSS_ESTEST__.publicMessage) {
+        throw new Error(pubMsg);
+      }
+
+      // default error message
+      else {
+        throw new Error(_unSafeESTestLog[logToken]);
+      }
+    } else {
+      console.error(` 📝 Public Message: ${pubMsg}`);
+    }
   }
 
   function privateMsg() {
