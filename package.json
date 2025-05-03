@@ -10,15 +10,8 @@
     "tdd",
     "zero-dependency"
   ],
-  "homepage": "https://github.com/ESCSS-labs/",
-  "bugs": "https://github.com/ESCSS-labs/ESCSS-ESTest/issues",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ESCSS-labs/ESCSS-ESTest.git"
-  },
-  "funding": "https://opencollective.com/escss",
   "license": "(AGPL-3.0-only OR Commercial)",
-  "author": "Mike Lee <cspkno005@gmail.com> (https://github.com/ESCSS-labs)",
+  "author": "Mike Lee",
   "type": "module",
   "exports": "./src/index.js",
   "main": "./src/index.js",
@@ -27,8 +20,8 @@
     "src"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.25.1",
-    "eslint": "^9.25.1",
+    "@eslint/js": "^9.26.0",
+    "eslint": "^9.26.0",
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
     "vitest": "^3.1.2"
