@@ -20,11 +20,11 @@
   "license": "(AGPL-3.0-only OR Commercial)",
   "author": "Mike Lee <cspkno005@gmail.com> (https://github.com/ESCSS-labs)",
   "type": "module",
-  "exports": "./lib/index.js",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "exports": "./src/index.js",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "files": [
-    "lib"
+    "src"
   ],
   "devDependencies": {
     "@eslint/js": "^9.25.1",
