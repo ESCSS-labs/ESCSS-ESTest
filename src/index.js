@@ -1,4 +1,3 @@
-/** global config */
 globalThis.__ESCSS_ESTEST__ = {
   name: "escss-estest",
   version: "v2.1.0",
@@ -644,10 +643,6 @@ const _chain = {
   regex: class _Regex extends _Common {},
 };
 
-/**
- * @param {*} input
- * @returns {string}
- */
 function _typeof(input) {
   /* 
   // based on typeof (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
@@ -700,16 +695,6 @@ function _typeof(input) {
   return newType;
 }
 
-/**
- * Handle blocking / non-blocking errors
- * @param {*} input
- * @param {string} type
- * @param {string} [pubMsg]
- * @param {boolean} isUnSafe true: blocking error (throw new Error()); false: non-blocking error (console.error)
- * @param {string} logToken
- * @param {*} value variable for chain methods
- * @param {*} value2 variable for chain methods
- */
 function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   // bigint in Template strings will be changed: `1n` -> `1`, so add "n" back
   const isBigint = typeof value === "bigint" ? value + "n" : value;
@@ -789,10 +774,7 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 }
 
 /**
- * A JavaScript runtime testing library inspired by TDD, Joi, and Zod.
- * @param {*} input
- * @param { 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' } type
- * @param {string} [pubMsg = globalThis.__ESCSS_ESTEST__.publicMessage]
+ * If not passed, it logs an error via console.error().
  */
 function ESTest(
   input,
@@ -803,21 +785,18 @@ function ESTest(
 
   // check 3rd argument
   if (typeof pubMsg !== "string") {
-    // console.error
     _error(input, type, pubMsg, true, "errArg3");
     return;
   }
 
   // check 2nd argument
   else if (_ALLOWED_TYPES.includes(type) === false) {
-    // console.error
     _error(input, type, pubMsg, true, "errArg2");
     return;
   }
 
   // check 1st argument
   else if (_typeof(input) !== type) {
-    // console.error
     _error(input, type, pubMsg, false, "errArg1");
     return;
   }
@@ -827,10 +806,7 @@ function ESTest(
 }
 
 /**
- * A JavaScript runtime testing library inspired by TDD, Joi, and Zod.
- * @param {*} input
- * @param { 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' } type
- * @param {string} [pubMsg = globalThis.__ESCSS_ESTEST__.publicMessage]
+ * If not passed, it throws an error using throw new Error().
  */
 function unSafeESTest(
   input,
@@ -839,19 +815,16 @@ function unSafeESTest(
 ) {
   // check 3rd argument
   if (typeof pubMsg !== "string") {
-    // throw new Error()
     _error(input, type, pubMsg, true, "errArg3");
   }
 
   // check 2nd argument
   else if (_ALLOWED_TYPES.includes(type) === false) {
-    // throw new Error()
     _error(input, type, pubMsg, true, "errArg2");
   }
 
   // check 1st argument
   else if (_typeof(input) !== type) {
-    // throw new Error()
     _error(input, type, pubMsg, true, "errArg1");
   }
 
