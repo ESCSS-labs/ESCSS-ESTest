@@ -704,34 +704,34 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
       console[logType](`🚫 Details hidden for security. Check in dev mode.`),
     errArg1: (logType) =>
       console[logType](
-        ` ✅ Expected ESTest() 1st Argument: '${type}' \n ❌ Received ESTest() 1st Argument: '${_typeof(input)}'`,
+        ` \n ✅ Expected ESTest() 1st Argument: '${type}' \n ❌ Received ESTest() 1st Argument: '${_typeof(input)}' \n`,
         input,
       ),
     typeCheck: (logType) =>
       console[logType](
-        `❌ Expected ESTest().method(value) value type: '${value2}', got: '${_typeof(value)}'`,
+        ` \n ❌ Expected ESTest().method(value) value type: '${value2}', got: '${_typeof(value)}'`,
         value,
       ),
     less: (logType) =>
-      console[logType](`❌ Must be < ${isBigint}, got:`, input),
+      console[logType](` \n ❌ Must be < ${isBigint}, got:`, input),
     max: (logType) =>
-      console[logType](`❌ Must be <= ${isBigint}, got:`, input),
+      console[logType](` \n ❌ Must be <= ${isBigint}, got:`, input),
     min: (logType) =>
-      console[logType](`❌ Must be >= ${isBigint}, got:`, input),
+      console[logType](` \n ❌ Must be >= ${isBigint}, got:`, input),
     greater: (logType) =>
-      console[logType](`❌ Must be > ${isBigint}, got:`, input),
+      console[logType](` \n ❌ Must be > ${isBigint}, got:`, input),
     multiple: (logType) =>
-      console[logType](`❌ Must be a multiple of ${isBigint}, got:`, input),
+      console[logType](` \n ❌ Must be a multiple of ${isBigint}, got:`, input),
     length: (logType) =>
-      console[logType](`❌ Must be === ${value}, got:`, input),
+      console[logType](` \n ❌ Must be === ${value}, got:`, input),
     invalidInput: (logType) =>
-      console[logType](`❌ Invalid input, got:`, input),
+      console[logType](` \n ❌ Invalid input, got:`, input),
     integer: (logType) =>
-      console[logType](`❌ Must be an integer, got:`, input),
+      console[logType](` \n ❌ Must be an integer, got:`, input),
     positive: (logType) =>
-      console[logType](`❌ Must be a positive number, got:`, input),
+      console[logType](` \n ❌ Must be a positive number, got:`, input),
     negative: (logType) =>
-      console[logType](`❌ Must be a negative number, got:`, input),
+      console[logType](` \n ❌ Must be a negative number, got:`, input),
   };
 
   const _unSafeESTestLog = {
