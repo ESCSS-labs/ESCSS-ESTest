@@ -771,7 +771,6 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   }
 
   function privateMsg() {
-    // if backend receive lots invalid api from frontend, privateMsg is redundant, because throw Error(...) handle it.
     if (isUnSafe) return;
     else {
       if (process.env.NODE_ENV === "production") _ESTestLog.hiddenMsg("error");
