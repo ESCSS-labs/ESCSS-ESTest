@@ -1,6 +1,6 @@
 {
   "name": "escss-estest",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "A JavaScript runtime testing library inspired by TDD, Joi, and Zod.",
   "keywords": [
     "escss",
