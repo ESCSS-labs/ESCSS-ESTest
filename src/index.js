@@ -852,9 +852,10 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 
   // For performance: ESTest(...) (isUnSafe is false) used often
   if (isUnSafe === false) {
+    /* === public message === */
     console.error(` 📝 Public Message: ${pubMsg}`);
 
-    // private message - console.error (browser) / console.trace (node / webworker)
+    /* === private message === */
     // production
     if (process.env.NODE_ENV === "production") _ESTestLog.hiddenMsg("error");
     // browser
@@ -862,11 +863,11 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
     // node / webworker
     else _ESTestLog[logToken]("trace");
   } else {
-    // use customized error message
-    if (pubMsg !== globalThis.__ESCSS_ESTEST__.publicMessage)
-      throw new Error(pubMsg);
-    // use default error message
-    else throw new Error(_unSafeESTestLog[logToken]);
+    // default error message
+    if (pubMsg === globalThis.__ESCSS_ESTEST__.publicMessage)
+      throw new Error(_unSafeESTestLog[logToken]);
+    // customized error message
+    else throw new Error(pubMsg);
   }
 }
 
