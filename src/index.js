@@ -635,7 +635,96 @@ const _chain = {
       return this;
     }
   },
-  undefined: class _Undefined extends _Common {},
+  // collect all _chain[type] methods to prevent crazy usage to break the program
+  undefined: class _Undefined extends _Common {
+    constructor(...args) {
+      super(...args);
+    }
+
+    max() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    min() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    length() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    email() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    uuid() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    regex() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    base64() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    ip() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    less() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    greater() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    integer() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    positive() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    negative() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    multiple() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+  },
   null: class _Null extends _Common {},
   NaN: class _NaN extends _Common {},
   symbol: class _Symbol extends _Common {},
@@ -713,6 +802,10 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
+    undefined: (logType) =>
+      console[logType](
+        ` \n 💩 Tried undefined.method() — safely blocked to prevent a crash. Check the correct usage: https://github.com/ESCSS-labs/ESCSS-ESTest \n`,
+      ),
     typeCheck: (logType) =>
       console[logType](
         ` \n ❌ Expected ESTest().method(value) value type: '${value2}', got: '${_typeof(value)}'`,
@@ -787,20 +880,16 @@ function ESTest(
 ) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
 
-  // check 3rd argument
-  if (typeof pubMsg !== "string") {
-    _error(input, type, pubMsg, false, "errArg3");
-    return;
-  }
-
-  // check 2nd argument
-  else if (_ALLOWED_TYPES.includes(type) === false) {
+  // Edge Case - invalid type: 'foo'
+  if (_ALLOWED_TYPES.includes(type) === false) {
+    type = "undefined";
     _error(input, type, pubMsg, false, "errArg2");
-    return;
   }
 
-  // check 1st argument
-  else if (_typeof(input) !== type) {
+  // Edge Case - invalid public message: [], 123123
+  else if (typeof pubMsg !== "string") {
+    _error(input, type, pubMsg, false, "errArg3");
+  } else if (_typeof(input) !== type) {
     // Not early return in this case
     // ESTest() needs return an object to chain methods, otherwise undefined.method() will stop the program
     _error(input, type, pubMsg, false, "errArg1");
@@ -818,18 +907,15 @@ function unSafeESTest(
   type = "null",
   pubMsg = globalThis.__ESCSS_ESTEST__.publicMessage,
 ) {
-  // check 3rd argument
-  if (typeof pubMsg !== "string") {
-    _error(input, type, pubMsg, true, "errArg3");
-  }
-
-  // check 2nd argument
-  else if (_ALLOWED_TYPES.includes(type) === false) {
+  // Edge Case - invalid type: 'foo'
+  if (_ALLOWED_TYPES.includes(type) === false) {
     _error(input, type, pubMsg, true, "errArg2");
   }
 
-  // check 1st argument
-  else if (_typeof(input) !== type) {
+  // Edge Case - invalid error message: [], 123123
+  else if (typeof pubMsg !== "string") {
+    _error(input, type, pubMsg, true, "errArg3");
+  } else if (_typeof(input) !== type) {
     _error(input, type, pubMsg, true, "errArg1");
   }
 
