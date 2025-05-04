@@ -880,23 +880,25 @@ function ESTest(
 ) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
 
+  const isUnSafe = false;
+
   // Edge Case - invalid type: 'foo'
   if (_ALLOWED_TYPES.includes(type) === false) {
     type = "undefined";
-    _error(input, type, pubMsg, false, "errArg2");
+    _error(input, type, pubMsg, isUnSafe, "errArg2");
   }
 
   // Edge Case - invalid public message: [], 123123
   else if (typeof pubMsg !== "string") {
-    _error(input, type, pubMsg, false, "errArg3");
+    _error(input, type, pubMsg, isUnSafe, "errArg3");
   } else if (_typeof(input) !== type) {
     // Not early return in this case
     // ESTest() needs return an object to chain methods, otherwise undefined.method() will stop the program
-    _error(input, type, pubMsg, false, "errArg1");
+    _error(input, type, pubMsg, isUnSafe, "errArg1");
   }
 
   // ESTest(...).[method](), e.g. ESTest(1, 'number).max(10)
-  return new _chain[type](input, type, pubMsg, false);
+  return new _chain[type](input, type, pubMsg, isUnSafe);
 }
 
 /**
@@ -907,20 +909,22 @@ function unSafeESTest(
   type = "null",
   pubMsg = globalThis.__ESCSS_ESTEST__.publicMessage,
 ) {
+  const isUnSafe = true;
+
   // Edge Case - invalid type: 'foo'
   if (_ALLOWED_TYPES.includes(type) === false) {
-    _error(input, type, pubMsg, true, "errArg2");
+    _error(input, type, pubMsg, isUnSafe, "errArg2");
   }
 
   // Edge Case - invalid error message: [], 123123
   else if (typeof pubMsg !== "string") {
-    _error(input, type, pubMsg, true, "errArg3");
+    _error(input, type, pubMsg, isUnSafe, "errArg3");
   } else if (_typeof(input) !== type) {
-    _error(input, type, pubMsg, true, "errArg1");
+    _error(input, type, pubMsg, isUnSafe, "errArg1");
   }
 
   // ESTest(...).[method](), e.g. ESTest(1, 'number).max(10)
-  return new _chain[type](input, type, pubMsg, true);
+  return new _chain[type](input, type, pubMsg, isUnSafe);
 }
 
 export { ESTest, unSafeESTest };
