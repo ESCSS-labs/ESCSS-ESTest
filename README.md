@@ -10,7 +10,7 @@ ESCSS-ESTest is a runtime testing library inspired by TDD, Joi, and Zod to achie
 - 🎨 Designed with DX first in mind.
 - ⚙️ Manual Testing and E2E Integration.
 - 👌 Effortless integration with your codebase.
-- 📦 1.9 kB (minified + gzipped), 0 dependency.
+- 📦 2 kB (minified + gzipped), 0 dependency.
 - 🚀 Optional runtime testing without performance overhead.
 
 ## Installation
