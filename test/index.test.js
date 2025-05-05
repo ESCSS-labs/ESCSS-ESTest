@@ -129,6 +129,7 @@ describe("ESTest", () => {
           .mockImplementation(() => {});
 
         ESTest("foo", "string").max(10);
+        ESTest("foo", "string").max(3);
 
         expect(publicMessage).toHaveBeenCalledTimes(0);
         expect(privateMessage).toHaveBeenCalledTimes(0);
@@ -159,6 +160,7 @@ describe("ESTest", () => {
           .mockImplementation(() => {});
 
         ESTest("foo", "string").min(1);
+        ESTest("foo", "string").min(3);
 
         expect(publicMessage).toHaveBeenCalledTimes(0);
         expect(privateMessage).toHaveBeenCalledTimes(0);
@@ -443,6 +445,7 @@ describe("ESTest", () => {
           .mockImplementation(() => {});
 
         ESTest(1, "number").max(10);
+        ESTest(1, "number").max(1);
 
         expect(publicMessage).toHaveBeenCalledTimes(0);
         expect(privateMessage).toHaveBeenCalledTimes(0);
@@ -503,6 +506,7 @@ describe("ESTest", () => {
           .mockImplementation(() => {});
 
         ESTest(15, "number").min(10);
+        ESTest(15, "number").min(15);
 
         expect(publicMessage).toHaveBeenCalledTimes(0);
         expect(privateMessage).toHaveBeenCalledTimes(0);
@@ -842,6 +846,7 @@ describe("unSafeESTest", () => {
     describe("max", () => {
       test("success", () => {
         unSafeESTest("foo", "string").max(10);
+        unSafeESTest("foo", "string").max(3);
       });
 
       test("fail", () => {
@@ -852,6 +857,7 @@ describe("unSafeESTest", () => {
     describe("min", () => {
       test("success", () => {
         unSafeESTest("foo", "string").min(1);
+        unSafeESTest("foo", "string").min(3);
       });
 
       test("fail", () => {
@@ -1054,6 +1060,220 @@ describe("unSafeESTest", () => {
           unSafeESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string").ip(),
         ).toThrowError();
         expect(() => unSafeESTest("=========", "string").ip()).toThrowError();
+      });
+    });
+  });
+
+  describe("number", () => {
+    describe("less", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(1, "number").less(10);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(20, "number").less(10)).toThrow();
+      });
+    });
+
+    describe("max", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(1, "number").max(10);
+        unSafeESTest(1, "number").max(1);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(20, "number").max(10)).toThrowError();
+      });
+    });
+
+    describe("greater", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(15, "number").greater(10);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(3, "number").greater(10)).toThrowError();
+      });
+    });
+
+    describe("min", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(15, "number").min(10);
+        unSafeESTest(15, "number").min(15);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(3, "number").min(10)).toThrowError();
+      });
+    });
+
+    describe("integer", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(15, "number").integer();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(3.1, "number").integer()).toThrowError();
+        expect(() => unSafeESTest(-3.1, "number").integer()).toThrowError();
+        expect(() => unSafeESTest(1 / 2, "number").integer()).toThrowError();
+        expect(() => unSafeESTest(-1 / 2, "number").integer()).toThrowError();
+      });
+    });
+
+    describe("positive", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(15, "number").positive();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(-3.1, "number").positive()).toThrowError();
+        expect(() => unSafeESTest(-1 / 2, "number").positive()).toThrowError();
+      });
+    });
+
+    describe("negative", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(-15, "number").negative();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(3.1, "number").negative()).toThrowError();
+        expect(() => unSafeESTest(1 / 2, "number").negative()).toThrowError();
+      });
+    });
+
+    describe("multiple", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(15, "number").multiple(5);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(15, "number").multiple(2)).toThrowError();
+        expect(() => unSafeESTest(15, "number").multiple(4)).toThrowError();
+      });
+    });
+  });
+
+  describe("array", () => {
+    describe("max", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest([1], "array").max(10);
+        unSafeESTest([1], "array").max(1);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest([1], "array").max(-10)).toThrow();
+      });
+    });
+
+    describe("min", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest([1], "array").min(0);
+        unSafeESTest([1], "array").min(1);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest([1], "array").min(10)).toThrowError();
       });
     });
   });
