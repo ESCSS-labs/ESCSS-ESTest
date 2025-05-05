@@ -2,7 +2,7 @@
 
 ## What is ESCSS-ESTest?
 
-ESCSS-ESTest is a runtime testing library inspired by TDD, Joi, and Zod to achieve 100% coverage.
+ESCSS-ESTest is a runtime validation library inspired by TDD and Zod.
 
 ## Features
 
