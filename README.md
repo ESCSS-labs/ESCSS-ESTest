@@ -142,11 +142,6 @@ app.post("/validate", async (req, res) => {
 - Get feedback from others
 
 ```js
-// Example 1: for library author
-globalThis.__ESCSS_ESTEST__.publicMessage =
-  "[libraryName] welcomes you to submit the issue at [link].";
-
-// Example 2: for others to help debug
 globalThis.__ESCSS_ESTEST__.publicMessage =
   "Please note when the issue occurred and send the details to [link].";
 ```
