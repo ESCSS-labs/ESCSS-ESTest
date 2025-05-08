@@ -38,8 +38,7 @@
 
 [Dual-license-templates](https://github.com/lawndoc/dual-license-templates)
 
-
-// This project uses parts of Zod v3.24.1 (specifically: email(), ip(), uuid()), 
+// This project uses parts of Zod v3.24.1 (specifically: email(), ip(), uuid()),
 // which is licensed under the MIT License.
 // Source: https://github.com/colinhacks/zod
 
@@ -64,4 +63,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
