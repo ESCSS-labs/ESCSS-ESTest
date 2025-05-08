@@ -893,8 +893,6 @@ function ESTest(
   else if (typeof pubMsg !== "string") {
     _error(input, type, pubMsg, isUnSafe, "errArg3");
   } else if (_typeof(input) !== type) {
-    // Not early return in this case
-    // ESTest() needs return an object to chain methods, otherwise undefined.method() will stop the program
     _error(input, type, pubMsg, isUnSafe, "errArg1");
   }
 
