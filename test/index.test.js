@@ -715,6 +715,36 @@ describe("ESTest", () => {
       });
     });
   });
+
+  describe("edge case", () => {
+    test("3rd argument is wrong", () => {
+      const publicMessage = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+      const privateMessage = vi
+        .spyOn(console, "trace")
+        .mockImplementation(() => {});
+
+      expect(ESTest(1, "string", 123).max(10)).toBeTypeOf("object");
+
+      expect(publicMessage).toHaveBeenCalledTimes(2);
+      expect(privateMessage).toHaveBeenCalledTimes(2);
+    });
+
+    test("2nd & 3rd argument is wrong", () => {
+      const publicMessage = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+      const privateMessage = vi
+        .spyOn(console, "trace")
+        .mockImplementation(() => {});
+
+      expect(ESTest(1, "strings", 123).max(10)).toBeTypeOf("object");
+
+      expect(publicMessage).toHaveBeenCalledTimes(2);
+      expect(privateMessage).toHaveBeenCalledTimes(2);
+    });
+  });
 });
 
 describe("unSafeESTest", () => {
