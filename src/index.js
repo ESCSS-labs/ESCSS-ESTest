@@ -871,9 +871,31 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   }
 }
 
-/**
- * If not passed, it logs an error via console.error().
- */
+function _baseTest(input, type, pubMsg, isUnSafe) {
+  // Edge Case for 3nd argument
+  if (typeof pubMsg !== "string") {
+    if (_ALLOWED_TYPES.includes(type) === false) {
+      type = "undefined";
+    }
+    _error(input, type, pubMsg, isUnSafe, "errArg3");
+  }
+
+  // Edge Case for 2nd argument
+  else if (_ALLOWED_TYPES.includes(type) === false) {
+    type = "undefined";
+    _error(input, type, pubMsg, isUnSafe, "errArg2");
+  }
+
+  // type is not matched
+  else if (_typeof(input) !== type) {
+    _error(input, type, pubMsg, isUnSafe, "errArg1");
+  }
+
+  // return an object for chaining methods
+  // e.g. ESTest(1, 'number).max(10)
+  return new _chain[type](input, type, pubMsg, isUnSafe);
+}
+
 function ESTest(
   input,
   type = "null",
@@ -881,49 +903,19 @@ function ESTest(
 ) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
 
+  // console.error()
   const isUnSafe = false;
-
-  // Edge Case - invalid type: 'foo'
-  if (_ALLOWED_TYPES.includes(type) === false) {
-    type = "undefined";
-    _error(input, type, pubMsg, isUnSafe, "errArg2");
-  }
-
-  // Edge Case - invalid public message: [], 123123
-  else if (typeof pubMsg !== "string") {
-    _error(input, type, pubMsg, isUnSafe, "errArg3");
-  } else if (_typeof(input) !== type) {
-    _error(input, type, pubMsg, isUnSafe, "errArg1");
-  }
-
-  // ESTest(...).[method](), e.g. ESTest(1, 'number).max(10)
-  return new _chain[type](input, type, pubMsg, isUnSafe);
+  return _baseTest(input, type, pubMsg, isUnSafe);
 }
 
-/**
- * If not passed, it throws an error using throw new Error().
- */
 function unSafeESTest(
   input,
   type = "null",
   pubMsg = globalThis.__ESCSS_ESTEST__.publicMessage,
 ) {
+  // throw new Error()
   const isUnSafe = true;
-
-  // Edge Case - invalid type: 'foo'
-  if (_ALLOWED_TYPES.includes(type) === false) {
-    _error(input, type, pubMsg, isUnSafe, "errArg2");
-  }
-
-  // Edge Case - invalid error message: [], 123123
-  else if (typeof pubMsg !== "string") {
-    _error(input, type, pubMsg, isUnSafe, "errArg3");
-  } else if (_typeof(input) !== type) {
-    _error(input, type, pubMsg, isUnSafe, "errArg1");
-  }
-
-  // ESTest(...).[method](), e.g. ESTest(1, 'number).max(10)
-  return new _chain[type](input, type, pubMsg, isUnSafe);
+  return _baseTest(input, type, pubMsg, isUnSafe);
 }
 
 export { ESTest, unSafeESTest };
