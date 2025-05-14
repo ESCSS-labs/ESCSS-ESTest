@@ -223,6 +223,22 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
   pubMsg?: string,
 ): _Chain<T>;
 
+/**
+ * - // Same as ESTest just used for "library" to wrap default public message
+ * @example
+ *
+ * export function ESTest(input, type, pubMsg = "[libraryName] your message for others to help debugging") {
+ *  return baseESTest(input, type, pubMsg)
+ * }
+ *
+ * @see https://github.com/ESCSS-labs/ESCSS-ESTest
+ */
+export declare function baseESTest<T extends _ALLOWED_TYPES>(
+  input: unknown,
+  type: T,
+  pubMsg?: string,
+): _Chain<T>;
+
 declare global {
   var __ESCSS_ESTEST__: {
     /**

@@ -921,8 +921,7 @@ function ESTest(
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
 
   // console.error()
-  const isUnSafe = false;
-  return _baseTest(input, type, pubMsg, isUnSafe);
+  return _baseTest(input, type, pubMsg, false);
 }
 
 function unSafeESTest(
@@ -931,8 +930,17 @@ function unSafeESTest(
   pubMsg = globalThis.__ESCSS_ESTEST__.publicMessage,
 ) {
   // throw new Error()
-  const isUnSafe = true;
-  return _baseTest(input, type, pubMsg, isUnSafe);
+  return _baseTest(input, type, pubMsg, true);
 }
 
-export { ESTest, unSafeESTest };
+function baseESTest(input, type = "null", pubMsg) {
+  if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
+
+  // update globalThis
+  globalThis.__ESCSS_ESTEST__.publicMessage = pubMsg;
+
+  // console.error()
+  return _baseTest(input, type, pubMsg, false);
+}
+
+export { ESTest, unSafeESTest, baseESTest };
