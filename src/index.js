@@ -751,28 +751,36 @@ function _typeof(input) {
 
   switch (typeof input) {
     case "number":
-      if (Number.isNaN(input)) newType = "NaN";
-      // check valid number
+      if (Number.isNaN(input)) {
+        newType = "NaN";
+      }
+      // check if it is a valid number
       else if (
         (Number.MIN_SAFE_INTEGER <= input &&
           input <= Number.MAX_SAFE_INTEGER) === false
-      )
+      ) {
         throw new Error(
           `Expected: -9007199254740991 <= [input] <= 9007199254740991 (or try 'bigint')`,
         );
-      else newType = "number";
+      } else {
+        newType = "number";
+      }
       break;
     case "object":
-      if (Array.isArray(input)) newType = "array";
-      else if (input === null) newType = "null";
-      else if (Object.prototype.toString.call(input) === "[object Date]") {
+      if (Array.isArray(input)) {
+        newType = "array";
+      } else if (input === null) {
+        newType = "null";
+      } else if (Object.prototype.toString.call(input) === "[object Date]") {
         // check valid date
         if (Number.isNaN(input.getTime()))
           throw new Error(`Expected: 'date', Received: 'Invalid Date'`);
         else newType = "date";
-      } else if (Object.prototype.toString.call(input) === "[object RegExp]")
+      } else if (Object.prototype.toString.call(input) === "[object RegExp]") {
         newType = "regex";
-      else newType = "object";
+      } else {
+        newType = "object";
+      }
       break;
 
     // 'undefined' | 'boolean' | 'bigint' | 'string' | 'symbol' | 'function'
@@ -857,17 +865,26 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 
     /* === private message === */
     // production
-    if (process.env.NODE_ENV === "production") _ESTestLog.hiddenMsg("error");
+    if (process.env.NODE_ENV === "production") {
+      _ESTestLog.hiddenMsg("error");
+    }
     // browser
-    else if (typeof window === "object") _ESTestLog[logToken]("error");
+    else if (typeof window === "object") {
+      _ESTestLog[logToken]("error");
+    }
     // node / webworker
-    else _ESTestLog[logToken]("trace");
+    else {
+      _ESTestLog[logToken]("trace");
+    }
   } else {
     // default error message
-    if (pubMsg === globalThis.__ESCSS_ESTEST__.publicMessage)
+    if (pubMsg === globalThis.__ESCSS_ESTEST__.publicMessage) {
       throw new Error(_unSafeESTestLog[logToken]);
+    }
     // customized error message
-    else throw new Error(pubMsg);
+    else {
+      throw new Error(pubMsg);
+    }
   }
 }
 
