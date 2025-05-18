@@ -727,8 +727,8 @@ describe("ESTest", () => {
 
       expect(ESTest(1, "string", 123).max(10)).toBeTypeOf("object");
 
-      expect(publicMessage).toHaveBeenCalledTimes(2);
-      expect(privateMessage).toHaveBeenCalledTimes(2);
+      expect(publicMessage).toHaveBeenCalledTimes(3);
+      expect(privateMessage).toHaveBeenCalledTimes(3);
     });
 
     test("2nd & 3rd argument is wrong", () => {
@@ -741,8 +741,8 @@ describe("ESTest", () => {
 
       expect(ESTest(1, "strings", 123).max(10)).toBeTypeOf("object");
 
-      expect(publicMessage).toHaveBeenCalledTimes(2);
-      expect(privateMessage).toHaveBeenCalledTimes(2);
+      expect(publicMessage).toHaveBeenCalledTimes(3);
+      expect(privateMessage).toHaveBeenCalledTimes(3);
     });
   });
 });

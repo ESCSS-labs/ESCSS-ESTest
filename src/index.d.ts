@@ -11,7 +11,14 @@ declare type _ALLOWED_TYPES =
   | "NaN"
   | "symbol"
   | "function"
-  | "regex";
+  | "regex"
+  // optional(?)
+  | "string?"
+  | "number?"
+  | "array?"
+  | "object?"
+  | "boolean?"
+  | "bigint?";
 
 declare type _Chain<T extends _ALLOWED_TYPES> = T extends "string"
   ? _String

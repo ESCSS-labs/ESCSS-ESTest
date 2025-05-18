@@ -21,6 +21,13 @@ const _ALLOWED_TYPES = [
   "symbol",
   "function",
   "regex",
+  // optional(?)
+  "string?",
+  "number?",
+  "array?",
+  "object?",
+  "boolean?",
+  "bigint?",
 ];
 
 class _Common {
@@ -74,9 +81,11 @@ const _chain = {
         );
       }
 
-      if (this.input.length <= value === false) {
+      if (this.input?.length <= value === false) {
+        console.log(this.input);
+        console.log(this.input?.length);
         _error(
-          this.input.length,
+          this.input?.length,
           this.type,
           this.pubMsg,
           this.isUnSafe,
@@ -101,9 +110,9 @@ const _chain = {
         );
       }
 
-      if (this.input.length >= value === false) {
+      if (this.input?.length >= value === false) {
         _error(
-          this.input.length,
+          this.input?.length,
           this.type,
           this.pubMsg,
           this.isUnSafe,
@@ -128,9 +137,9 @@ const _chain = {
         );
       }
 
-      if ((this.input.length === value) === false) {
+      if ((this.input?.length === value) === false) {
         _error(
-          this.input.length,
+          this.input?.length,
           this.type,
           this.pubMsg,
           this.isUnSafe,
@@ -418,9 +427,9 @@ const _chain = {
         );
       }
 
-      if (this.input.length >= value === false) {
+      if (this.input?.length >= value === false) {
         _error(
-          this.input.length,
+          this.input?.length,
           this.type,
           this.pubMsg,
           this.isUnSafe,
@@ -445,9 +454,9 @@ const _chain = {
         );
       }
 
-      if (this.input.length <= value === false) {
+      if (this.input?.length <= value === false) {
         _error(
-          this.input.length,
+          this.input?.length,
           this.type,
           this.pubMsg,
           this.isUnSafe,
@@ -472,9 +481,9 @@ const _chain = {
         );
       }
 
-      if ((this.input.length === value) === false) {
+      if ((this.input?.length === value) === false) {
         _error(
-          this.input.length,
+          this.input?.length,
           this.type,
           this.pubMsg,
           this.isUnSafe,
@@ -736,15 +745,15 @@ function _typeof(input) {
   /* 
   // based on typeof (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
   
-  Undefined        	 'undefined'
-  Null 	             'object'      ->    change to 'null'
-  Boolean   	       'boolean'
-  Number 	           'number'      ->    change to 'NaN' | 'number'
+  Undefined          'undefined'
+  Null               'object'      ->    change to 'null'
+  Boolean            'boolean'
+  Number             'number'      ->    change to 'NaN' | 'number'
   BigInt             'bigint'
-  String 	           'string'
-  Symbol 	           'symbol'
+  String             'string'
+  Symbol             'symbol'
   Function           'function'
-  Any other object 	 'object'      ->    change to 'null' | 'array' | 'date' | 'regex' | 'object'
+  Any other object   'object'      ->    change to 'null' | 'array' | 'date' | 'regex' | 'object'
   */
 
   let newType;
@@ -806,7 +815,7 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
       ),
     errArg2: (logType) =>
       console[logType](
-        ` \n ✅ Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' \n`,
+        ` \n ✅ Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?' \n`,
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
@@ -843,7 +852,7 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 
   const _unSafeESTestLog = {
     errArg1: `The value must be a/an '${type}'`,
-    errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex'`,
+    errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
     errArg3: `Expected 3rd Argument: 'string'`,
     typeCheck: `Expected unSafeESTest().method(value), value type: '${value2}'`,
     less: `The value must be less than ${isBigint}`,
@@ -889,27 +898,63 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 }
 
 function _baseTest(input, type, pubMsg, isUnSafe) {
-  // Edge Case for 3nd argument
-  if (typeof pubMsg !== "string") {
-    if (_ALLOWED_TYPES.includes(type) === false) {
+  {
+    // fail type -> undeinfed
+    if (!_ALLOWED_TYPES.includes(type)) {
       type = "undefined";
+      _error(input, type, pubMsg, isUnSafe, "errArg2");
+
+      if (typeof pubMsg !== "string") {
+        _error(input, type, pubMsg, isUnSafe, "errArg3");
+      }
     }
-    _error(input, type, pubMsg, isUnSafe, "errArg3");
-  }
 
-  // Edge Case for 2nd argument
-  else if (_ALLOWED_TYPES.includes(type) === false) {
-    type = "undefined";
-    _error(input, type, pubMsg, isUnSafe, "errArg2");
-  }
+    // string?
+    else if (type.endsWith("?")) {
+      // string === string?, undeinfed === string?
+      if (_typeof(input) === type.slice(0, -1) || input === undefined) {
+        // invalid pubMsg
+        if (typeof pubMsg !== "string") {
+          _error(input, type, pubMsg, isUnSafe, "errArg3");
+        }
 
-  // type is not matched
-  else if (_typeof(input) !== type) {
-    _error(input, type, pubMsg, isUnSafe, "errArg1");
+        type = type.slice(0, -1);
+      }
+
+      // string !== number?
+      else if (_typeof(input) !== type) {
+        // invalid pubMsg
+        if (typeof pubMsg !== "string") {
+          _error(input, type, pubMsg, isUnSafe, "errArg3");
+        }
+
+        _error(input, type, pubMsg, isUnSafe, "errArg1");
+        type = type.slice(0, -1);
+      }
+    }
+
+    // string
+    else {
+      // string === string
+      if (_typeof(input) === type) {
+        if (typeof pubMsg !== "string") {
+          _error(input, type, pubMsg, isUnSafe, "errArg3");
+        }
+      }
+
+      // string !== number
+      if (_typeof(input) !== type) {
+        // invalid pubMsg
+        if (typeof pubMsg !== "string") {
+          _error(input, type, pubMsg, isUnSafe, "errArg3");
+        }
+
+        _error(input, type, pubMsg, isUnSafe, "errArg1");
+      }
+    }
   }
 
   // return an object for chaining methods
-  // e.g. ESTest(1, 'number).max(10)
   return new _chain[type](input, type, pubMsg, isUnSafe);
 }
 
