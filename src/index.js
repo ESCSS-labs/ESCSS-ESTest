@@ -898,8 +898,9 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 }
 
 function _baseTest(input, type, pubMsg, isUnSafe) {
+  // Unhappy path
   {
-    // fail type -> undeinfed
+    // fail type
     if (!_ALLOWED_TYPES.includes(type)) {
       type = "undefined";
       _error(input, type, pubMsg, isUnSafe, "errArg2");
@@ -911,7 +912,7 @@ function _baseTest(input, type, pubMsg, isUnSafe) {
 
     // string?
     else if (type.endsWith("?")) {
-      // string === string?, undeinfed === string?
+      // string === string?, undefined === string?
       if (_typeof(input) === type.slice(0, -1) || input === undefined) {
         // invalid pubMsg
         if (typeof pubMsg !== "string") {
@@ -954,6 +955,7 @@ function _baseTest(input, type, pubMsg, isUnSafe) {
     }
   }
 
+  // Happy path
   // return an object for chaining methods
   return new _chain[type](input, type, pubMsg, isUnSafe);
 }
