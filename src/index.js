@@ -900,7 +900,7 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 function _baseTest(input, type, pubMsg, isUnSafe) {
   // Unhappy path
   {
-    // fail type
+    // fail type -> undefined (handle all edge cases)
     if (!_ALLOWED_TYPES.includes(type)) {
       type = "undefined";
       _error(input, type, pubMsg, isUnSafe, "errArg2");
@@ -912,7 +912,7 @@ function _baseTest(input, type, pubMsg, isUnSafe) {
 
     // string?
     else if (type.endsWith("?")) {
-      // string === string?, undefined === string?
+      // string === string? || undefined === string?
       if (_typeof(input) === type.slice(0, -1) || input === undefined) {
         // invalid pubMsg
         if (typeof pubMsg !== "string") {
