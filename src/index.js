@@ -867,29 +867,37 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
     negative: `The value must be a negative number`,
   };
 
-  // For performance: ESTest(...) (isUnSafe is false) used often
+  // For ESTest
   if (isUnSafe === false) {
-    /* === public message === */
     console.error(` 📝 Public Message: ${pubMsg}`);
 
-    /* === private message === */
-    // production
+    /* === detail information === */
+    // production situation
     if (process.env.NODE_ENV === "production") {
       _ESTestLog.hiddenMsg("error");
     }
-    // browser
-    else if (typeof window === "object") {
-      _ESTestLog[logToken]("error");
-    }
-    // node / webworker
+
+    // development situation
     else {
-      _ESTestLog[logToken]("trace");
+      // browser
+      if (typeof window === "object") {
+        _ESTestLog[logToken]("error");
+      }
+
+      // node / webworker
+      else {
+        _ESTestLog[logToken]("trace");
+      }
     }
-  } else {
-    // default error message
+  }
+
+  // For unSafeESTest
+  else {
+    // Use the default error message if the third argument (pubMsg) is not provided
     if (pubMsg === globalThis.__ESCSS_ESTEST__.publicMessage) {
       throw new Error(_unSafeESTestLog[logToken]);
     }
+
     // customized error message
     else {
       throw new Error(pubMsg);
