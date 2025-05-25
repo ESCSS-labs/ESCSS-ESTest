@@ -7,9 +7,9 @@ A passive, non-intrusive JavaScript runtime validator designed to achieve 100% f
 ## Features
 
 - 🪄 Supports TypeScript autocompletion.
-- 🎨 Designed with developer experience (DX) as a priority.
-- 📦 2 kB (minified + gzipped), zero dependencies.
 - 👌 Effortless integration with your codebase.
+- 📦 2 kB (minified + gzipped), zero dependencies.
+- 🎨 Designed with developer experience (DX) as a priority.
 - ⚙️ Unlock its full potential through E2E and unit testing.
 - 🚀 Optional runtime testing with minimal performance overhead.
 
