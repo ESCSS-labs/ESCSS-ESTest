@@ -260,11 +260,15 @@ declare global {
      */
     publicMessage: string;
     /**
-     * // Note: unSafeESTest is not available to disable for security.
+     * // Note: unSafeESTest won't be disabled (security reason).
      * @example
-     * // To disable ESTest return undefined (default: false)
+     * // To disable ESTest (default: false)
      * globalThis.__ESCSS_ESTEST__.isESTestDisabled = true
      */
     isESTestDisabled: boolean;
+    /**
+     * library information
+     */
+    information: string;
   };
 }

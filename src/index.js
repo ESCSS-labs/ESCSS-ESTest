@@ -1,7 +1,13 @@
 globalThis.__ESCSS_ESTEST__ = {
-  name: "escss-estest",
-  version: "2.1.5",
-  license: "Copyright (c) 2024 Mike Lee, AGPL-3.0-only OR Commercial",
+  information: `
+   ========================================================================
+   | name: escss-estest                                                   |
+   | version: 2.1.5                                                       |
+   | license: AGPL-3.0-only OR Commercial                                 ｜
+   | author: Mike Lee                                                     |
+   | repository: https://github.com/ESCSS-labs/ESCSS-ESTest               |
+   ========================================================================
+  `,
   publicMessage:
     "Set 'globalThis.__ESCSS_ESTEST__.publicMessage' for customize message",
   isESTestDisabled: false,
