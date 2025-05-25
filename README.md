@@ -2,16 +2,16 @@
 
 ## What is ESCSS-ESTest?
 
-ESCSS-ESTest is a runtime validation library inspired by TDD and Zod.
+A passive, non-intrusive JavaScript runtime validator designed to achieve 100% function coverage.
 
 ## Features
 
-- 🪄 TypeScript autocompletion.
-- 🎨 Designed with DX first in mind.
-- ⚙️ Manual Testing and E2E Integration.
+- 🪄 Supports TypeScript autocompletion.
+- 🎨 Designed with developer experience (DX) as a priority.
+- 📦 2 kB (minified + gzipped), zero dependencies.
 - 👌 Effortless integration with your codebase.
-- 📦 2 kB (minified + gzipped), 0 dependency.
-- 🚀 Optional runtime testing without performance overhead.
+- ⚙️ Unlock its full potential through E2E and unit testing.
+- 🚀 Optional runtime testing with minimal performance overhead.
 
 ## Installation
 
@@ -37,19 +37,23 @@ ESCSS-ESTest is a runtime validation library inspired by TDD and Zod.
 
 ```js
 function demo() {
+  // {...} is a filter
   {
-    ESTest(...) // filter error
+    ESTest(...)
+    ESTest(...)
   }
 
   // happy path
 }
 ```
 
-## Usage
+## Core API
 
-### ESTest()
+### `ESTest(input, type, publicMessage)`
 
-- General usage -> console.error
+#### _ESTest is just a console.error(...), so it won't break your app._
+
+##### case 1
 
 ```js
 import { ESTest } from "escss-estest";
@@ -64,50 +68,50 @@ function sum(a, b) {
 }
 ```
 
-- For Frontend Validation -> console.error
+##### case 2
 
 ```js
 import { ESTest } from "escss-estest";
 
 async function getApi(a, b) {
-  const originData = await fetch("https://www.just-an-example.com/1");
-  const data = await originData.json();
+  const apiData = await fetch("https://www.just-an-example.com/1");
+  const data = await apiData.json();
 
   /**
    * data = {
-   *    name: 'foo',
-   *    age: 100,
+   *    name: 'demo',
+   *    age: 999,
    *    info: [
    *      {
-   *        id: '254d83e3-81ee-4d20-b7fe-ebfd6651bca0',
-   *        city: 'bar1',
+   *        id: '1',
+   *        city: 'foo',
    *        statusCode: 111
    *      },
    *      {
-   *        id: 'da19b77a-f1b1-4f25-bfc3-de14bfafdf53',
-   *        city: 'bar2',
+   *        id: '2',
+   *        city: 'bar',
    *        statusCode: 222
    *      }
    *    ]
    * }
    */
 
-  // Use ?. to prevent undefined from breaking the app
+  // You might get 'undefined' data. Use the optional chaining operator (?.) to prevent undefined from breaking your app.
   {
-    ESTest(data?.name, "string");
-    ESTest(data?.age, "number").min(0);
-    ESTest(data?.info[0]?.id, "string").uuid();
-    ESTest(data?.info[0]?.city, "string");
-    ESTest(data?.info[0]?.statusCode, "number").positive();
+    ESTest(data.name, "string");
+    ESTest(data.age, "number").min(0);
+    ESTest(data.info[0]?.id, "string");
+    ESTest(data.info[0]?.city, "string").regex(/(foo|bar)/);
+    ESTest(data.info[0]?.statusCode, "number?");
   }
 
   return data;
 }
 ```
 
-### unSafeESTest()
+### `unSafeESTest(input, type, errorMessage)`
 
-- For Backend Validation -> throw new Error()
+#### unSafeESTest throws a new Error, make sure to wrap it in try...catch
 
 ```js
 import { unSafeESTest } from "escss-estest";
@@ -125,7 +129,7 @@ app.post("/validate", async (req, res) => {
 
     {
       unSafeESTest(data.name, "string").min(3);
-      unSafeESTest(data.email, "string", "your email is invalid").email();
+      unSafeESTest(data.email, "string", "invalid email").email();
     }
 
     res.json({ message: "Validation passed" });
@@ -135,9 +139,9 @@ app.post("/validate", async (req, res) => {
 });
 ```
 
-### Global API Config
+## Support API
 
-#### globalThis.**ESCSS_ESTEST**.publicMessage
+### `globalThis.__ESCSS_ESTEST__.publicMessage`
 
 - Get feedback from others
 
@@ -146,18 +150,16 @@ globalThis.__ESCSS_ESTEST__.publicMessage =
   "Please note when the issue occurred and send the details to [link].";
 ```
 
-#### globalThis.**ESCSS_ESTEST**.isESTestDisabled
+### `globalThis.__ESCSS_ESTEST__.isESTestDisabled`
 
-- ESTest (default: false)
-- unSafeESTest **CAN NOT** be disabled (security reason)
+#### Why have this feature?
+
+- Designed to avoid vendor lock-in.
+- Optimized for production performance (if you want).
+
+_note: unSafeESTest **WON'T** be disabled (security reason)_
 
 ```js
-// Why have this feature?
-// 1. To avoid my library locking down your app.
-// 2. If you care about performance but still want runtime tests:
-//  - Use ESTest in staging.
-//  - globalThis.__ESCSS_ESTEST__.isESTestDisabled = true in production to disable it.
-
 globalThis.__ESCSS_ESTEST__.isESTestDisabled = true;
 
 function sum(a, b) {
