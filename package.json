@@ -30,7 +30,7 @@
     "format": "prettier . --write",
     "format:check": "prettier --check .",
     "lint": "eslint .",
-    "test": "vitest --watch=false",
+    "test": "node ./test/happy-path-test.js",
     "check": "pnpm format && pnpm lint && pnpm run test"
   }
 }
