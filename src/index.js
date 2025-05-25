@@ -779,10 +779,7 @@ function _typeof(input) {
       } else if (input === null) {
         newType = "null";
       } else if (Object.prototype.toString.call(input) === "[object Date]") {
-        // check valid date
-        if (Number.isNaN(input.getTime()))
-          throw new Error(`Expected: 'date', Received: 'Invalid Date'`);
-        else newType = "date";
+        newType = "date";
       } else if (Object.prototype.toString.call(input) === "[object RegExp]") {
         newType = "regex";
       } else {
@@ -806,7 +803,11 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
       console[logType](`🚫 Details hidden for security. Check in dev mode.`),
     invalidNumber: (logType) =>
       console[logType](
-        ` \n ✅ Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint') \n ❌ Received input: ${input} (invalid number) \n`,
+        ` \n ✅ Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint') \n ❌ Received input: ${input} (Invalid number) \n`,
+      ),
+    invalidDate: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: 'date' \n ❌ Received: 'Invalid Date' \n`,
       ),
     errArg1: (logType) =>
       console[logType](
@@ -852,6 +853,7 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 
   const _unSafeESTestLog = {
     invalidNumber: `Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
+    invalidDate: `Expected: 'date', Received: 'Invalid Date'`,
     errArg1: `The value must be a/an '${type}'`,
     errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
     errArg3: `Expected 3rd Argument: 'string'`,
@@ -929,7 +931,12 @@ function _test(input, type, pubMsg, isUnSafe) {
         _error(input, type, pubMsg, isUnSafe, "invalidNumber");
       }
 
-      // invalid pubMsg
+      // is a valid date?
+      if (input instanceof Date && isNaN(input)) {
+        _error(input, type, pubMsg, isUnSafe, "invalidDate");
+      }
+
+      // is a valid pubMsg?
       if (typeof pubMsg !== "string") {
         _error(input, type, pubMsg, isUnSafe, "errArg3");
       }
@@ -956,7 +963,12 @@ function _test(input, type, pubMsg, isUnSafe) {
         _error(input, type, pubMsg, isUnSafe, "invalidNumber");
       }
 
-      // invalid pubMsg
+      // is a valid date?
+      if (input instanceof Date && isNaN(input)) {
+        _error(input, type, pubMsg, isUnSafe, "invalidDate");
+      }
+
+      // is a valid pubMsg?
       if (typeof pubMsg !== "string") {
         _error(input, type, pubMsg, isUnSafe, "errArg3");
       }
