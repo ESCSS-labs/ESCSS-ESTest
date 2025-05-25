@@ -915,7 +915,7 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   }
 }
 
-function _baseTest(input, type, pubMsg, isUnSafe) {
+function _test(input, type, pubMsg, isUnSafe) {
   // Unhappy path
   {
     // fail type -> undefined (handle all edge cases)
@@ -986,7 +986,7 @@ function ESTest(
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
 
   // console.error()
-  return _baseTest(input, type, pubMsg, false);
+  return _test(input, type, pubMsg, false);
 }
 
 function unSafeESTest(
@@ -995,7 +995,7 @@ function unSafeESTest(
   pubMsg = globalThis.__ESCSS_ESTEST__.publicMessage,
 ) {
   // throw new Error()
-  return _baseTest(input, type, pubMsg, true);
+  return _test(input, type, pubMsg, true);
 }
 
 function baseESTest(input, type = "null", pubMsg) {
@@ -1005,7 +1005,7 @@ function baseESTest(input, type = "null", pubMsg) {
   globalThis.__ESCSS_ESTEST__.publicMessage = pubMsg;
 
   // console.error()
-  return _baseTest(input, type, pubMsg, false);
+  return _test(input, type, pubMsg, false);
 }
 
 export { ESTest, unSafeESTest, baseESTest };
