@@ -743,27 +743,36 @@ const _chain = {
 
 function _typeof(input) {
   /* 
-  // based on typeof (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
-  
-  Undefined          'undefined'
-  Null               'object'      ->    change to 'null'
-  Boolean            'boolean'
-  Number             'number'      ->    change to 'NaN' | 'number'
-  BigInt             'bigint'
+  // the idea is from [object Null]、[object String]..., based on typeof (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
+
+  [object Class]    from typeof (vanilla JS)       output type
+  -------------------------------------------------------------------------------------------------------
   String             'string'
+  Number             'number'
+  Array              'object'          ->        change to 'array'
+  Object             'object'
+  Boolean            'boolean'
+  Date               'object'          ->        change to 'date'
+  BigInt             'bigint'
+  Undefined          'undefined'
+  Null               'object'          ->        change to 'null'
+  Number (NaN)       'number'          ->        change to 'NaN'
   Symbol             'symbol'
   Function           'function'
-  Any other object   'object'      ->    change to 'null' | 'array' | 'date' | 'regex' | 'object'
+  RegExp             'object'          ->        change to 'regex'
+
   */
 
   let newType;
 
   switch (typeof input) {
     case "number":
+      // is a NaN?
       if (Number.isNaN(input)) {
         newType = "NaN";
       }
-      // check if it is a valid number
+
+      // is a valid number?
       else if (
         (Number.MIN_SAFE_INTEGER <= input &&
           input <= Number.MAX_SAFE_INTEGER) === false
@@ -771,7 +780,10 @@ function _typeof(input) {
         throw new Error(
           `Expected: -9007199254740991 <= [input] <= 9007199254740991 (or try 'bigint')`,
         );
-      } else {
+      }
+
+      // valid number
+      else {
         newType = "number";
       }
       break;
@@ -791,8 +803,6 @@ function _typeof(input) {
         newType = "object";
       }
       break;
-
-    // 'undefined' | 'boolean' | 'bigint' | 'string' | 'symbol' | 'function'
     default:
       newType = typeof input;
       break;
@@ -964,7 +974,7 @@ function _baseTest(input, type, pubMsg, isUnSafe) {
   }
 
   // Happy path
-  // return an object for chaining methods
+  // return an object for chaining methods. e.g., ESTest(1, 'number').max(10)
   return new _chain[type](input, type, pubMsg, isUnSafe);
 }
 
