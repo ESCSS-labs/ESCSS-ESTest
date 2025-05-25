@@ -767,23 +767,9 @@ function _typeof(input) {
 
   switch (typeof input) {
     case "number":
-      // is a NaN?
       if (Number.isNaN(input)) {
         newType = "NaN";
-      }
-
-      // is a valid number?
-      else if (
-        (Number.MIN_SAFE_INTEGER <= input &&
-          input <= Number.MAX_SAFE_INTEGER) === false
-      ) {
-        throw new Error(
-          `Expected: -9007199254740991 <= [input] <= 9007199254740991 (or try 'bigint')`,
-        );
-      }
-
-      // valid number
-      else {
+      } else {
         newType = "number";
       }
       break;
@@ -818,6 +804,10 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   const _ESTestLog = {
     hiddenMsg: (logType) =>
       console[logType](`🚫 Details hidden for security. Check in dev mode.`),
+    invalidNumber: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint') \n ❌ Received input: ${input} (invalid number) \n`,
+      ),
     errArg1: (logType) =>
       console[logType](
         ` \n ✅ Expected ESTest() 1st Argument: '${type}' \n ❌ Received ESTest() 1st Argument: '${_typeof(input)}' \n`,
@@ -861,6 +851,7 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
   };
 
   const _unSafeESTestLog = {
+    invalidNumber: `Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
     errArg1: `The value must be a/an '${type}'`,
     errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
     errArg3: `Expected 3rd Argument: 'string'`,
@@ -930,23 +921,26 @@ function _test(input, type, pubMsg, isUnSafe) {
 
     // "string?" case
     else if (type.endsWith("?")) {
-      // "string" === "string" || "undefined" === "string"?
-      if (_typeof(input) === type.slice(0, -1) || input === undefined) {
-        // invalid pubMsg
-        if (typeof pubMsg !== "string") {
-          _error(input, type, pubMsg, isUnSafe, "errArg3");
-        }
+      // is a valid number?
+      if (
+        _typeof(input) === "number" &&
+        !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
+      ) {
+        _error(input, type, pubMsg, isUnSafe, "invalidNumber");
+      }
 
+      // invalid pubMsg
+      if (typeof pubMsg !== "string") {
+        _error(input, type, pubMsg, isUnSafe, "errArg3");
+      }
+
+      // "string" === "string" || "undefined" === "string"? case
+      if (_typeof(input) === type.slice(0, -1) || input === undefined) {
         type = type.slice(0, -1);
       }
 
-      // "number" !== "string?"
+      // "number" !== "string?" case
       else {
-        // invalid pubMsg
-        if (typeof pubMsg !== "string") {
-          _error(input, type, pubMsg, isUnSafe, "errArg3");
-        }
-
         _error(input, type, pubMsg, isUnSafe, "errArg1");
         type = type.slice(0, -1);
       }
@@ -954,20 +948,21 @@ function _test(input, type, pubMsg, isUnSafe) {
 
     // "string" case
     else {
-      // "string" === "string"
-      if (_typeof(input) === type) {
-        if (typeof pubMsg !== "string") {
-          _error(input, type, pubMsg, isUnSafe, "errArg3");
-        }
+      // is a valid number?
+      if (
+        _typeof(input) === "number" &&
+        !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
+      ) {
+        _error(input, type, pubMsg, isUnSafe, "invalidNumber");
       }
 
-      // "number" !== "string"
-      else {
-        // invalid pubMsg
-        if (typeof pubMsg !== "string") {
-          _error(input, type, pubMsg, isUnSafe, "errArg3");
-        }
+      // invalid pubMsg
+      if (typeof pubMsg !== "string") {
+        _error(input, type, pubMsg, isUnSafe, "errArg3");
+      }
 
+      // "string" !== "string" case
+      if (_typeof(input) !== type) {
         _error(input, type, pubMsg, isUnSafe, "errArg1");
       }
     }
