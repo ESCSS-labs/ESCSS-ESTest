@@ -916,9 +916,9 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
 }
 
 function _test(input, type, pubMsg, isUnSafe) {
-  // Unhappy path
+  // Unhappy path (validation)
   {
-    // fail type -> undefined (handle all edge cases)
+    // invalid type
     if (!_ALLOWED_TYPES.includes(type)) {
       type = "undefined";
       _error(input, type, pubMsg, isUnSafe, "errArg2");
@@ -928,9 +928,9 @@ function _test(input, type, pubMsg, isUnSafe) {
       }
     }
 
-    // string?
+    // "string?" case
     else if (type.endsWith("?")) {
-      // string === string? || undefined === string?
+      // "string" === "string" || "undefined" === "string"?
       if (_typeof(input) === type.slice(0, -1) || input === undefined) {
         // invalid pubMsg
         if (typeof pubMsg !== "string") {
@@ -940,8 +940,8 @@ function _test(input, type, pubMsg, isUnSafe) {
         type = type.slice(0, -1);
       }
 
-      // string !== number?
-      else if (_typeof(input) !== type) {
+      // "number" !== "string?"
+      else {
         // invalid pubMsg
         if (typeof pubMsg !== "string") {
           _error(input, type, pubMsg, isUnSafe, "errArg3");
@@ -952,17 +952,17 @@ function _test(input, type, pubMsg, isUnSafe) {
       }
     }
 
-    // string
+    // "string" case
     else {
-      // string === string
+      // "string" === "string"
       if (_typeof(input) === type) {
         if (typeof pubMsg !== "string") {
           _error(input, type, pubMsg, isUnSafe, "errArg3");
         }
       }
 
-      // string !== number
-      if (_typeof(input) !== type) {
+      // "number" !== "string"
+      else {
         // invalid pubMsg
         if (typeof pubMsg !== "string") {
           _error(input, type, pubMsg, isUnSafe, "errArg3");
@@ -973,8 +973,7 @@ function _test(input, type, pubMsg, isUnSafe) {
     }
   }
 
-  // Happy path
-  // return an object for chaining methods. e.g., ESTest(1, 'number').max(10)
+  // Happy path (return an object for chaining methods) e.g., ESTest(1, 'number').max(10)
   return new _chain[type](input, type, pubMsg, isUnSafe);
 }
 
