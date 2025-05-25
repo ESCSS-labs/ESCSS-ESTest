@@ -759,7 +759,7 @@ function _typeof(input) {
   Number (NaN)       'number'          ->        change to 'NaN'
   Symbol             'symbol'
   Function           'function'
-  RegExp             'object'          ->        change to 'regex'
+  RegExp             'object'          ->        change to 'regex' // follow common usage instead of 'regexp'
 
   */
 
