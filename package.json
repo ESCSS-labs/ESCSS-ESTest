@@ -1,13 +1,11 @@
 {
   "name": "escss-estest",
   "version": "2.1.5",
-  "description": "A JavaScript runtime validation library.",
+  "description": "A passive, non-intrusive JavaScript runtime validator designed to achieve 100% function coverage.",
   "keywords": [
-    "escss",
-    "escss-estest",
+    "JavaScript",
     "testing",
-    "javascript",
-    "tdd",
+    "runtime-validation",
     "zero-dependency"
   ],
   "license": "(AGPL-3.0-only OR Commercial)",
