@@ -231,10 +231,10 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
 ): _Chain<T>;
 
 /**
- * - // Same as ESTest just used for "library" to wrap default public message
  * @example
- *
- * export function ESTest(input, type, pubMsg = "[libraryName] your message for others to help debugging") {
+ * 
+ * // Same as ESTest just used for "library" to wrap default public message
+ * function ESTest(input, type, pubMsg = "[libraryName] your message for others to help debugging") {
  *  return baseESTest(input, type, pubMsg)
  * }
  *
