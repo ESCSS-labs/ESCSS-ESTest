@@ -11,7 +11,7 @@ declare type _ALLOWED_TYPES =
   | "NaN"
   | "symbol"
   | "function"
-  | "regex"
+  | "regexp"
   // optional(?)
   | "string?"
   | "number?"
@@ -44,8 +44,8 @@ declare type _Chain<T extends _ALLOWED_TYPES> = T extends "string"
                       ? _Symbol
                       : T extends "function"
                         ? _Function
-                        : T extends "regex"
-                          ? _Regex
+                        : T extends "regexp"
+                          ? _Regexp
                           : never;
 
 declare interface _Common<T extends _ALLOWED_TYPES> {
@@ -93,9 +93,9 @@ declare interface _String extends _Common<"string"> {
 
   /**
    * @example
-   * ESTest('foo bar', 'string').regex(/(foo|bar)/) // pass
+   * ESTest('foo bar', 'string').regexp(/(foo|bar)/) // pass
    */
-  regex(): _Chain<"string">;
+  regexp(): _Chain<"string">;
 
   /**
    * @example
@@ -210,7 +210,7 @@ declare interface _Symbol extends _Common<"symbol"> {}
 
 declare interface _Function extends _Common<"function"> {}
 
-declare interface _Regex extends _Common<"regex"> {}
+declare interface _Regexp extends _Common<"regexp"> {}
 
 /**
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest

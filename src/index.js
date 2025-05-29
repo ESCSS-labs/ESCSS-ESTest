@@ -26,7 +26,7 @@ const _ALLOWED_TYPES = [
   "NaN",
   "symbol",
   "function",
-  "regex",
+  "regexp",
   // optional(?)
   "string?",
   "number?",
@@ -159,10 +159,10 @@ const _chain = {
 
     email() {
       // from zod v3.24.1 https://github.com/colinhacks/zod/blob/main/src/types.ts
-      const emailRegex =
+      const emailRegexp =
         /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-\\.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\\-]*\.)+[A-Z]{2,}$/i;
 
-      if (emailRegex.test(this.input) === false) {
+      if (emailRegexp.test(this.input) === false) {
         _error(
           this.input,
           this.type,
@@ -178,10 +178,10 @@ const _chain = {
     uuid() {
       // from zod v3.24.1 https://github.com/colinhacks/zod/blob/main/src/types.ts
       // Changed: removed \b (not necessary)
-      const uuidRegex =
+      const uuidRegexp =
         /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/i;
 
-      if (uuidRegex.test(this.input) === false) {
+      if (uuidRegexp.test(this.input) === false) {
         _error(
           this.input,
           this.type,
@@ -194,8 +194,8 @@ const _chain = {
       return this;
     }
 
-    regex(value) {
-      if (_typeof(value) !== "regex") {
+    regexp(value) {
+      if (_typeof(value) !== "regexp") {
         _error(
           this.input,
           this.type,
@@ -203,7 +203,7 @@ const _chain = {
           this.isUnSafe,
           "typeCheck",
           value,
-          "regex",
+          "regexp",
         );
       }
 
@@ -222,10 +222,10 @@ const _chain = {
 
     base64() {
       // https://stackoverflow.com/questions/7860392/determine-if-string-is-in-base64-using-javascript
-      const base64Regex =
+      const base64Regexp =
         /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
 
-      if (base64Regex.test(this.input) === false) {
+      if (base64Regexp.test(this.input) === false) {
         _error(
           this.input,
           this.type,
@@ -240,14 +240,14 @@ const _chain = {
 
     ip() {
       // from zod v3.24.1 https://github.com/colinhacks/zod/blob/main/src/types.ts
-      const ipv4Regex =
+      const ipv4Regexp =
         /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
-      const ipv6Regex =
+      const ipv6Regexp =
         /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
 
       if (
-        ipv4Regex.test(this.input) === false &&
-        ipv6Regex.test(this.input) === false
+        ipv4Regexp.test(this.input) === false &&
+        ipv6Regexp.test(this.input) === false
       ) {
         _error(
           this.input,
@@ -686,7 +686,7 @@ const _chain = {
       return this;
     }
 
-    regex() {
+    regexp() {
       _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
 
       return this;
@@ -744,7 +744,7 @@ const _chain = {
   NaN: class _NaN extends _Common {},
   symbol: class _Symbol extends _Common {},
   function: class _Function extends _Common {},
-  regex: class _Regex extends _Common {},
+  regexp: class _Regexp extends _Common {},
 };
 
 function _typeof(input) {
@@ -765,7 +765,7 @@ function _typeof(input) {
   Number (NaN)       'number'          ->        change to 'NaN'
   Symbol             'symbol'
   Function           'function'
-  RegExp             'object'          ->        change to 'regex' // follow common usage instead of 'regexp'
+  RegExp             'object'          ->        change to 'regexp'
 
   */
 
@@ -787,7 +787,7 @@ function _typeof(input) {
       } else if (Object.prototype.toString.call(input) === "[object Date]") {
         newType = "date";
       } else if (Object.prototype.toString.call(input) === "[object RegExp]") {
-        newType = "regex";
+        newType = "regexp";
       } else {
         newType = "object";
       }
@@ -822,7 +822,7 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
       ),
     errArg2: (logType) =>
       console[logType](
-        ` \n ✅ Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?' \n`,
+        ` \n ✅ Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?' \n`,
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
@@ -861,7 +861,7 @@ function _error(input, type, pubMsg, isUnSafe, logToken, value, value2) {
     invalidNumber: `Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
     invalidDate: `Expected: 'date', Received: 'Invalid Date'`,
     errArg1: `The value must be a/an '${type}'`,
-    errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regex' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
+    errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
     errArg3: `Expected 3rd Argument: 'string'`,
     typeCheck: `Expected unSafeESTest().method(value), value type: '${value2}'`,
     less: `The value must be less than ${isBigint}`,

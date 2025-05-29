@@ -14,7 +14,7 @@ ESTest("1", "string").min(0);
 ESTest("1", "string").length(1);
 ESTest("foo@gmail.com", "string").email();
 ESTest(crypto.randomUUID(), "string").uuid();
-ESTest("foo bar", "string").regex(/(foo|bar)/);
+ESTest("foo bar", "string").regexp(/(foo|bar)/);
 ESTest("SGVsbG8gd29ybGQh", "string").base64();
 ESTest("192.168.1.1", "string").ip();
 ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip();
@@ -75,8 +75,8 @@ ESTest(Symbol("tt"), "symbol").description("test");
 ESTest(function test() {}, "function");
 ESTest(function test() {}, "function").description("test");
 
-ESTest(/foo/, "regex");
-ESTest(/foo/, "regex").description("test");
+ESTest(/foo/, "regexp");
+ESTest(/foo/, "regexp").description("test");
 
 // unsafeESTest
 unSafeESTest("1", "string");
@@ -86,7 +86,7 @@ unSafeESTest("1", "string").min(0);
 unSafeESTest("1", "string").length(1);
 unSafeESTest("foo@gmail.com", "string").email();
 unSafeESTest(crypto.randomUUID(), "string").uuid();
-unSafeESTest("foo bar", "string").regex(/(foo|bar)/);
+unSafeESTest("foo bar", "string").regexp(/(foo|bar)/);
 unSafeESTest("SGVsbG8gd29ybGQh", "string").base64();
 unSafeESTest("192.168.1.1", "string").ip();
 unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip();
@@ -147,5 +147,5 @@ unSafeESTest(Symbol("tt"), "symbol").description("test");
 unSafeESTest(function test() {}, "function");
 unSafeESTest(function test() {}, "function").description("test");
 
-unSafeESTest(/foo/, "regex");
-unSafeESTest(/foo/, "regex").description("test");
+unSafeESTest(/foo/, "regexp");
+unSafeESTest(/foo/, "regexp").description("test");
