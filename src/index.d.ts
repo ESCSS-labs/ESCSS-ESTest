@@ -87,9 +87,15 @@ declare interface _String extends _Common<"string"> {
 
   /**
    * @example
-   * ESTest(crypto.randomUUID(), 'string').uuid() // pass
+   * ESTest('550e8400-e29b-41d4-a716-446655440000', 'string').uuid4() // pass
    */
-  uuid(): _Chain<"string">;
+  uuid4(): _Chain<"string">;
+
+  /**
+   * @example
+   * ESTest('0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d', 'string').uuid7() // pass
+   */
+  uuid7(): _Chain<"string">;
 
   /**
    * @example

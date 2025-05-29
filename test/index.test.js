@@ -321,8 +321,11 @@ describe("ESTest", () => {
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
-        ESTest("123e4567-e89b-12d3-a456-426614174000", "string?").uuid();
-        ESTest("123e4567-e89b-12d3-a456-426614174000", "string").uuid();
+        ESTest("550e8400-e29b-41d4-a716-446655440000", "string").uuid4();
+        ESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d", "string").uuid7();
+
+        ESTest("550e8400-e29b-41d4-a716-446655440000", "string?").uuid4();
+        ESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d", "string?").uuid7();
 
         expect(publicMessage).toHaveBeenCalledTimes(0);
         expect(privateMessage).toHaveBeenCalledTimes(0);
@@ -336,27 +339,29 @@ describe("ESTest", () => {
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
-        ESTest("123e4567-e89b-12d3-a456", "string?").uuid();
-        ESTest("123e4567-e89b-12d3-a456-42661417400z", "string?").uuid();
-        ESTest("123e--4567-e89b-12d3-a456-426614174000", "string?").uuid();
-        ESTest("123e4567|e89b|12d3|a456|426614174000", "string?").uuid();
-        ESTest("123e4567-e89b-12d3-a456-4266141740000000", "string?").uuid();
-        ESTest("123e4567-e89b-12d3-a456-426g14174000", "string?").uuid();
-        ESTest("123e4567--e89b-12d3-a456-426614174000", "string?").uuid();
-        ESTest("123e4567-e89b-12d3-a456-@426614174000", "string?").uuid();
-        ESTest("123e/4567/e89b/12d3/a456/426614174000", "string?").uuid();
-        ESTest("123e4567-e89b-12d3-a456-42661417400", "string?").uuid();
+        ESTest("123e4567|e89b|12d3|a456|426614174000", "string?").uuid4();
+        ESTest("123e4567-e89b-12d3-a456-426g14174000", "string?").uuid4();
+        ESTest("123e4567--e89b-12d3-a456-426614174000", "string?").uuid4();
+        ESTest("123e4567-e89b-12d3-a456-@426614174000", "string?").uuid4();
+        ESTest("123e/4567/e89b/12d3/a456/426614174000", "string?").uuid4();
 
-        ESTest("123e4567-e89b-12d3-a456", "string").uuid();
-        ESTest("123e4567-e89b-12d3-a456-42661417400z", "string").uuid();
-        ESTest("123e--4567-e89b-12d3-a456-426614174000", "string").uuid();
-        ESTest("123e4567|e89b|12d3|a456|426614174000", "string").uuid();
-        ESTest("123e4567-e89b-12d3-a456-4266141740000000", "string").uuid();
-        ESTest("123e4567-e89b-12d3-a456-426g14174000", "string").uuid();
-        ESTest("123e4567--e89b-12d3-a456-426614174000", "string").uuid();
-        ESTest("123e4567-e89b-12d3-a456-@426614174000", "string").uuid();
-        ESTest("123e/4567/e89b/12d3/a456/426614174000", "string").uuid();
-        ESTest("123e4567-e89b-12d3-a456-42661417400", "string").uuid();
+        ESTest("123e4567|e89b|12d3|a456|426614174000", "string").uuid4();
+        ESTest("123e4567-e89b-12d3-a456-426g14174000", "string").uuid4();
+        ESTest("123e4567--e89b-12d3-a456-426614174000", "string").uuid4();
+        ESTest("123e4567-e89b-12d3-a456-@426614174000", "string").uuid4();
+        ESTest("123e/4567/e89b/12d3/a456/426614174000", "string").uuid4();
+
+        ESTest("0189c7e4-3b8a-4e3b-8291-4e6f2b1a4c7d", "string?").uuid7();
+        ESTest("0189c7e4-3b8a-7e3b-c291-4e6f2b1a4c7d", "string?").uuid7();
+        ESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c", "string?").uuid7();
+        ESTest("0189c7e43b8a7e3b82914e6f2b1a4c7d", "string?").uuid7();
+        ESTest("0189c7e4-3b8a-7e3b-z291-4e6f2b1a4c7d", "string?").uuid7();
+
+        ESTest("0189c7e4-3b8a-4e3b-8291-4e6f2b1a4c7d", "string").uuid7();
+        ESTest("0189c7e4-3b8a-7e3b-c291-4e6f2b1a4c7d", "string").uuid7();
+        ESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c", "string").uuid7();
+        ESTest("0189c7e43b8a7e3b82914e6f2b1a4c7d", "string").uuid7();
+        ESTest("0189c7e4-3b8a-7e3b-z291-4e6f2b1a4c7d", "string").uuid7();
 
         expect(publicMessage).toHaveBeenCalledTimes(20);
         expect(privateMessage).toHaveBeenCalledTimes(20);
@@ -1139,110 +1144,124 @@ describe("unSafeESTest", () => {
 
     describe("uuid", () => {
       test("success", () => {
-        unSafeESTest("123e4567-e89b-12d3-a456-426614174000", "string?").uuid();
-        unSafeESTest("123e4567-e89b-12d3-a456-426614174000", "string").uuid();
+        unSafeESTest("550e8400-e29b-41d4-a716-446655440000", "string").uuid4();
+        unSafeESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d", "string").uuid7();
+
+        unSafeESTest("550e8400-e29b-41d4-a716-446655440000", "string?").uuid4();
+        unSafeESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d", "string?").uuid7();
       });
 
       test("fail", () => {
         expect(() =>
-          unSafeESTest("123e4567-e89b-12d3-a456", "string?").uuid(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest(
-            "123e4567-e89b-12d3-a456-42661417400z",
-            "string?",
-          ).uuid(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest(
-            "123e--4567-e89b-12d3-a456-426614174000",
-            "string",
-          ).uuid(),
-        ).toThrowError();
-        expect(() =>
           unSafeESTest(
             "123e4567|e89b|12d3|a456|426614174000",
             "string?",
-          ).uuid(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest(
-            "123e4567-e89b-12d3-a456-4266141740000000",
-            "string",
-          ).uuid(),
+          ).uuid4(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
             "123e4567-e89b-12d3-a456-426g14174000",
             "string?",
-          ).uuid(),
+          ).uuid4(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
             "123e4567--e89b-12d3-a456-426614174000",
-            "string",
-          ).uuid(),
+            "string?",
+          ).uuid4(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
             "123e4567-e89b-12d3-a456-@426614174000",
-            "string",
-          ).uuid(),
+            "string?",
+          ).uuid4(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
             "123e/4567/e89b/12d3/a456/426614174000",
-            "string",
-          ).uuid(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("123e4567-e89b-12d3-a456-42661417400", "string?").uuid(),
+            "string?",
+          ).uuid4(),
         ).toThrowError();
 
         expect(() =>
-          unSafeESTest("123e4567-e89b-12d3-a456", "string").uuid(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("123e4567-e89b-12d3-a456-42661417400z", "string").uuid(),
+          unSafeESTest(
+            "123e4567|e89b|12d3|a456|426614174000",
+            "string",
+          ).uuid4(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
-            "123e--4567-e89b-12d3-a456-426614174000",
+            "123e4567-e89b-12d3-a456-426g14174000",
             "string",
-          ).uuid(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("123e4567|e89b|12d3|a456|426614174000", "string").uuid(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest(
-            "123e4567-e89b-12d3-a456-4266141740000000",
-            "string",
-          ).uuid(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("123e4567-e89b-12d3-a456-426g14174000", "string").uuid(),
+          ).uuid4(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
             "123e4567--e89b-12d3-a456-426614174000",
             "string",
-          ).uuid(),
+          ).uuid4(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
             "123e4567-e89b-12d3-a456-@426614174000",
             "string",
-          ).uuid(),
+          ).uuid4(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
             "123e/4567/e89b/12d3/a456/426614174000",
             "string",
-          ).uuid(),
+          ).uuid4(),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            "0189c7e4-3b8a-4e3b-8291-4e6f2b1a4c7d",
+            "string?",
+          ).uuid7(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("123e4567-e89b-12d3-a456-42661417400", "string").uuid(),
+          unSafeESTest(
+            "0189c7e4-3b8a-7e3b-c291-4e6f2b1a4c7d",
+            "string?",
+          ).uuid7(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c", "string?").uuid7(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("0189c7e43b8a7e3b82914e6f2b1a4c7d", "string?").uuid7(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest(
+            "0189c7e4-3b8a-7e3b-z291-4e6f2b1a4c7d",
+            "string?",
+          ).uuid7(),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            "0189c7e4-3b8a-4e3b-8291-4e6f2b1a4c7d",
+            "string",
+          ).uuid7(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest(
+            "0189c7e4-3b8a-7e3b-c291-4e6f2b1a4c7d",
+            "string",
+          ).uuid7(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c", "string").uuid7(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("0189c7e43b8a7e3b82914e6f2b1a4c7d", "string").uuid7(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest(
+            "0189c7e4-3b8a-7e3b-z291-4e6f2b1a4c7d",
+            "string",
+          ).uuid7(),
         ).toThrowError();
       });
     });

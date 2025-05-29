@@ -176,13 +176,30 @@ const _chain = {
       return this;
     }
 
-    uuid() {
-      // from zod v3.24.1 https://github.com/colinhacks/zod/blob/main/src/types.ts
-      // Changed: removed \b (not necessary)
-      const uuidRegexp =
-        /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/i;
+    uuid4() {
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      const uuid4 =
+        /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
 
-      if (uuidRegexp.test(this.input) === false) {
+      if (uuid4.test(this.input) === false) {
+        _error(
+          this.input,
+          this.type,
+          this.pubMsg,
+          this.isUnSafe,
+          "invalidInput",
+        );
+      }
+
+      return this;
+    }
+
+    uuid7() {
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      const uuid7 =
+        /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
+
+      if (uuid7.test(this.input) === false) {
         _error(
           this.input,
           this.type,
@@ -694,7 +711,13 @@ const _chain = {
       return this;
     }
 
-    uuid() {
+    uuid4() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    uuid7() {
       _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
 
       return this;
