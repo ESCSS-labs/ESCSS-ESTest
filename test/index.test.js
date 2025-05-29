@@ -412,6 +412,9 @@ describe("ESTest", () => {
         ESTest("SGVsbG8gd29ybGQh", "string?").base64();
         ESTest("SGVsbG8gd29ybGQh", "string").base64();
 
+        ESTest("Zm9vYmFyXzEyMw", "string?").base64url();
+        ESTest("Zm9vYmFyXzEyMw", "string").base64url();
+
         expect(publicMessage).toHaveBeenCalledTimes(0);
         expect(privateMessage).toHaveBeenCalledTimes(0);
       });
@@ -424,27 +427,29 @@ describe("ESTest", () => {
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
-        ESTest("SGVsbG8gd29ybGQ@123", "string?").base64();
         ESTest("SGVsbG8gd29ybGQ@!#", "string?").base64();
-        ESTest("SGVsbG8gd29yb", "string?").base64();
         ESTest("SGVsbG8gd29ybGQ===", "string?").base64();
-        ESTest("SGVsbG8!d29ybGQ=", "string?").base64();
-        ESTest("U29mdHowUuY29tL2ZpbGU=", "string?").base64();
         ESTest("SGVsbG8gd29ybGQ--", "string?").base64();
-        ESTest("SGVsbG8gd29ybGQ$%^&", "string?").base64();
         ESTest("!@#SGVsbG8gd29ybGQ=", "string?").base64();
-        ESTest("==============", "string?").base64();
+        ESTest("SGVsbG8gd29ybGQ$%^&", "string?").base64();
 
-        ESTest("SGVsbG8gd29ybGQ@123", "string").base64();
         ESTest("SGVsbG8gd29ybGQ@!#", "string").base64();
-        ESTest("SGVsbG8gd29yb", "string").base64();
         ESTest("SGVsbG8gd29ybGQ===", "string").base64();
-        ESTest("SGVsbG8!d29ybGQ=", "string").base64();
-        ESTest("U29mdHowUuY29tL2ZpbGU=", "string").base64();
         ESTest("SGVsbG8gd29ybGQ--", "string").base64();
-        ESTest("SGVsbG8gd29ybGQ$%^&", "string").base64();
         ESTest("!@#SGVsbG8gd29ybGQ=", "string").base64();
-        ESTest("==============", "string").base64();
+        ESTest("SGVsbG8gd29ybGQ$%^&", "string").base64();
+
+        ESTest("SGVsbG8gV29ybGQ=", "string?").base64url();
+        ESTest("invalid+char/example", "string?").base64url();
+        ESTest("another=fail", "string?").base64url();
+        ESTest("你好世界", "string?").base64url();
+        ESTest("padded==", "string?").base64url();
+
+        ESTest("SGVsbG8gV29ybGQ=", "string").base64url();
+        ESTest("invalid+char/example", "string").base64url();
+        ESTest("another=fail", "string").base64url();
+        ESTest("你好世界", "string").base64url();
+        ESTest("padded==", "string").base64url();
 
         expect(publicMessage).toHaveBeenCalledTimes(20);
         expect(privateMessage).toHaveBeenCalledTimes(20);
@@ -1284,69 +1289,74 @@ describe("unSafeESTest", () => {
       test("success", () => {
         unSafeESTest("SGVsbG8gd29ybGQh", "string?").base64();
         unSafeESTest("SGVsbG8gd29ybGQh", "string").base64();
+
+        unSafeESTest("Zm9vYmFyXzEyMw", "string?").base64url();
+        unSafeESTest("Zm9vYmFyXzEyMw", "string").base64url();
       });
 
       test("fail", () => {
         expect(() =>
-          unSafeESTest("SGVsbG8gd29ybGQ@123", "string?").base64(),
-        ).toThrowError();
-        expect(() =>
           unSafeESTest("SGVsbG8gd29ybGQ@!#", "string?").base64(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("SGVsbG8gd29yb", "string?").base64(),
         ).toThrowError();
         expect(() =>
           unSafeESTest("SGVsbG8gd29ybGQ===", "string?").base64(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("SGVsbG8!d29ybGQ=", "string?").base64(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("U29mdHowUuY29tL2ZpbGU=", "string?").base64(),
-        ).toThrowError();
-        expect(() =>
           unSafeESTest("SGVsbG8gd29ybGQ--", "string?").base64(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("SGVsbG8gd29ybGQ$%^&", "string?").base64(),
         ).toThrowError();
         expect(() =>
           unSafeESTest("!@#SGVsbG8gd29ybGQ=", "string?").base64(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("==============", "string?").base64(),
+          unSafeESTest("SGVsbG8gd29ybGQ$%^&", "string?").base64(),
         ).toThrowError();
 
         expect(() =>
-          unSafeESTest("SGVsbG8gd29ybGQ@123", "string").base64(),
-        ).toThrowError();
-        expect(() =>
           unSafeESTest("SGVsbG8gd29ybGQ@!#", "string").base64(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("SGVsbG8gd29yb", "string").base64(),
         ).toThrowError();
         expect(() =>
           unSafeESTest("SGVsbG8gd29ybGQ===", "string").base64(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("SGVsbG8!d29ybGQ=", "string").base64(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("U29mdHowUuY29tL2ZpbGU=", "string").base64(),
-        ).toThrowError();
-        expect(() =>
           unSafeESTest("SGVsbG8gd29ybGQ--", "string").base64(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("SGVsbG8gd29ybGQ$%^&", "string").base64(),
         ).toThrowError();
         expect(() =>
           unSafeESTest("!@#SGVsbG8gd29ybGQ=", "string").base64(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("==============", "string").base64(),
+          unSafeESTest("SGVsbG8gd29ybGQ$%^&", "string").base64(),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest("SGVsbG8gV29ybGQ=", "string?").base64url(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("invalid+char/example", "string?").base64url(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("another=fail", "string?").base64url(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("你好世界", "string?").base64url(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("padded==", "string?").base64url(),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest("SGVsbG8gV29ybGQ=", "string").base64url(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("invalid+char/example", "string").base64url(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("another=fail", "string").base64url(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("你好世界", "string").base64url(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("padded==", "string").base64url(),
         ).toThrowError();
       });
     });

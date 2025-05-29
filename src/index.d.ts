@@ -111,6 +111,12 @@ declare interface _String extends _Common<"string"> {
 
   /**
    * @example
+   * ESTest('Zm9vYmFyXzEyMw', 'string').base64url() // pass
+   */
+  base64url(): _Chain<"string">;
+
+  /**
+   * @example
    * ESTest('192.168.1.1', 'string').ip() // pass
    */
   ip4(): _Chain<"string">;

@@ -239,11 +239,28 @@ const _chain = {
     }
 
     base64() {
-      // https://stackoverflow.com/questions/7860392/determine-if-string-is-in-base64-using-javascript
-      const base64Regexp =
-        /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      const base64 =
+        /^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$/;
 
-      if (base64Regexp.test(this.input) === false) {
+      if (base64.test(this.input) === false) {
+        _error(
+          this.input,
+          this.type,
+          this.pubMsg,
+          this.isUnSafe,
+          "invalidInput",
+        );
+      }
+
+      return this;
+    }
+
+    base64url() {
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      const base64url = /^[A-Za-z0-9_-]*$/;
+
+      if (base64url.test(this.input) === false) {
         _error(
           this.input,
           this.type,
@@ -730,6 +747,12 @@ const _chain = {
     }
 
     base64() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    base64url() {
       _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
 
       return this;
