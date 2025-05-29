@@ -158,9 +158,10 @@ const _chain = {
     }
 
     email() {
-      // from zod v3.24.1 https://github.com/colinhacks/zod/blob/main/src/types.ts
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
       const emailRegexp =
-        /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-\\.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\\-]*\.)+[A-Z]{2,}$/i;
+        // eslint-disable-next-line no-useless-escape
+        /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/;
 
       if (emailRegexp.test(this.input) === false) {
         _error(
