@@ -20,6 +20,7 @@ ESTest("SGVsbG8gd29ybGQh", "string").base64();
 ESTest("Zm9vYmFyXzEyMw", "string").base64url();
 ESTest("192.168.1.1", "string").ip4();
 ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip6();
+ESTest("🌀", "string").emoji();
 ESTest(undefined, "string?");
 ESTest(undefined, "string?").description("test");
 
@@ -94,6 +95,7 @@ unSafeESTest("SGVsbG8gd29ybGQh", "string").base64();
 unSafeESTest("Zm9vYmFyXzEyMw", "string").base64url();
 unSafeESTest("192.168.1.1", "string").ip4();
 unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip6();
+unSafeESTest("🌀", "string").emoji();
 unSafeESTest(undefined, "string?");
 unSafeESTest(undefined, "string?").description("test");
 

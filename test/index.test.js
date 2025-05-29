@@ -506,6 +506,38 @@ describe("ESTest", () => {
         expect(privateMessage).toHaveBeenCalledTimes(18);
       });
     });
+
+    describe("emoji", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest("🌀", "string?").emoji();
+        ESTest("🌀", "string").emoji();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest("_1", "string?").emoji();
+        ESTest("_1", "string").emoji();
+
+        expect(publicMessage).toHaveBeenCalledTimes(2);
+        expect(privateMessage).toHaveBeenCalledTimes(2);
+      });
+    });
   });
 
   describe("number", () => {
@@ -1434,6 +1466,18 @@ describe("unSafeESTest", () => {
         expect(() =>
           unSafeESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string").ip6(),
         ).toThrowError();
+      });
+    });
+
+    describe("emoji", () => {
+      test("success", () => {
+        unSafeESTest("🌀", "string?").emoji();
+        unSafeESTest("🌀", "string").emoji();
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest("_1", "string?").emoji()).toThrowError();
+        expect(() => unSafeESTest("_1", "string").emoji()).toThrowError();
       });
     });
   });

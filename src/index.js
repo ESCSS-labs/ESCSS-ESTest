@@ -308,6 +308,23 @@ const _chain = {
 
       return this;
     }
+
+    emoji() {
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      const emoji = /^(?:\p{Extended_Pictographic}|\p{Emoji_Component})+$/u;
+
+      if (emoji.test(this.input) === false) {
+        _error(
+          this.input,
+          this.type,
+          this.pubMsg,
+          this.isUnSafe,
+          "invalidInput",
+        );
+      }
+
+      return this;
+    }
   },
   number: class _Number extends _Common {
     constructor(...args) {
@@ -765,6 +782,12 @@ const _chain = {
     }
 
     ip6() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    emoji() {
       _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
 
       return this;
