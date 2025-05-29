@@ -455,10 +455,10 @@ describe("ESTest", () => {
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
-        ESTest("192.168.1.1", "string?").ip();
-        ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string?").ip();
-        ESTest("192.168.1.1", "string").ip();
-        ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip();
+        ESTest("192.168.1.1", "string?").ip4();
+        ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string?").ip6();
+        ESTest("192.168.1.1", "string").ip4();
+        ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip6();
 
         expect(publicMessage).toHaveBeenCalledTimes(0);
         expect(privateMessage).toHaveBeenCalledTimes(0);
@@ -472,30 +472,28 @@ describe("ESTest", () => {
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
-        ESTest("256.256.256.256", "string?").ip();
-        ESTest("192.168.1", "string?").ip();
-        ESTest("192.168.a.1", "string?").ip();
-        ESTest("192..168.1.1", "string?").ip();
-        ESTest("192.168.1.1.1", "string?").ip();
-        ESTest("2001:db8::a8::::4a:257:202", "string?").ip();
-        ESTest("2001:db8::a8:4a:257g:202", "string?").ip();
-        ESTest("2001:db8:abcd:1234:abcd:1234:abcd:1234:5678", "string?").ip();
-        ESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string?").ip();
-        ESTest("=========", "string?").ip();
+        ESTest("256.256.256.256", "string?").ip4();
+        ESTest("192.168.1", "string?").ip4();
+        ESTest("192.168.a.1", "string?").ip4();
+        ESTest("192..168.1.1", "string?").ip4();
+        ESTest("192.168.1.1.1", "string?").ip4();
+        ESTest("2001:db8::a8::::4a:257:202", "string?").ip6();
+        ESTest("2001:db8::a8:4a:257g:202", "string?").ip6();
+        ESTest("2001:db8:abcd:1234:abcd:1234:abcd:1234:5678", "string?").ip6();
+        ESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string?").ip6();
 
-        ESTest("256.256.256.256", "string").ip();
-        ESTest("192.168.1", "string").ip();
-        ESTest("192.168.a.1", "string").ip();
-        ESTest("192..168.1.1", "string").ip();
-        ESTest("192.168.1.1.1", "string").ip();
-        ESTest("2001:db8::a8::::4a:257:202", "string").ip();
-        ESTest("2001:db8::a8:4a:257g:202", "string").ip();
-        ESTest("2001:db8:abcd:1234:abcd:1234:abcd:1234:5678", "string").ip();
-        ESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string").ip();
-        ESTest("=========", "string").ip();
+        ESTest("256.256.256.256", "string").ip4();
+        ESTest("192.168.1", "string").ip4();
+        ESTest("192.168.a.1", "string").ip4();
+        ESTest("192..168.1.1", "string").ip4();
+        ESTest("192.168.1.1.1", "string").ip4();
+        ESTest("2001:db8::a8::::4a:257:202", "string").ip6();
+        ESTest("2001:db8::a8:4a:257g:202", "string").ip6();
+        ESTest("2001:db8:abcd:1234:abcd:1234:abcd:1234:5678", "string").ip6();
+        ESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string").ip6();
 
-        expect(publicMessage).toHaveBeenCalledTimes(20);
-        expect(privateMessage).toHaveBeenCalledTimes(20);
+        expect(publicMessage).toHaveBeenCalledTimes(18);
+        expect(privateMessage).toHaveBeenCalledTimes(18);
       });
     });
   });
@@ -1256,7 +1254,9 @@ describe("unSafeESTest", () => {
       });
 
       test("fail", () => {
-        expect(() => unSafeESTest("foo", "string?").regexp(/aa/)).toThrowError();
+        expect(() =>
+          unSafeESTest("foo", "string?").regexp(/aa/),
+        ).toThrowError();
         expect(() => unSafeESTest("foo", "string").regexp(/aa/)).toThrowError();
       });
     });
@@ -1334,71 +1334,77 @@ describe("unSafeESTest", () => {
 
     describe("ip", () => {
       test("success", () => {
-        unSafeESTest("192.168.1.1", "string?").ip();
-        unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string?").ip();
+        unSafeESTest("192.168.1.1", "string?").ip4();
+        unSafeESTest(
+          "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+          "string?",
+        ).ip6();
 
-        unSafeESTest("192.168.1.1", "string").ip();
-        unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip();
+        unSafeESTest("192.168.1.1", "string").ip4();
+        unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip6();
       });
 
       test("fail", () => {
         expect(() =>
-          unSafeESTest("256.256.256.256", "string?").ip(),
+          unSafeESTest("256.256.256.256", "string?").ip4(),
         ).toThrowError();
-        expect(() => unSafeESTest("192.168.1", "string?").ip()).toThrowError();
+        expect(() => unSafeESTest("192.168.1", "string?").ip4()).toThrowError();
         expect(() =>
-          unSafeESTest("192.168.a.1", "string?").ip(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("192..168.1.1", "string?").ip(),
+          unSafeESTest("192.168.a.1", "string?").ip4(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("192.168.1.1.1", "string?").ip(),
+          unSafeESTest("192..168.1.1", "string?").ip4(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("2001:db8::a8::::4a:257:202", "string?").ip(),
+          unSafeESTest("192.168.1.1.1", "string?").ip4(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("2001:db8::a8:4a:257g:202", "string?").ip(),
+          unSafeESTest("2001:db8::a8::::4a:257:202", "string?").ip6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("2001:db8::a8:4a:257g:202", "string?").ip6(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
             "2001:db8:abcd:1234:abcd:1234:abcd:1234:5678",
             "string",
-          ).ip(),
+          ).ip6(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string?").ip(),
+          unSafeESTest(
+            "2001:db8:abcd:1234:xyz:1234:abcd:5678",
+            "string?",
+          ).ip6(),
         ).toThrowError();
-        expect(() => unSafeESTest("=========", "string?").ip()).toThrowError();
 
         expect(() =>
-          unSafeESTest("256.256.256.256", "string").ip(),
+          unSafeESTest("256.256.256.256", "string").ip4(),
         ).toThrowError();
-        expect(() => unSafeESTest("192.168.1", "string").ip()).toThrowError();
-        expect(() => unSafeESTest("192.168.a.1", "string").ip()).toThrowError();
+        expect(() => unSafeESTest("192.168.1", "string").ip4()).toThrowError();
         expect(() =>
-          unSafeESTest("192..168.1.1", "string").ip(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("192.168.1.1.1", "string").ip(),
+          unSafeESTest("192.168.a.1", "string").ip4(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("2001:db8::a8::::4a:257:202", "string").ip(),
+          unSafeESTest("192..168.1.1", "string").ip4(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("2001:db8::a8:4a:257g:202", "string").ip(),
+          unSafeESTest("192.168.1.1.1", "string").ip4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("2001:db8::a8::::4a:257:202", "string").ip6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("2001:db8::a8:4a:257g:202", "string").ip6(),
         ).toThrowError();
         expect(() =>
           unSafeESTest(
             "2001:db8:abcd:1234:abcd:1234:abcd:1234:5678",
             "string",
-          ).ip(),
+          ).ip6(),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string").ip(),
+          unSafeESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string").ip6(),
         ).toThrowError();
-        expect(() => unSafeESTest("=========", "string").ip()).toThrowError();
       });
     });
   });

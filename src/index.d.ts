@@ -105,10 +105,15 @@ declare interface _String extends _Common<"string"> {
 
   /**
    * @example
-   * ESTest('192.168.1.1', 'string').ip() // pass ipv4
-   * ESTest('2001:0db8:85a3:0000:0000:8a2e:0370:7334', 'string').ip() // pass ipv6
+   * ESTest('192.168.1.1', 'string').ip() // pass
    */
-  ip(): _Chain<"string">;
+  ip4(): _Chain<"string">;
+
+  /**
+   * @example
+   * ESTest('2001:0db8:85a3:0000:0000:8a2e:0370:7334', 'string').ip() // pass
+   */
+  ip6(): _Chain<"string">;
 }
 
 declare interface _Number extends _Common<"number"> {
@@ -232,7 +237,7 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
 
 /**
  * @example
- * 
+ *
  * // Same as ESTest just used for "library" to wrap default public message
  * function ESTest(input, type, pubMsg = "[libraryName] your message for others to help debugging") {
  *  return baseESTest(input, type, pubMsg)

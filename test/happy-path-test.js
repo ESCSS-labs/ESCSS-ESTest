@@ -16,8 +16,8 @@ ESTest("foo@gmail.com", "string").email();
 ESTest(crypto.randomUUID(), "string").uuid();
 ESTest("foo bar", "string").regexp(/(foo|bar)/);
 ESTest("SGVsbG8gd29ybGQh", "string").base64();
-ESTest("192.168.1.1", "string").ip();
-ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip();
+ESTest("192.168.1.1", "string").ip4();
+ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip6();
 ESTest(undefined, "string?");
 ESTest(undefined, "string?").description("test");
 
@@ -88,8 +88,8 @@ unSafeESTest("foo@gmail.com", "string").email();
 unSafeESTest(crypto.randomUUID(), "string").uuid();
 unSafeESTest("foo bar", "string").regexp(/(foo|bar)/);
 unSafeESTest("SGVsbG8gd29ybGQh", "string").base64();
-unSafeESTest("192.168.1.1", "string").ip();
-unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip();
+unSafeESTest("192.168.1.1", "string").ip4();
+unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip6();
 unSafeESTest(undefined, "string?");
 unSafeESTest(undefined, "string?").description("test");
 
