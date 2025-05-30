@@ -507,6 +507,65 @@ describe("ESTest", () => {
       });
     });
 
+    describe("cidr", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest("192.168.1.1/16", "string?").cidr4();
+        ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334/16", "string?").cidr6();
+        ESTest("192.168.1.1/16", "string").cidr4();
+        ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334/16", "string").cidr6();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest("256.256.256.256/255", "string?").cidr4();
+        ESTest("192.168.1+16", "string?").cidr4();
+        ESTest("192.168.a.1-16", "string?").cidr4();
+        ESTest("192..168.1.1_16", "string?").cidr4();
+        ESTest("192.168.1.1.1/-16", "string?").cidr4();
+        ESTest("2001:db8::a8::::4a:257:202/255", "string?").cidr6();
+        ESTest("2001:db8::a8:4a:257g:202+16", "string?").cidr6();
+        ESTest("2001:db8::a8:4a:257g:202-16", "string?").cidr6();
+        ESTest(
+          "2001:db8:abcd:1234:abcd:1234:abcd:1234:5678_16",
+          "string?",
+        ).cidr6();
+        ESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678/-16", "string?").cidr6();
+
+        ESTest("256.256.256.256/255", "string").cidr4();
+        ESTest("192.168.1+16", "string").cidr4();
+        ESTest("192.168.a.1-16", "string").cidr4();
+        ESTest("192..168.1.1_16", "string").cidr4();
+        ESTest("192.168.1.1.1/-16", "string").cidr4();
+        ESTest("2001:db8::a8::::4a:257:202/255", "string").cidr6();
+        ESTest("2001:db8::a8:4a:257g:202+16", "string").cidr6();
+        ESTest("2001:db8::a8:4a:257g:202-16", "string").cidr6();
+        ESTest(
+          "2001:db8:abcd:1234:abcd:1234:abcd:1234:5678_16",
+          "string",
+        ).cidr6();
+        ESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678/-16", "string").cidr6();
+
+        expect(publicMessage).toHaveBeenCalledTimes(20);
+        expect(privateMessage).toHaveBeenCalledTimes(20);
+      });
+    });
+
     describe("emoji", () => {
       test("success", () => {
         const publicMessage = vi
@@ -1465,6 +1524,107 @@ describe("unSafeESTest", () => {
         ).toThrowError();
         expect(() =>
           unSafeESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string").ip6(),
+        ).toThrowError();
+      });
+    });
+
+    describe("cidr", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest("192.168.1.1/16", "string?").cidr4();
+        unSafeESTest(
+          "2001:0db8:85a3:0000:0000:8a2e:0370:7334/16",
+          "string?",
+        ).cidr6();
+        unSafeESTest("192.168.1.1/16", "string").cidr4();
+        unSafeESTest(
+          "2001:0db8:85a3:0000:0000:8a2e:0370:7334/16",
+          "string",
+        ).cidr6();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() =>
+          unSafeESTest("256.256.256.256/255", "string?").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("192.168.1+16", "string?").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("192.168.a.1-16", "string?").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("192..168.1.1_16", "string?").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("192.168.1.1.1/-16", "string?").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("2001:db8::a8::::4a:257:202/255", "string?").cidr6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("2001:db8::a8:4a:257g:202+16", "string?").cidr6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("2001:db8::a8:4a:257g:202-16", "string?").cidr6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest(
+            "2001:db8:abcd:1234:abcd:1234:abcd:1234:5678_16",
+            "string?",
+          ).cidr6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest(
+            "2001:db8:abcd:1234:xyz:1234:abcd:5678/-16",
+            "string?",
+          ).cidr6(),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest("256.256.256.256/255", "string").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("192.168.1+16", "string").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("192.168.a.1-16", "string").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("192..168.1.1_16", "string").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("192.168.1.1.1/-16", "string").cidr4(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("2001:db8::a8::::4a:257:202/255", "string").cidr6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("2001:db8::a8:4a:257g:202+16", "string").cidr6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("2001:db8::a8:4a:257g:202-16", "string").cidr6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest(
+            "2001:db8:abcd:1234:abcd:1234:abcd:1234:5678_16",
+            "string",
+          ).cidr6(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest(
+            "2001:db8:abcd:1234:xyz:1234:abcd:5678/-16",
+            "string",
+          ).cidr6(),
         ).toThrowError();
       });
     });

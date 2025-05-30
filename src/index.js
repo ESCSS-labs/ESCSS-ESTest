@@ -309,6 +309,42 @@ const _chain = {
       return this;
     }
 
+    cidr4() {
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      const cidr4 =
+        /^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\/([0-9]|[1-2][0-9]|3[0-2])$/;
+
+      if (cidr4.test(this.input) === false) {
+        _error(
+          this.input,
+          this.type,
+          this.pubMsg,
+          this.isUnSafe,
+          "invalidInput",
+        );
+      }
+
+      return this;
+    }
+
+    cidr6() {
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      const cidr6 =
+        /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
+
+      if (cidr6.test(this.input) === false) {
+        _error(
+          this.input,
+          this.type,
+          this.pubMsg,
+          this.isUnSafe,
+          "invalidInput",
+        );
+      }
+
+      return this;
+    }
+
     emoji() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
       const emoji = /^(?:\p{Extended_Pictographic}|\p{Emoji_Component})+$/u;
@@ -782,6 +818,18 @@ const _chain = {
     }
 
     ip6() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    cidr4() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    cidr6() {
       _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
 
       return this;
