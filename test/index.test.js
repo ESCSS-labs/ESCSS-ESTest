@@ -1007,6 +1007,245 @@ describe("ESTest", () => {
     });
   });
 
+  describe("bigint", () => {
+    describe("less", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(1n, "bigint?").less(10n);
+        ESTest(1n, "bigint").less(10n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(20n, "bigint?").less(10n);
+        ESTest(20n, "bigint").less(10n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(2);
+        expect(privateMessage).toHaveBeenCalledTimes(2);
+      });
+    });
+
+    describe("max", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(1n, "bigint?").max(10n);
+        ESTest(1n, "bigint?").max(1n);
+        ESTest(1n, "bigint").max(10n);
+        ESTest(1n, "bigint").max(1n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(20n, "bigint?").max(10n);
+        ESTest(20n, "bigint").max(10n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(2);
+        expect(privateMessage).toHaveBeenCalledTimes(2);
+      });
+    });
+
+    describe("greater", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(15n, "bigint?").greater(10n);
+        ESTest(15n, "bigint").greater(10n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(3n, "bigint?").greater(10n);
+        ESTest(3n, "bigint").greater(10n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(2);
+        expect(privateMessage).toHaveBeenCalledTimes(2);
+      });
+    });
+
+    describe("min", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(15n, "bigint?").min(10n);
+        ESTest(15n, "bigint?").min(15n);
+
+        ESTest(15n, "bigint").min(10n);
+        ESTest(15n, "bigint").min(15n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(3n, "bigint?").min(10n);
+        ESTest(3n, "bigint").min(10n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(2);
+        expect(privateMessage).toHaveBeenCalledTimes(2);
+      });
+    });
+
+    describe("positive", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(15n, "bigint?").positive();
+        ESTest(15n, "bigint").positive();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(-3n, "bigint?").positive();
+        ESTest(-1n, "bigint?").positive();
+        ESTest(-3n, "bigint").positive();
+        ESTest(-1n, "bigint").positive();
+
+        expect(publicMessage).toHaveBeenCalledTimes(4);
+        expect(privateMessage).toHaveBeenCalledTimes(4);
+      });
+    });
+
+    describe("negative", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(-15n, "bigint?").negative();
+        ESTest(-15n, "bigint").negative();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(3n, "bigint?").negative();
+        ESTest(1n, "bigint?").negative();
+
+        ESTest(3n, "bigint").negative();
+        ESTest(1n, "bigint").negative();
+
+        expect(publicMessage).toHaveBeenCalledTimes(4);
+        expect(privateMessage).toHaveBeenCalledTimes(4);
+      });
+    });
+
+    describe("multiple", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(15n, "bigint?").multiple(5n);
+        ESTest(15n, "bigint").multiple(5n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest(15n, "bigint?").multiple(2n);
+        ESTest(15n, "bigint?").multiple(4n);
+
+        ESTest(15n, "bigint").multiple(2n);
+        ESTest(15n, "bigint").multiple(4n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(4);
+        expect(privateMessage).toHaveBeenCalledTimes(4);
+      });
+    });
+  });
+
   describe("edge case", () => {
     test("3rd argument is wrong", () => {
       const publicMessage = vi
@@ -2034,6 +2273,175 @@ describe("unSafeESTest", () => {
       test("fail", () => {
         expect(() => unSafeESTest([1], "array?").min(10)).toThrowError();
         expect(() => unSafeESTest([1], "array").min(10)).toThrowError();
+      });
+    });
+  });
+
+  describe("bigint", () => {
+    describe("less", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(1n, "bigint?").less(10n);
+        unSafeESTest(1n, "bigint").less(10n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(20n, "bigint?").less(10n)).toThrowError();
+        expect(() => unSafeESTest(20n, "bigint").less(10n)).toThrowError();
+      });
+    });
+
+    describe("max", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(1n, "bigint?").max(10n);
+        unSafeESTest(1n, "bigint?").max(1n);
+        unSafeESTest(1n, "bigint").max(10n);
+        unSafeESTest(1n, "bigint").max(1n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(20n, "bigint?").max(10n)).toThrowError();
+        expect(() => unSafeESTest(20n, "bigint").max(10n)).toThrowError();
+      });
+    });
+
+    describe("greater", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(15n, "bigint?").greater(10n);
+        unSafeESTest(15n, "bigint").greater(10n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(3n, "bigint?").greater(10n)).toThrowError();
+        expect(() => unSafeESTest(3n, "bigint").greater(10n)).toThrowError();
+      });
+    });
+
+    describe("min", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(15n, "bigint?").min(10n);
+        unSafeESTest(15n, "bigint?").min(15n);
+
+        unSafeESTest(15n, "bigint").min(10n);
+        unSafeESTest(15n, "bigint").min(15n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(3n, "bigint?").min(10n)).toThrowError();
+        expect(() => unSafeESTest(3n, "bigint").min(10n)).toThrowError();
+      });
+    });
+
+    describe("positive", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(15n, "bigint?").positive();
+        unSafeESTest(15n, "bigint").positive();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(-3n, "bigint?").positive()).toThrowError();
+        expect(() => unSafeESTest(-1n, "bigint?").positive()).toThrowError();
+        expect(() => unSafeESTest(-3n, "bigint").positive()).toThrowError();
+        expect(() => unSafeESTest(-1n, "bigint").positive()).toThrowError();
+      });
+    });
+
+    describe("negative", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(-15n, "bigint?").negative();
+        unSafeESTest(-15n, "bigint").negative();
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(3n, "bigint?").negative()).toThrowError();
+        expect(() => unSafeESTest(1n, "bigint?").negative()).toThrowError();
+
+        expect(() => unSafeESTest(3n, "bigint").negative()).toThrowError();
+        expect(() => unSafeESTest(1n, "bigint").negative()).toThrowError();
+      });
+    });
+
+    describe("multiple", () => {
+      test("success", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(15n, "bigint?").multiple(5n);
+        unSafeESTest(15n, "bigint").multiple(5n);
+
+        expect(publicMessage).toHaveBeenCalledTimes(0);
+        expect(privateMessage).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest(15n, "bigint?").multiple(2n)).toThrowError();
+        expect(() => unSafeESTest(15n, "bigint?").multiple(4n)).toThrowError();
+
+        expect(() => unSafeESTest(15n, "bigint").multiple(2n)).toThrowError();
+        expect(() => unSafeESTest(15n, "bigint").multiple(4n)).toThrowError();
       });
     });
   });

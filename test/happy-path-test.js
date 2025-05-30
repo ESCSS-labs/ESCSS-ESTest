@@ -64,6 +64,13 @@ ESTest(new Date(), "date").description("test");
 
 ESTest(1n, "bigint");
 ESTest(1n, "bigint").description("test");
+ESTest(5n, "bigint").less(10n);
+ESTest(5n, "bigint").max(10n);
+ESTest(15n, "bigint").greater(10n);
+ESTest(15n, "bigint").min(10n);
+ESTest(15n, "bigint").positive();
+ESTest(-15n, "bigint").negative();
+ESTest(15n, "bigint").multiple(3n);
 ESTest(undefined, "bigint?");
 ESTest(undefined, "bigint?").description("test");
 
@@ -143,6 +150,13 @@ unSafeESTest(new Date(), "date").description("test");
 
 unSafeESTest(1n, "bigint");
 unSafeESTest(1n, "bigint").description("test");
+unSafeESTest(5n, "bigint").less(10n);
+unSafeESTest(5n, "bigint").max(10n);
+unSafeESTest(15n, "bigint").greater(10n);
+unSafeESTest(15n, "bigint").min(10n);
+unSafeESTest(15n, "bigint").positive();
+unSafeESTest(-15n, "bigint").negative();
+unSafeESTest(15n, "bigint").multiple(3n);
 unSafeESTest(undefined, "bigint?");
 unSafeESTest(undefined, "bigint?").description("test");
 
