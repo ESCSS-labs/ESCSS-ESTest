@@ -1148,46 +1148,15 @@ function _test(input, type, message, isUnSafe) {
     // invalid type
     if (!_ALLOWED_TYPES.includes(type)) {
       type = "undefined";
+
+      if (typeof message !== "string") {
+        _error(input, type, message, isUnSafe, "errArg3");
+      }
+
       _error(input, type, message, isUnSafe, "errArg2");
-
-      if (typeof message !== "string") {
-        _error(input, type, message, isUnSafe, "errArg3");
-      }
     }
 
-    // "string?" case
-    else if (type.endsWith("?")) {
-      // is a valid number?
-      if (
-        _typeof(input) === "number" &&
-        !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
-      ) {
-        _error(input, type, message, isUnSafe, "invalidNumber");
-      }
-
-      // is a valid date?
-      if (input instanceof Date && isNaN(input)) {
-        _error(input, type, message, isUnSafe, "invalidDate");
-      }
-
-      // is a valid message?
-      if (typeof message !== "string") {
-        _error(input, type, message, isUnSafe, "errArg3");
-      }
-
-      // "string" === "string" || "undefined" === "string"? case
-      if (_typeof(input) === type.slice(0, -1) || input === undefined) {
-        type = type.slice(0, -1);
-      }
-
-      // "number" !== "string?" case
-      else {
-        _error(input, type, message, isUnSafe, "errArg1");
-        type = type.slice(0, -1);
-      }
-    }
-
-    // "string" case
+    // valid type
     else {
       // is a valid number?
       if (
@@ -1207,9 +1176,22 @@ function _test(input, type, message, isUnSafe) {
         _error(input, type, message, isUnSafe, "errArg3");
       }
 
-      // "string" !== "string" case
-      if (_typeof(input) !== type) {
-        _error(input, type, message, isUnSafe, "errArg1");
+      // "string?" case
+      if (type.endsWith("?")) {
+        // "number" !== "string?" case
+        if (input !== undefined && _typeof(input) !== type.slice(0, -1)) {
+          _error(input, type, message, isUnSafe, "errArg1");
+        }
+
+        type = type.slice(0, -1);
+      }
+
+      // "string" case
+      else {
+        // "number" !== "string" case
+        if (_typeof(input) !== type) {
+          _error(input, type, message, isUnSafe, "errArg1");
+        }
       }
     }
   }
