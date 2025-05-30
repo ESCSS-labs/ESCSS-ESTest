@@ -285,7 +285,7 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
 /**
  * @example
  *
- * // Same as ESTest just used for "library" to wrap default public message
+ * // Same as ESTest just used for "library" to wrap default message
  * function ESTest(input, type, pubMsg = "[libraryName] your message for others to help debugging") {
  *  return baseESTest(input, type, pubMsg)
  * }
@@ -301,6 +301,11 @@ export declare function baseESTest<T extends _ALLOWED_TYPES>(
 declare global {
   var __ESCSS_ESTEST__: {
     /**
+     * library information
+     */
+    information: string;
+
+    /**
      * @example
      * // A template message to get feedback from others
      *
@@ -310,7 +315,8 @@ declare global {
      * // Example 2: for company:
      * 'Please note when the issue occurred and send the details to [link].'
      */
-    publicMessage: string;
+    message: string;
+
     /**
      * // Note: unSafeESTest won't be disabled (security reason).
      * @example
@@ -318,9 +324,5 @@ declare global {
      * globalThis.__ESCSS_ESTEST__.isESTestDisabled = true
      */
     isESTestDisabled: boolean;
-    /**
-     * library information
-     */
-    information: string;
   };
 }

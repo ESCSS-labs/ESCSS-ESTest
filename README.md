@@ -49,7 +49,7 @@ function demo() {
 
 ## Core API
 
-### `ESTest(input, type, publicMessage)`
+### `ESTest(input, type, message)`
 
 #### _ESTest is just a console.error(...), so it won't break your app._
 
@@ -109,7 +109,7 @@ async function getApi(a, b) {
 }
 ```
 
-### `unSafeESTest(input, type, errorMessage)`
+### `unSafeESTest(input, type, message)`
 
 #### unSafeESTest throws a new Error, make sure to wrap it in try...catch
 
@@ -141,12 +141,12 @@ app.post("/validate", async (req, res) => {
 
 ## Support API
 
-### `globalThis.__ESCSS_ESTEST__.publicMessage`
+### `globalThis.__ESCSS_ESTEST__.message`
 
 - Get feedback from others
 
 ```js
-globalThis.__ESCSS_ESTEST__.publicMessage =
+globalThis.__ESCSS_ESTEST__.message =
   "Please note when the issue occurred and send the details to [link].";
 ```
 

@@ -27,10 +27,8 @@ describe("ESTest", () => {
     });
 
     test("fail", () => {
-      const publicMessage = vi
-        .spyOn(console, "error")
-        .mockImplementation(() => {});
-      const privateMessage = vi
+      const message = vi.spyOn(console, "error").mockImplementation(() => {});
+      const information = vi
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
@@ -54,8 +52,8 @@ describe("ESTest", () => {
       expect(ESTest(Symbol("a"), "function")).toBeTypeOf("object");
       expect(ESTest(() => {}, "regexp")).toBeTypeOf("object");
 
-      expect(publicMessage).toHaveBeenCalledTimes(19);
-      expect(privateMessage).toHaveBeenCalledTimes(19);
+      expect(message).toHaveBeenCalledTimes(19);
+      expect(information).toHaveBeenCalledTimes(19);
     });
   });
 
@@ -84,10 +82,8 @@ describe("ESTest", () => {
     });
 
     test("fail", () => {
-      const publicMessage = vi
-        .spyOn(console, "error")
-        .mockImplementation(() => {});
-      const privateMessage = vi
+      const message = vi.spyOn(console, "error").mockImplementation(() => {});
+      const information = vi
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
@@ -111,17 +107,15 @@ describe("ESTest", () => {
       expect(ESTest(Symbol("a"), "function", 1)).toBeTypeOf("object");
       expect(ESTest(() => {}, "regexp", 1)).toBeTypeOf("object");
 
-      expect(publicMessage).toHaveBeenCalledTimes(38);
-      expect(privateMessage).toHaveBeenCalledTimes(38);
+      expect(message).toHaveBeenCalledTimes(38);
+      expect(information).toHaveBeenCalledTimes(38);
     });
   });
 
   describe("common", () => {
     test("description", () => {
-      const publicMessage = vi
-        .spyOn(console, "error")
-        .mockImplementation(() => {});
-      const privateMessage = vi
+      const message = vi.spyOn(console, "error").mockImplementation(() => {});
+      const information = vi
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
@@ -145,18 +139,16 @@ describe("ESTest", () => {
       ESTest(() => {}, "function").description("test");
       ESTest(/a/, "regexp").description("test");
 
-      expect(publicMessage).toHaveBeenCalledTimes(0);
-      expect(privateMessage).toHaveBeenCalledTimes(0);
+      expect(message).toHaveBeenCalledTimes(0);
+      expect(information).toHaveBeenCalledTimes(0);
     });
   });
 
   describe("string", () => {
     describe("max", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -165,32 +157,28 @@ describe("ESTest", () => {
         ESTest("foo", "string").max(10);
         ESTest("foo", "string").max(3);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest("foo", "string?").max(-10);
         ESTest("foo", "string").max(-10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("min", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -199,79 +187,69 @@ describe("ESTest", () => {
         ESTest("foo", "string").min(1);
         ESTest("foo", "string").min(3);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest("foo", "string?").min(10);
         ESTest("foo", "string").min(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("length", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest("foo", "string?").length(3);
         ESTest("foo", "string").length(3);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest("foo", "string?").length(5);
         ESTest("foo", "string").length(5);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("email", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest("foobar@gmail.com", "string?").email();
         ESTest("foobar@gmail.com", "string").email();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -307,17 +285,15 @@ describe("ESTest", () => {
         ESTest("john..doe@example.com", "string").email();
         ESTest("john@doe@example.com", "string").email();
 
-        expect(publicMessage).toHaveBeenCalledTimes(30);
-        expect(privateMessage).toHaveBeenCalledTimes(30);
+        expect(message).toHaveBeenCalledTimes(30);
+        expect(information).toHaveBeenCalledTimes(30);
       });
     });
 
     describe("uuid", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -327,15 +303,13 @@ describe("ESTest", () => {
         ESTest("550e8400-e29b-41d4-a716-446655440000", "string?").uuid4();
         ESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d", "string?").uuid7();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -363,49 +337,43 @@ describe("ESTest", () => {
         ESTest("0189c7e43b8a7e3b82914e6f2b1a4c7d", "string").uuid7();
         ESTest("0189c7e4-3b8a-7e3b-z291-4e6f2b1a4c7d", "string").uuid7();
 
-        expect(publicMessage).toHaveBeenCalledTimes(20);
-        expect(privateMessage).toHaveBeenCalledTimes(20);
+        expect(message).toHaveBeenCalledTimes(20);
+        expect(information).toHaveBeenCalledTimes(20);
       });
     });
 
     describe("regexp", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest("foo", "string?").regexp(/foo/);
         ESTest("foo", "string").regexp(/foo/);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest("foo", "string?").regexp(/aa/);
         ESTest("foo", "string").regexp(/aa/);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("base64", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -415,15 +383,13 @@ describe("ESTest", () => {
         ESTest("Zm9vYmFyXzEyMw", "string?").base64url();
         ESTest("Zm9vYmFyXzEyMw", "string").base64url();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -451,17 +417,15 @@ describe("ESTest", () => {
         ESTest("你好世界", "string").base64url();
         ESTest("padded==", "string").base64url();
 
-        expect(publicMessage).toHaveBeenCalledTimes(20);
-        expect(privateMessage).toHaveBeenCalledTimes(20);
+        expect(message).toHaveBeenCalledTimes(20);
+        expect(information).toHaveBeenCalledTimes(20);
       });
     });
 
     describe("ip", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -470,15 +434,13 @@ describe("ESTest", () => {
         ESTest("192.168.1.1", "string").ip4();
         ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "string").ip6();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -502,17 +464,15 @@ describe("ESTest", () => {
         ESTest("2001:db8:abcd:1234:abcd:1234:abcd:1234:5678", "string").ip6();
         ESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678", "string").ip6();
 
-        expect(publicMessage).toHaveBeenCalledTimes(18);
-        expect(privateMessage).toHaveBeenCalledTimes(18);
+        expect(message).toHaveBeenCalledTimes(18);
+        expect(information).toHaveBeenCalledTimes(18);
       });
     });
 
     describe("cidr", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -521,15 +481,13 @@ describe("ESTest", () => {
         ESTest("192.168.1.1/16", "string").cidr4();
         ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334/16", "string").cidr6();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -561,40 +519,36 @@ describe("ESTest", () => {
         ).cidr6();
         ESTest("2001:db8:abcd:1234:xyz:1234:abcd:5678/-16", "string").cidr6();
 
-        expect(publicMessage).toHaveBeenCalledTimes(20);
-        expect(privateMessage).toHaveBeenCalledTimes(20);
+        expect(message).toHaveBeenCalledTimes(20);
+        expect(information).toHaveBeenCalledTimes(20);
       });
     });
 
     describe("emoji", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest("🌀", "string?").emoji();
         ESTest("🌀", "string").emoji();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest("_1", "string?").emoji();
         ESTest("_1", "string").emoji();
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
@@ -608,10 +562,8 @@ describe("ESTest", () => {
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -625,8 +577,8 @@ describe("ESTest", () => {
         ESTest("886912345678", "string").e164();
         ESTest("8860912345678", "string").e164();
 
-        expect(publicMessage).toHaveBeenCalledTimes(8);
-        expect(privateMessage).toHaveBeenCalledTimes(8);
+        expect(message).toHaveBeenCalledTimes(8);
+        expect(information).toHaveBeenCalledTimes(8);
       });
     });
 
@@ -638,10 +590,8 @@ describe("ESTest", () => {
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -657,8 +607,8 @@ describe("ESTest", () => {
         ESTest("_FooBar", "string").lowercase();
         ESTest("$FooBar", "string").lowercase();
 
-        expect(publicMessage).toHaveBeenCalledTimes(10);
-        expect(privateMessage).toHaveBeenCalledTimes(10);
+        expect(message).toHaveBeenCalledTimes(10);
+        expect(information).toHaveBeenCalledTimes(10);
       });
     });
   });
@@ -666,42 +616,36 @@ describe("ESTest", () => {
   describe("number", () => {
     describe("less", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(1, "number?").less(10);
         ESTest(1, "number").less(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(20, "number?").less(10);
         ESTest(20, "number").less(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("max", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -710,64 +654,56 @@ describe("ESTest", () => {
         ESTest(1, "number").max(10);
         ESTest(1, "number").max(1);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(20, "number?").max(10);
         ESTest(20, "number").max(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("greater", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(15, "number?").greater(10);
         ESTest(15, "number").greater(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(3, "number?").greater(10);
         ESTest(3, "number").greater(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("min", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -777,47 +713,41 @@ describe("ESTest", () => {
         ESTest(15, "number").min(10);
         ESTest(15, "number").min(15);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(3, "number?").min(10);
         ESTest(3, "number").min(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("integer", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(15, "number?").integer();
         ESTest(15, "number").integer();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -831,32 +761,28 @@ describe("ESTest", () => {
         ESTest(1 / 2, "number").integer();
         ESTest(-1 / 2, "number").integer();
 
-        expect(publicMessage).toHaveBeenCalledTimes(8);
-        expect(privateMessage).toHaveBeenCalledTimes(8);
+        expect(message).toHaveBeenCalledTimes(8);
+        expect(information).toHaveBeenCalledTimes(8);
       });
     });
 
     describe("positive", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(15, "number?").positive();
         ESTest(15, "number").positive();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -865,32 +791,28 @@ describe("ESTest", () => {
         ESTest(-3.1, "number").positive();
         ESTest(-1 / 2, "number").positive();
 
-        expect(publicMessage).toHaveBeenCalledTimes(4);
-        expect(privateMessage).toHaveBeenCalledTimes(4);
+        expect(message).toHaveBeenCalledTimes(4);
+        expect(information).toHaveBeenCalledTimes(4);
       });
     });
 
     describe("negative", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(-15, "number?").negative();
         ESTest(-15, "number").negative();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -900,32 +822,28 @@ describe("ESTest", () => {
         ESTest(3.1, "number").negative();
         ESTest(1 / 2, "number").negative();
 
-        expect(publicMessage).toHaveBeenCalledTimes(4);
-        expect(privateMessage).toHaveBeenCalledTimes(4);
+        expect(message).toHaveBeenCalledTimes(4);
+        expect(information).toHaveBeenCalledTimes(4);
       });
     });
 
     describe("multiple", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(15, "number?").multiple(5);
         ESTest(15, "number").multiple(5);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -935,8 +853,8 @@ describe("ESTest", () => {
         ESTest(15, "number").multiple(2);
         ESTest(15, "number").multiple(4);
 
-        expect(publicMessage).toHaveBeenCalledTimes(4);
-        expect(privateMessage).toHaveBeenCalledTimes(4);
+        expect(message).toHaveBeenCalledTimes(4);
+        expect(information).toHaveBeenCalledTimes(4);
       });
     });
   });
@@ -944,65 +862,57 @@ describe("ESTest", () => {
   describe("array", () => {
     describe("max", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest([1], "array?").max(10);
         ESTest([1], "array").max(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest([1], "array?").max(-10);
         ESTest([1], "array").max(-10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("min", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest([1], "array?").min(1);
         ESTest([1], "array").min(1);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest([1], "array?").min(10);
         ESTest([1], "array").min(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
   });
@@ -1010,42 +920,36 @@ describe("ESTest", () => {
   describe("bigint", () => {
     describe("less", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(1n, "bigint?").less(10n);
         ESTest(1n, "bigint").less(10n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(20n, "bigint?").less(10n);
         ESTest(20n, "bigint").less(10n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("max", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -1054,64 +958,56 @@ describe("ESTest", () => {
         ESTest(1n, "bigint").max(10n);
         ESTest(1n, "bigint").max(1n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(20n, "bigint?").max(10n);
         ESTest(20n, "bigint").max(10n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("greater", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(15n, "bigint?").greater(10n);
         ESTest(15n, "bigint").greater(10n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(3n, "bigint?").greater(10n);
         ESTest(3n, "bigint").greater(10n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("min", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -1121,47 +1017,41 @@ describe("ESTest", () => {
         ESTest(15n, "bigint").min(10n);
         ESTest(15n, "bigint").min(15n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(3n, "bigint?").min(10n);
         ESTest(3n, "bigint").min(10n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(2);
-        expect(privateMessage).toHaveBeenCalledTimes(2);
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
     describe("positive", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(15n, "bigint?").positive();
         ESTest(15n, "bigint").positive();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -1170,32 +1060,28 @@ describe("ESTest", () => {
         ESTest(-3n, "bigint").positive();
         ESTest(-1n, "bigint").positive();
 
-        expect(publicMessage).toHaveBeenCalledTimes(4);
-        expect(privateMessage).toHaveBeenCalledTimes(4);
+        expect(message).toHaveBeenCalledTimes(4);
+        expect(information).toHaveBeenCalledTimes(4);
       });
     });
 
     describe("negative", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(-15n, "bigint?").negative();
         ESTest(-15n, "bigint").negative();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -1205,32 +1091,28 @@ describe("ESTest", () => {
         ESTest(3n, "bigint").negative();
         ESTest(1n, "bigint").negative();
 
-        expect(publicMessage).toHaveBeenCalledTimes(4);
-        expect(privateMessage).toHaveBeenCalledTimes(4);
+        expect(message).toHaveBeenCalledTimes(4);
+        expect(information).toHaveBeenCalledTimes(4);
       });
     });
 
     describe("multiple", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         ESTest(15n, "bigint?").multiple(5n);
         ESTest(15n, "bigint").multiple(5n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -1240,40 +1122,36 @@ describe("ESTest", () => {
         ESTest(15n, "bigint").multiple(2n);
         ESTest(15n, "bigint").multiple(4n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(4);
-        expect(privateMessage).toHaveBeenCalledTimes(4);
+        expect(message).toHaveBeenCalledTimes(4);
+        expect(information).toHaveBeenCalledTimes(4);
       });
     });
   });
 
   describe("edge case", () => {
     test("3rd argument is wrong", () => {
-      const publicMessage = vi
-        .spyOn(console, "error")
-        .mockImplementation(() => {});
-      const privateMessage = vi
+      const message = vi.spyOn(console, "error").mockImplementation(() => {});
+      const information = vi
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
       expect(ESTest(1, "string?", 123).max(10)).toBeTypeOf("object");
       expect(ESTest(1, "string", 123).max(10)).toBeTypeOf("object");
 
-      expect(publicMessage).toHaveBeenCalledTimes(6);
-      expect(privateMessage).toHaveBeenCalledTimes(6);
+      expect(message).toHaveBeenCalledTimes(6);
+      expect(information).toHaveBeenCalledTimes(6);
     });
 
     test("2nd & 3rd argument is wrong", () => {
-      const publicMessage = vi
-        .spyOn(console, "error")
-        .mockImplementation(() => {});
-      const privateMessage = vi
+      const message = vi.spyOn(console, "error").mockImplementation(() => {});
+      const information = vi
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
       expect(ESTest(1, "foo", 123).max(10)).toBeTypeOf("object");
 
-      expect(publicMessage).toHaveBeenCalledTimes(3);
-      expect(privateMessage).toHaveBeenCalledTimes(3);
+      expect(message).toHaveBeenCalledTimes(3);
+      expect(information).toHaveBeenCalledTimes(3);
     });
   });
 });
@@ -1375,10 +1253,8 @@ describe("unSafeESTest", () => {
 
   describe("common", () => {
     test("description", () => {
-      const publicMessage = vi
-        .spyOn(console, "error")
-        .mockImplementation(() => {});
-      const privateMessage = vi
+      const message = vi.spyOn(console, "error").mockImplementation(() => {});
+      const information = vi
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
@@ -1402,8 +1278,8 @@ describe("unSafeESTest", () => {
       unSafeESTest(() => {}, "function").description("test");
       unSafeESTest(/a/, "regexp").description("test");
 
-      expect(publicMessage).toHaveBeenCalledTimes(0);
-      expect(privateMessage).toHaveBeenCalledTimes(0);
+      expect(message).toHaveBeenCalledTimes(0);
+      expect(information).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -1833,10 +1709,8 @@ describe("unSafeESTest", () => {
 
     describe("cidr", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -1851,8 +1725,8 @@ describe("unSafeESTest", () => {
           "string",
         ).cidr6();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2028,18 +1902,16 @@ describe("unSafeESTest", () => {
   describe("number", () => {
     describe("less", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(1, "number?").less(10);
         unSafeESTest(1, "number").less(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2050,10 +1922,8 @@ describe("unSafeESTest", () => {
 
     describe("max", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -2063,8 +1933,8 @@ describe("unSafeESTest", () => {
         unSafeESTest(1, "number").max(10);
         unSafeESTest(1, "number").max(1);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2075,18 +1945,16 @@ describe("unSafeESTest", () => {
 
     describe("greater", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(15, "number?").greater(10);
         unSafeESTest(15, "number").greater(10);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2097,10 +1965,8 @@ describe("unSafeESTest", () => {
 
     describe("min", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -2110,8 +1976,8 @@ describe("unSafeESTest", () => {
         unSafeESTest(15, "number").min(10);
         unSafeESTest(15, "number").min(15);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2122,18 +1988,16 @@ describe("unSafeESTest", () => {
 
     describe("integer", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(15, "number?").integer();
         unSafeESTest(15, "number").integer();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2151,18 +2015,16 @@ describe("unSafeESTest", () => {
 
     describe("positive", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(15, "number?").positive();
         unSafeESTest(15, "number").positive();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2176,18 +2038,16 @@ describe("unSafeESTest", () => {
 
     describe("negative", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(-15, "number?").negative();
         unSafeESTest(-15, "number").negative();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2201,18 +2061,16 @@ describe("unSafeESTest", () => {
 
     describe("multiple", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(15, "number?").multiple(5);
         unSafeESTest(15, "number").multiple(5);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2228,10 +2086,8 @@ describe("unSafeESTest", () => {
   describe("array", () => {
     describe("max", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -2241,8 +2097,8 @@ describe("unSafeESTest", () => {
         unSafeESTest([1], "array").max(10);
         unSafeESTest([1], "array").max(1);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2253,10 +2109,8 @@ describe("unSafeESTest", () => {
 
     describe("min", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -2266,8 +2120,8 @@ describe("unSafeESTest", () => {
         unSafeESTest([1], "array").min(0);
         unSafeESTest([1], "array").min(1);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2280,18 +2134,16 @@ describe("unSafeESTest", () => {
   describe("bigint", () => {
     describe("less", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(1n, "bigint?").less(10n);
         unSafeESTest(1n, "bigint").less(10n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2302,10 +2154,8 @@ describe("unSafeESTest", () => {
 
     describe("max", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -2314,8 +2164,8 @@ describe("unSafeESTest", () => {
         unSafeESTest(1n, "bigint").max(10n);
         unSafeESTest(1n, "bigint").max(1n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2326,18 +2176,16 @@ describe("unSafeESTest", () => {
 
     describe("greater", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(15n, "bigint?").greater(10n);
         unSafeESTest(15n, "bigint").greater(10n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2348,10 +2196,8 @@ describe("unSafeESTest", () => {
 
     describe("min", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
@@ -2361,8 +2207,8 @@ describe("unSafeESTest", () => {
         unSafeESTest(15n, "bigint").min(10n);
         unSafeESTest(15n, "bigint").min(15n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2373,18 +2219,16 @@ describe("unSafeESTest", () => {
 
     describe("positive", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(15n, "bigint?").positive();
         unSafeESTest(15n, "bigint").positive();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2397,18 +2241,16 @@ describe("unSafeESTest", () => {
 
     describe("negative", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(-15n, "bigint?").negative();
         unSafeESTest(-15n, "bigint").negative();
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2422,18 +2264,16 @@ describe("unSafeESTest", () => {
 
     describe("multiple", () => {
       test("success", () => {
-        const publicMessage = vi
-          .spyOn(console, "error")
-          .mockImplementation(() => {});
-        const privateMessage = vi
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
         unSafeESTest(15n, "bigint?").multiple(5n);
         unSafeESTest(15n, "bigint").multiple(5n);
 
-        expect(publicMessage).toHaveBeenCalledTimes(0);
-        expect(privateMessage).toHaveBeenCalledTimes(0);
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
       test("fail", () => {
@@ -2448,9 +2288,9 @@ describe("unSafeESTest", () => {
 });
 
 describe("globalThis config", () => {
-  test("publicMessage", () => {
-    expect(globalThis.__ESCSS_ESTEST__.publicMessage).toBe(
-      "Set 'globalThis.__ESCSS_ESTEST__.publicMessage' for customize message",
+  test("message", () => {
+    expect(globalThis.__ESCSS_ESTEST__.message).toBe(
+      "Set 'globalThis.__ESCSS_ESTEST__.message' for customize message",
     );
   });
   test("isESTestDisabled", () => {
