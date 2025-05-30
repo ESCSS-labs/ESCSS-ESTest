@@ -1016,6 +1016,7 @@ function _test(input, type, message, isUnSafe) {
     if (!_ALLOWED_TYPES.includes(type)) {
       type = "undefined";
 
+      // is a valid message?
       if (typeof message !== "string") {
         _error(input, type, message, isUnSafe, "errArg3");
       }
