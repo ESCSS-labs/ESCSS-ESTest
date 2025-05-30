@@ -361,6 +361,23 @@ const _chain = {
 
       return this;
     }
+
+    e164() {
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      const e164 = /^\+(?:[0-9]){6,14}[0-9]$/;
+
+      if (e164.test(this.input) === false) {
+        _error(
+          this.input,
+          this.type,
+          this.pubMsg,
+          this.isUnSafe,
+          "invalidInput",
+        );
+      }
+
+      return this;
+    }
   },
   number: class _Number extends _Common {
     constructor(...args) {
@@ -836,6 +853,12 @@ const _chain = {
     }
 
     emoji() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    e164() {
       _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
 
       return this;

@@ -144,6 +144,15 @@ declare interface _String extends _Common<"string"> {
    * ESTest('🌀', 'string').emoji() // pass
    */
   emoji(): _Chain<"string">;
+
+  /**
+   * @example
+   * // international phone
+   * ESTest('+886912345678', 'string').e164() // pass
+   * ESTest('+14151234567', 'string').e164() // pass
+   *
+   */
+  e164(): _Chain<"string">;
 }
 
 declare interface _Number extends _Common<"number"> {

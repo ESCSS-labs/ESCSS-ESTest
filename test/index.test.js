@@ -597,6 +597,38 @@ describe("ESTest", () => {
         expect(privateMessage).toHaveBeenCalledTimes(2);
       });
     });
+
+    describe("e164", () => {
+      test("success", () => {
+        ESTest("+886912345678", "string?").e164();
+        ESTest("+8860912345678", "string?").e164();
+
+        ESTest("+886912345678", "string").e164();
+        ESTest("+8860912345678", "string").e164();
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest("0912-345-678", "string?").e164();
+        ESTest("0912345678", "string?").e164();
+        ESTest("886912345678", "string?").e164();
+        ESTest("8860912345678", "string?").e164();
+
+        ESTest("0912-345-678", "string").e164();
+        ESTest("0912345678", "string").e164();
+        ESTest("886912345678", "string").e164();
+        ESTest("8860912345678", "string").e164();
+
+        expect(publicMessage).toHaveBeenCalledTimes(8);
+        expect(privateMessage).toHaveBeenCalledTimes(8);
+      });
+    });
   });
 
   describe("number", () => {
@@ -1638,6 +1670,44 @@ describe("unSafeESTest", () => {
       test("fail", () => {
         expect(() => unSafeESTest("_1", "string?").emoji()).toThrowError();
         expect(() => unSafeESTest("_1", "string").emoji()).toThrowError();
+      });
+    });
+
+    describe("e164", () => {
+      test("success", () => {
+        unSafeESTest("+886912345678", "string?").e164();
+        unSafeESTest("+8860912345678", "string?").e164();
+
+        unSafeESTest("+886912345678", "string").e164();
+        unSafeESTest("+8860912345678", "string").e164();
+      });
+
+      test("fail", () => {
+        expect(() =>
+          unSafeESTest("0912-345-678", "string?").e164(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("0912345678", "string?").e164(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("886912345678", "string?").e164(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("8860912345678", "string?").e164(),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest("0912-345-678", "string").e164(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("0912345678", "string").e164(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("886912345678", "string").e164(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("8860912345678", "string").e164(),
+        ).toThrowError();
       });
     });
   });
