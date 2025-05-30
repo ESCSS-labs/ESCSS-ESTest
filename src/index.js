@@ -674,7 +674,7 @@ const _chain = {
   object: class _Object extends _Common {},
   boolean: class _Boolean extends _Common {},
   date: class _Date extends _Common {},
-  bigint: class _Bigint extends _Common {
+  bigint: class _BigInt extends _Common {
     constructor(...args) {
       super(...args);
     }
@@ -972,7 +972,7 @@ const _chain = {
   nan: class _NaN extends _Common {},
   symbol: class _Symbol extends _Common {},
   function: class _Function extends _Common {},
-  regexp: class _Regexp extends _Common {},
+  regexp: class _RegExp extends _Common {},
 };
 
 function _typeof(input) {

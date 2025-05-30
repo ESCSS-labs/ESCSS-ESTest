@@ -33,7 +33,7 @@ declare type _Chain<T extends _ALLOWED_TYPES> = T extends "string"
           : T extends "date"
             ? _Date
             : T extends "bigint"
-              ? _Bigint
+              ? _BigInt
               : T extends "undefined"
                 ? _Undefined
                 : T extends "null"
@@ -45,7 +45,7 @@ declare type _Chain<T extends _ALLOWED_TYPES> = T extends "string"
                       : T extends "function"
                         ? _Function
                         : T extends "regexp"
-                          ? _Regexp
+                          ? _RegExp
                           : never;
 
 declare interface _Common<T extends _ALLOWED_TYPES> {
@@ -260,7 +260,7 @@ declare interface _Boolean extends _Common<"boolean"> {}
 
 declare interface _Date extends _Common<"date"> {}
 
-declare interface _Bigint extends _Common<"bigint"> {}
+declare interface _BigInt extends _Common<"bigint"> {}
 
 declare interface _Undefined extends _Common<"undefined"> {}
 
@@ -272,7 +272,7 @@ declare interface _Symbol extends _Common<"symbol"> {}
 
 declare interface _Function extends _Common<"function"> {}
 
-declare interface _Regexp extends _Common<"regexp"> {}
+declare interface _RegExp extends _Common<"regexp"> {}
 
 /**
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
