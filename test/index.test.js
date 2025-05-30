@@ -20,7 +20,7 @@ describe("ESTest", () => {
       expect(ESTest(1n, "bigint")).toBeTypeOf("object");
       expect(ESTest(undefined, "undefined")).toBeTypeOf("object");
       expect(ESTest(null, "null")).toBeTypeOf("object");
-      expect(ESTest(NaN, "NaN")).toBeTypeOf("object");
+      expect(ESTest(NaN, "nan")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "symbol")).toBeTypeOf("object");
       expect(ESTest(() => {}, "function")).toBeTypeOf("object");
       expect(ESTest(/a/, "regexp")).toBeTypeOf("object");
@@ -47,7 +47,7 @@ describe("ESTest", () => {
       expect(ESTest(new Date(), "bigint")).toBeTypeOf("object");
       expect(ESTest(1n, "undefined")).toBeTypeOf("object");
       expect(ESTest(undefined, "null")).toBeTypeOf("object");
-      expect(ESTest(null, "NaN")).toBeTypeOf("object");
+      expect(ESTest(null, "nan")).toBeTypeOf("object");
       expect(ESTest(NaN, "symbol")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "function")).toBeTypeOf("object");
       expect(ESTest(() => {}, "regexp")).toBeTypeOf("object");
@@ -75,7 +75,7 @@ describe("ESTest", () => {
       expect(ESTest(1n, "bigint", "1")).toBeTypeOf("object");
       expect(ESTest(undefined, "undefined", "1")).toBeTypeOf("object");
       expect(ESTest(null, "null", "1")).toBeTypeOf("object");
-      expect(ESTest(NaN, "NaN", "1")).toBeTypeOf("object");
+      expect(ESTest(NaN, "nan", "1")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "symbol", "1")).toBeTypeOf("object");
       expect(ESTest(() => {}, "function", "1")).toBeTypeOf("object");
       expect(ESTest(/a/, "regexp", "1")).toBeTypeOf("object");
@@ -102,7 +102,7 @@ describe("ESTest", () => {
       expect(ESTest(new Date(), "bigint", 1)).toBeTypeOf("object");
       expect(ESTest(1n, "undefined", 1)).toBeTypeOf("object");
       expect(ESTest(undefined, "null", 1)).toBeTypeOf("object");
-      expect(ESTest(null, "NaN", 1)).toBeTypeOf("object");
+      expect(ESTest(null, "nan", 1)).toBeTypeOf("object");
       expect(ESTest(NaN, "symbol", 1)).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "function", 1)).toBeTypeOf("object");
       expect(ESTest(() => {}, "regexp", 1)).toBeTypeOf("object");
@@ -134,7 +134,7 @@ describe("ESTest", () => {
       ESTest(1n, "bigint").description("test");
       ESTest(undefined, "undefined").description("test");
       ESTest(null, "null").description("test");
-      ESTest(NaN, "NaN").description("test");
+      ESTest(NaN, "nan").description("test");
       ESTest(Symbol("a"), "symbol").description("test");
       ESTest(() => {}, "function").description("test");
       ESTest(/a/, "regexp").description("test");
@@ -1175,7 +1175,7 @@ describe("unSafeESTest", () => {
       expect(ESTest(1n, "bigint")).toBeTypeOf("object");
       expect(ESTest(undefined, "undefined")).toBeTypeOf("object");
       expect(ESTest(null, "null")).toBeTypeOf("object");
-      expect(ESTest(NaN, "NaN")).toBeTypeOf("object");
+      expect(ESTest(NaN, "nan")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "symbol")).toBeTypeOf("object");
       expect(ESTest(() => {}, "function")).toBeTypeOf("object");
       expect(ESTest(/a/, "regexp")).toBeTypeOf("object");
@@ -1197,7 +1197,7 @@ describe("unSafeESTest", () => {
       expect(() => unSafeESTest(new Date(), "bigint")).toThrow();
       expect(() => unSafeESTest(1n, "undefined")).toThrow();
       expect(() => unSafeESTest(undefined, "null")).toThrow();
-      expect(() => unSafeESTest(null, "NaN")).toThrow();
+      expect(() => unSafeESTest(null, "nan")).toThrow();
       expect(() => unSafeESTest(NaN, "symbol")).toThrow();
       expect(() => unSafeESTest(Symbol("a"), "function")).toThrow();
       expect(() => unSafeESTest(() => {}, "regexp")).toThrow();
@@ -1222,7 +1222,7 @@ describe("unSafeESTest", () => {
       expect(ESTest(1n, "bigint", "1")).toBeTypeOf("object");
       expect(ESTest(undefined, "undefined", "1")).toBeTypeOf("object");
       expect(ESTest(null, "null", "1")).toBeTypeOf("object");
-      expect(ESTest(NaN, "NaN", "1")).toBeTypeOf("object");
+      expect(ESTest(NaN, "nan", "1")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "symbol", "1")).toBeTypeOf("object");
       expect(ESTest(() => {}, "function", "1")).toBeTypeOf("object");
       expect(ESTest(/a/, "regexp", "1")).toBeTypeOf("object");
@@ -1244,7 +1244,7 @@ describe("unSafeESTest", () => {
       expect(() => unSafeESTest(new Date(), "bigint", 1)).toThrow();
       expect(() => unSafeESTest(1n, "undefined", 1)).toThrow();
       expect(() => unSafeESTest(undefined, "null", 1)).toThrow();
-      expect(() => unSafeESTest(null, "NaN", 1)).toThrow();
+      expect(() => unSafeESTest(null, "nan", 1)).toThrow();
       expect(() => unSafeESTest(NaN, "symbol", 1)).toThrow();
       expect(() => unSafeESTest(Symbol("a"), "function", 1)).toThrow();
       expect(() => unSafeESTest(() => {}, "regexp", 1)).toThrow();
@@ -1273,7 +1273,7 @@ describe("unSafeESTest", () => {
       unSafeESTest(1n, "bigint").description("test");
       unSafeESTest(undefined, "undefined").description("test");
       unSafeESTest(null, "null").description("test");
-      unSafeESTest(NaN, "NaN").description("test");
+      unSafeESTest(NaN, "nan").description("test");
       unSafeESTest(Symbol("a"), "symbol").description("test");
       unSafeESTest(() => {}, "function").description("test");
       unSafeESTest(/a/, "regexp").description("test");

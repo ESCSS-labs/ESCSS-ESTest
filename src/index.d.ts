@@ -8,7 +8,7 @@ declare type _ALLOWED_TYPES =
   | "bigint"
   | "undefined"
   | "null"
-  | "NaN"
+  | "nan"
   | "symbol"
   | "function"
   | "regexp"
@@ -38,7 +38,7 @@ declare type _Chain<T extends _ALLOWED_TYPES> = T extends "string"
                 ? _Undefined
                 : T extends "null"
                   ? _Null
-                  : T extends "NaN"
+                  : T extends "nan"
                     ? _NaN
                     : T extends "symbol"
                       ? _Symbol
@@ -256,7 +256,7 @@ declare interface _Undefined extends _Common<"undefined"> {}
 
 declare interface _Null extends _Common<"null"> {}
 
-declare interface _NaN extends _Common<"NaN"> {}
+declare interface _NaN extends _Common<"nan"> {}
 
 declare interface _Symbol extends _Common<"symbol"> {}
 

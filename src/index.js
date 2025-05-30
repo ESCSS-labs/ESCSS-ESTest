@@ -21,7 +21,7 @@ const _ALLOWED_TYPES = [
   "bigint",
   "undefined",
   "null",
-  "NaN",
+  "nan",
   "symbol",
   "function",
   "regexp",
@@ -944,7 +944,7 @@ const _chain = {
     }
   },
   null: class _Null extends _Common {},
-  NaN: class _NaN extends _Common {},
+  nan: class _NaN extends _Common {},
   symbol: class _Symbol extends _Common {},
   function: class _Function extends _Common {},
   regexp: class _Regexp extends _Common {},
@@ -965,7 +965,7 @@ function _typeof(input) {
   BigInt             'bigint'
   Undefined          'undefined'
   Null               'object'          ->        change to 'null'
-  Number (NaN)       'number'          ->        change to 'NaN'
+  Number (NaN)       'number'          ->        change to 'nan'
   Symbol             'symbol'
   Function           'function'
   RegExp             'object'          ->        change to 'regexp'
@@ -977,7 +977,7 @@ function _typeof(input) {
   switch (typeof input) {
     case "number":
       if (Number.isNaN(input)) {
-        newType = "NaN";
+        newType = "nan";
       } else {
         newType = "number";
       }
@@ -1027,7 +1027,7 @@ function _error(input, type, message, isUnSafe, logToken, value, value2) {
       ),
     errArg2: (logType) =>
       console[logType](
-        ` \n ✅ Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?' \n`,
+        ` \n ✅ Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'nan' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?' \n`,
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
@@ -1066,7 +1066,7 @@ function _error(input, type, message, isUnSafe, logToken, value, value2) {
     invalidNumber: `Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
     invalidDate: `Expected: 'date', Received: 'Invalid Date'`,
     errArg1: `The value must be a/an '${type}'`,
-    errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'NaN' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
+    errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'nan' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
     errArg3: `Expected 3rd Argument: 'string'`,
     typeCheck: `Expected unSafeESTest().method(value), value type: '${value2}'`,
     less: `The value must be less than ${isBigint}`,

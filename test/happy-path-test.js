@@ -80,8 +80,8 @@ ESTest(undefined, "undefined").description("test");
 ESTest(null, "null");
 ESTest(null, "null").description("test");
 
-ESTest(NaN, "NaN");
-ESTest(NaN, "NaN").description("test");
+ESTest(NaN, "nan");
+ESTest(NaN, "nan").description("test");
 
 ESTest(Symbol("tt"), "symbol");
 ESTest(Symbol("tt"), "symbol").description("test");
@@ -166,8 +166,8 @@ unSafeESTest(undefined, "undefined").description("test");
 unSafeESTest(null, "null");
 unSafeESTest(null, "null").description("test");
 
-unSafeESTest(NaN, "NaN");
-unSafeESTest(NaN, "NaN").description("test");
+unSafeESTest(NaN, "nan");
+unSafeESTest(NaN, "nan").description("test");
 
 unSafeESTest(Symbol("tt"), "symbol");
 unSafeESTest(Symbol("tt"), "symbol").description("test");
