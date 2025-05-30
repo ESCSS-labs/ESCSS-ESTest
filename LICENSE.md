@@ -38,13 +38,18 @@
 
 [Dual-license-templates](https://github.com/lawndoc/dual-license-templates)
 
-// This project uses parts of Zod v4 (specifically: email, ip, uuid, base64),
-// which is licensed under the MIT License.
-// Source: https://github.com/colinhacks/zod
+This project directly adopts the regular expressions from Zod v4, including:
+- email
+- uuidv4 / uuidv7
+- ipv4 / ipv6
+- cidrv4 / cidrv6
+- e164 / base64
+- base64url
+- lowercase
 
 MIT License
 
-Copyright (c) 2020 Colin McDonnell
+Copyright (c) 2025 Colin McDonnell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
