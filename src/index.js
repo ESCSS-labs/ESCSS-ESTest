@@ -1009,7 +1009,12 @@ function _error(input, type, message, isUnSafe, logToken, value, value2) {
   }
 }
 
-function _test(input, type, message, isUnSafe) {
+function _test(
+  input,
+  type = "undefined",
+  message = globalThis.__ESCSS_ESTEST__.message,
+  isUnSafe,
+) {
   // Unhappy path (validation)
   {
     // invalid type
@@ -1068,27 +1073,19 @@ function _test(input, type, message, isUnSafe) {
   return new _chain[type](input, type, message, isUnSafe);
 }
 
-function ESTest(
-  input,
-  type = "null",
-  message = globalThis.__ESCSS_ESTEST__.message,
-) {
+function ESTest(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
 
   // console.error()
   return _test(input, type, message, false);
 }
 
-function unSafeESTest(
-  input,
-  type = "null",
-  message = globalThis.__ESCSS_ESTEST__.message,
-) {
+function unSafeESTest(input, type, message) {
   // throw new Error()
   return _test(input, type, message, true);
 }
 
-function baseESTest(input, type = "null", message) {
+function baseESTest(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
 
   // update globalThis
