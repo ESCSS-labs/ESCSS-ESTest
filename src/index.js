@@ -5,7 +5,6 @@ globalThis.__ESCSS_ESTEST__ = {
    | version: 2.1.5                                                       |
    | license: AGPL-3.0-only OR Commercial                                 ｜
    | author: Mike Lee                                                     |
-   | repository: https://github.com/ESCSS-labs/ESCSS-ESTest               |
    ========================================================================
   `,
   publicMessage:

@@ -39,6 +39,7 @@
 [Dual-license-templates](https://github.com/lawndoc/dual-license-templates)
 
 This project directly adopts the regular expressions from Zod v4, including:
+
 - email
 - uuidv4 / uuidv7
 - ipv4 / ipv6
