@@ -153,6 +153,14 @@ declare interface _String extends _Common<"string"> {
    *
    */
   e164(): _Chain<"string">;
+
+  /**
+   * @example
+   * // international phone
+   * ESTest('foobar', 'string').lowercase() // pass
+   *
+   */
+  lowercase(): _Chain<"string">;
 }
 
 declare interface _Number extends _Common<"number"> {

@@ -378,6 +378,24 @@ const _chain = {
 
       return this;
     }
+
+    lowercase() {
+      // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      // regex for string with no uppercase letters
+      const lowercase = /^[^A-Z]*$/;
+
+      if (lowercase.test(this.input) === false) {
+        _error(
+          this.input,
+          this.type,
+          this.pubMsg,
+          this.isUnSafe,
+          "invalidInput",
+        );
+      }
+
+      return this;
+    }
   },
   number: class _Number extends _Common {
     constructor(...args) {
@@ -859,6 +877,12 @@ const _chain = {
     }
 
     e164() {
+      _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
+
+      return this;
+    }
+
+    lowercase() {
       _error(this.input, this.type, this.pubMsg, this.isUnSafe, "undefined");
 
       return this;

@@ -629,6 +629,38 @@ describe("ESTest", () => {
         expect(privateMessage).toHaveBeenCalledTimes(8);
       });
     });
+
+    describe("lowercase", () => {
+      test("success", () => {
+        ESTest("foobar", "string?").lowercase();
+
+        ESTest("foobar", "string").lowercase();
+      });
+
+      test("fail", () => {
+        const publicMessage = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const privateMessage = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest("FOOBAR", "string?").lowercase();
+        ESTest("FooBar", "string?").lowercase();
+        ESTest("FoOBaR", "string?").lowercase();
+        ESTest("_FooBar", "string?").lowercase();
+        ESTest("$FooBar", "string?").lowercase();
+
+        ESTest("FOOBAR", "string").lowercase();
+        ESTest("FooBar", "string").lowercase();
+        ESTest("FoOBaR", "string").lowercase();
+        ESTest("_FooBar", "string").lowercase();
+        ESTest("$FooBar", "string").lowercase();
+
+        expect(publicMessage).toHaveBeenCalledTimes(10);
+        expect(privateMessage).toHaveBeenCalledTimes(10);
+      });
+    });
   });
 
   describe("number", () => {
@@ -1707,6 +1739,48 @@ describe("unSafeESTest", () => {
         ).toThrowError();
         expect(() =>
           unSafeESTest("8860912345678", "string").e164(),
+        ).toThrowError();
+      });
+    });
+
+    describe("lowercase", () => {
+      test("success", () => {
+        unSafeESTest("foobar", "string?").lowercase();
+
+        unSafeESTest("foobar", "string").lowercase();
+      });
+
+      test("fail", () => {
+        expect(() =>
+          unSafeESTest("FOOBAR", "string?").lowercase(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("FooBar", "string?").lowercase(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("FoOBaR", "string?").lowercase(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("_FooBar", "string?").lowercase(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("$FooBar", "string?").lowercase(),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest("FOOBAR", "string").lowercase(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("FooBar", "string").lowercase(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("FoOBaR", "string").lowercase(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("_FooBar", "string").lowercase(),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("$FooBar", "string").lowercase(),
         ).toThrowError();
       });
     });

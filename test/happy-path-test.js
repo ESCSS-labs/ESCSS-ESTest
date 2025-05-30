@@ -24,6 +24,7 @@ ESTest("192.168.1.1/16", "string").cidr4();
 ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334/16", "string").cidr6();
 ESTest("🌀", "string").emoji();
 ESTest("+886912345678", "string").e164();
+ESTest("foobar", "string").lowercase();
 ESTest(undefined, "string?");
 ESTest(undefined, "string?").description("test");
 
@@ -102,6 +103,7 @@ unSafeESTest("192.168.1.1/16", "string").cidr4();
 unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334/16", "string").cidr6();
 unSafeESTest("🌀", "string").emoji();
 unSafeESTest("+886912345678", "string").e164();
+unSafeESTest("foobar", "string").lowercase();
 unSafeESTest(undefined, "string?");
 unSafeESTest(undefined, "string?").description("test");
 
