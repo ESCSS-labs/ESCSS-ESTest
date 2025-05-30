@@ -260,7 +260,56 @@ declare interface _Boolean extends _Common<"boolean"> {}
 
 declare interface _Date extends _Common<"date"> {}
 
-declare interface _BigInt extends _Common<"bigint"> {}
+declare interface _BigInt extends _Common<"bigint"> {
+  /**
+   * @example
+   * // 5n < 10n
+   * ESTest(5n, 'bigint').less(10n) // pass
+   */
+  less(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 5n <= 10n
+   * ESTest(5n, 'bigint').max(10n) // pass
+   */
+  max(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15n > 10n
+   * ESTest(15n, 'bigint').greater(10n) // pass
+   */
+  greater(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15n >= 10n
+   * ESTest(15n, 'bigint').min(10n) // pass
+   */
+  min(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15n > 0n
+   * ESTest(15n, 'bigint').positive() // pass
+   */
+  positive(): _Chain<"number">;
+
+  /**
+   * @example
+   * // -15n < 0n
+   * ESTest(-15n, 'bigint').negative() // pass
+   */
+  negative(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15n % 3n === 0n
+   * ESTest(15n, 'bigint').multiple(3n) // pass
+   */
+  multiple(): _Chain<"number">;
+}
 
 declare interface _Undefined extends _Common<"undefined"> {}
 

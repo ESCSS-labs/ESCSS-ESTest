@@ -788,7 +788,7 @@ const _chain = {
     }
 
     positive() {
-      if (this.input > 0 === false) {
+      if (this.input > 0n === false) {
         _error(this.input, this.type, this.message, this.isUnSafe, "positive");
       }
 
@@ -796,7 +796,7 @@ const _chain = {
     }
 
     negative() {
-      if (this.input < 0 === false) {
+      if (this.input < 0n === false) {
         _error(this.input, this.type, this.message, this.isUnSafe, "negative");
       }
 
