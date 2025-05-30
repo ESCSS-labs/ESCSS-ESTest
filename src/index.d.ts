@@ -81,7 +81,17 @@ declare interface _String extends _Common<"string"> {
 
   /**
    * @example
-   * ESTest('foobar@gmail.com', 'string').email() // pass
+   * // Zod's default email regex (Gmail rules)
+   * ESTest("foo@gmail.com", "string").email(); // pass
+   *
+   * // Equivalent to the HTML5 input[type=email] validation implemented by browsers.
+   * ESTest("john.doe+@example-domain.com", "string").email("html5Email"); // pass
+   *
+   * // The classic emailregex.com regex for RFC 5322-compliant emails
+   * ESTest("user.tag+filter@sub.example-domain.co.uk", "string").email("rfc5322Email"); // pass
+   *
+   * // A loose regex that allows Unicode characters, enforces length limits, and that's about it.
+   * ESTest("user.name123@example-domain.com", "string").email("unicodeEmail"); // pass
    */
   email(): _Chain<"string">;
 

@@ -243,6 +243,28 @@ describe("ESTest", () => {
         ESTest("foobar@gmail.com", "string?").email();
         ESTest("foobar@gmail.com", "string").email();
 
+        ESTest("john.doe+newsletter@example-domain.com", "string?").email(
+          "html5Email",
+        );
+        ESTest("john.doe+newsletter@example-domain.com", "string").email(
+          "html5Email",
+        );
+
+        ESTest(
+          "user.name+tag+filter@sub.example-domain.co.uk",
+          "string?",
+        ).email("rfc5322Email");
+        ESTest("user.name+tag+filter@sub.example-domain.co.uk", "string").email(
+          "rfc5322Email",
+        );
+
+        ESTest("user.name123@example-domain.com", "string?").email(
+          "unicodeEmail",
+        );
+        ESTest("user.name123@example-domain.com", "string").email(
+          "unicodeEmail",
+        );
+
         expect(message).toHaveBeenCalledTimes(0);
         expect(information).toHaveBeenCalledTimes(0);
       });
@@ -258,35 +280,63 @@ describe("ESTest", () => {
         ESTest("john.com", "string?").email();
         ESTest("john@", "string?").email();
         ESTest("john doe@example.com", "string?").email();
-        ESTest("john.doe@@example.com", "string?").email();
-        ESTest("john.doe@example.c", "string?").email();
-        ESTest("john.doe@example", "string?").email();
-        ESTest("john.doe@example.com.", "string?").email();
-        ESTest("john.doe@com", "string?").email();
-        ESTest("john.doe@example..com", "string?").email();
-        ESTest("john.doe@example.x", "string?").email();
-        ESTest("john.doe@example#com", "string?").email();
-        ESTest("john..doe@example.com", "string?").email();
-        ESTest("john@doe@example.com", "string?").email();
 
         ESTest("..john@gmail.com", "string").email();
         ESTest(".john@", "string").email();
         ESTest("john.com", "string").email();
         ESTest("john@", "string").email();
         ESTest("john doe@example.com", "string").email();
-        ESTest("john.doe@@example.com", "string").email();
-        ESTest("john.doe@example.c", "string").email();
-        ESTest("john.doe@example", "string").email();
-        ESTest("john.doe@example.com.", "string").email();
-        ESTest("john.doe@com", "string").email();
-        ESTest("john.doe@example..com", "string").email();
-        ESTest("john.doe@example.x", "string").email();
-        ESTest("john.doe@example#com", "string").email();
-        ESTest("john..doe@example.com", "string").email();
-        ESTest("john@doe@example.com", "string").email();
 
-        expect(message).toHaveBeenCalledTimes(30);
-        expect(information).toHaveBeenCalledTimes(30);
+        ESTest(" name@example.com", "string?").email("html5Email");
+        ESTest("user@-example.com", "string?").email("html5Email");
+        ESTest("user@@example.com", "string?").email("html5Email");
+        ESTest("user@example..com", "string?").email("html5Email");
+        ESTest("user@.example.com", "string?").email("html5Email");
+
+        ESTest(" name@example.com", "string").email("html5Email");
+        ESTest("user@-example.com", "string").email("html5Email");
+        ESTest("user@@example.com", "string").email("html5Email");
+        ESTest("user@example..com", "string").email("html5Email");
+        ESTest("user@.example.com", "string").email("html5Email");
+
+        ESTest("#@%^%#$#.com", "string?").email("rfc5322Email");
+        ESTest("plainApples", "string?").email("rfc5322Email");
+        ESTest("@example.com", "string?").email("rfc5322Email");
+        ESTest("test@example", "string?").email("rfc5322Email");
+        ESTest("test@.abcde", "string?").email("rfc5322Email");
+
+        ESTest("#@%^%#$#.com", "string").email("rfc5322Email");
+        ESTest("plainApples", "string").email("rfc5322Email");
+        ESTest("@example.com", "string").email("rfc5322Email");
+        ESTest("test@example", "string").email("rfc5322Email");
+        ESTest("test@.abcde", "string").email("rfc5322Email");
+
+        ESTest(
+          "too_long_local_part_this_is_more_than_sixty_four_characters_to_test_the_limit@example.com",
+          "string?",
+        ).email("unicodeEmail");
+        ESTest(
+          "test@too_long_domain_part_this_is_definitely_more_than_two_hundred_fifty_five_characters_to_test_the_limit_and_it_will_fail_because_of_its_excessive_length_which_is_not_allowed_by_the_regular_expression_for_email_validation_as_it_exceeds_the_specified_maximum_length_limit.com",
+          "string?",
+        ).email("unicodeEmail");
+        ESTest("test with spaces@example.com", "string?").email("unicodeEmail");
+        ESTest("test@example.com test", "string?").email("unicodeEmail");
+        ESTest("test!example.com", "string?").email("unicodeEmail");
+
+        ESTest(
+          "too_long_local_part_this_is_more_than_sixty_four_characters_to_test_the_limit@example.com",
+          "string",
+        ).email("unicodeEmail");
+        ESTest(
+          "test@too_long_domain_part_this_is_definitely_more_than_two_hundred_fifty_five_characters_to_test_the_limit_and_it_will_fail_because_of_its_excessive_length_which_is_not_allowed_by_the_regular_expression_for_email_validation_as_it_exceeds_the_specified_maximum_length_limit.com",
+          "string",
+        ).email("unicodeEmail");
+        ESTest("test with spaces@example.com", "string").email("unicodeEmail");
+        ESTest("test@example.com test", "string").email("unicodeEmail");
+        ESTest("test!example.com", "string").email("unicodeEmail");
+
+        expect(message).toHaveBeenCalledTimes(40);
+        expect(information).toHaveBeenCalledTimes(40);
       });
     });
 
@@ -1330,6 +1380,29 @@ describe("unSafeESTest", () => {
       test("success", () => {
         unSafeESTest("foobar@gmail.com", "string?").email();
         unSafeESTest("foobar@gmail.com", "string").email();
+
+        unSafeESTest("john.doe+newsletter@example-domain.com", "string?").email(
+          "html5Email",
+        );
+        unSafeESTest("john.doe+newsletter@example-domain.com", "string").email(
+          "html5Email",
+        );
+
+        unSafeESTest(
+          "user.name+tag+filter@sub.example-domain.co.uk",
+          "string?",
+        ).email("rfc5322Email");
+        unSafeESTest(
+          "user.name+tag+filter@sub.example-domain.co.uk",
+          "string",
+        ).email("rfc5322Email");
+
+        unSafeESTest("user.name123@example-domain.com", "string?").email(
+          "unicodeEmail",
+        );
+        unSafeESTest("user.name123@example-domain.com", "string").email(
+          "unicodeEmail",
+        );
       });
 
       test("fail", () => {
@@ -1344,36 +1417,6 @@ describe("unSafeESTest", () => {
         expect(() =>
           unSafeESTest("john doe@example.com", "string?").email(),
         ).toThrowError();
-        expect(() =>
-          unSafeESTest("john.doe@@example.com", "string?").email(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("john.doe@example.c", "string?").email(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("john.doe@example", "string?").email(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("john.doe@example.com.", "string?").email(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("john.doe@com", "string?").email(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("john.doe@example..com", "string?").email(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("john.doe@example.x", "string?").email(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("john.doe@example#com", "string?").email(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("john..doe@example.com", "string?").email(),
-        ).toThrowError();
-        expect(() =>
-          unSafeESTest("john@doe@example.com", "string?").email(),
-        ).toThrowError();
 
         expect(() =>
           unSafeESTest("..john@gmail.com", "string").email(),
@@ -1384,35 +1427,119 @@ describe("unSafeESTest", () => {
         expect(() =>
           unSafeESTest("john doe@example.com", "string").email(),
         ).toThrowError();
+
         expect(() =>
-          unSafeESTest("john.doe@@example.com", "string").email(),
+          unSafeESTest(" name@example.com", "string?").email("html5Email"),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("john.doe@example.c", "string").email(),
+          unSafeESTest("user@-example.com", "string?").email("html5Email"),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("john.doe@example", "string").email(),
+          unSafeESTest("user@@example.com", "string?").email("html5Email"),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("john.doe@example.com.", "string").email(),
+          unSafeESTest("user@example..com", "string?").email("html5Email"),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("john.doe@com", "string").email(),
+          unSafeESTest("user@.example.com", "string?").email("html5Email"),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(" name@example.com", "string").email("html5Email"),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("john.doe@example..com", "string").email(),
+          unSafeESTest("user@-example.com", "string").email("html5Email"),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("john.doe@example.x", "string").email(),
+          unSafeESTest("user@@example.com", "string").email("html5Email"),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("john.doe@example#com", "string").email(),
+          unSafeESTest("user@example..com", "string").email("html5Email"),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("john..doe@example.com", "string").email(),
+          unSafeESTest("user@.example.com", "string").email("html5Email"),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest("#@%^%#$#.com", "string?").email("rfc5322Email"),
         ).toThrowError();
         expect(() =>
-          unSafeESTest("john@doe@example.com", "string").email(),
+          unSafeESTest("plainApples", "string?").email("rfc5322Email"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("@example.com", "string?").email("rfc5322Email"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test@example", "string?").email("rfc5322Email"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test@.abcde", "string?").email("rfc5322Email"),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest("#@%^%#$#.com", "string").email("rfc5322Email"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("plainApples", "string").email("rfc5322Email"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("@example.com", "string").email("rfc5322Email"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test@example", "string").email("rfc5322Email"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test@.abcde", "string").email("rfc5322Email"),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            "too_long_local_part_this_is_more_than_sixty_four_characters_to_test_the_limit@example.com",
+            "string?",
+          ).email("unicodeEmail"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest(
+            "test@too_long_domain_part_this_is_definitely_more_than_two_hundred_fifty_five_characters_to_test_the_limit_and_it_will_fail_because_of_its_excessive_length_which_is_not_allowed_by_the_regular_expression_for_email_validation_as_it_exceeds_the_specified_maximum_length_limit.com",
+            "string?",
+          ).email("unicodeEmail"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test with spaces@example.com", "string?").email(
+            "unicodeEmail",
+          ),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test@example.com test", "string?").email(
+            "unicodeEmail",
+          ),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test!example.com", "string?").email("unicodeEmail"),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            "too_long_local_part_this_is_more_than_sixty_four_characters_to_test_the_limit@example.com",
+            "string",
+          ).email("unicodeEmail"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest(
+            "test@too_long_domain_part_this_is_definitely_more_than_two_hundred_fifty_five_characters_to_test_the_limit_and_it_will_fail_because_of_its_excessive_length_which_is_not_allowed_by_the_regular_expression_for_email_validation_as_it_exceeds_the_specified_maximum_length_limit.com",
+            "string",
+          ).email("unicodeEmail"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test with spaces@example.com", "string").email(
+            "unicodeEmail",
+          ),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test@example.com test", "string").email("unicodeEmail"),
+        ).toThrowError();
+        expect(() =>
+          unSafeESTest("test!example.com", "string").email("unicodeEmail"),
         ).toThrowError();
       });
     });

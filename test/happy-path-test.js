@@ -13,6 +13,11 @@ ESTest("1", "string").max(10);
 ESTest("1", "string").min(0);
 ESTest("1", "string").length(1);
 ESTest("foo@gmail.com", "string").email();
+ESTest("john.doe+@example-domain.com", "string").email("html5Email");
+ESTest("user.tag+filter@sub.example-domain.co.uk", "string").email(
+  "rfc5322Email",
+);
+ESTest("user.name123@example-domain.com", "string").email("unicodeEmail");
 ESTest("550e8400-e29b-41d4-a716-446655440000", "string").uuid4();
 ESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d", "string").uuid7();
 ESTest("foo bar", "string").regexp(/(foo|bar)/);
@@ -99,6 +104,11 @@ unSafeESTest("1", "string").max(10);
 unSafeESTest("1", "string").min(0);
 unSafeESTest("1", "string").length(1);
 unSafeESTest("foo@gmail.com", "string").email();
+unSafeESTest("john.doe+@example-domain.com", "string").email("html5Email");
+unSafeESTest("user.tag+filter@sub.example-domain.co.uk", "string").email(
+  "rfc5322Email",
+);
+unSafeESTest("user.name123@example-domain.com", "string").email("unicodeEmail");
 unSafeESTest("550e8400-e29b-41d4-a716-446655440000", "string").uuid4();
 unSafeESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d", "string").uuid7();
 unSafeESTest("foo bar", "string").regexp(/(foo|bar)/);

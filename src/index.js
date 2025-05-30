@@ -152,11 +152,36 @@ const _chain = {
       return this;
     }
 
-    email() {
+    email(value) {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
-      const email =
-        // eslint-disable-next-line no-useless-escape
-        /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/;
+
+      let email = "";
+
+      switch (value) {
+        /** Equivalent to the HTML5 input[type=email] validation implemented by browsers. Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email */
+        case "html5Email":
+          email =
+            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+          break;
+
+        /** The classic emailregex.com regex for RFC 5322-compliant emails */
+        case "rfc5322Email":
+          email =
+            // eslint-disable-next-line no-useless-escape
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          break;
+
+        /** A loose regex that allows Unicode characters, enforces length limits, and that's about it. */
+        case "unicodeEmail":
+          email = /^[^\s@"]{1,64}@[^\s@]{1,255}$/u;
+          break;
+
+        /** Zod's default email regex (Gmail rules) */
+        default:
+          email =
+            // eslint-disable-next-line no-useless-escape
+            /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/;
+      }
 
       if (email.test(this.input) === false) {
         _error(
@@ -997,7 +1022,6 @@ function _typeof(input) {
       break;
     default:
       newType = typeof input;
-      break;
   }
 
   return newType;
