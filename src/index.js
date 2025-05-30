@@ -87,8 +87,6 @@ const _chain = {
       }
 
       if (this.input?.length <= value === false) {
-        console.log(this.input);
-        console.log(this.input?.length);
         _error(
           this.input?.length,
           this.type,
@@ -158,11 +156,11 @@ const _chain = {
 
     email() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
-      const emailRegexp =
+      const email =
         // eslint-disable-next-line no-useless-escape
         /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/;
 
-      if (emailRegexp.test(this.input) === false) {
+      if (email.test(this.input) === false) {
         _error(
           this.input,
           this.type,
@@ -644,7 +642,6 @@ const _chain = {
       super(...args);
     }
 
-    // <
     less(value) {
       if (typeof value !== "bigint") {
         _error(
@@ -672,7 +669,6 @@ const _chain = {
       return this;
     }
 
-    // <=
     max(value) {
       if (typeof value !== "bigint") {
         _error(
@@ -693,7 +689,6 @@ const _chain = {
       return this;
     }
 
-    // >
     greater(value) {
       if (typeof value !== "bigint") {
         _error(
@@ -721,7 +716,6 @@ const _chain = {
       return this;
     }
 
-    // >=
     min(value) {
       if (typeof value !== "bigint") {
         _error(
