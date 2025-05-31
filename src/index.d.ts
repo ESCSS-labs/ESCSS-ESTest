@@ -381,5 +381,10 @@ declare global {
      * globalThis.__ESCSS_ESTEST__.isESTestDisabled = true
      */
     isESTestDisabled: boolean;
+
+    /**
+     * show usage report
+     */
+    analysis: object;
   };
 }

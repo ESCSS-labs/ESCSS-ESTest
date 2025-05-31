@@ -9,6 +9,91 @@ globalThis.__ESCSS_ESTEST__ = {
   `,
   message: "Set 'globalThis.__ESCSS_ESTEST__.message' for customize message",
   isESTestDisabled: false,
+  analysis: {
+    ESTest: {
+      _count: 0,
+    },
+    unSafeESTest: {
+      _count: 0,
+    },
+    _Common: {
+      _count: 0,
+      description: 0,
+    },
+    _String: {
+      _count: 0,
+      max: 0,
+      min: 0,
+      length: 0,
+      email: 0,
+      uuid4: 0,
+      uuid7: 0,
+      regexp: 0,
+      base64: 0,
+      base64url: 0,
+      ip4: 0,
+      ip6: 0,
+      cidr4: 0,
+      cidr6: 0,
+      emoji: 0,
+      e164: 0,
+      lowercase: 0,
+    },
+    _Number: {
+      _count: 0,
+      less: 0,
+      max: 0,
+      greater: 0,
+      min: 0,
+      integer: 0,
+      positive: 0,
+      negative: 0,
+      multiple: 0,
+    },
+    _Array: {
+      _count: 0,
+      min: 0,
+      max: 0,
+      length: 0,
+    },
+    _Object: {
+      _count: 0,
+    },
+    _Boolean: {
+      _count: 0,
+    },
+    _Date: {
+      _count: 0,
+    },
+    _BigInt: {
+      _count: 0,
+      less: 0,
+      max: 0,
+      greater: 0,
+      min: 0,
+      positive: 0,
+      negative: 0,
+      multiple: 0,
+    },
+    _Undefined: {
+      _count: 0,
+    },
+    _Null: {
+      _count: 0,
+    },
+    _NaN: {
+      _count: 0,
+    },
+    _Symbol: {
+      _count: 0,
+    },
+    _Function: {
+      _count: 0,
+    },
+    _RegExp: {
+      _count: 0,
+    },
+  },
 };
 
 const _ALLOWED_TYPES = [
@@ -46,9 +131,11 @@ class _Common {
     this.type = type;
     this.message = message;
     this.isUnSafe = isUnSafe;
+    globalThis.__ESCSS_ESTEST__.analysis._Common._count += 1;
   }
 
   description(inputValue) {
+    globalThis.__ESCSS_ESTEST__.analysis._Common.description += 1;
     if (typeof inputValue !== "string") {
       _error(
         this.input,
@@ -69,9 +156,11 @@ const _chain = {
   string: class _String extends _Common {
     constructor(...args) {
       super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._String._count += 1;
     }
 
     max(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._String.max += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -99,6 +188,7 @@ const _chain = {
     }
 
     min(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._String.min += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -126,6 +216,7 @@ const _chain = {
     }
 
     length(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._String.length += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -154,6 +245,7 @@ const _chain = {
 
     email(inputValue) {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.email += 1;
 
       let email = "";
 
@@ -200,6 +292,7 @@ const _chain = {
 
     uuid4() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.uuid4 += 1;
       const uuid4 =
         /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
 
@@ -220,6 +313,7 @@ const _chain = {
 
     uuid7() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.uuid7 += 1;
       const uuid7 =
         /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
 
@@ -239,6 +333,7 @@ const _chain = {
     }
 
     regexp(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._String.regexp += 1;
       if (_typeof(inputValue) !== "regexp") {
         _error(
           this.input,
@@ -268,6 +363,7 @@ const _chain = {
 
     base64() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.base64 += 1;
       const base64 =
         /^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$/;
 
@@ -288,6 +384,7 @@ const _chain = {
 
     base64url() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.base64url += 1;
       const base64url = /^[A-Za-z0-9_-]*$/;
 
       if (base64url.test(this.input) === false) {
@@ -307,6 +404,7 @@ const _chain = {
 
     ip4() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.ip4 += 1;
       const ip4 =
         /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
 
@@ -327,6 +425,7 @@ const _chain = {
 
     ip6() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.ip6 += 1;
       const ip6 =
         /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})$/;
 
@@ -347,6 +446,7 @@ const _chain = {
 
     cidr4() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.cidr4 += 1;
       const cidr4 =
         /^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\/([0-9]|[1-2][0-9]|3[0-2])$/;
 
@@ -367,6 +467,7 @@ const _chain = {
 
     cidr6() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.cidr6 += 1;
       const cidr6 =
         /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
 
@@ -387,6 +488,7 @@ const _chain = {
 
     emoji() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.emoji += 1;
       const emoji = /^(?:\p{Extended_Pictographic}|\p{Emoji_Component})+$/u;
 
       if (emoji.test(this.input) === false) {
@@ -406,6 +508,7 @@ const _chain = {
 
     e164() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.e164 += 1;
       const e164 = /^\+(?:[0-9]){6,14}[0-9]$/;
 
       if (e164.test(this.input) === false) {
@@ -425,6 +528,8 @@ const _chain = {
 
     lowercase() {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
+      globalThis.__ESCSS_ESTEST__.analysis._String.lowercase += 1;
+
       // regex for string with no uppercase letters
       const lowercase = /^[^A-Z]*$/;
 
@@ -446,9 +551,11 @@ const _chain = {
   number: class _Number extends _Common {
     constructor(...args) {
       super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Number._count += 1;
     }
 
     less(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.less += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -476,6 +583,7 @@ const _chain = {
     }
 
     max(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.max += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -503,6 +611,7 @@ const _chain = {
     }
 
     greater(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.greater += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -530,6 +639,7 @@ const _chain = {
     }
 
     min(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.min += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -557,6 +667,7 @@ const _chain = {
     }
 
     integer() {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.integer += 1;
       if (Number.isInteger(this.input) === false) {
         _error(this.input, this.type, this.message, this.isUnSafe, "integer");
       }
@@ -565,6 +676,7 @@ const _chain = {
     }
 
     positive() {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.positive += 1;
       if (this.input > 0 === false) {
         _error(this.input, this.type, this.message, this.isUnSafe, "positive");
       }
@@ -573,6 +685,7 @@ const _chain = {
     }
 
     negative() {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.negative += 1;
       if (this.input < 0 === false) {
         _error(this.input, this.type, this.message, this.isUnSafe, "negative");
       }
@@ -581,6 +694,7 @@ const _chain = {
     }
 
     multiple(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.multiple += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -610,9 +724,11 @@ const _chain = {
   array: class _Array extends _Common {
     constructor(...args) {
       super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Array._count += 1;
     }
 
     min(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Array.min += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -640,6 +756,7 @@ const _chain = {
     }
 
     max(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Array.max += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -667,6 +784,7 @@ const _chain = {
     }
 
     length(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Array.length += 1;
       if (typeof inputValue !== "number") {
         _error(
           this.input,
@@ -693,15 +811,32 @@ const _chain = {
       return this;
     }
   },
-  object: class _Object extends _Common {},
-  boolean: class _Boolean extends _Common {},
-  date: class _Date extends _Common {},
+  object: class _Object extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Object._count += 1;
+    }
+  },
+  boolean: class _Boolean extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Boolean._count += 1;
+    }
+  },
+  date: class _Date extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Date._count += 1;
+    }
+  },
   bigint: class _BigInt extends _Common {
     constructor(...args) {
       super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt._count += 1;
     }
 
     less(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.less += 1;
       if (typeof inputValue !== "bigint") {
         _error(
           this.input,
@@ -729,6 +864,7 @@ const _chain = {
     }
 
     max(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.max += 1;
       if (typeof inputValue !== "bigint") {
         _error(
           this.input,
@@ -756,6 +892,7 @@ const _chain = {
     }
 
     greater(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.greater += 1;
       if (typeof inputValue !== "bigint") {
         _error(
           this.input,
@@ -783,6 +920,7 @@ const _chain = {
     }
 
     min(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.min += 1;
       if (typeof inputValue !== "bigint") {
         _error(
           this.input,
@@ -810,6 +948,7 @@ const _chain = {
     }
 
     positive() {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.positive += 1;
       if (this.input > 0n === false) {
         _error(this.input, this.type, this.message, this.isUnSafe, "positive");
       }
@@ -818,6 +957,7 @@ const _chain = {
     }
 
     negative() {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.negative += 1;
       if (this.input < 0n === false) {
         _error(this.input, this.type, this.message, this.isUnSafe, "negative");
       }
@@ -826,6 +966,7 @@ const _chain = {
     }
 
     multiple(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.multiple += 1;
       if (typeof inputValue !== "bigint") {
         _error(
           this.input,
@@ -855,13 +996,39 @@ const _chain = {
   undefined: class _Undefined extends _Common {
     constructor(...args) {
       super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined._count += 1;
     }
   },
-  null: class _Null extends _Common {},
-  nan: class _NaN extends _Common {},
-  symbol: class _Symbol extends _Common {},
-  function: class _Function extends _Common {},
-  regexp: class _RegExp extends _Common {},
+  null: class _Null extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Null._count += 1;
+    }
+  },
+  nan: class _NaN extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._NaN._count += 1;
+    }
+  },
+  symbol: class _Symbol extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Symbol._count += 1;
+    }
+  },
+  function: class _Function extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Function._count += 1;
+    }
+  },
+  regexp: class _RegExp extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._RegExp._count += 1;
+    }
+  },
 };
 
 function _typeof(input) {
@@ -1135,11 +1302,15 @@ function _test(
 function ESTest(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
 
+  globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
+
   // console.error()
   return _test(input, type, message, false);
 }
 
 function unSafeESTest(input, type, message) {
+  globalThis.__ESCSS_ESTEST__.analysis.unSafeESTest._count += 1;
+
   // throw new Error()
   return _test(input, type, message, true);
 }
@@ -1149,6 +1320,7 @@ function baseESTest(input, type, message) {
 
   // update globalThis
   globalThis.__ESCSS_ESTEST__.message = message;
+  globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
 
   // console.error()
   return _test(input, type, message, false);
