@@ -190,6 +190,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          `email(${inputValue})`,
         );
       }
 
@@ -208,6 +210,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "uuid4",
         );
       }
 
@@ -226,6 +230,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "uuid7",
         );
       }
 
@@ -252,6 +258,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "regexp",
         );
       }
 
@@ -270,6 +278,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "base64",
         );
       }
 
@@ -287,6 +297,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "base64url",
         );
       }
 
@@ -305,6 +317,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "ip4",
         );
       }
 
@@ -323,6 +337,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "ip6",
         );
       }
 
@@ -341,6 +357,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "cidr4",
         );
       }
 
@@ -359,6 +377,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "cidr6",
         );
       }
 
@@ -376,6 +396,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "emoji",
         );
       }
 
@@ -393,6 +415,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "e164",
         );
       }
 
@@ -411,6 +435,8 @@ const _chain = {
           this.message,
           this.isUnSafe,
           "invalidInput",
+          null,
+          "lowercase",
         );
       }
 
@@ -908,19 +934,7 @@ function _error(
       console[logType](
         `🚫 Information hidden for security purposes. Verify in development mode.`,
       ),
-    invalidNumber: (logType) =>
-      console[logType](
-        ` \n ✅ Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint') \n ❌ Received input: ${input} (Invalid number) \n`,
-      ),
-    invalidDate: (logType) =>
-      console[logType](
-        ` \n ✅ Expected: 'date' \n ❌ Received: 'Invalid Date' \n`,
-      ),
-    invalidType: (logType) =>
-      console[logType](
-        ` \n ❌ Expected ESTest().method(value) value type: '${inputValue2}', got: '${_typeof(inputValue)}'`,
-        inputValue,
-      ),
+
     errArg1: (logType) =>
       console[logType](
         ` \n ✅ Expected ESTest() 1st Argument: '${type}' \n ❌ Received ESTest() 1st Argument: '${_typeof(input)}' \n`,
@@ -932,45 +946,89 @@ function _error(
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
-    less: (logType) =>
-      console[logType](` \n ❌ Must be < ${isBigint}, got:`, input),
-    max: (logType) =>
-      console[logType](` \n ❌ Must be <= ${isBigint}, got:`, input),
-    min: (logType) =>
-      console[logType](` \n ❌ Must be >= ${isBigint}, got:`, input),
-    greater: (logType) =>
-      console[logType](` \n ❌ Must be > ${isBigint}, got:`, input),
-    multiple: (logType) =>
-      console[logType](` \n ❌ Must be a multiple of ${isBigint}, got:`, input),
-    length: (logType) =>
-      console[logType](` \n ❌ Must be === ${inputValue}, got:`, input),
+
+    invalidNumber: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint') \n ❌ Received input: ${input} (Invalid number) \n`,
+      ),
+    invalidDate: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: 'date' \n ❌ Received: 'Invalid Date' \n`,
+      ),
+    invalidType: (logType) =>
+      console[logType](
+        ` \n ✅ Expected input type: '${inputValue2}' \n ❌ Received input type: '${_typeof(inputValue)}'`,
+        inputValue,
+      ),
     invalidInput: (logType) =>
-      console[logType](` \n ❌ Invalid input, got:`, input),
+      console[logType](` \n ❌ The input is invalid, got:`, input),
+
+    less: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: input < ${isBigint} \n ❌ Received:`,
+        input,
+      ),
+    max: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: input <= ${isBigint} \n ❌ Received:`,
+        input,
+      ),
+    min: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: input >= ${isBigint} \n ❌ Received:`,
+        input,
+      ),
+    greater: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: input > ${isBigint} \n ❌ Received:`,
+        input,
+      ),
+    multiple: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: input % ${isBigint} === 0 \n ❌ Received:`,
+        input,
+      ),
+    length: (logType) =>
+      console[logType](
+        ` \n ✅ Expected: input === ${inputValue} \n ❌ Received:`,
+        input,
+      ),
     integer: (logType) =>
-      console[logType](` \n ❌ Must be an integer, got:`, input),
+      console[logType](
+        ` \n ✅ Expected: input is an integer \n ❌ Received:`,
+        input,
+      ),
     positive: (logType) =>
-      console[logType](` \n ❌ Must be a positive number, got:`, input),
+      console[logType](
+        ` \n ✅ Expected: input is a positive number/bigint \n ❌ Received:`,
+        input,
+      ),
     negative: (logType) =>
-      console[logType](` \n ❌ Must be a negative number, got:`, input),
+      console[logType](
+        ` \n ✅ Expected: input is a negative number/bigint \n ❌ Received:`,
+        input,
+      ),
   };
 
   const _unSafeESTestLog = {
-    invalidNumber: `Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
-    invalidDate: `Expected: 'date', Received: 'Invalid Date'`,
-    invalidType: `Expected unSafeESTest().method(value), value type: '${inputValue2}'`,
-    errArg1: `The value must be a/an '${type}'`,
-    errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'nan' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
-    errArg3: `Expected 3rd Argument: 'string'`,
-    less: `The value must be less than ${isBigint}`,
-    max: `The value must be less than or equal to ${isBigint}`,
-    min: `The value must be greater or equal to ${isBigint}`,
-    greater: `The value must be greater than ${isBigint}`,
-    multiple: `The value must be a multiple of ${isBigint}`,
-    length: `The value must be exactly equal to ${inputValue}`,
-    invalidInput: `The value is invalid input`,
-    integer: `The value must be an integer`,
-    positive: `The value must be a positive number`,
-    negative: `The value must be a negative number`,
+    errArg1: `[unSafeESTest(input, type, message)] Expected 1st Argument '${type}'`,
+    errArg2: `[unSafeESTest(input, type, message)] Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'nan' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
+    errArg3: `[unSafeESTest(input, type, message)] Expected 3rd Argument: 'string'`,
+
+    invalidNumber: `[unSafeESTest(input)] Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
+    invalidDate: `[unSafeESTest(input)] Expected: 'date', Received: 'Invalid Date'`,
+    invalidType: `[unSafeESTest().method(input)] Expected input type: '${inputValue2}'`,
+    invalidInput: `[unSafeESTest().${inputValue2}(input)] The input is invalid`,
+
+    less: `[unSafeESTest().less(input)] Expected: input < ${isBigint}`,
+    max: `[unSafeESTest().max(input)] Expected: input <= ${isBigint}`,
+    min: `[unSafeESTest().min(input)] Expected: input >= ${isBigint}`,
+    greater: `[unSafeESTest().greater(input)] Expected: input > ${isBigint}`,
+    multiple: `[unSafeESTest().multiple(input)] Expected: input % ${isBigint} === 0`,
+    length: `[unSafeESTest().length(input)] Expected: input === ${inputValue}`,
+    integer: `[unSafeESTest(input).integer()] Expected: input is an integer`,
+    positive: `[unSafeESTest(input).integer()] Expected: input is a positive number/bigint`,
+    negative: `[unSafeESTest(input).integer()] Expected: input is a negative number/bigint`,
   };
 
   // For ESTest
