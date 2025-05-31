@@ -1056,6 +1056,10 @@ function _typeof(input) {
   let newType;
 
   switch (typeof input) {
+    // 'string' is used to early return for performance
+    case "string":
+      newType = "string";
+      break;
     case "number":
       if (Number.isNaN(input)) {
         newType = "nan";
