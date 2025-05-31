@@ -20,7 +20,7 @@ ESTest("user.tag+filter@sub.example-domain.co.uk", "string").email(
 ESTest("user.name123@example-domain.com", "string").email("unicodeEmail");
 ESTest("550e8400-e29b-41d4-a716-446655440000", "string").uuid4();
 ESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d", "string").uuid7();
-ESTest("foo bar", "string").regexp(/(foo|bar)/);
+ESTest("foo bar", "string").regex(/(foo|bar)/);
 ESTest("SGVsbG8gd29ybGQh", "string").base64();
 ESTest("Zm9vYmFyXzEyMw", "string").base64url();
 ESTest("192.168.1.1", "string").ip4();
@@ -105,7 +105,7 @@ unSafeESTest("user.tag+filter@sub.example-domain.co.uk", "string").email(
 unSafeESTest("user.name123@example-domain.com", "string").email("unicodeEmail");
 unSafeESTest("550e8400-e29b-41d4-a716-446655440000", "string").uuid4();
 unSafeESTest("0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d", "string").uuid7();
-unSafeESTest("foo bar", "string").regexp(/(foo|bar)/);
+unSafeESTest("foo bar", "string").regex(/(foo|bar)/);
 unSafeESTest("SGVsbG8gd29ybGQh", "string").base64();
 unSafeESTest("Zm9vYmFyXzEyMw", "string").base64url();
 unSafeESTest("192.168.1.1", "string").ip4();

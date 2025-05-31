@@ -217,9 +217,9 @@ declare interface _String extends _Common<"string"> {
 
   /**
    * @example
-   * ESTest('foo bar', 'string').regexp(/(foo|bar)/) // pass
+   * ESTest('foo bar', 'string').regex(/(foo|bar)/) // pass
    */
-  regexp(): _Chain<"string">;
+  regex(): _Chain<"string">;
 
   /**
    * @example

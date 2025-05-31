@@ -58,7 +58,7 @@ globalThis.__ESCSS_ESTEST__ = {
       email: 0,
       uuid4: 0,
       uuid7: 0,
-      regexp: 0,
+      regex: 0,
       base64: 0,
       base64url: 0,
       ip4: 0,
@@ -679,8 +679,8 @@ const _chain = {
       return this;
     }
 
-    regexp(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._String.regexp += 1;
+    regex(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._String.regex += 1;
       if (_typeof(inputValue) !== "object") {
         _error(
           this.input,
