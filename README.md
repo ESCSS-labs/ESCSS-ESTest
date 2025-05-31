@@ -1,17 +1,19 @@
 ![logo](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/logo.png)
 
-## What is ESCSS-ESTest?
+# What is ESCSS-ESTest?
 
 A passive, non-intrusive JavaScript runtime validator designed to achieve 100% function coverage.
 
 ## Features
 
-- 🪄 Supports TypeScript autocompletion.
-- 👌 Effortless integration with your codebase.
-- 📦 2.7 kB (minified + gzipped), zero dependencies.
-- 🎨 Designed with developer experience as a priority.
-- ⚙️ Unlock its full potential through E2E and unit testing.
-- 🚀 (Optional) runtime testing with minimal performance overhead.
+- ✅ `TypeScript autocompletion`.
+- 🧪 Supports `E2E` & `unit testing`.
+- ⚙️ Works in `Node.js` & `modern browsers`.
+- ❤️‍🔥 Built with `security` & `developer experience` at heart.
+- 🎯 `Non-intrusive` & `concise API` to achieve `100% function coverage`.
+- 🔥 `Runtime dependency error detection` to eliminate `dependency hell`.
+- 🪶 `2.7 kB` (minified + gzipped), `zero dependencies`, and `no vendor lock-in`.
+- ⚡ (Optional) `runtime testing` with `minimal performance impact`.
 
 ## Installation
 
@@ -31,21 +33,22 @@ A passive, non-intrusive JavaScript runtime validator designed to achieve 100% f
   bun add escss-estest
 ```
 
-## Core Concepts
+## Core Concept
 
-### Water filter
+**`Water filter`**
+
+- Inspired by TDD, it's a filter for your code, making sure only clean results come through.
 
 ```js
 function sum(a, b) {
   // unhappy path: {...}
-  // This block acts as an unhappy path filter, validating input with "console.error"
-  // without breaking the main codebase. It can be collapsed in IDEs to hide its complexity.
+  // Unhappy path filter. console.error (non-breaking). Collapsible. Removable.
   {
     ESTest(a, "number");
     ESTest(b, "number");
   }
 
-  // Happy path: inputs are valid, perform the intuitive sum.
+  // Happy path: inputs are valid
   return a + b;
 }
 ```
@@ -54,9 +57,9 @@ function sum(a, b) {
 
 ### `ESTest(input, type, message)`
 
-#### _ESTest is just a console.error(...), so it won't break your app._
+- Non-breaking error logging via `console.error(...)`
 
-##### case 1
+**case 1**
 
 ```js
 import { ESTest } from "escss-estest";
@@ -71,7 +74,7 @@ function sum(a, b) {
 }
 ```
 
-##### case 2
+**case 2**
 
 ```js
 import { ESTest } from "escss-estest";
@@ -99,7 +102,7 @@ async function getApi(a, b) {
    * }
    */
 
-  // Hint: you might get 'undefined' data, use the optional chaining operator (?.) to prevent undefined from breaking your app.
+  // Hint: Prevent undefined errors with optional chaining (?.)
   {
     ESTest(data.name, "string").regex(/(demo|Alice)/);
     ESTest(data.age, "number").positive();
@@ -114,7 +117,7 @@ async function getApi(a, b) {
 
 ### `unSafeESTest(input, type, message)`
 
-#### unSafeESTest throws a new Error, make sure to wrap it in try...catch
+- Breaking error throwing via `throw new Error(...)`
 
 ```js
 import { unSafeESTest } from "escss-estest";
@@ -136,7 +139,7 @@ app.post("/validate", (req, res) => {
 
     {
       unSafeESTest(data.name, "string").regex(/(foo)/);
-      unSafeESTest(data.email, "string", "your email is invalid!").email();
+      unSafeESTest(data.email, "string", "custom error messages").email();
     }
 
     res.json({ message: "Validation passed" });
@@ -146,29 +149,41 @@ app.post("/validate", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`http://localhost:${port}`)
-})
+  console.log(`http://localhost:${port}`);
+});
 ```
 
-## Support API
+### `baseESTest(input, type, message)`
+
+- Get clear, actionable `bug reports` (for library authors/maintainers).
+
+```js
+
+
+```
+
+## Auxiliary API
+
+### `globalThis.__ESCSS_ESTEST__.information`
+
+- Show library information
 
 ### `globalThis.__ESCSS_ESTEST__.message`
 
-- Get feedbacks from others
+- Captures `internal bug reports` (for company teams).
 
 ```js
-globalThis.__ESCSS_ESTEST__.message =
-  "Please send this issue to [url].";
+globalThis.__ESCSS_ESTEST__.message = "Please report this issue to ...";
 ```
 
 ### `globalThis.__ESCSS_ESTEST__.isESTestDisabled`
 
-#### Why have this feature?
+- Why have this feature?
 
-- Designed to avoid vendor lock-in.
-- Optimized for production performance.
+  - Avoids vendor lock-in for long-term project flexibility.
+  - Optimizes production performance by enabling in dev and disabling in prod.
 
-*note: unSafeESTest will not be affected (security reasons).*
+  _Note: `unSafeESTest` will not be affected (for security reasons)_
 
 ```js
 globalThis.__ESCSS_ESTEST__.isESTestDisabled = true;
@@ -182,8 +197,12 @@ function sum(a, b) {
   return a + b;
 }
 
-// same as below (but performance improved)
+// same as below
 function sum(a, b) {
   return a + b;
 }
 ```
+
+### `globalThis.__ESCSS_ESTEST__.analysis`
+
+- Show usage reports
