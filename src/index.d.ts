@@ -1,51 +1,50 @@
 declare type _ALLOWED_TYPES =
-  | "string"
-  | "number"
-  | "array"
-  | "object"
-  | "boolean"
-  | "date"
-  | "bigint"
   | "undefined"
   | "null"
-  | "nan"
+  | "boolean"
+  | "number"
+  | "bigint"
+  | "string"
   | "symbol"
   | "function"
+  | "object"
+  | "array"
+  | "date"
   | "regexp"
+  | "nan"
   // optional(?)
-  | "string?"
-  | "number?"
-  | "array?"
-  | "object?"
   | "boolean?"
-  | "bigint?";
+  | "number?"
+  | "string?"
+  | "object?"
+  | "array?";
 
-declare type _Chain<T extends _ALLOWED_TYPES> = T extends "string" | "string?"
-  ? _String
-  : T extends "number" | "number?"
-    ? _Number
-    : T extends "array" | "array?"
-      ? _Array
-      : T extends "object" | "object?"
-        ? _Object
-        : T extends "boolean" | "boolean?"
-          ? _Boolean
-          : T extends "date"
-            ? _Date
-            : T extends "bigint" | "bigint?"
-              ? _BigInt
-              : T extends "undefined"
-                ? _Undefined
-                : T extends "null"
-                  ? _Null
-                  : T extends "nan"
-                    ? _NaN
-                    : T extends "symbol"
-                      ? _Symbol
-                      : T extends "function"
-                        ? _Function
-                        : T extends "regexp"
-                          ? _RegExp
+declare type _Chain<T extends _ALLOWED_TYPES> = T extends "undefined"
+  ? _Undefined?
+  : T extends "null"
+    ? _Null?
+    : T extends "boolean" | "boolean?"
+      ? _Boolean
+      : T extends "number" | "number?"
+        ? _Number
+        : T extends "bigint" | "bigint?"
+          ? _BigInt
+          : T extends "string" | "string?"
+            ? _String
+            : T extends "symbol"
+              ? _Symbol
+              : T extends "function"
+                ? _Function
+                : T extends "object" | "object?"
+                  ? _Object
+                  : T extends "array" | "array?"
+                    ? _Array
+                    : T extends "date"
+                      ? _Date
+                      : T extends "regexp"
+                        ? _RegExp
+                        : T extends "nan"
+                          ? _NaN
                           : never;
 
 declare interface _Common<T extends _ALLOWED_TYPES> {
@@ -55,6 +54,121 @@ declare interface _Common<T extends _ALLOWED_TYPES> {
    * ESTest('foo', 'string').description('a helpful information')
    */
   description(): _Chain<T>;
+}
+
+declare interface _Undefined extends _Common<"undefined"> {}
+
+declare interface _Null extends _Common<"null"> {}
+
+declare interface _Boolean extends _Common<"boolean"> {}
+
+declare interface _Number extends _Common<"number"> {
+  /**
+   * @example
+   * // 5 < 10
+   * ESTest(5, 'number').less(10) // pass
+   */
+  less(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 5 <= 10
+   * ESTest(5, 'number').max(10) // pass
+   */
+  max(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15 > 10
+   * ESTest(15, 'number').greater(10) // pass
+   */
+  greater(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15 >= 10
+   * ESTest(15, 'number').min(10) // pass
+   */
+  min(): _Chain<"number">;
+
+  /**
+   * @example
+   * // Number.isInteger(15)
+   * ESTest(15, 'number').integer() // pass
+   */
+  integer(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15 > 0
+   * ESTest(15, 'number').positive() // pass
+   */
+  positive(): _Chain<"number">;
+
+  /**
+   * @example
+   * // -15 < 0
+   * ESTest(-15, 'number').negative() // pass
+   */
+  negative(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15 % 3 === 0
+   * ESTest(15, 'number').multiple(3) // pass
+   */
+  multiple(): _Chain<"number">;
+}
+
+declare interface _BigInt extends _Common<"bigint"> {
+  /**
+   * @example
+   * // 5n < 10n
+   * ESTest(5n, 'bigint').less(10n) // pass
+   */
+  less(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 5n <= 10n
+   * ESTest(5n, 'bigint').max(10n) // pass
+   */
+  max(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15n > 10n
+   * ESTest(15n, 'bigint').greater(10n) // pass
+   */
+  greater(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15n >= 10n
+   * ESTest(15n, 'bigint').min(10n) // pass
+   */
+  min(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15n > 0n
+   * ESTest(15n, 'bigint').positive() // pass
+   */
+  positive(): _Chain<"number">;
+
+  /**
+   * @example
+   * // -15n < 0n
+   * ESTest(-15n, 'bigint').negative() // pass
+   */
+  negative(): _Chain<"number">;
+
+  /**
+   * @example
+   * // 15n % 3n === 0n
+   * ESTest(15n, 'bigint').multiple(3n) // pass
+   */
+  multiple(): _Chain<"number">;
 }
 
 declare interface _String extends _Common<"string"> {
@@ -171,63 +285,11 @@ declare interface _String extends _Common<"string"> {
   lowercase(): _Chain<"string">;
 }
 
-declare interface _Number extends _Common<"number"> {
-  /**
-   * @example
-   * // 5 < 10
-   * ESTest(5, 'number').less(10) // pass
-   */
-  less(): _Chain<"number">;
+declare interface _Symbol extends _Common<"symbol"> {}
 
-  /**
-   * @example
-   * // 5 <= 10
-   * ESTest(5, 'number').max(10) // pass
-   */
-  max(): _Chain<"number">;
+declare interface _Function extends _Common<"function"> {}
 
-  /**
-   * @example
-   * // 15 > 10
-   * ESTest(15, 'number').greater(10) // pass
-   */
-  greater(): _Chain<"number">;
-
-  /**
-   * @example
-   * // 15 >= 10
-   * ESTest(15, 'number').min(10) // pass
-   */
-  min(): _Chain<"number">;
-
-  /**
-   * @example
-   * // Number.isInteger(15)
-   * ESTest(15, 'number').integer() // pass
-   */
-  integer(): _Chain<"number">;
-
-  /**
-   * @example
-   * // 15 > 0
-   * ESTest(15, 'number').positive() // pass
-   */
-  positive(): _Chain<"number">;
-
-  /**
-   * @example
-   * // -15 < 0
-   * ESTest(-15, 'number').negative() // pass
-   */
-  negative(): _Chain<"number">;
-
-  /**
-   * @example
-   * // 15 % 3 === 0
-   * ESTest(15, 'number').multiple(3) // pass
-   */
-  multiple(): _Chain<"number">;
-}
+declare interface _Object extends _Common<"object"> {}
 
 declare interface _Array extends _Common<"array"> {
   /**
@@ -252,74 +314,11 @@ declare interface _Array extends _Common<"array"> {
   length(): _Chain<"array">;
 }
 
-declare interface _Object extends _Common<"object"> {}
-
-declare interface _Boolean extends _Common<"boolean"> {}
-
 declare interface _Date extends _Common<"date"> {}
 
-declare interface _BigInt extends _Common<"bigint"> {
-  /**
-   * @example
-   * // 5n < 10n
-   * ESTest(5n, 'bigint').less(10n) // pass
-   */
-  less(): _Chain<"number">;
-
-  /**
-   * @example
-   * // 5n <= 10n
-   * ESTest(5n, 'bigint').max(10n) // pass
-   */
-  max(): _Chain<"number">;
-
-  /**
-   * @example
-   * // 15n > 10n
-   * ESTest(15n, 'bigint').greater(10n) // pass
-   */
-  greater(): _Chain<"number">;
-
-  /**
-   * @example
-   * // 15n >= 10n
-   * ESTest(15n, 'bigint').min(10n) // pass
-   */
-  min(): _Chain<"number">;
-
-  /**
-   * @example
-   * // 15n > 0n
-   * ESTest(15n, 'bigint').positive() // pass
-   */
-  positive(): _Chain<"number">;
-
-  /**
-   * @example
-   * // -15n < 0n
-   * ESTest(-15n, 'bigint').negative() // pass
-   */
-  negative(): _Chain<"number">;
-
-  /**
-   * @example
-   * // 15n % 3n === 0n
-   * ESTest(15n, 'bigint').multiple(3n) // pass
-   */
-  multiple(): _Chain<"number">;
-}
-
-declare interface _Undefined extends _Common<"undefined"> {}
-
-declare interface _Null extends _Common<"null"> {}
+declare interface _RegExp extends _Common<"regexp"> {}
 
 declare interface _NaN extends _Common<"nan"> {}
-
-declare interface _Symbol extends _Common<"symbol"> {}
-
-declare interface _Function extends _Common<"function"> {}
-
-declare interface _RegExp extends _Common<"regexp"> {}
 
 /**
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest

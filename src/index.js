@@ -20,6 +20,36 @@ globalThis.__ESCSS_ESTEST__ = {
       _count: 0,
       description: 0,
     },
+    _Undefined: {
+      _count: 0,
+    },
+    _Null: {
+      _count: 0,
+    },
+    _Boolean: {
+      _count: 0,
+    },
+    _Number: {
+      _count: 0,
+      less: 0,
+      max: 0,
+      greater: 0,
+      min: 0,
+      integer: 0,
+      positive: 0,
+      negative: 0,
+      multiple: 0,
+    },
+    _BigInt: {
+      _count: 0,
+      less: 0,
+      max: 0,
+      greater: 0,
+      min: 0,
+      positive: 0,
+      negative: 0,
+      multiple: 0,
+    },
     _String: {
       _count: 0,
       max: 0,
@@ -39,16 +69,14 @@ globalThis.__ESCSS_ESTEST__ = {
       e164: 0,
       lowercase: 0,
     },
-    _Number: {
+    _Symbol: {
       _count: 0,
-      less: 0,
-      max: 0,
-      greater: 0,
-      min: 0,
-      integer: 0,
-      positive: 0,
-      negative: 0,
-      multiple: 0,
+    },
+    _Function: {
+      _count: 0,
+    },
+    _Object: {
+      _count: 0,
     },
     _Array: {
       _count: 0,
@@ -56,67 +84,39 @@ globalThis.__ESCSS_ESTEST__ = {
       max: 0,
       length: 0,
     },
-    _Object: {
-      _count: 0,
-    },
-    _Boolean: {
-      _count: 0,
-    },
     _Date: {
       _count: 0,
     },
-    _BigInt: {
-      _count: 0,
-      less: 0,
-      max: 0,
-      greater: 0,
-      min: 0,
-      positive: 0,
-      negative: 0,
-      multiple: 0,
-    },
-    _Undefined: {
-      _count: 0,
-    },
-    _Null: {
+    _RegExp: {
       _count: 0,
     },
     _NaN: {
-      _count: 0,
-    },
-    _Symbol: {
-      _count: 0,
-    },
-    _Function: {
-      _count: 0,
-    },
-    _RegExp: {
       _count: 0,
     },
   },
 };
 
 const _ALLOWED_TYPES = [
-  "string",
-  "number",
-  "array",
-  "object",
-  "boolean",
-  "date",
-  "bigint",
   "undefined",
   "null",
-  "nan",
+  "boolean",
+  "number",
+  "bigint",
+  "string",
   "symbol",
   "function",
+  "object",
+  "array",
+  "date",
   "regexp",
+  "nan",
   // optional(?)
-  "string?",
-  "number?",
-  "array?",
-  "object?",
   "boolean?",
+  "number?",
   "bigint?",
+  "string?",
+  "object?",
+  "array?",
 ];
 
 class _Common {
@@ -153,6 +153,361 @@ class _Common {
 }
 
 const _chain = {
+  undefined: class _Undefined extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined._count += 1;
+    }
+  },
+  null: class _Null extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Null._count += 1;
+    }
+  },
+  boolean: class _Boolean extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Boolean._count += 1;
+    }
+  },
+  number: class _Number extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Number._count += 1;
+    }
+
+    less(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.less += 1;
+      if (typeof inputValue !== "number") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "number",
+        );
+      }
+
+      if (this.input < inputValue === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "less",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+
+    max(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.max += 1;
+      if (typeof inputValue !== "number") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "number",
+        );
+      }
+
+      if (this.input <= inputValue === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "max",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+
+    greater(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.greater += 1;
+      if (typeof inputValue !== "number") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "number",
+        );
+      }
+
+      if (this.input > inputValue === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "greater",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+
+    min(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.min += 1;
+      if (typeof inputValue !== "number") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "number",
+        );
+      }
+
+      if (this.input >= inputValue === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "min",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+
+    integer() {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.integer += 1;
+      if (Number.isInteger(this.input) === false) {
+        _error(this.input, this.type, this.message, this.isUnSafe, "integer");
+      }
+
+      return this;
+    }
+
+    positive() {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.positive += 1;
+      if (this.input > 0 === false) {
+        _error(this.input, this.type, this.message, this.isUnSafe, "positive");
+      }
+
+      return this;
+    }
+
+    negative() {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.negative += 1;
+      if (this.input < 0 === false) {
+        _error(this.input, this.type, this.message, this.isUnSafe, "negative");
+      }
+
+      return this;
+    }
+
+    multiple(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._Number.multiple += 1;
+      if (typeof inputValue !== "number") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "number",
+        );
+      }
+
+      if ((this.input % inputValue === 0) === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "multiple",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+  },
+  bigint: class _BigInt extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt._count += 1;
+    }
+
+    less(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.less += 1;
+      if (typeof inputValue !== "bigint") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "bigint",
+        );
+      }
+
+      if (this.input < inputValue === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "less",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+
+    max(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.max += 1;
+      if (typeof inputValue !== "bigint") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "bigint",
+        );
+      }
+
+      if (this.input <= inputValue === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "max",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+
+    greater(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.greater += 1;
+      if (typeof inputValue !== "bigint") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "bigint",
+        );
+      }
+
+      if (this.input > inputValue === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "greater",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+
+    min(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.min += 1;
+      if (typeof inputValue !== "bigint") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "bigint",
+        );
+      }
+
+      if (this.input >= inputValue === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "min",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+
+    positive() {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.positive += 1;
+      if (this.input > 0n === false) {
+        _error(this.input, this.type, this.message, this.isUnSafe, "positive");
+      }
+
+      return this;
+    }
+
+    negative() {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.negative += 1;
+      if (this.input < 0n === false) {
+        _error(this.input, this.type, this.message, this.isUnSafe, "negative");
+      }
+
+      return this;
+    }
+
+    multiple(inputValue) {
+      globalThis.__ESCSS_ESTEST__.analysis._BigInt.multiple += 1;
+      if (typeof inputValue !== "bigint") {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "invalidType",
+          inputValue,
+          "bigint",
+        );
+      }
+
+      if ((this.input % inputValue === 0n) === false) {
+        _error(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "multiple",
+          inputValue,
+        );
+      }
+
+      return this;
+    }
+  },
   string: class _String extends _Common {
     constructor(...args) {
       super(...args);
@@ -548,177 +903,22 @@ const _chain = {
       return this;
     }
   },
-  number: class _Number extends _Common {
+  symbol: class _Symbol extends _Common {
     constructor(...args) {
       super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._Number._count += 1;
+      globalThis.__ESCSS_ESTEST__.analysis._Symbol._count += 1;
     }
-
-    less(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._Number.less += 1;
-      if (typeof inputValue !== "number") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "number",
-        );
-      }
-
-      if (this.input < inputValue === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "less",
-          inputValue,
-        );
-      }
-
-      return this;
+  },
+  function: class _Function extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Function._count += 1;
     }
-
-    max(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._Number.max += 1;
-      if (typeof inputValue !== "number") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "number",
-        );
-      }
-
-      if (this.input <= inputValue === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "max",
-          inputValue,
-        );
-      }
-
-      return this;
-    }
-
-    greater(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._Number.greater += 1;
-      if (typeof inputValue !== "number") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "number",
-        );
-      }
-
-      if (this.input > inputValue === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "greater",
-          inputValue,
-        );
-      }
-
-      return this;
-    }
-
-    min(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._Number.min += 1;
-      if (typeof inputValue !== "number") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "number",
-        );
-      }
-
-      if (this.input >= inputValue === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "min",
-          inputValue,
-        );
-      }
-
-      return this;
-    }
-
-    integer() {
-      globalThis.__ESCSS_ESTEST__.analysis._Number.integer += 1;
-      if (Number.isInteger(this.input) === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "integer");
-      }
-
-      return this;
-    }
-
-    positive() {
-      globalThis.__ESCSS_ESTEST__.analysis._Number.positive += 1;
-      if (this.input > 0 === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "positive");
-      }
-
-      return this;
-    }
-
-    negative() {
-      globalThis.__ESCSS_ESTEST__.analysis._Number.negative += 1;
-      if (this.input < 0 === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "negative");
-      }
-
-      return this;
-    }
-
-    multiple(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._Number.multiple += 1;
-      if (typeof inputValue !== "number") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "number",
-        );
-      }
-
-      if ((this.input % inputValue === 0) === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "multiple",
-          inputValue,
-        );
-      }
-
-      return this;
+  },
+  object: class _Object extends _Common {
+    constructor(...args) {
+      super(...args);
+      globalThis.__ESCSS_ESTEST__.analysis._Object._count += 1;
     }
   },
   array: class _Array extends _Common {
@@ -811,222 +1011,22 @@ const _chain = {
       return this;
     }
   },
-  object: class _Object extends _Common {
-    constructor(...args) {
-      super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._Object._count += 1;
-    }
-  },
-  boolean: class _Boolean extends _Common {
-    constructor(...args) {
-      super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._Boolean._count += 1;
-    }
-  },
   date: class _Date extends _Common {
     constructor(...args) {
       super(...args);
       globalThis.__ESCSS_ESTEST__.analysis._Date._count += 1;
     }
   },
-  bigint: class _BigInt extends _Common {
+  regexp: class _RegExp extends _Common {
     constructor(...args) {
       super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._BigInt._count += 1;
-    }
-
-    less(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._BigInt.less += 1;
-      if (typeof inputValue !== "bigint") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "bigint",
-        );
-      }
-
-      if (this.input < inputValue === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "less",
-          inputValue,
-        );
-      }
-
-      return this;
-    }
-
-    max(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._BigInt.max += 1;
-      if (typeof inputValue !== "bigint") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "bigint",
-        );
-      }
-
-      if (this.input <= inputValue === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "max",
-          inputValue,
-        );
-      }
-
-      return this;
-    }
-
-    greater(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._BigInt.greater += 1;
-      if (typeof inputValue !== "bigint") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "bigint",
-        );
-      }
-
-      if (this.input > inputValue === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "greater",
-          inputValue,
-        );
-      }
-
-      return this;
-    }
-
-    min(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._BigInt.min += 1;
-      if (typeof inputValue !== "bigint") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "bigint",
-        );
-      }
-
-      if (this.input >= inputValue === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "min",
-          inputValue,
-        );
-      }
-
-      return this;
-    }
-
-    positive() {
-      globalThis.__ESCSS_ESTEST__.analysis._BigInt.positive += 1;
-      if (this.input > 0n === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "positive");
-      }
-
-      return this;
-    }
-
-    negative() {
-      globalThis.__ESCSS_ESTEST__.analysis._BigInt.negative += 1;
-      if (this.input < 0n === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "negative");
-      }
-
-      return this;
-    }
-
-    multiple(inputValue) {
-      globalThis.__ESCSS_ESTEST__.analysis._BigInt.multiple += 1;
-      if (typeof inputValue !== "bigint") {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "invalidType",
-          inputValue,
-          "bigint",
-        );
-      }
-
-      if ((this.input % inputValue === 0n) === false) {
-        _error(
-          this.input,
-          this.type,
-          this.message,
-          this.isUnSafe,
-          "multiple",
-          inputValue,
-        );
-      }
-
-      return this;
-    }
-  },
-  undefined: class _Undefined extends _Common {
-    constructor(...args) {
-      super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._Undefined._count += 1;
-    }
-  },
-  null: class _Null extends _Common {
-    constructor(...args) {
-      super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._Null._count += 1;
+      globalThis.__ESCSS_ESTEST__.analysis._RegExp._count += 1;
     }
   },
   nan: class _NaN extends _Common {
     constructor(...args) {
       super(...args);
       globalThis.__ESCSS_ESTEST__.analysis._NaN._count += 1;
-    }
-  },
-  symbol: class _Symbol extends _Common {
-    constructor(...args) {
-      super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._Symbol._count += 1;
-    }
-  },
-  function: class _Function extends _Common {
-    constructor(...args) {
-      super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._Function._count += 1;
-    }
-  },
-  regexp: class _RegExp extends _Common {
-    constructor(...args) {
-      super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._RegExp._count += 1;
     }
   },
 };
@@ -1037,20 +1037,19 @@ function _typeof(input) {
 
   [object Class]    from typeof (vanilla JS)       output type
   -------------------------------------------------------------------------------------------------------
-  String             'string'
-  Number             'number'
-  Array              'object'          ->        change to 'array'
-  Object             'object'
-  Boolean            'boolean'
-  Date               'object'          ->        change to 'date'
-  BigInt             'bigint'
   Undefined          'undefined'
   Null               'object'          ->        change to 'null'
-  Number (NaN)       'number'          ->        change to 'nan'
+  Boolean            'boolean'
+  Number             'number'
+  BigInt             'bigint'
+  String             'string'
   Symbol             'symbol'
   Function           'function'
+  Object             'object'
+  Array              'object'          ->        change to 'array'
+  Date               'object'          ->        change to 'date'
   RegExp             'object'          ->        change to 'regexp'
-
+  Number (NaN)       'number'          ->        change to 'nan'
   */
 
   let newType;
@@ -1113,7 +1112,7 @@ function _error(
       ),
     errArg2: (logType) =>
       console[logType](
-        ` \n ✅ Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'nan' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?' \n`,
+        ` \n ✅ Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'date' | 'regexp' | 'nan' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?' \n`,
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
@@ -1183,7 +1182,7 @@ function _error(
 
   const _unSafeESTestLog = {
     errArg1: `[unSafeESTest(input, type, message)] Expected 1st Argument '${type}'`,
-    errArg2: `[unSafeESTest(input, type, message)] Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'nan' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
+    errArg2: `[unSafeESTest(input, type, message)] Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'date' | 'regexp' | 'nan' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?'`,
     errArg3: `[unSafeESTest(input, type, message)] Expected 3rd Argument: 'string'`,
 
     invalidNumber: `[unSafeESTest(input)] Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
