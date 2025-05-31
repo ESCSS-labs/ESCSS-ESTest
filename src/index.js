@@ -90,9 +90,6 @@ globalThis.__ESCSS_ESTEST__ = {
     _RegExp: {
       _count: 0,
     },
-    _NaN: {
-      _count: 0,
-    },
   },
 };
 
@@ -109,7 +106,6 @@ const _ALLOWED_TYPES = [
   "array",
   "date",
   "regexp",
-  "nan",
   // optional(?)
   "boolean?",
   "number?",
@@ -1023,12 +1019,6 @@ const _chain = {
       globalThis.__ESCSS_ESTEST__.analysis._RegExp._count += 1;
     }
   },
-  nan: class _NaN extends _Common {
-    constructor(...args) {
-      super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._NaN._count += 1;
-    }
-  },
 };
 
 function _typeof(input) {
@@ -1049,7 +1039,6 @@ function _typeof(input) {
   Array              'object'          ->        change to 'array'
   Date               'object'          ->        change to 'date'
   RegExp             'object'          ->        change to 'regexp'
-  Number (NaN)       'number'          ->        change to 'nan'
   */
 
   let newType;
@@ -1061,6 +1050,7 @@ function _typeof(input) {
       break;
     case "number":
       if (Number.isNaN(input)) {
+        // for internal usage to check edge case of number
         newType = "nan";
       } else {
         newType = "number";
@@ -1112,7 +1102,7 @@ function _error(
       ),
     errArg2: (logType) =>
       console[logType](
-        ` \n ✅ Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'date' | 'regexp' | 'nan' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?' \n`,
+        ` \n ✅ Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'date' | 'regexp' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?' \n`,
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
@@ -1182,7 +1172,7 @@ function _error(
 
   const _unSafeESTestLog = {
     errArg1: `[unSafeESTest(input, type, message)] Expected 1st Argument '${type}'`,
-    errArg2: `[unSafeESTest(input, type, message)] Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'date' | 'regexp' | 'nan' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?'`,
+    errArg2: `[unSafeESTest(input, type, message)] Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'date' | 'regexp' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?'`,
     errArg3: `[unSafeESTest(input, type, message)] Expected 3rd Argument: 'string'`,
 
     invalidNumber: `[unSafeESTest(input)] Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
