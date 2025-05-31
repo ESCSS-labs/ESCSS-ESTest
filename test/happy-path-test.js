@@ -91,9 +91,6 @@ ESTest(Symbol("tt"), "symbol").description("test");
 ESTest(function test() {}, "function");
 ESTest(function test() {}, "function").description("test");
 
-ESTest(/foo/, "regexp");
-ESTest(/foo/, "regexp").description("test");
-
 // unsafeESTest
 unSafeESTest("1", "string");
 unSafeESTest("1", "string").description("test");
@@ -178,6 +175,3 @@ unSafeESTest(Symbol("tt"), "symbol").description("test");
 
 unSafeESTest(function test() {}, "function");
 unSafeESTest(function test() {}, "function").description("test");
-
-unSafeESTest(/foo/, "regexp");
-unSafeESTest(/foo/, "regexp").description("test");

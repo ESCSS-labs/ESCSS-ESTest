@@ -10,7 +10,6 @@ declare type _ALLOWED_TYPES =
   | "object"
   | "array"
   | "date"
-  | "regexp"
   // optional(?)
   | "boolean?"
   | "number?"
@@ -40,9 +39,7 @@ declare type _Chain<T extends _ALLOWED_TYPES> = T extends "undefined"
                     ? _Array
                     : T extends "date"
                       ? _Date
-                      : T extends "regexp"
-                        ? _RegExp
-                        : never;
+                      : never;
 
 declare interface _Common<T extends _ALLOWED_TYPES> {
   /**
@@ -312,8 +309,6 @@ declare interface _Array extends _Common<"array"> {
 }
 
 declare interface _Date extends _Common<"date"> {}
-
-declare interface _RegExp extends _Common<"regexp"> {}
 
 /**
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest

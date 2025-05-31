@@ -22,7 +22,6 @@ describe("ESTest", () => {
       expect(ESTest(null, "null")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "symbol")).toBeTypeOf("object");
       expect(ESTest(() => {}, "function")).toBeTypeOf("object");
-      expect(ESTest(/a/, "regexp")).toBeTypeOf("object");
     });
 
     test("fail", () => {
@@ -49,7 +48,6 @@ describe("ESTest", () => {
       expect(ESTest(undefined, "null")).toBeTypeOf("object");
       expect(ESTest(NaN, "symbol")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "function")).toBeTypeOf("object");
-      expect(ESTest(() => {}, "regexp")).toBeTypeOf("object");
 
       expect(message).toHaveBeenCalledTimes(19);
       expect(information).toHaveBeenCalledTimes(19);
@@ -76,7 +74,6 @@ describe("ESTest", () => {
       expect(ESTest(null, "null", "1")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "symbol", "1")).toBeTypeOf("object");
       expect(ESTest(() => {}, "function", "1")).toBeTypeOf("object");
-      expect(ESTest(/a/, "regexp", "1")).toBeTypeOf("object");
     });
 
     test("fail", () => {
@@ -102,7 +99,6 @@ describe("ESTest", () => {
       expect(ESTest(undefined, "null", 1)).toBeTypeOf("object");
       expect(ESTest(NaN, "symbol", 1)).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "function", 1)).toBeTypeOf("object");
-      expect(ESTest(() => {}, "regexp", 1)).toBeTypeOf("object");
 
       expect(message).toHaveBeenCalledTimes(36);
       expect(information).toHaveBeenCalledTimes(36);
@@ -133,7 +129,6 @@ describe("ESTest", () => {
       ESTest(null, "null").description("test");
       ESTest(Symbol("a"), "symbol").description("test");
       ESTest(() => {}, "function").description("test");
-      ESTest(/a/, "regexp").description("test");
 
       expect(message).toHaveBeenCalledTimes(0);
       expect(information).toHaveBeenCalledTimes(0);
@@ -385,34 +380,6 @@ describe("ESTest", () => {
 
         expect(message).toHaveBeenCalledTimes(20);
         expect(information).toHaveBeenCalledTimes(20);
-      });
-    });
-
-    describe("regexp", () => {
-      test("success", () => {
-        const message = vi.spyOn(console, "error").mockImplementation(() => {});
-        const information = vi
-          .spyOn(console, "trace")
-          .mockImplementation(() => {});
-
-        ESTest("foo", "string?").regexp(/foo/);
-        ESTest("foo", "string").regexp(/foo/);
-
-        expect(message).toHaveBeenCalledTimes(0);
-        expect(information).toHaveBeenCalledTimes(0);
-      });
-
-      test("fail", () => {
-        const message = vi.spyOn(console, "error").mockImplementation(() => {});
-        const information = vi
-          .spyOn(console, "trace")
-          .mockImplementation(() => {});
-
-        ESTest("foo", "string?").regexp(/aa/);
-        ESTest("foo", "string").regexp(/aa/);
-
-        expect(message).toHaveBeenCalledTimes(2);
-        expect(information).toHaveBeenCalledTimes(2);
       });
     });
 
@@ -1196,7 +1163,6 @@ describe("unSafeESTest", () => {
       expect(ESTest(null, "null")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "symbol")).toBeTypeOf("object");
       expect(ESTest(() => {}, "function")).toBeTypeOf("object");
-      expect(ESTest(/a/, "regexp")).toBeTypeOf("object");
     });
 
     test("fail", () => {
@@ -1218,7 +1184,6 @@ describe("unSafeESTest", () => {
       expect(() => unSafeESTest(undefined, "null")).toThrow();
       expect(() => unSafeESTest(NaN, "symbol")).toThrow();
       expect(() => unSafeESTest(Symbol("a"), "function")).toThrow();
-      expect(() => unSafeESTest(() => {}, "regexp")).toThrow();
       expect(() => unSafeESTest(NaN, "number")).toThrow();
     });
   });
@@ -1243,7 +1208,6 @@ describe("unSafeESTest", () => {
       expect(ESTest(null, "null", "1")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "symbol", "1")).toBeTypeOf("object");
       expect(ESTest(() => {}, "function", "1")).toBeTypeOf("object");
-      expect(ESTest(/a/, "regexp", "1")).toBeTypeOf("object");
     });
 
     test("fail", () => {
@@ -1264,7 +1228,6 @@ describe("unSafeESTest", () => {
       expect(() => unSafeESTest(undefined, "null", 1)).toThrow();
       expect(() => unSafeESTest(NaN, "symbol", 1)).toThrow();
       expect(() => unSafeESTest(Symbol("a"), "function", 1)).toThrow();
-      expect(() => unSafeESTest(() => {}, "regexp", 1)).toThrow();
     });
   });
 
@@ -1292,7 +1255,6 @@ describe("unSafeESTest", () => {
       unSafeESTest(null, "null").description("test");
       unSafeESTest(Symbol("a"), "symbol").description("test");
       unSafeESTest(() => {}, "function").description("test");
-      unSafeESTest(/a/, "regexp").description("test");
 
       expect(message).toHaveBeenCalledTimes(0);
       expect(information).toHaveBeenCalledTimes(0);
@@ -1631,20 +1593,6 @@ describe("unSafeESTest", () => {
             "string",
           ).uuid7(),
         ).toThrowError();
-      });
-    });
-
-    describe("regexp", () => {
-      test("success", () => {
-        unSafeESTest("foo", "string?").regexp(/foo/);
-        unSafeESTest("foo", "string").regexp(/foo/);
-      });
-
-      test("fail", () => {
-        expect(() =>
-          unSafeESTest("foo", "string?").regexp(/aa/),
-        ).toThrowError();
-        expect(() => unSafeESTest("foo", "string").regexp(/aa/)).toThrowError();
       });
     });
 
