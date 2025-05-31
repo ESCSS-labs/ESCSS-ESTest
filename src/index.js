@@ -1128,51 +1128,51 @@ function _error(
         inputValue,
       ),
     invalidInput: (logType) =>
-      console[logType](` \n ❌ The input is invalid, got:`, input),
+      console[logType](` \n ❌ The input is invalid \n Received:`, input),
 
     less: (logType) =>
       console[logType](
-        ` \n ✅ Expected: input < ${isBigint} \n ❌ Received:`,
+        ` \n ✅ Expected: input < ${isBigint} \n ❌ Received input:`,
         input,
       ),
     max: (logType) =>
       console[logType](
-        ` \n ✅ Expected: input <= ${isBigint} \n ❌ Received:`,
+        ` \n ✅ Expected: input <= ${isBigint} \n ❌ Received input:`,
         input,
       ),
     min: (logType) =>
       console[logType](
-        ` \n ✅ Expected: input >= ${isBigint} \n ❌ Received:`,
+        ` \n ✅ Expected: input >= ${isBigint} \n ❌ Received input:`,
         input,
       ),
     greater: (logType) =>
       console[logType](
-        ` \n ✅ Expected: input > ${isBigint} \n ❌ Received:`,
+        ` \n ✅ Expected: input > ${isBigint} \n ❌ Received input:`,
         input,
       ),
     multiple: (logType) =>
       console[logType](
-        ` \n ✅ Expected: input % ${isBigint} === 0 \n ❌ Received:`,
+        ` \n ✅ Expected: input % ${isBigint} === 0 \n ❌ Received input:`,
         input,
       ),
     length: (logType) =>
       console[logType](
-        ` \n ✅ Expected: input === ${inputValue} \n ❌ Received:`,
+        ` \n ✅ Expected: input === ${inputValue} \n ❌ Received input:`,
         input,
       ),
     integer: (logType) =>
       console[logType](
-        ` \n ✅ Expected: input is an integer \n ❌ Received:`,
+        ` \n ✅ Expected: input is an integer \n ❌ Received input:`,
         input,
       ),
     positive: (logType) =>
       console[logType](
-        ` \n ✅ Expected: input is a positive number/bigint \n ❌ Received:`,
+        ` \n ✅ Expected: input is a positive number/bigint \n ❌ Received input:`,
         input,
       ),
     negative: (logType) =>
       console[logType](
-        ` \n ✅ Expected: input is a negative number/bigint \n ❌ Received:`,
+        ` \n ✅ Expected: input is a negative number/bigint \n ❌ Received input:`,
         input,
       ),
   };
@@ -1187,12 +1187,12 @@ function _error(
     invalidType: `[unSafeESTest().method(input)] Expected input type: '${inputValue2}'`,
     invalidInput: `[unSafeESTest().${inputValue2}(input)] The input is invalid`,
 
-    less: `[unSafeESTest().less(input)] Expected: input < ${isBigint}`,
-    max: `[unSafeESTest().max(input)] Expected: input <= ${isBigint}`,
-    min: `[unSafeESTest().min(input)] Expected: input >= ${isBigint}`,
-    greater: `[unSafeESTest().greater(input)] Expected: input > ${isBigint}`,
-    multiple: `[unSafeESTest().multiple(input)] Expected: input % ${isBigint} === 0`,
-    length: `[unSafeESTest().length(input)] Expected: input === ${inputValue}`,
+    less: `[unSafeESTest(input).less()] Expected: input < ${isBigint}`,
+    max: `[unSafeESTest(input).max()] Expected: input <= ${isBigint}`,
+    min: `[unSafeESTest(input).min()] Expected: input >= ${isBigint}`,
+    greater: `[unSafeESTest(input).greater()] Expected: input > ${isBigint}`,
+    multiple: `[unSafeESTest(input).multiple()] Expected: input % ${isBigint} === 0`,
+    length: `[unSafeESTest(input).length()] Expected: input === ${inputValue}`,
     integer: `[unSafeESTest(input).integer()] Expected: input is an integer`,
     positive: `[unSafeESTest(input).integer()] Expected: input is a positive number/bigint`,
     negative: `[unSafeESTest(input).integer()] Expected: input is a negative number/bigint`,
