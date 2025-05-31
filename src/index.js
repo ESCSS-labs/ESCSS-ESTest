@@ -1061,9 +1061,9 @@ function _typeof(input) {
         newType = "array";
       } else if (input === null) {
         newType = "null";
-      } else if (Object.prototype.toString.call(input) === "[object Date]") {
+      } else if (input instanceof Date) {
         newType = "date";
-      } else if (Object.prototype.toString.call(input) === "[object RegExp]") {
+      } else if (input instanceof RegExp) {
         newType = "regexp";
       } else {
         newType = "object";
