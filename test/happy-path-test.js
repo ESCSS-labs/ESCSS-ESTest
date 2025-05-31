@@ -64,9 +64,6 @@ ESTest(true, "boolean").description("test");
 ESTest(undefined, "boolean?");
 ESTest(undefined, "boolean?").description("test");
 
-ESTest(new Date(), "date");
-ESTest(new Date(), "date").description("test");
-
 ESTest(1n, "bigint");
 ESTest(1n, "bigint").description("test");
 ESTest(5n, "bigint").less(10n);
@@ -148,9 +145,6 @@ unSafeESTest(true, "boolean");
 unSafeESTest(true, "boolean").description("test");
 unSafeESTest(undefined, "boolean?");
 unSafeESTest(undefined, "boolean?").description("test");
-
-unSafeESTest(new Date(), "date");
-unSafeESTest(new Date(), "date").description("test");
 
 unSafeESTest(1n, "bigint");
 unSafeESTest(1n, "bigint").description("test");

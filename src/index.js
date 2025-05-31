@@ -84,9 +84,6 @@ globalThis.__ESCSS_ESTEST__ = {
       max: 0,
       length: 0,
     },
-    _Date: {
-      _count: 0,
-    },
   },
 };
 
@@ -101,7 +98,6 @@ const _ALLOWED_TYPES = [
   "function",
   "object",
   "array",
-  "date",
   // optional(?)
   "boolean?",
   "number?",
@@ -1003,12 +999,6 @@ const _chain = {
       return this;
     }
   },
-  date: class _Date extends _Common {
-    constructor(...args) {
-      super(...args);
-      globalThis.__ESCSS_ESTEST__.analysis._Date._count += 1;
-    }
-  },
 };
 
 function _typeof(input) {
@@ -1027,7 +1017,6 @@ function _typeof(input) {
   Function           'function'
   Object             'object'
   Array              'object'          ->        change to 'array'
-  Date               'object'          ->        change to 'date'
   */
 
   let newType;
@@ -1050,8 +1039,6 @@ function _typeof(input) {
         newType = "array";
       } else if (input === null) {
         newType = "null";
-      } else if (input instanceof Date) {
-        newType = "date";
       } else {
         newType = "object";
       }
@@ -1089,7 +1076,7 @@ function _error(
       ),
     errArg2: (logType) =>
       console[logType](
-        ` \n ✅ Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'date' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?' \n`,
+        ` \n ✅ Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?' \n`,
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
@@ -1097,10 +1084,6 @@ function _error(
     invalidNumber: (logType) =>
       console[logType](
         ` \n ✅ Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint') \n ❌ Received input: ${input} (Invalid number) \n`,
-      ),
-    invalidDate: (logType) =>
-      console[logType](
-        ` \n ✅ Expected: 'date' \n ❌ Received: 'Invalid Date' \n`,
       ),
     invalidType: (logType) =>
       console[logType](
@@ -1159,11 +1142,10 @@ function _error(
 
   const _unSafeESTestLog = {
     errArg1: `[unSafeESTest(input, type, message)] Expected 1st Argument '${type}'`,
-    errArg2: `[unSafeESTest(input, type, message)] Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'date' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?'`,
+    errArg2: `[unSafeESTest(input, type, message)] Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?'`,
     errArg3: `[unSafeESTest(input, type, message)] Expected 3rd Argument: 'string'`,
 
     invalidNumber: `[unSafeESTest(input)] Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
-    invalidDate: `[unSafeESTest(input)] Expected: 'date', Received: 'Invalid Date'`,
     invalidType: `[unSafeESTest().method(input)] Expected input type: '${inputValue2}'`,
     invalidInput: `[unSafeESTest().${inputValue2}(input)] The input is invalid`,
 
@@ -1243,11 +1225,6 @@ function _test(
         !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
       ) {
         _error(input, type, message, isUnSafe, "invalidNumber");
-      }
-
-      // is a valid date?
-      if (input instanceof Date && isNaN(input)) {
-        _error(input, type, message, isUnSafe, "invalidDate");
       }
 
       // is a valid message?

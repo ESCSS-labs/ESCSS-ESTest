@@ -15,7 +15,6 @@ describe("ESTest", () => {
       expect(ESTest({}, "object")).toBeTypeOf("object");
       expect(ESTest(undefined, "boolean?")).toBeTypeOf("object");
       expect(ESTest(true, "boolean")).toBeTypeOf("object");
-      expect(ESTest(new Date(), "date")).toBeTypeOf("object");
       expect(ESTest(undefined, "bigint?")).toBeTypeOf("object");
       expect(ESTest(1n, "bigint")).toBeTypeOf("object");
       expect(ESTest(undefined, "undefined")).toBeTypeOf("object");
@@ -41,7 +40,6 @@ describe("ESTest", () => {
       expect(ESTest([], "object")).toBeTypeOf("object");
       expect(ESTest({}, "boolean?")).toBeTypeOf("object");
       expect(ESTest({}, "boolean")).toBeTypeOf("object");
-      expect(ESTest(true, "date")).toBeTypeOf("object");
       expect(ESTest(new Date(), "bigint?")).toBeTypeOf("object");
       expect(ESTest(new Date(), "bigint")).toBeTypeOf("object");
       expect(ESTest(1n, "undefined")).toBeTypeOf("object");
@@ -67,7 +65,6 @@ describe("ESTest", () => {
       expect(ESTest({}, "object", "1")).toBeTypeOf("object");
       expect(ESTest(undefined, "boolean?", "1")).toBeTypeOf("object");
       expect(ESTest(true, "boolean", "1")).toBeTypeOf("object");
-      expect(ESTest(new Date(), "date", "1")).toBeTypeOf("object");
       expect(ESTest(undefined, "bigint?", "1")).toBeTypeOf("object");
       expect(ESTest(1n, "bigint", "1")).toBeTypeOf("object");
       expect(ESTest(undefined, "undefined", "1")).toBeTypeOf("object");
@@ -92,7 +89,6 @@ describe("ESTest", () => {
       expect(ESTest([], "object", 1)).toBeTypeOf("object");
       expect(ESTest({}, "boolean?", 1)).toBeTypeOf("object");
       expect(ESTest({}, "boolean", 1)).toBeTypeOf("object");
-      expect(ESTest(true, "date", 1)).toBeTypeOf("object");
       expect(ESTest(new Date(), "bigint?", 1)).toBeTypeOf("object");
       expect(ESTest(new Date(), "bigint", 1)).toBeTypeOf("object");
       expect(ESTest(1n, "undefined", 1)).toBeTypeOf("object");
@@ -122,7 +118,6 @@ describe("ESTest", () => {
       ESTest({}, "object").description("test");
       ESTest(true, "boolean?").description("test");
       ESTest(true, "boolean").description("test");
-      ESTest(new Date(), "date").description("test");
       ESTest(1n, "bigint?").description("test");
       ESTest(1n, "bigint").description("test");
       ESTest(undefined, "undefined").description("test");
@@ -1156,7 +1151,6 @@ describe("unSafeESTest", () => {
       expect(ESTest({}, "object")).toBeTypeOf("object");
       expect(ESTest(undefined, "boolean?")).toBeTypeOf("object");
       expect(ESTest(true, "boolean")).toBeTypeOf("object");
-      expect(ESTest(new Date(), "date")).toBeTypeOf("object");
       expect(ESTest(undefined, "bigint?")).toBeTypeOf("object");
       expect(ESTest(1n, "bigint")).toBeTypeOf("object");
       expect(ESTest(undefined, "undefined")).toBeTypeOf("object");
@@ -1177,7 +1171,6 @@ describe("unSafeESTest", () => {
       expect(() => unSafeESTest([], "object")).toThrow();
       expect(() => unSafeESTest({}, "boolean?")).toThrow();
       expect(() => unSafeESTest({}, "boolean")).toThrow();
-      expect(() => unSafeESTest(true, "date")).toThrow();
       expect(() => unSafeESTest(new Date(), "bigint?")).toThrow();
       expect(() => unSafeESTest(new Date(), "bigint")).toThrow();
       expect(() => unSafeESTest(1n, "undefined")).toThrow();
@@ -1201,7 +1194,6 @@ describe("unSafeESTest", () => {
       expect(ESTest({}, "object", "1")).toBeTypeOf("object");
       expect(ESTest(undefined, "boolean?", "1")).toBeTypeOf("object");
       expect(ESTest(true, "boolean", "1")).toBeTypeOf("object");
-      expect(ESTest(new Date(), "date", "1")).toBeTypeOf("object");
       expect(ESTest(undefined, "bigint?", "1")).toBeTypeOf("object");
       expect(ESTest(1n, "bigint", "1")).toBeTypeOf("object");
       expect(ESTest(undefined, "undefined", "1")).toBeTypeOf("object");
@@ -1221,7 +1213,6 @@ describe("unSafeESTest", () => {
       expect(() => unSafeESTest([], "object", 1)).toThrow();
       expect(() => unSafeESTest({}, "boolean?", 1)).toThrow();
       expect(() => unSafeESTest({}, "boolean", 1)).toThrow();
-      expect(() => unSafeESTest(true, "date", 1)).toThrow();
       expect(() => unSafeESTest(new Date(), "bigint?", 1)).toThrow();
       expect(() => unSafeESTest(new Date(), "bigint", 1)).toThrow();
       expect(() => unSafeESTest(1n, "undefined", 1)).toThrow();
@@ -1248,7 +1239,6 @@ describe("unSafeESTest", () => {
       unSafeESTest({}, "object").description("test");
       unSafeESTest(true, "boolean?").description("test");
       unSafeESTest(true, "boolean").description("test");
-      unSafeESTest(new Date(), "date").description("test");
       unSafeESTest(1n, "bigint?").description("test");
       unSafeESTest(1n, "bigint").description("test");
       unSafeESTest(undefined, "undefined").description("test");
