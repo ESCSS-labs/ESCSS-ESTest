@@ -48,15 +48,15 @@ class _Common {
     this.isUnSafe = isUnSafe;
   }
 
-  description(value) {
-    if (typeof value !== "string") {
+  description(inputValue) {
+    if (typeof inputValue !== "string") {
       _error(
         this.input,
         this.type,
         this.message,
         this.isUnSafe,
-        "typeCheck",
-        value,
+        "invalidType",
+        inputValue,
         "string",
       );
     }
@@ -71,93 +71,93 @@ const _chain = {
       super(...args);
     }
 
-    max(value) {
-      if (typeof value !== "number") {
+    max(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if (this.input?.length <= value === false) {
+      if (this.input?.length <= inputValue === false) {
         _error(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
           "max",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    min(value) {
-      if (typeof value !== "number") {
+    min(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if (this.input?.length >= value === false) {
+      if (this.input?.length >= inputValue === false) {
         _error(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
           "min",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    length(value) {
-      if (typeof value !== "number") {
+    length(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if ((this.input?.length === value) === false) {
+      if ((this.input?.length === inputValue) === false) {
         _error(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
           "length",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    email(value) {
+    email(inputValue) {
       // https://github.com/colinhacks/zod/blob/main/packages/zod/src/v4/core/regexes.ts
 
       let email = "";
 
-      switch (value) {
+      switch (inputValue) {
         /** Equivalent to the HTML5 input[type=email] validation implemented by browsers. Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email */
         case "html5Email":
           email =
@@ -232,20 +232,20 @@ const _chain = {
       return this;
     }
 
-    regexp(value) {
-      if (_typeof(value) !== "regexp") {
+    regexp(inputValue) {
+      if (_typeof(inputValue) !== "regexp") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "regexp",
         );
       }
 
-      if (value.test(this.input) === false) {
+      if (inputValue.test(this.input) === false) {
         _error(
           this.input,
           this.type,
@@ -422,108 +422,108 @@ const _chain = {
       super(...args);
     }
 
-    less(value) {
-      if (typeof value !== "number") {
+    less(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if (this.input < value === false) {
+      if (this.input < inputValue === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "less",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    max(value) {
-      if (typeof value !== "number") {
+    max(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if (this.input <= value === false) {
+      if (this.input <= inputValue === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "max",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    greater(value) {
-      if (typeof value !== "number") {
+    greater(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if (this.input > value === false) {
+      if (this.input > inputValue === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "greater",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    min(value) {
-      if (typeof value !== "number") {
+    min(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if (this.input >= value === false) {
+      if (this.input >= inputValue === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "min",
-          value,
+          inputValue,
         );
       }
 
@@ -554,27 +554,27 @@ const _chain = {
       return this;
     }
 
-    multiple(value) {
-      if (typeof value !== "number") {
+    multiple(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if ((this.input % value === 0) === false) {
+      if ((this.input % inputValue === 0) === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "multiple",
-          value,
+          inputValue,
         );
       }
 
@@ -586,81 +586,81 @@ const _chain = {
       super(...args);
     }
 
-    min(value) {
-      if (typeof value !== "number") {
+    min(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if (this.input?.length >= value === false) {
+      if (this.input?.length >= inputValue === false) {
         _error(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
           "min",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    max(value) {
-      if (typeof value !== "number") {
+    max(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if (this.input?.length <= value === false) {
+      if (this.input?.length <= inputValue === false) {
         _error(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
           "max",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    length(value) {
-      if (typeof value !== "number") {
+    length(inputValue) {
+      if (typeof inputValue !== "number") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "number",
         );
       }
 
-      if ((this.input?.length === value) === false) {
+      if ((this.input?.length === inputValue) === false) {
         _error(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
           "length",
-          value,
+          inputValue,
         );
       }
 
@@ -675,108 +675,108 @@ const _chain = {
       super(...args);
     }
 
-    less(value) {
-      if (typeof value !== "bigint") {
+    less(inputValue) {
+      if (typeof inputValue !== "bigint") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "bigint",
         );
       }
 
-      if (this.input < value === false) {
+      if (this.input < inputValue === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "less",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    max(value) {
-      if (typeof value !== "bigint") {
+    max(inputValue) {
+      if (typeof inputValue !== "bigint") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "bigint",
         );
       }
 
-      if (this.input <= value === false) {
+      if (this.input <= inputValue === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "max",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    greater(value) {
-      if (typeof value !== "bigint") {
+    greater(inputValue) {
+      if (typeof inputValue !== "bigint") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "bigint",
         );
       }
 
-      if (this.input > value === false) {
+      if (this.input > inputValue === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "greater",
-          value,
+          inputValue,
         );
       }
 
       return this;
     }
 
-    min(value) {
-      if (typeof value !== "bigint") {
+    min(inputValue) {
+      if (typeof inputValue !== "bigint") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "bigint",
         );
       }
 
-      if (this.input >= value === false) {
+      if (this.input >= inputValue === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "min",
-          value,
+          inputValue,
         );
       }
 
@@ -799,27 +799,27 @@ const _chain = {
       return this;
     }
 
-    multiple(value) {
-      if (typeof value !== "bigint") {
+    multiple(inputValue) {
+      if (typeof inputValue !== "bigint") {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "typeCheck",
-          value,
+          "invalidType",
+          inputValue,
           "bigint",
         );
       }
 
-      if ((this.input % value === 0n) === false) {
+      if ((this.input % inputValue === 0n) === false) {
         _error(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
           "multiple",
-          value,
+          inputValue,
         );
       }
 
@@ -890,9 +890,18 @@ function _typeof(input) {
   return newType;
 }
 
-function _error(input, type, message, isUnSafe, logToken, value, value2) {
+function _error(
+  input,
+  type,
+  message,
+  isUnSafe,
+  logToken,
+  inputValue,
+  inputValue2,
+) {
   // bigint in Template strings will be changed: `1n` -> `1`, so add "n" back
-  const isBigint = typeof value === "bigint" ? value + "n" : value;
+  const isBigint =
+    typeof inputValue === "bigint" ? inputValue + "n" : inputValue;
 
   const _ESTestLog = {
     hiddenInformation: (logType) =>
@@ -907,6 +916,11 @@ function _error(input, type, message, isUnSafe, logToken, value, value2) {
       console[logType](
         ` \n ✅ Expected: 'date' \n ❌ Received: 'Invalid Date' \n`,
       ),
+    invalidType: (logType) =>
+      console[logType](
+        ` \n ❌ Expected ESTest().method(value) value type: '${inputValue2}', got: '${_typeof(inputValue)}'`,
+        inputValue,
+      ),
     errArg1: (logType) =>
       console[logType](
         ` \n ✅ Expected ESTest() 1st Argument: '${type}' \n ❌ Received ESTest() 1st Argument: '${_typeof(input)}' \n`,
@@ -918,11 +932,6 @@ function _error(input, type, message, isUnSafe, logToken, value, value2) {
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
-    typeCheck: (logType) =>
-      console[logType](
-        ` \n ❌ Expected ESTest().method(value) value type: '${value2}', got: '${_typeof(value)}'`,
-        value,
-      ),
     less: (logType) =>
       console[logType](` \n ❌ Must be < ${isBigint}, got:`, input),
     max: (logType) =>
@@ -934,7 +943,7 @@ function _error(input, type, message, isUnSafe, logToken, value, value2) {
     multiple: (logType) =>
       console[logType](` \n ❌ Must be a multiple of ${isBigint}, got:`, input),
     length: (logType) =>
-      console[logType](` \n ❌ Must be === ${value}, got:`, input),
+      console[logType](` \n ❌ Must be === ${inputValue}, got:`, input),
     invalidInput: (logType) =>
       console[logType](` \n ❌ Invalid input, got:`, input),
     integer: (logType) =>
@@ -948,16 +957,16 @@ function _error(input, type, message, isUnSafe, logToken, value, value2) {
   const _unSafeESTestLog = {
     invalidNumber: `Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
     invalidDate: `Expected: 'date', Received: 'Invalid Date'`,
+    invalidType: `Expected unSafeESTest().method(value), value type: '${inputValue2}'`,
     errArg1: `The value must be a/an '${type}'`,
     errArg2: `Expected 2nd Argument: 'string' | 'number' | 'array' | 'object' | 'boolean' | 'date' | 'bigint' | 'undefined' | 'null' | 'nan' | 'symbol' | 'function' | 'regexp' | 'string?' | 'number?' | 'array?' | 'object?' | 'boolean?'`,
     errArg3: `Expected 3rd Argument: 'string'`,
-    typeCheck: `Expected unSafeESTest().method(value), value type: '${value2}'`,
     less: `The value must be less than ${isBigint}`,
     max: `The value must be less than or equal to ${isBigint}`,
     min: `The value must be greater or equal to ${isBigint}`,
     greater: `The value must be greater than ${isBigint}`,
     multiple: `The value must be a multiple of ${isBigint}`,
-    length: `The value must be exactly equal to ${value}`,
+    length: `The value must be exactly equal to ${inputValue}`,
     invalidInput: `The value is invalid input`,
     integer: `The value must be an integer`,
     positive: `The value must be a positive number`,
