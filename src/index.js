@@ -422,7 +422,6 @@ const _chain = {
       super(...args);
     }
 
-    // <
     less(value) {
       if (typeof value !== "number") {
         _error(
@@ -450,7 +449,6 @@ const _chain = {
       return this;
     }
 
-    // <=
     max(value) {
       if (typeof value !== "number") {
         _error(
@@ -478,7 +476,6 @@ const _chain = {
       return this;
     }
 
-    // >
     greater(value) {
       if (typeof value !== "number") {
         _error(
@@ -506,7 +503,6 @@ const _chain = {
       return this;
     }
 
-    // >=
     min(value) {
       if (typeof value !== "number") {
         _error(
@@ -922,10 +918,6 @@ function _error(input, type, message, isUnSafe, logToken, value, value2) {
       ),
     errArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
-    undefined: (logType) =>
-      console[logType](
-        ` \n 💩 Tried undefined.method() — safely blocked to prevent a crash. Check the correct usage: https://github.com/ESCSS-labs/ESCSS-ESTest \n`,
-      ),
     typeCheck: (logType) =>
       console[logType](
         ` \n ❌ Expected ESTest().method(value) value type: '${value2}', got: '${_typeof(value)}'`,

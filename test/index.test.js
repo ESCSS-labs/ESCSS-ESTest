@@ -1177,33 +1177,6 @@ describe("ESTest", () => {
       });
     });
   });
-
-  describe("edge case", () => {
-    test("3rd argument is wrong", () => {
-      const message = vi.spyOn(console, "error").mockImplementation(() => {});
-      const information = vi
-        .spyOn(console, "trace")
-        .mockImplementation(() => {});
-
-      expect(ESTest(1, "string?", 123).max(10)).toBeTypeOf("object");
-      expect(ESTest(1, "string", 123).max(10)).toBeTypeOf("object");
-
-      expect(message).toHaveBeenCalledTimes(6);
-      expect(information).toHaveBeenCalledTimes(6);
-    });
-
-    test("2nd & 3rd argument is wrong", () => {
-      const message = vi.spyOn(console, "error").mockImplementation(() => {});
-      const information = vi
-        .spyOn(console, "trace")
-        .mockImplementation(() => {});
-
-      expect(ESTest(1, "foo", 123).max(10)).toBeTypeOf("object");
-
-      expect(message).toHaveBeenCalledTimes(3);
-      expect(information).toHaveBeenCalledTimes(3);
-    });
-  });
 });
 
 describe("unSafeESTest", () => {

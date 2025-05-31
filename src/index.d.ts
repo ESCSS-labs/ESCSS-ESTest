@@ -166,9 +166,7 @@ declare interface _String extends _Common<"string"> {
 
   /**
    * @example
-   * // international phone
    * ESTest('foobar', 'string').lowercase() // pass
-   *
    */
   lowercase(): _Chain<"string">;
 }
