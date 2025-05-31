@@ -20,19 +20,19 @@ declare type _ALLOWED_TYPES =
   | "boolean?"
   | "bigint?";
 
-declare type _Chain<T extends _ALLOWED_TYPES> = T extends "string"
+declare type _Chain<T extends _ALLOWED_TYPES> = T extends "string" | "string?"
   ? _String
-  : T extends "number"
+  : T extends "number" | "number?"
     ? _Number
-    : T extends "array"
+    : T extends "array" | "array?"
       ? _Array
-      : T extends "object"
+      : T extends "object" | "object?"
         ? _Object
-        : T extends "boolean"
+        : T extends "boolean" | "boolean?"
           ? _Boolean
           : T extends "date"
             ? _Date
-            : T extends "bigint"
+            : T extends "bigint" | "bigint?"
               ? _BigInt
               : T extends "undefined"
                 ? _Undefined
