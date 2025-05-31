@@ -4,7 +4,7 @@
   "description": "A passive, non-intrusive JavaScript runtime validator designed to achieve 100% function coverage.",
   "keywords": [
     "JavaScript",
-    "testing",
+    "test",
     "runtime-validation",
     "zero-dependency"
   ],

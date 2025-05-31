@@ -8,10 +8,10 @@ A passive, non-intrusive JavaScript runtime validator designed to achieve 100% f
 
 - 🪄 Supports TypeScript autocompletion.
 - 👌 Effortless integration with your codebase.
-- 📦 2 kB (minified + gzipped), zero dependencies.
+- 📦 2.7 kB (minified + gzipped), zero dependencies.
 - 🎨 Designed with developer experience as a priority.
 - ⚙️ Unlock its full potential through E2E and unit testing.
-- 🚀 Optional runtime testing with minimal performance overhead.
+- 🚀 (Optional) runtime testing with minimal performance overhead.
 
 ## Installation
 
@@ -36,14 +36,17 @@ A passive, non-intrusive JavaScript runtime validator designed to achieve 100% f
 ### Water filter
 
 ```js
-function demo() {
-  // {...} is a filter
+function sum(a, b) {
+  // unhappy path: {...}
+  // This block acts as an unhappy path filter, validating input with "console.error"
+  // without breaking the main codebase. It can be collapsed in IDEs to hide its complexity.
   {
-    ESTest(...)
-    ESTest(...)
+    ESTest(a, "number");
+    ESTest(b, "number");
   }
 
-  // happy path
+  // Happy path: inputs are valid, perform the intuitive sum.
+  return a + b;
 }
 ```
 
@@ -96,12 +99,12 @@ async function getApi(a, b) {
    * }
    */
 
-  // You might get 'undefined' data. Use the optional chaining operator (?.) to prevent undefined from breaking your app.
+  // Hint: you might get 'undefined' data, use the optional chaining operator (?.) to prevent undefined from breaking your app.
   {
-    ESTest(data.name, "string");
-    ESTest(data.age, "number").min(0);
-    ESTest(data.info[0]?.id, "string");
-    ESTest(data.info[0]?.city, "string").regex(/(foo|bar)/);
+    ESTest(data.name, "string").regex(/(demo|Alice)/);
+    ESTest(data.age, "number").positive();
+    ESTest(data.info[0]?.id, "string?");
+    ESTest(data.info[0]?.city, "string?");
     ESTest(data.info[0]?.statusCode, "number?");
   }
 
@@ -115,8 +118,12 @@ async function getApi(a, b) {
 
 ```js
 import { unSafeESTest } from "escss-estest";
+import express from "express";
 
-app.post("/validate", async (req, res) => {
+const app = express();
+const port = 3000;
+
+app.post("/validate", (req, res) => {
   try {
     const data = req.body;
 
@@ -128,26 +135,30 @@ app.post("/validate", async (req, res) => {
      */
 
     {
-      unSafeESTest(data.name, "string").min(3);
-      unSafeESTest(data.email, "string", "invalid email").email();
+      unSafeESTest(data.name, "string").regex(/(foo)/);
+      unSafeESTest(data.email, "string", "your email is invalid!").email();
     }
 
     res.json({ message: "Validation passed" });
   } catch (error) {
-    res.status(400).json({ errors: error });
+    res.status(400).json({ message: error });
   }
 });
+
+app.listen(port, () => {
+  console.log(`http://localhost:${port}`)
+})
 ```
 
 ## Support API
 
 ### `globalThis.__ESCSS_ESTEST__.message`
 
-- Get feedback from others
+- Get feedbacks from others
 
 ```js
 globalThis.__ESCSS_ESTEST__.message =
-  "Please note when the issue occurred and send the details to [link].";
+  "Please send this issue to [url].";
 ```
 
 ### `globalThis.__ESCSS_ESTEST__.isESTestDisabled`
@@ -155,9 +166,9 @@ globalThis.__ESCSS_ESTEST__.message =
 #### Why have this feature?
 
 - Designed to avoid vendor lock-in.
-- Optimized for production performance (if you want).
+- Optimized for production performance.
 
-_note: unSafeESTest **WON'T** be disabled (security reason)_
+*note: unSafeESTest will not be affected (security reasons).*
 
 ```js
 globalThis.__ESCSS_ESTEST__.isESTestDisabled = true;
@@ -171,8 +182,7 @@ function sum(a, b) {
   return a + b;
 }
 
-// same as
-
+// same as below (but performance improved)
 function sum(a, b) {
   return a + b;
 }
