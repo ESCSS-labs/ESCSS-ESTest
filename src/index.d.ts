@@ -306,6 +306,7 @@ declare interface _Array extends _Common<"array"> {
 }
 
 /**
+ * Non-breaking error logging via console.error(...)
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
  */
 export declare function ESTest<T extends _ALLOWED_TYPES>(
@@ -315,6 +316,7 @@ export declare function ESTest<T extends _ALLOWED_TYPES>(
 ): _Chain<T>;
 
 /**
+ * Breaking error throwing via throw new Error(...)
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
  */
 export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
@@ -324,9 +326,8 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
 ): _Chain<T>;
 
 /**
+ * Get clear, actionable bug reports (for library authors/maintainers).
  * @example
- *
- * // For library authors/maintainers to wrap and set a default message
  * function ESTest(input, type, message = "[libraryName] your message for others to help debugging") {
  *  return createESTest(input, type, message)
  * }
@@ -342,32 +343,34 @@ export declare function createESTest<T extends _ALLOWED_TYPES>(
 declare global {
   var __ESCSS_ESTEST__: {
     /**
-     * library information
+     * Show library information
+     * @see https://github.com/ESCSS-labs/ESCSS-ESTest
      */
     information: string;
 
     /**
+     * Captures internal bug reports (for company teams)
      * @example
-     * // A template message to get feedback from others
+     * globalThis.__ESCSS_ESTEST__.message = "Please report this issue to ...";
      *
-     * // Example 1: for library author:
-     * '[libraryName] welcomes you to submit the issue at [link].'
-     *
-     * // Example 2: for company:
-     * 'Please note when the issue occurred and send the details to [link].'
+     * @see https://github.com/ESCSS-labs/ESCSS-ESTest
      */
     message: string;
 
     /**
-     * // Note: unSafeESTest won't be disabled (security reason).
-     * @example
-     * // To disable ESTest (default: false)
-     * globalThis.__ESCSS_ESTEST__.isESTestDisabled = true
+     *  Why have this feature?
+     *  - Avoids vendor lock-in for long-term project flexibility.
+     *  - Optimizes production performance by enabling in dev and disabling in prod.
+     *
+     * *Note: unSafeESTest will not be affected (for security reasons)*
+     *
+     * @see https://github.com/ESCSS-labs/ESCSS-ESTest
      */
     isESTestDisabled: boolean;
 
     /**
-     * show usage report
+     * Show usage reports
+     * @see https://github.com/ESCSS-labs/ESCSS-ESTest
      */
     analysis: object;
   };
