@@ -159,7 +159,6 @@ app.listen(port, () => {
 
 ```js
 
-
 ```
 
 ## Auxiliary API
