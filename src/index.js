@@ -142,12 +142,12 @@ class _Common {
   description(inputValue) {
     globalThis.__ESCSS_ESTEST__.analysis._Common.description += 1;
     if (typeof inputValue !== "string") {
-      _error(
+      _err(
         this.input,
         this.type,
         this.message,
         this.isUnSafe,
-        "invalidType",
+        "_errLogType",
         inputValue,
         "string",
       );
@@ -277,24 +277,24 @@ const _chain = {
     less(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.less += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if (this.input < inputValue === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "less",
+          "_errLogLess",
           inputValue,
         );
       }
@@ -305,24 +305,24 @@ const _chain = {
     max(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.max += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if (this.input <= inputValue === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "max",
+          "_errLogMax",
           inputValue,
         );
       }
@@ -333,24 +333,24 @@ const _chain = {
     greater(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.greater += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if (this.input > inputValue === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "greater",
+          "_errLogGreater",
           inputValue,
         );
       }
@@ -361,24 +361,24 @@ const _chain = {
     min(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.min += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if (this.input >= inputValue === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "min",
+          "_errLogMin",
           inputValue,
         );
       }
@@ -389,7 +389,13 @@ const _chain = {
     integer() {
       globalThis.__ESCSS_ESTEST__.analysis._Number.integer += 1;
       if (Number.isInteger(this.input) === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "integer");
+        _err(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "_errLogInteger",
+        );
       }
 
       return this;
@@ -398,7 +404,13 @@ const _chain = {
     positive() {
       globalThis.__ESCSS_ESTEST__.analysis._Number.positive += 1;
       if (this.input > 0 === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "positive");
+        _err(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "_errLogPositive",
+        );
       }
 
       return this;
@@ -407,7 +419,13 @@ const _chain = {
     negative() {
       globalThis.__ESCSS_ESTEST__.analysis._Number.negative += 1;
       if (this.input < 0 === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "negative");
+        _err(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "_errLogNegative",
+        );
       }
 
       return this;
@@ -416,24 +434,24 @@ const _chain = {
     multiple(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.multiple += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if ((this.input % inputValue === 0) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "multiple",
+          "_errLogMultiple",
           inputValue,
         );
       }
@@ -450,24 +468,24 @@ const _chain = {
     less(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.less += 1;
       if (typeof inputValue !== "bigint") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "bigint",
         );
       }
 
       if (this.input < inputValue === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "less",
+          "_errLogLess",
           inputValue,
         );
       }
@@ -478,24 +496,24 @@ const _chain = {
     max(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.max += 1;
       if (typeof inputValue !== "bigint") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "bigint",
         );
       }
 
       if (this.input <= inputValue === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "max",
+          "_errLogMax",
           inputValue,
         );
       }
@@ -506,24 +524,24 @@ const _chain = {
     greater(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.greater += 1;
       if (typeof inputValue !== "bigint") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "bigint",
         );
       }
 
       if (this.input > inputValue === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "greater",
+          "_errLogGreater",
           inputValue,
         );
       }
@@ -534,24 +552,24 @@ const _chain = {
     min(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.min += 1;
       if (typeof inputValue !== "bigint") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "bigint",
         );
       }
 
       if (this.input >= inputValue === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "min",
+          "_errLogMin",
           inputValue,
         );
       }
@@ -562,7 +580,13 @@ const _chain = {
     positive() {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.positive += 1;
       if (this.input > 0n === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "positive");
+        _err(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "_errLogPositive",
+        );
       }
 
       return this;
@@ -571,7 +595,13 @@ const _chain = {
     negative() {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.negative += 1;
       if (this.input < 0n === false) {
-        _error(this.input, this.type, this.message, this.isUnSafe, "negative");
+        _err(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "_errLogNegative",
+        );
       }
 
       return this;
@@ -580,24 +610,24 @@ const _chain = {
     multiple(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.multiple += 1;
       if (typeof inputValue !== "bigint") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "bigint",
         );
       }
 
       if ((this.input % inputValue === 0n) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "multiple",
+          "_errLogMultiple",
           inputValue,
         );
       }
@@ -614,24 +644,24 @@ const _chain = {
     max(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._String.max += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if (this.input?.length <= inputValue === false) {
-        _error(
+        _err(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
-          "max",
+          "_errLogMax",
           inputValue,
         );
       }
@@ -642,24 +672,24 @@ const _chain = {
     min(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._String.min += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if (this.input?.length >= inputValue === false) {
-        _error(
+        _err(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
-          "min",
+          "_errLogMin",
           inputValue,
         );
       }
@@ -670,24 +700,24 @@ const _chain = {
     length(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._String.length += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if ((this.input?.length === inputValue) === false) {
-        _error(
+        _err(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
-          "length",
+          "_errLogLength",
           inputValue,
         );
       }
@@ -728,12 +758,12 @@ const _chain = {
       }
 
       if (email.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           `email(${inputValue})`,
         );
@@ -749,12 +779,12 @@ const _chain = {
         /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
 
       if (uuid4.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "uuid4",
         );
@@ -770,12 +800,12 @@ const _chain = {
         /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
 
       if (uuid7.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "uuid7",
         );
@@ -787,24 +817,24 @@ const _chain = {
     regex(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._String.regex += 1;
       if (_typeof(inputValue) !== "object") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "object",
         );
       }
 
       if (inputValue.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "object",
         );
@@ -820,12 +850,12 @@ const _chain = {
         /^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$/;
 
       if (base64.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "base64",
         );
@@ -840,12 +870,12 @@ const _chain = {
       const base64url = /^[A-Za-z0-9_-]*$/;
 
       if (base64url.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "base64url",
         );
@@ -861,12 +891,12 @@ const _chain = {
         /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
 
       if (ip4.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "ip4",
         );
@@ -882,12 +912,12 @@ const _chain = {
         /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})$/;
 
       if (ip6.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "ip6",
         );
@@ -903,12 +933,12 @@ const _chain = {
         /^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\/([0-9]|[1-2][0-9]|3[0-2])$/;
 
       if (cidr4.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "cidr4",
         );
@@ -924,12 +954,12 @@ const _chain = {
         /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
 
       if (cidr6.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "cidr6",
         );
@@ -944,12 +974,12 @@ const _chain = {
       const emoji = /^(?:\p{Extended_Pictographic}|\p{Emoji_Component})+$/u;
 
       if (emoji.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "emoji",
         );
@@ -964,12 +994,12 @@ const _chain = {
       const e164 = /^\+(?:[0-9]){6,14}[0-9]$/;
 
       if (e164.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "e164",
         );
@@ -986,12 +1016,12 @@ const _chain = {
       const lowercase = /^[^A-Z]*$/;
 
       if (lowercase.test(this.input) === false) {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidInput",
+          "_errLogInput",
           null,
           "lowercase",
         );
@@ -1027,24 +1057,24 @@ const _chain = {
     min(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Array.min += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if (this.input?.length >= inputValue === false) {
-        _error(
+        _err(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
-          "min",
+          "_errLogMin",
           inputValue,
         );
       }
@@ -1055,24 +1085,24 @@ const _chain = {
     max(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Array.max += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if (this.input?.length <= inputValue === false) {
-        _error(
+        _err(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
-          "max",
+          "_errLogMax",
           inputValue,
         );
       }
@@ -1083,24 +1113,24 @@ const _chain = {
     length(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Array.length += 1;
       if (typeof inputValue !== "number") {
-        _error(
+        _err(
           this.input,
           this.type,
           this.message,
           this.isUnSafe,
-          "invalidType",
+          "_errLogType",
           inputValue,
           "number",
         );
       }
 
       if ((this.input?.length === inputValue) === false) {
-        _error(
+        _err(
           this.input?.length,
           this.type,
           this.message,
           this.isUnSafe,
-          "length",
+          "_errLogLength",
           inputValue,
         );
       }
@@ -1159,7 +1189,7 @@ function _typeof(input) {
   return newType;
 }
 
-function _error(
+function _err(
   input,
   type,
   message,
@@ -1173,76 +1203,76 @@ function _error(
     typeof inputValue === "bigint" ? inputValue + "n" : inputValue;
 
   const _ESTestLog = {
-    hiddenInformation: (logType) =>
+    _errLogHiddenInfo: (logType) =>
       console[logType](
         `🚫 Information hidden for security purposes. Verify in development mode.`,
       ),
 
-    errArg1: (logType) =>
+    _errLogArg1: (logType) =>
       console[logType](
         ` \n ✅ Expected ESTest() 1st Argument: '${type}' \n ❌ Received ESTest() 1st Argument: '${_typeof(input)}' \n`,
         input,
       ),
-    errArg2: (logType) =>
+    _errLogArg2: (logType) =>
       console[logType](
         ` \n ✅ Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?' \n`,
       ),
-    errArg3: (logType) =>
+    _errLogArg3: (logType) =>
       console[logType](` \n ✅ Expected 3rd Argument: 'string' \n`),
 
-    invalidNumber: (logType) =>
+    _errLogNumber: (logType) =>
       console[logType](
         ` \n ✅ Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint') \n ❌ Received input: ${input} (Invalid number) \n`,
       ),
-    invalidType: (logType) =>
+    _errLogType: (logType) =>
       console[logType](
         ` \n ✅ Expected input type: '${inputValue2}' \n ❌ Received input type: '${_typeof(inputValue)}'`,
         inputValue,
       ),
-    invalidInput: (logType) =>
+    _errLogInput: (logType) =>
       console[logType](` \n ❌ The input is invalid \n Received:`, input),
 
-    less: (logType) =>
+    _errLogLess: (logType) =>
       console[logType](
         ` \n ✅ Expected: input < ${isBigint} \n ❌ Received input:`,
         input,
       ),
-    max: (logType) =>
+    _errLogMax: (logType) =>
       console[logType](
         ` \n ✅ Expected: input <= ${isBigint} \n ❌ Received input:`,
         input,
       ),
-    min: (logType) =>
+    _errLogMin: (logType) =>
       console[logType](
         ` \n ✅ Expected: input >= ${isBigint} \n ❌ Received input:`,
         input,
       ),
-    greater: (logType) =>
+    _errLogGreater: (logType) =>
       console[logType](
         ` \n ✅ Expected: input > ${isBigint} \n ❌ Received input:`,
         input,
       ),
-    multiple: (logType) =>
+    _errLogMultiple: (logType) =>
       console[logType](
         ` \n ✅ Expected: input % ${isBigint} === 0 \n ❌ Received input:`,
         input,
       ),
-    length: (logType) =>
+    _errLogLength: (logType) =>
       console[logType](
         ` \n ✅ Expected: input === ${inputValue} \n ❌ Received input:`,
         input,
       ),
-    integer: (logType) =>
+    _errLogInteger: (logType) =>
       console[logType](
         ` \n ✅ Expected: input is an integer \n ❌ Received input:`,
         input,
       ),
-    positive: (logType) =>
+    _errLogPositive: (logType) =>
       console[logType](
         ` \n ✅ Expected: input is a positive number/bigint \n ❌ Received input:`,
         input,
       ),
-    negative: (logType) =>
+    _errLogNegative: (logType) =>
       console[logType](
         ` \n ✅ Expected: input is a negative number/bigint \n ❌ Received input:`,
         input,
@@ -1250,23 +1280,23 @@ function _error(
   };
 
   const _unSafeESTestLog = {
-    errArg1: `[unSafeESTest(input, type, message)] Expected 1st Argument '${type}'`,
-    errArg2: `[unSafeESTest(input, type, message)] Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?'`,
-    errArg3: `[unSafeESTest(input, type, message)] Expected 3rd Argument: 'string'`,
+    _errLogArg1: `[unSafeESTest(input, type, message)] Expected 1st Argument '${type}'`,
+    _errLogArg2: `[unSafeESTest(input, type, message)] Expected 2nd Argument: 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object' | 'array' | 'boolean?' | 'number?' | 'string?' | 'object?' | 'array?'`,
+    _errLogArg3: `[unSafeESTest(input, type, message)] Expected 3rd Argument: 'string'`,
 
-    invalidNumber: `[unSafeESTest(input)] Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
-    invalidType: `[unSafeESTest().method(input)] Expected input type: '${inputValue2}'`,
-    invalidInput: `[unSafeESTest().${inputValue2}(input)] The input is invalid`,
+    _errLogNumber: `[unSafeESTest(input)] Expected: -9007199254740991 <= input <= 9007199254740991 (or try 'bigint')`,
+    _errLogType: `[unSafeESTest().method(input)] Expected input type: '${inputValue2}'`,
+    _errLogInput: `[unSafeESTest().${inputValue2}(input)] The input is invalid`,
 
-    less: `[unSafeESTest(input).less()] Expected: input < ${isBigint}`,
-    max: `[unSafeESTest(input).max()] Expected: input <= ${isBigint}`,
-    min: `[unSafeESTest(input).min()] Expected: input >= ${isBigint}`,
-    greater: `[unSafeESTest(input).greater()] Expected: input > ${isBigint}`,
-    multiple: `[unSafeESTest(input).multiple()] Expected: input % ${isBigint} === 0`,
-    length: `[unSafeESTest(input).length()] Expected: input === ${inputValue}`,
-    integer: `[unSafeESTest(input).integer()] Expected: input is an integer`,
-    positive: `[unSafeESTest(input).integer()] Expected: input is a positive number/bigint`,
-    negative: `[unSafeESTest(input).integer()] Expected: input is a negative number/bigint`,
+    _errLogLess: `[unSafeESTest(input).less()] Expected: input < ${isBigint}`,
+    _errLogMax: `[unSafeESTest(input).max()] Expected: input <= ${isBigint}`,
+    _errLogMin: `[unSafeESTest(input).min()] Expected: input >= ${isBigint}`,
+    _errLogGreater: `[unSafeESTest(input).greater()] Expected: input > ${isBigint}`,
+    _errLogMultiple: `[unSafeESTest(input).multiple()] Expected: input % ${isBigint} === 0`,
+    _errLogLength: `[unSafeESTest(input).length()] Expected: input === ${inputValue}`,
+    _errLogInteger: `[unSafeESTest(input).integer()] Expected: input is an integer`,
+    _errLogPositive: `[unSafeESTest(input).integer()] Expected: input is a positive number/bigint`,
+    _errLogNegative: `[unSafeESTest(input).integer()] Expected: input is a negative number/bigint`,
   };
 
   // For ESTest
@@ -1275,7 +1305,7 @@ function _error(
 
     // production situation
     if (process.env.NODE_ENV === "production") {
-      _ESTestLog.hiddenInformation("error");
+      _ESTestLog._errLogHiddenInfo("error");
     }
 
     // development situation
@@ -1320,10 +1350,10 @@ function _test(
 
       // is a valid message?
       if (typeof message !== "string") {
-        _error(input, type, message, isUnSafe, "errArg3");
+        _err(input, type, message, isUnSafe, "_errLogArg3");
       }
 
-      _error(input, type, message, isUnSafe, "errArg2");
+      _err(input, type, message, isUnSafe, "_errLogArg2");
     }
 
     // valid type
@@ -1333,7 +1363,7 @@ function _test(
         _typeof(input) === "number" &&
         !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
       ) {
-        _error(input, type, message, isUnSafe, "invalidNumber");
+        _err(input, type, message, isUnSafe, "_errLogNumber");
       }
 
       // is a valid message?
@@ -1341,14 +1371,14 @@ function _test(
         typeof message !== "string" &&
         !globalThis.__ESCSS_ESTEST__.isESTestDisabled
       ) {
-        _error(input, type, message, isUnSafe, "errArg3");
+        _err(input, type, message, isUnSafe, "_errLogArg3");
       }
 
       // "string?" case
       if (type.endsWith("?")) {
         // "number" !== "string?" case
         if (input !== undefined && _typeof(input) !== type.slice(0, -1)) {
-          _error(input, type, message, isUnSafe, "errArg1");
+          _err(input, type, message, isUnSafe, "_errLogArg1");
         }
 
         type = type.slice(0, -1);
@@ -1358,7 +1388,7 @@ function _test(
       else {
         // "number" !== "string" case
         if (_typeof(input) !== type) {
-          _error(input, type, message, isUnSafe, "errArg1");
+          _err(input, type, message, isUnSafe, "_errLogArg1");
         }
       }
     }
