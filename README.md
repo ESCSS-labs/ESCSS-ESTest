@@ -153,7 +153,7 @@ app.listen(port, () => {
 });
 ```
 
-### `baseESTest(input, type, message)`
+### `createESTest(input, type, message)`
 
 - Get clear, actionable `bug reports` (for library authors/maintainers).
 

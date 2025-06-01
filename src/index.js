@@ -1266,7 +1266,7 @@ function unSafeESTest(input, type, message) {
   return _test(input, type, message, true);
 }
 
-function baseESTest(input, type, message) {
+function createESTest(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
 
   // update globalThis
@@ -1277,4 +1277,4 @@ function baseESTest(input, type, message) {
   return _test(input, type, message, false);
 }
 
-export { ESTest, unSafeESTest, baseESTest };
+export { ESTest, unSafeESTest, createESTest };

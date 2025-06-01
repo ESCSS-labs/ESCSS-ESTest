@@ -326,14 +326,14 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
 /**
  * @example
  *
- * // Same as ESTest just used for "library" to wrap default message
+ * // For library authors/maintainers to wrap and set a default message
  * function ESTest(input, type, pubMsg = "[libraryName] your message for others to help debugging") {
- *  return baseESTest(input, type, pubMsg)
+ *  return createESTest(input, type, pubMsg)
  * }
  *
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
  */
-export declare function baseESTest<T extends _ALLOWED_TYPES>(
+export declare function createESTest<T extends _ALLOWED_TYPES>(
   input: unknown,
   type: T,
   pubMsg?: string,
