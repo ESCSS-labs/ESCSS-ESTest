@@ -353,6 +353,7 @@ declare global {
     /**
      * Captures internal bug reports (for company teams)
      * @example
+     * // Set in the entry point, e.g., main.js, App.vue, or App.jsx...
      * globalThis.__ESCSS_ESTEST__.message = "Please report this issue to ...";
      *
      * @see https://github.com/ESCSS-labs/ESCSS-ESTest

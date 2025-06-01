@@ -19,7 +19,7 @@ A passive, non-intrusive JavaScript runtime validator designed to achieve 100% f
 
 <img width="800" alt="benchmark" src="https://github.com/user-attachments/assets/0f367922-a8fb-4436-ac65-3f6f34819772" />
 
-[ESTest-benchmark-repo](https://github.com/ESCSS-labs/ESTest-benchmark-repo)
+**source**: [ESTest-benchmark-repo](https://github.com/ESCSS-labs/ESTest-benchmark-repo)
 
 ## Installation
 
@@ -91,8 +91,8 @@ async function getApi(a, b) {
 
   /**
    * data = {
-   *    name: 'demo',
-   *    age: 999,
+   *    name: "mike lee",
+   *    email: "cspkno005@gmail.com"
    *    info: [
    *      {
    *        id: '1',
@@ -110,8 +110,8 @@ async function getApi(a, b) {
 
   // Hint: Prevent undefined errors with optional chaining (?.)
   {
-    ESTest(data.name, "string").regex(/(demo|Alice)/);
-    ESTest(data.age, "number").positive();
+    ESTest(data.name, "string").regex(/^mike lee$/);
+    ESTest(data.email, "string").email();
     ESTest(data.info[0]?.id, "string?");
     ESTest(data.info[0]?.city, "string?");
     ESTest(data.info[0]?.statusCode, "number?");
@@ -123,39 +123,43 @@ async function getApi(a, b) {
 
 **image**
 <img width="800" alt="estest-custom" src="https://github.com/user-attachments/assets/cbfc957f-81b9-4f3c-98e5-672c46947166" />
-<img width="800" alt="estest-dev1" src="https://github.com/user-attachments/assets/3ad8f43a-592d-459e-a2f9-b8a14017176f" />
+<img width="800" alt="estest-dev" src="https://github.com/user-attachments/assets/c7b67a58-ad7d-47bf-869c-00a571d7a559" />
 <img width="800" alt="estest-prod" src="https://github.com/user-attachments/assets/f1942695-a5b4-41a7-9d4c-60c6f687a191" />
+
+**source**: [mike-demo-project](https://github.com/ESCSS-labs/mike-demo-project)
 
 ### `unSafeESTest(input, type, message)`
 
 - Breaking error throwing via `throw new Error(...)`
 
 ```js
-import { unSafeESTest } from "escss-estest";
+import { ESTest, unSafeESTest } from "escss-estest";
 import express from "express";
 
 const app = express();
 const port = 3000;
 
-app.post("/validate", (req, res) => {
+app.use(express.json());
+
+app.post("/demo", (req, res) => {
   try {
     const data = req.body;
 
     /**
      * data = {
-     *    name: 'foo',
-     *    email: 'abc12345@gmail.com'
+     *    name: "mike lee",
+     *    email: "cspkno005@gmail.com"
      * }
      */
 
     {
-      unSafeESTest(data.name, "string").regex(/(foo)/);
-      unSafeESTest(data.email, "string", "custom error messages").email();
+      unSafeESTest(data.name, "string", "wrong name").regex(/^mike lee$/);
+      unSafeESTest(data.email, "string", "invalid email").email();
     }
 
-    res.json({ message: "Validation passed" });
-  } catch (error) {
-    res.status(400).json({ message: error });
+    res.json({ message: "ok" });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });
 
@@ -168,6 +172,8 @@ app.listen(port, () => {
 <img width="800" alt="unsafeestest-custom" src="https://github.com/user-attachments/assets/d912f352-4f3e-4ce8-a608-6f05edca9c8d" />
 <img width="800" alt="unsafeestest-dev" src="https://github.com/user-attachments/assets/653b58cb-56ed-49ad-8ae9-69a0f33558f7" />
 <img width="800" alt="unsafeestest-prod" src="https://github.com/user-attachments/assets/19f9701f-c254-4684-a1f1-ffc78a5b9394" />
+
+**source**: [mike-demo-project](https://github.com/ESCSS-labs/mike-demo-project)
 
 ### `createESTest(input, type, message)`
 
@@ -199,6 +205,7 @@ function ESTest(
 - Captures `internal bug reports` (for company teams)
 
 ```js
+// Set in the entry point, e.g., main.js, App.vue, or App.jsx...
 globalThis.__ESCSS_ESTEST__.message = "Please report this issue to ...";
 ```
 
