@@ -311,7 +311,7 @@ declare interface _Array extends _Common<"array"> {
 export declare function ESTest<T extends _ALLOWED_TYPES>(
   input: unknown,
   type: T,
-  pubMsg?: string,
+  message?: string,
 ): _Chain<T>;
 
 /**
@@ -320,15 +320,15 @@ export declare function ESTest<T extends _ALLOWED_TYPES>(
 export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
   input: unknown,
   type: T,
-  pubMsg?: string,
+  message?: string,
 ): _Chain<T>;
 
 /**
  * @example
  *
  * // For library authors/maintainers to wrap and set a default message
- * function ESTest(input, type, pubMsg = "[libraryName] your message for others to help debugging") {
- *  return createESTest(input, type, pubMsg)
+ * function ESTest(input, type, message = "[libraryName] your message for others to help debugging") {
+ *  return createESTest(input, type, message)
  * }
  *
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
@@ -336,7 +336,7 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
 export declare function createESTest<T extends _ALLOWED_TYPES>(
   input: unknown,
   type: T,
-  pubMsg?: string,
+  message?: string,
 ): _Chain<T>;
 
 declare global {
