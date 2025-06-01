@@ -1205,7 +1205,7 @@ function _err(
   const _ESTestLog = {
     _errLogHiddenInfo: (logType) =>
       console[logType](
-        `🚫 Information hidden for security purposes. Verify in development mode.`,
+        ` 🚫 Information hidden for security purposes. Verify in development mode.`,
       ),
 
     _errLogArg1: (logType) =>
