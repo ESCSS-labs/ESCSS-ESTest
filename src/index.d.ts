@@ -328,6 +328,8 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
 /**
  * Get clear, actionable bug reports (for library authors/maintainers).
  * @example
+ *
+ * // Encapsulate createESTest to provide your library's own default message
  * function ESTest(input, type, message = "[libraryName] your message for others to help debugging") {
  *  return createESTest(input, type, message)
  * }
