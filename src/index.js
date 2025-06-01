@@ -16,6 +16,29 @@ globalThis.__ESCSS_ESTEST__ = {
     },
     _Undefined: {
       _count: 0,
+      description: 0,
+      less: 0,
+      max: 0,
+      greater: 0,
+      min: 0,
+      integer: 0,
+      positive: 0,
+      negative: 0,
+      multiple: 0,
+      length: 0,
+      email: 0,
+      uuid4: 0,
+      uuid7: 0,
+      regex: 0,
+      base64: 0,
+      base64url: 0,
+      ip4: 0,
+      ip6: 0,
+      cidr4: 0,
+      cidr6: 0,
+      emoji: 0,
+      e164: 0,
+      lowercase: 0,
     },
     _Null: {
       _count: 0,
@@ -135,10 +158,102 @@ class _Common {
 }
 
 const _chain = {
+  // Prevent crashes if globalThis.__ESCSS_ESTEST__.isESTestDisabled = true
   undefined: class _Undefined extends _Common {
     constructor(...args) {
       super(...args);
       globalThis.__ESCSS_ESTEST__.analysis._Undefined._count += 1;
+    }
+    description() {
+      return this;
+    }
+
+    less() {
+      return this;
+    }
+
+    max() {
+      return this;
+    }
+
+    greater() {
+      return this;
+    }
+
+    min() {
+      return this;
+    }
+
+    integer() {
+      return this;
+    }
+
+    positive() {
+      return this;
+    }
+
+    negative() {
+      return this;
+    }
+
+    multiple() {
+      return this;
+    }
+
+    length() {
+      return this;
+    }
+
+    email() {
+      return this;
+    }
+
+    uuid4() {
+      return this;
+    }
+
+    uuid7() {
+      return this;
+    }
+
+    regex() {
+      return this;
+    }
+
+    base64() {
+      return this;
+    }
+
+    base64url() {
+      return this;
+    }
+
+    ip4() {
+      return this;
+    }
+
+    ip6() {
+      return this;
+    }
+
+    cidr4() {
+      return this;
+    }
+
+    cidr6() {
+      return this;
+    }
+
+    emoji() {
+      return this;
+    }
+
+    e164() {
+      return this;
+    }
+
+    lowercase() {
+      return this;
     }
   },
   null: class _Null extends _Common {
@@ -1222,7 +1337,10 @@ function _test(
       }
 
       // is a valid message?
-      if (typeof message !== "string") {
+      if (
+        typeof message !== "string" &&
+        !globalThis.__ESCSS_ESTEST__.isESTestDisabled
+      ) {
         _error(input, type, message, isUnSafe, "errArg3");
       }
 
@@ -1251,7 +1369,11 @@ function _test(
 }
 
 function ESTest(input, type, message) {
-  if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
+  if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
+    // To prevent the app from breaking when set to true
+    input = undefined;
+    type = "undefined";
+  }
 
   globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
 
@@ -1267,9 +1389,12 @@ function unSafeESTest(input, type, message) {
 }
 
 function createESTest(input, type, message) {
-  if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) return;
+  if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
+    // To prevent the app from breaking when set to true
+    input = undefined;
+    type = "undefined";
+  }
 
-  // update globalThis
   globalThis.__ESCSS_ESTEST__.message = message;
   globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
 
