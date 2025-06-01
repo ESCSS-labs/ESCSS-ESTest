@@ -1,6 +1,6 @@
 globalThis.__ESCSS_ESTEST__ = {
   information:
-    "name: escss-estest, version: 2.3.1, license: AGPL-3.0-only OR Commercial, author: Mike Lee",
+    "name: escss-estest, version: 2.3.2, license: AGPL-3.0-only OR Commercial, author: Mike Lee",
   message: "Set 'globalThis.__ESCSS_ESTEST__.message' for customize message",
   isESTestDisabled: false,
   analysis: {
