@@ -159,100 +159,122 @@ class _Common {
 
 const _chain = {
   // Prevent crashes if globalThis.__ESCSS_ESTEST__.isESTestDisabled = true
-  undefined: class _Undefined extends _Common {
-    constructor(...args) {
-      super(...args);
+  undefined: class _Undefined {
+    constructor() {
       globalThis.__ESCSS_ESTEST__.analysis._Undefined._count += 1;
     }
     description() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.description += 1;
       return this;
     }
 
     less() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.less += 1;
       return this;
     }
 
     max() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.max += 1;
       return this;
     }
 
     greater() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.greater += 1;
       return this;
     }
 
     min() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.min += 1;
       return this;
     }
 
     integer() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.integer += 1;
       return this;
     }
 
     positive() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.positive += 1;
       return this;
     }
 
     negative() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.negative += 1;
       return this;
     }
 
     multiple() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.multiple += 1;
       return this;
     }
 
     length() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.length += 1;
       return this;
     }
 
     email() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.email += 1;
       return this;
     }
 
     uuid4() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.uuid4 += 1;
       return this;
     }
 
     uuid7() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.uuid7 += 1;
       return this;
     }
 
     regex() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.regex += 1;
       return this;
     }
 
     base64() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.base64 += 1;
       return this;
     }
 
     base64url() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.base64url += 1;
       return this;
     }
 
     ip4() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.ip4 += 1;
       return this;
     }
 
     ip6() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.ip6 += 1;
       return this;
     }
 
     cidr4() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.cidr4 += 1;
       return this;
     }
 
     cidr6() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.cidr6 += 1;
       return this;
     }
 
     emoji() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.emoji += 1;
       return this;
     }
 
     e164() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.e164 += 1;
       return this;
     }
 
     lowercase() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.lowercase += 1;
       return this;
     }
   },
@@ -1367,10 +1389,7 @@ function _test(
       }
 
       // is a valid message?
-      if (
-        typeof message !== "string" &&
-        !globalThis.__ESCSS_ESTEST__.isESTestDisabled
-      ) {
+      if (typeof message !== "string") {
         _err(input, type, message, isUnSafe, "_errLogArg3");
       }
 
@@ -1401,8 +1420,7 @@ function _test(
 function ESTest(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
     // To prevent the app from breaking when set to true
-    input = undefined;
-    type = "undefined";
+    return new _chain.undefined();
   }
 
   globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
@@ -1421,8 +1439,7 @@ function unSafeESTest(input, type, message) {
 function createESTest(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
     // To prevent the app from breaking when set to true
-    input = undefined;
-    type = "undefined";
+    return new _chain.undefined();
   }
 
   globalThis.__ESCSS_ESTEST__.message = message;
