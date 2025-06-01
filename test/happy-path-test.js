@@ -79,6 +79,7 @@ ESTest(undefined, "bigint?").description("test");
 ESTest(undefined, "undefined");
 ESTest(undefined, "undefined").description("test");
 
+ESTest(null);
 ESTest(null, "null");
 ESTest(null, "null").description("test");
 
@@ -161,6 +162,7 @@ unSafeESTest(undefined, "bigint?").description("test");
 unSafeESTest(undefined, "undefined");
 unSafeESTest(undefined, "undefined").description("test");
 
+unSafeESTest(null);
 unSafeESTest(null, "null");
 unSafeESTest(null, "null").description("test");
 

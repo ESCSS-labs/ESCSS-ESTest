@@ -61,7 +61,7 @@ function sum(a, b) {
 
 ## Core API
 
-### `ESTest(input, type, message)`
+### `ESTest(input, type = "null", message = globalThis.__ESCSS_ESTEST__.message)`
 
 - Non-breaking error logging via `console.error(...)`
 
@@ -128,7 +128,7 @@ async function getApi(a, b) {
 
 **source**: [mike-demo-project](https://github.com/ESCSS-labs/mike-demo-project)
 
-### `unSafeESTest(input, type, message)`
+### `unSafeESTest(input, type = "null", message = globalThis.__ESCSS_ESTEST__.message)`
 
 - Breaking error throwing via `throw new Error(...)`
 

@@ -1360,7 +1360,7 @@ function _err(
 
 function _test(
   input,
-  type = "undefined",
+  type = "null",
   message = globalThis.__ESCSS_ESTEST__.message,
   isUnSafe,
 ) {

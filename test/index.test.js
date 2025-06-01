@@ -4,6 +4,7 @@ import { ESTest, unSafeESTest } from "../src/index.js";
 describe("ESTest", () => {
   describe("1st / 2nd argument", () => {
     test("success", () => {
+      expect(ESTest(null)).toBeTypeOf("object");
       expect(ESTest("a", "string?")).toBeTypeOf("object");
       expect(ESTest(undefined, "string?")).toBeTypeOf("object");
       expect(ESTest("a", "string")).toBeTypeOf("object");
@@ -29,6 +30,7 @@ describe("ESTest", () => {
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
+      expect(ESTest()).toBeTypeOf("object");
       expect(ESTest(/a/, "string?")).toBeTypeOf("object");
       expect(ESTest(/a/, "string")).toBeTypeOf("object");
       expect(ESTest("a", "number?")).toBeTypeOf("object");
@@ -47,8 +49,8 @@ describe("ESTest", () => {
       expect(ESTest(NaN, "symbol")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "function")).toBeTypeOf("object");
 
-      expect(message).toHaveBeenCalledTimes(17);
-      expect(information).toHaveBeenCalledTimes(17);
+      expect(message).toHaveBeenCalledTimes(18);
+      expect(information).toHaveBeenCalledTimes(18);
     });
   });
 
@@ -1140,6 +1142,7 @@ describe("ESTest", () => {
 describe("unSafeESTest", () => {
   describe("1st / 2nd argument", () => {
     test("success", () => {
+      expect(ESTest(null)).toBeTypeOf("object");
       expect(ESTest("a", "string?")).toBeTypeOf("object");
       expect(ESTest(undefined, "string?")).toBeTypeOf("object");
       expect(ESTest("a", "string")).toBeTypeOf("object");
@@ -1160,6 +1163,8 @@ describe("unSafeESTest", () => {
     });
 
     test("fail", () => {
+      expect(() => unSafeESTest()).toThrow();
+      expect(() => unSafeESTest(undefined)).toThrow();
       expect(() => unSafeESTest(/a/, "string?")).toThrow();
       expect(() => unSafeESTest(/a/, "string")).toThrow();
       expect(() => unSafeESTest("a", "number?")).toThrow();
