@@ -1,6 +1,6 @@
 {
   "name": "escss-estest",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "A passive, non-intrusive JavaScript runtime validator designed to achieve 100% function coverage.",
   "keywords": [
     "JavaScript",
