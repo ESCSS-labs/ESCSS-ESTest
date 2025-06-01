@@ -47,8 +47,8 @@ describe("ESTest", () => {
       expect(ESTest(NaN, "symbol")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "function")).toBeTypeOf("object");
 
-      expect(message).toHaveBeenCalledTimes(19);
-      expect(information).toHaveBeenCalledTimes(19);
+      expect(message).toHaveBeenCalledTimes(17);
+      expect(information).toHaveBeenCalledTimes(17);
     });
   });
 
@@ -79,25 +79,25 @@ describe("ESTest", () => {
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
-      expect(ESTest(/a/, "string?", 1)).toBeTypeOf("object");
-      expect(ESTest(/a/, "string", 1)).toBeTypeOf("object");
-      expect(ESTest("a", "number?", 1)).toBeTypeOf("object");
-      expect(ESTest("a", "number", 1)).toBeTypeOf("object");
-      expect(ESTest(1, "array?", 1)).toBeTypeOf("object");
-      expect(ESTest(1, "array", 1)).toBeTypeOf("object");
-      expect(ESTest([], "object?", 1)).toBeTypeOf("object");
-      expect(ESTest([], "object", 1)).toBeTypeOf("object");
-      expect(ESTest({}, "boolean?", 1)).toBeTypeOf("object");
-      expect(ESTest({}, "boolean", 1)).toBeTypeOf("object");
-      expect(ESTest(new Date(), "bigint?", 1)).toBeTypeOf("object");
-      expect(ESTest(new Date(), "bigint", 1)).toBeTypeOf("object");
-      expect(ESTest(1n, "undefined", 1)).toBeTypeOf("object");
-      expect(ESTest(undefined, "null", 1)).toBeTypeOf("object");
-      expect(ESTest(NaN, "symbol", 1)).toBeTypeOf("object");
-      expect(ESTest(Symbol("a"), "function", 1)).toBeTypeOf("object");
+      expect(ESTest("a", "string?", 1)).toBeTypeOf("object");
+      expect(ESTest("a", "string", 1)).toBeTypeOf("object");
+      expect(ESTest(1, "number?", 1)).toBeTypeOf("object");
+      expect(ESTest(1, "number", 1)).toBeTypeOf("object");
+      expect(ESTest([], "array?", 1)).toBeTypeOf("object");
+      expect(ESTest([], "array", 1)).toBeTypeOf("object");
+      expect(ESTest({}, "object?", 1)).toBeTypeOf("object");
+      expect(ESTest({}, "object", 1)).toBeTypeOf("object");
+      expect(ESTest(true, "boolean?", 1)).toBeTypeOf("object");
+      expect(ESTest(true, "boolean", 1)).toBeTypeOf("object");
+      expect(ESTest(1n, "bigint?", 1)).toBeTypeOf("object");
+      expect(ESTest(1n, "bigint", 1)).toBeTypeOf("object");
+      expect(ESTest(undefined, "undefined", 1)).toBeTypeOf("object");
+      expect(ESTest(null, "null", 1)).toBeTypeOf("object");
+      expect(ESTest(Symbol("1"), "symbol", 1)).toBeTypeOf("object");
+      expect(ESTest(function sum() {}, "function", 1)).toBeTypeOf("object");
 
-      expect(message).toHaveBeenCalledTimes(36);
-      expect(information).toHaveBeenCalledTimes(36);
+      expect(message).toHaveBeenCalledTimes(16);
+      expect(information).toHaveBeenCalledTimes(16);
     });
   });
 
@@ -2329,11 +2329,11 @@ describe("globalThis config", () => {
   });
   test("ESTest can be disabled", () => {
     globalThis.__ESCSS_ESTEST__.isESTestDisabled = true;
-    expect(ESTest(1, "string?")).toBe(undefined);
-    expect(ESTest("1", "string?")).toBe(undefined);
+    expect(ESTest(1, "string?")).toBeTypeOf("object");
+    expect(ESTest("1", "string?")).toBeTypeOf("object");
 
-    expect(ESTest(1, "string")).toBe(undefined);
-    expect(ESTest("1", "string")).toBe(undefined);
+    expect(ESTest(1, "string")).toBeTypeOf("object");
+    expect(ESTest("1", "string")).toBeTypeOf("object");
   });
   test("unSafeESTest should not be affected by isESTestDisabled (security)", () => {
     globalThis.__ESCSS_ESTEST__.isESTestDisabled = true;

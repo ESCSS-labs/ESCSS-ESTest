@@ -29,6 +29,6 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "test": "node ./test/happy-path-test.js",
-    "check": "pnpm format && pnpm lint && pnpm run test"
+    "check": "pnpm format && pnpm lint && pnpm run test && pnpm vitest"
   }
 }
