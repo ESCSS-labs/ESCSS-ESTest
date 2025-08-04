@@ -241,3 +241,9 @@ function sum(a, b) {
 - Show usage reports
 
 <img width="800" alt="analysis" src="https://github.com/user-attachments/assets/85166a84-14e8-4e37-98b4-06ad9f62331b" />
+
+### Thanks
+This project is heavily inspired by the following:
+- [Zod](https://zod.dev/)
+- [Joi](https://joi.dev/)
+- [ilyaliao](https://github.com/ilyaliao)
