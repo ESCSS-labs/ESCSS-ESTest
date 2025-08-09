@@ -6,14 +6,13 @@ A passive, non-intrusive JavaScript runtime validator designed to achieve 100% f
 
 ## Features
 
-- ✅ `TypeScript autocompletion`.
-- 🧪 Supports `E2E` & `unit testing`.
-- ⚙️ Works in `Node.js` & `modern browsers`.
-- ❤️‍🔥 Built with `security` & `developer experience` at heart.
-- 🎯 `Non-intrusive` & `concise API` to achieve `100% function coverage`.
-- 🔥 `Runtime dependency error detection` to eliminate `dependency hell`.
-- 🪶 `2.7 kB` (minified + gzipped), `zero dependencies`, and `no vendor lock-in`.
-- ⚡ (Optional) `runtime testing` with `minimal performance impact`.
+- ⚙️ JavaScript version of TypeScript + runtime-testing.
+- ✅ TypeScript autocompletion.
+- ❤️‍🔥 Built with security & DX at heart.
+- 🎯 Non-intrusive & concise API to achieve 100% function coverage.
+- 🔥 Runtime dependency error detection to eliminate dependency hell.
+- 🪶 2.7 kB (minified + gzipped), zero dependencies.
+- ⚡ (Optional) runtime testing with minimal performance impact.
 
 ## benchmark
 
@@ -85,48 +84,29 @@ function sum(a, b) {
 ```js
 import { ESTest } from "escss-estest";
 
-async function getApi(a, b) {
-  const apiData = await fetch("https://www.just-an-example.com/1");
+async function getApi() {
+  const apiData = await fetch("https://jsonplaceholder.typicode.com/todos/1");
   const data = await apiData.json();
 
-  /**
-   * data = {
-   *    name: "mike lee",
-   *    email: "cspkno005@gmail.com"
-   *    info: [
-   *      {
-   *        id: '1',
-   *        city: 'foo',
-   *        statusCode: 111
-   *      },
-   *      {
-   *        id: '2',
-   *        city: 'bar',
-   *        statusCode: 222
-   *      }
-   *    ]
-   * }
-   */
+  // const data = {
+  //   userId: 1, 
+  //   id: 1, 
+  //   title: "delectus aut autem", 
+  //   completed: false
+  // }
 
-  // Hint: Prevent undefined errors with optional chaining (?.)
   {
-    ESTest(data.name, "string").regex(/^mike lee$/);
-    ESTest(data.email, "string").email();
-    ESTest(data.info[0]?.id, "string?");
-    ESTest(data.info[0]?.city, "string?");
-    ESTest(data.info[0]?.statusCode, "number?");
+    ESTest(data.userId, "number");
+    ESTest(data.id, "number");
+    ESTest(data.title, "string");
+    ESTest(data.completed, "boolean");
   }
 
   return data;
 }
+
+getApi()
 ```
-
-**image**
-<img width="800" alt="estest-custom" src="https://github.com/user-attachments/assets/cbfc957f-81b9-4f3c-98e5-672c46947166" />
-<img width="800" alt="estest-dev" src="https://github.com/user-attachments/assets/c7b67a58-ad7d-47bf-869c-00a571d7a559" />
-<img width="800" alt="estest-prod" src="https://github.com/user-attachments/assets/f1942695-a5b4-41a7-9d4c-60c6f687a191" />
-
-**source**: [mike-demo-project](https://github.com/ESCSS-labs/mike-demo-project)
 
 ### `unSafeESTest(input, type = "null", message = globalThis.__ESCSS_ESTEST__.message)`
 
@@ -147,14 +127,14 @@ app.post("/demo", (req, res) => {
 
     /**
      * data = {
-     *    name: "mike lee",
-     *    email: "cspkno005@gmail.com"
+     *    name: "Mike Lee",
+     *    msg: "Hello!"
      * }
      */
 
     {
-      unSafeESTest(data.name, "string", "wrong name").regex(/^mike lee$/);
-      unSafeESTest(data.email, "string", "invalid email").email();
+      unSafeESTest(data.name, "string", "wrong name").regex(/^Mike Lee$/);
+      unSafeESTest(data.email, "string");
     }
 
     res.json({ message: "ok" });
@@ -167,13 +147,6 @@ app.listen(port, () => {
   console.log(`http://localhost:${port}`);
 });
 ```
-
-**image**
-<img width="800" alt="unsafeestest-custom" src="https://github.com/user-attachments/assets/d912f352-4f3e-4ce8-a608-6f05edca9c8d" />
-<img width="800" alt="unsafeestest-dev" src="https://github.com/user-attachments/assets/653b58cb-56ed-49ad-8ae9-69a0f33558f7" />
-<img width="800" alt="unsafeestest-prod" src="https://github.com/user-attachments/assets/19f9701f-c254-4684-a1f1-ffc78a5b9394" />
-
-**source**: [mike-demo-project](https://github.com/ESCSS-labs/mike-demo-project)
 
 ### `createESTest(input, type, message)`
 
