@@ -1633,56 +1633,51 @@ function _test(
   message = globalThis.__ESCSS_ESTEST__.message,
   isUnSafe,
 ) {
-  // Unhappy path (validation)
-  {
-    // invalid type
-    if (!_ALLOWED_TYPES.includes(type)) {
-      type = "undefined";
-
-      // is a valid message?
-      if (typeof message !== "string") {
-        _err(input, type, message, isUnSafe, "_errLogArg3");
-      }
-
-      _err(input, type, message, isUnSafe, "_errLogArg2");
+  // invalid type
+  if (!_ALLOWED_TYPES.includes(type)) {
+    // is a valid message?
+    if (typeof message !== "string") {
+      _err(input, "undefined", message, isUnSafe, "_errLogArg3");
     }
 
-    // valid type
+    _err(input, "undefined", message, isUnSafe, "_errLogArg2");
+  }
+
+  // valid type
+  else {
+    // is a valid number?
+    if (
+      _typeof(input) === "number" &&
+      !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
+    ) {
+      _err(input, type, message, isUnSafe, "_errLogNumber");
+    }
+
+    // is a valid message?
+    if (typeof message !== "string") {
+      _err(input, type, message, isUnSafe, "_errLogArg3");
+    }
+
+    // "string?" case
+    if (type.endsWith("?")) {
+      // "number" !== "string?" case
+      if (input !== undefined && _typeof(input) !== type.slice(0, -1)) {
+        _err(input, type, message, isUnSafe, "_errLogArg1");
+      }
+
+      type = type.slice(0, -1);
+    }
+
+    // "string" case
     else {
-      // is a valid number?
-      if (
-        _typeof(input) === "number" &&
-        !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
-      ) {
-        _err(input, type, message, isUnSafe, "_errLogNumber");
-      }
-
-      // is a valid message?
-      if (typeof message !== "string") {
-        _err(input, type, message, isUnSafe, "_errLogArg3");
-      }
-
-      // "string?" case
-      if (type.endsWith("?")) {
-        // "number" !== "string?" case
-        if (input !== undefined && _typeof(input) !== type.slice(0, -1)) {
-          _err(input, type, message, isUnSafe, "_errLogArg1");
-        }
-
-        type = type.slice(0, -1);
-      }
-
-      // "string" case
-      else {
-        // "number" !== "string" case
-        if (_typeof(input) !== type) {
-          _err(input, type, message, isUnSafe, "_errLogArg1");
-        }
+      // "number" !== "string" case
+      if (_typeof(input) !== type) {
+        _err(input, type, message, isUnSafe, "_errLogArg1");
       }
     }
   }
 
-  // Happy path (return an object for chaining methods) e.g., ESTest(1, 'number').max(10)
+  // return object for chain method. e.g., ESTest(1, 'number').max(10)
   return new _classType[type](input, type, message, isUnSafe);
 }
 
