@@ -27,7 +27,7 @@ declare type _ALLOWED_TYPES__SCHEMA =
   | "array"
   | "date";
 
-declare type _Chain<T extends _ALLOWED_TYPES> = T extends "undefined"
+declare type _ClassType<T extends _ALLOWED_TYPES> = T extends "undefined"
   ? _Undefined
   : T extends "null"
     ? _Null
@@ -55,7 +55,7 @@ declare interface _Common<T extends _ALLOWED_TYPES> {
    * // more information, doesn't do anything
    * ESTest('foo', 'string').description('a helpful information')
    */
-  description(): _Chain<T>;
+  description(): _ClassType<T>;
 }
 
 declare interface _Undefined extends _Common<"undefined"> {}
@@ -70,56 +70,56 @@ declare interface _Number extends _Common<"number"> {
    * // 5 < 10
    * ESTest(5, 'number').less(10) // pass
    */
-  less(): _Chain<"number">;
+  less(): _ClassType<"number">;
 
   /**
    * @example
    * // 5 <= 10
    * ESTest(5, 'number').max(10) // pass
    */
-  max(): _Chain<"number">;
+  max(): _ClassType<"number">;
 
   /**
    * @example
    * // 15 > 10
    * ESTest(15, 'number').greater(10) // pass
    */
-  greater(): _Chain<"number">;
+  greater(): _ClassType<"number">;
 
   /**
    * @example
    * // 15 >= 10
    * ESTest(15, 'number').min(10) // pass
    */
-  min(): _Chain<"number">;
+  min(): _ClassType<"number">;
 
   /**
    * @example
    * // Number.isInteger(15)
    * ESTest(15, 'number').integer() // pass
    */
-  integer(): _Chain<"number">;
+  integer(): _ClassType<"number">;
 
   /**
    * @example
    * // 15 > 0
    * ESTest(15, 'number').positive() // pass
    */
-  positive(): _Chain<"number">;
+  positive(): _ClassType<"number">;
 
   /**
    * @example
    * // -15 < 0
    * ESTest(-15, 'number').negative() // pass
    */
-  negative(): _Chain<"number">;
+  negative(): _ClassType<"number">;
 
   /**
    * @example
    * // 15 % 3 === 0
    * ESTest(15, 'number').multiple(3) // pass
    */
-  multiple(): _Chain<"number">;
+  multiple(): _ClassType<"number">;
 }
 
 declare interface _BigInt extends _Common<"bigint"> {
@@ -128,49 +128,49 @@ declare interface _BigInt extends _Common<"bigint"> {
    * // 5n < 10n
    * ESTest(5n, 'bigint').less(10n) // pass
    */
-  less(): _Chain<"number">;
+  less(): _ClassType<"number">;
 
   /**
    * @example
    * // 5n <= 10n
    * ESTest(5n, 'bigint').max(10n) // pass
    */
-  max(): _Chain<"number">;
+  max(): _ClassType<"number">;
 
   /**
    * @example
    * // 15n > 10n
    * ESTest(15n, 'bigint').greater(10n) // pass
    */
-  greater(): _Chain<"number">;
+  greater(): _ClassType<"number">;
 
   /**
    * @example
    * // 15n >= 10n
    * ESTest(15n, 'bigint').min(10n) // pass
    */
-  min(): _Chain<"number">;
+  min(): _ClassType<"number">;
 
   /**
    * @example
    * // 15n > 0n
    * ESTest(15n, 'bigint').positive() // pass
    */
-  positive(): _Chain<"number">;
+  positive(): _ClassType<"number">;
 
   /**
    * @example
    * // -15n < 0n
    * ESTest(-15n, 'bigint').negative() // pass
    */
-  negative(): _Chain<"number">;
+  negative(): _ClassType<"number">;
 
   /**
    * @example
    * // 15n % 3n === 0n
    * ESTest(15n, 'bigint').multiple(3n) // pass
    */
-  multiple(): _Chain<"number">;
+  multiple(): _ClassType<"number">;
 }
 
 declare interface _String extends _Common<"string"> {
@@ -179,21 +179,21 @@ declare interface _String extends _Common<"string"> {
    * // 'foo'.length <= 10
    * ESTest('foo', 'string').max(10) // pass
    */
-  max(): _Chain<"string">;
+  max(): _ClassType<"string">;
 
   /**
    * @example
    * // 'foo'.length >= 10
    * ESTest('foo', 'string').min(10) // pass
    */
-  min(): _Chain<"string">;
+  min(): _ClassType<"string">;
 
   /**
    * @example
    * // 'foo'.length === 10
    * ESTest('foo', 'string').length(10) // pass
    */
-  length(): _Chain<"string">;
+  length(): _ClassType<"string">;
 
   /**
    * @example
@@ -209,67 +209,67 @@ declare interface _String extends _Common<"string"> {
    * // A loose regex that allows Unicode characters, enforces length limits, and that's about it.
    * ESTest("user.name123@example-domain.com", "string").email("unicodeEmail"); // pass
    */
-  email(): _Chain<"string">;
+  email(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('550e8400-e29b-41d4-a716-446655440000', 'string').uuid4() // pass
    */
-  uuid4(): _Chain<"string">;
+  uuid4(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('0189c7e4-3b8a-7e3b-8291-4e6f2b1a4c7d', 'string').uuid7() // pass
    */
-  uuid7(): _Chain<"string">;
+  uuid7(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('foo bar', 'string').regex(/(foo|bar)/) // pass
    */
-  regex(): _Chain<"string">;
+  regex(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('SGVsbG8gd29ybGQh', 'string').base64() // pass
    */
-  base64(): _Chain<"string">;
+  base64(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('Zm9vYmFyXzEyMw', 'string').base64url() // pass
    */
-  base64url(): _Chain<"string">;
+  base64url(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('192.168.1.1', 'string').ip4() // pass
    */
-  ip4(): _Chain<"string">;
+  ip4(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('2001:0db8:85a3:0000:0000:8a2e:0370:7334', 'string').ip6() // pass
    */
-  ip6(): _Chain<"string">;
+  ip6(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('192.168.0.0/16', 'string').cidr4() // pass
    */
-  cidr4(): _Chain<"string">;
+  cidr4(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('2001:0db8:85a3:0000:0000:8a2e:0370:7334/16', 'string').cidr6() // pass
    */
-  cidr6(): _Chain<"string">;
+  cidr6(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('🌀', 'string').emoji() // pass
    */
-  emoji(): _Chain<"string">;
+  emoji(): _ClassType<"string">;
 
   /**
    * @example
@@ -278,13 +278,13 @@ declare interface _String extends _Common<"string"> {
    * ESTest('+14151234567', 'string').e164() // pass
    *
    */
-  e164(): _Chain<"string">;
+  e164(): _ClassType<"string">;
 
   /**
    * @example
    * ESTest('foobar', 'string').lowercase() // pass
    */
-  lowercase(): _Chain<"string">;
+  lowercase(): _ClassType<"string">;
 }
 
 declare interface _Symbol extends _Common<"symbol"> {}
@@ -316,7 +316,7 @@ declare interface _Object extends _Common<"object"> {
    */
   schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(
     key: T,
-  ): _Chain<"object">;
+  ): _ClassType<"object">;
 }
 
 declare interface _Array extends _Common<"array"> {
@@ -325,21 +325,21 @@ declare interface _Array extends _Common<"array"> {
    * // [1, 2, 3].length >= 3
    * ESTest([1, 2, 3], 'array').min(3) // pass
    */
-  min(): _Chain<"array">;
+  min(): _ClassType<"array">;
 
   /**
    * @example
    * // [1, 2, 3].length <= 3
    * ESTest([1, 2, 3], 'array').max(3) // pass
    */
-  max(): _Chain<"array">;
+  max(): _ClassType<"array">;
 
   /**
    * @example
    * // [1, 2, 3].length === 3
    * ESTest([1, 2, 3], 'array').length(3) // pass
    */
-  length(): _Chain<"array">;
+  length(): _ClassType<"array">;
 
   /**
    * @example
@@ -365,7 +365,7 @@ declare interface _Array extends _Common<"array"> {
    */
   schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(
     key: T,
-  ): _Chain<"array">;
+  ): _ClassType<"array">;
 }
 
 /**
@@ -376,7 +376,7 @@ export declare function ESTest<T extends _ALLOWED_TYPES>(
   input: unknown,
   type: T,
   message?: string,
-): _Chain<T>;
+): _ClassType<T>;
 
 /**
  * Breaking error throwing via throw new Error(...)
@@ -386,7 +386,7 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
   input: unknown,
   type: T,
   message?: string,
-): _Chain<T>;
+): _ClassType<T>;
 
 /**
  * Get clear, actionable bug reports (for library authors/maintainers).
@@ -403,7 +403,7 @@ export declare function createESTest<T extends _ALLOWED_TYPES>(
   input: unknown,
   type: T,
   message?: string,
-): _Chain<T>;
+): _ClassType<T>;
 
 declare global {
   var __ESCSS_ESTEST__: {

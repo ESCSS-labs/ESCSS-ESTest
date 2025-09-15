@@ -160,7 +160,7 @@ class _Common {
   }
 }
 
-const _chain = {
+const _classType = {
   // Prevent crashes if globalThis.__ESCSS_ESTEST__.isESTestDisabled = true
   undefined: class _Undefined {
     constructor() {
@@ -1683,13 +1683,13 @@ function _test(
   }
 
   // Happy path (return an object for chaining methods) e.g., ESTest(1, 'number').max(10)
-  return new _chain[type](input, type, message, isUnSafe);
+  return new _classType[type](input, type, message, isUnSafe);
 }
 
 function ESTest(input, type, message) {
   // To prevent the app from breaking when set to true
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
-    return new _chain.undefined();
+    return new _classType.undefined();
   }
 
   globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
@@ -1708,7 +1708,7 @@ function unSafeESTest(input, type, message) {
 function createESTest(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
     // To prevent the app from breaking when set to true
-    return new _chain.undefined();
+    return new _classType.undefined();
   }
 
   globalThis.__ESCSS_ESTEST__.message = message;
