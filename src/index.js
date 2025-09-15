@@ -1335,22 +1335,22 @@ function _err(
         input,
       ),
     _errLogOnlyObjArr: (logType) =>
-      console[logType](` \n 🥲 <input> only "object" or "array".`),
+      console[logType](`🥲 <input> only "object" or "array".`),
     _errLogKeyLess: (logType) =>
       console[logType](
-        ` \n 🥲 <schemaKey> less than <inputKey>, can not be validated.`,
+        `🥲 Cannot be validated. <schemaKey> less than <inputKey>.`,
       ),
     _errLogSchemaMismatch: (logType) =>
       console[logType](
-        ` \n 🥲 ${inputValue} schema mismatch. should be [{...}, {...}].`,
+        `🥲 [${inputValue}]: Schema mismatch. Should be [{...}, {...}].`,
       ),
     _errLogPropertyMissing: (logType) =>
       console[logType](
-        ` \n 🥲 Property '${inputValue}' is missing, but required.`,
+        `🥲 [${inputValue}]: Property is missing. But required.`,
       ),
     _errLogTypeMismatch: (logType) =>
       console[logType](
-        ` \n 🥲 ${inputValue}: Type '${_typeof(inputValue2)}' is not assignable to type '${inputValue3}'.`,
+        `🥲 [${inputValue}]: Type '${_typeof(inputValue2)}' is not assignable to type '${inputValue3}'.`,
       ),
   };
 
