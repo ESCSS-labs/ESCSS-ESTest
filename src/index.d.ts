@@ -16,6 +16,17 @@ declare type _ALLOWED_TYPES =
   | "object?"
   | "array?";
 
+declare type _ALLOWED_TYPES__SCHEMA =
+  | "null"
+  | "boolean"
+  | "number"
+  | "bigint"
+  | "string"
+  | "symbol"
+  | "function"
+  | "array"
+  | "date"
+
 declare type _Chain<T extends _ALLOWED_TYPES> = T extends "undefined"
   ? _Undefined
   : T extends "null"
@@ -280,7 +291,31 @@ declare interface _Symbol extends _Common<"symbol"> {}
 
 declare interface _Function extends _Common<"function"> {}
 
-declare interface _Object extends _Common<"object"> {}
+declare interface _Object extends _Common<"object"> {
+  /**
+   * @example
+   * Note: schema() only accepts 'object'.
+   * 
+   * ESTest(data, 'object', 'custom error msg').schema({
+   *   name: 'string',
+   *   'msg?': 'string',
+   *   more: {
+   *     a: 'number',
+   *     'b?': 'number',
+   *   }
+   * })
+   * 
+   * ESTest(data, 'object', 'custom error msg').schema({
+   *   name: 'string',
+   *   'msg?': 'string',
+   *   more: [{
+   *     a: 'number',
+   *     'b?': 'number',
+   *   }]
+   * })
+   */
+  schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(key: T): _Chain<"object">;
+}
 
 declare interface _Array extends _Common<"array"> {
   /**
@@ -303,6 +338,30 @@ declare interface _Array extends _Common<"array"> {
    * ESTest([1, 2, 3], 'array').length(3) // pass
    */
   length(): _Chain<"array">;
+
+  /**
+   * @example
+   * Note: schema() only accepts 'object'.
+   * 
+   * ESTest(data, 'array', 'custom error msg').schema({
+   *   name: 'string',
+   *   'msg?': 'string',
+   *   more: {
+   *     a: 'number',
+   *     'b?': 'number',
+   *   }
+   * })
+   * 
+   * ESTest(data, 'array', 'custom error msg').schema({
+   *   name: 'string',
+   *   'msg?': 'string',
+   *   more: [{
+   *     a: 'number',
+   *     'b?': 'number',
+   *   }]
+   * })
+   */
+  schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(key: T): _Chain<"array">;
 }
 
 /**
