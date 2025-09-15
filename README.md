@@ -1,18 +1,18 @@
 ![logo](https://github.com/ESCSS-labs/ESCSS/blob/main/assets/logo.png)
 
-# What is ESCSS-ESTest?
+# Why ESCSS-ESTest?
 
-A passive, non-intrusive JavaScript runtime validator designed to achieve 100% function coverage.
+Just a guy who wants to survive in a **massive**, **legacy** JavaScript/TypeScript codebase.
 
 ## Features
 
-- ⚙️ JavaScript version of TypeScript + runtime-testing.
-- ✅ TypeScript autocompletion.
-- ❤️‍🔥 Built with security & DX at heart.
-- 🎯 Non-intrusive & concise API to achieve 100% function coverage.
-- 🔥 Runtime dependency error detection to eliminate dependency hell.
-- 🪶 2.7 kB (minified + gzipped), zero dependencies.
-- ⚡ (Optional) runtime testing with minimal performance impact.
+- 💪 JS version of TS + Zod: Ditch any & complexity.
+- 💣 No vender lock-in.
+- 🐛 Find bug quickly.
+- ❤️‍🔥 DX first, DX first, DX first and security!
+- 🪶 3.65 kB (minified + gzipped), 0 dependencies.
+- ✅ Autocompletion support.
+- ⚡ (Optional) The definitive choice for high-performance.
 
 ## benchmark
 
@@ -26,45 +26,19 @@ A passive, non-intrusive JavaScript runtime validator designed to achieve 100% f
   npm add escss-estest
 ```
 
-```bash
-  yarn add escss-estest
-```
-
-```bash
-  pnpm add escss-estest
-```
-
-```bash
-  bun add escss-estest
-```
-
 ## Core Concept
 
-**`Water filter`**
+- `ESTest`: console.error --> decoupling / disabled for performance
+- `unSafeESTest`: throw new Error
+- `ESTestForLibrary`: The default message is separated from `ESTest` & `unSafeESTest`
 
-- Inspired by TDD, it's a filter for your code, making sure only clean results come through.
-
-```js
-function sum(a, b) {
-  // unhappy path: {...}
-  // Unhappy path filter. console.error (non-breaking). Collapsible. Removable.
-  {
-    ESTest(a, "number");
-    ESTest(b, "number");
-  }
-
-  // Happy path: inputs are valid
-  return a + b;
-}
 ```
 
 ## Core API
 
-### `ESTest(input, type = "null", message = globalThis.__ESCSS_ESTEST__.message)`
+### `ESTest(input: any, type: string, message: string)`
 
-- Non-breaking error logging via `console.error(...)`
-
-**case 1**
+**validate type (TS part)**
 
 ```js
 import { ESTest } from "escss-estest";
@@ -79,7 +53,7 @@ function sum(a, b) {
 }
 ```
 
-**case 2**
+**Validate Schema (Zod part)**
 
 ```js
 import { ESTest } from "escss-estest";
@@ -89,17 +63,33 @@ async function getApi() {
   const data = await apiData.json();
 
   // const data = {
-  //   userId: 1,
   //   id: 1,
-  //   title: "delectus aut autem",
-  //   completed: false
+  //   name: 'Mike',
+  //   info: {
+  //     title: "Developer",
+  //     completed: false
+  //   },
+  //   more: [{
+  //     msg: 'Hi!',
+  //     hidden: false 
+  //   }]
   // }
 
   {
-    ESTest(data.userId, "number");
-    ESTest(data.id, "number");
-    ESTest(data.title, "string");
-    ESTest(data.completed, "boolean");
+    ESTest(data, 'object', 'schema mismatch').schema({
+      id: 'number',
+      name: 'string',
+      info: {
+        title: 'string',
+        'completed?': 'boolean'
+      },
+      more: [{
+        msg: 'string'
+        'hidden?': 'boolean'
+      }]
+    })
+
+    ESTest(data.id, 'number', 'custom msg').min(0).max(50)
   }
 
   return data;
@@ -108,12 +98,12 @@ async function getApi() {
 getApi();
 ```
 
-### `unSafeESTest(input, type = "null", message = globalThis.__ESCSS_ESTEST__.message)`
+### `unSafeESTest(input: any, type: string, message: string)`
 
-- Breaking error throwing via `throw new Error(...)`
+**Usage is exactly the same as ESTest**
 
 ```js
-import { ESTest, unSafeESTest } from "escss-estest";
+import { unSafeESTest } from "escss-estest";
 import express from "express";
 
 const app = express();
@@ -125,16 +115,34 @@ app.post("/demo", (req, res) => {
   try {
     const data = req.body;
 
-    /**
-     * data = {
-     *    name: "Mike Lee",
-     *    msg: "Hello!"
-     * }
-     */
+    // const data = {
+    //   id: 1,
+    //   name: 'Mike',
+    //   info: {
+    //     title: "Developer",
+    //     completed: false
+    //   },
+    //   more: [{
+    //     msg: 'Hi!',
+    //     hidden: false 
+    //   }]
+    // }
 
     {
-      unSafeESTest(data.name, "string", "wrong name").regex(/^Mike Lee$/);
-      unSafeESTest(data.email, "string");
+      unSafeESTest(data, 'object', 'schema mismatch').schema({
+        id: 'number',
+        name: 'string',
+        info: {
+          title: 'string',
+          'completed?': 'boolean'
+        },
+        more: [{
+          msg: 'string'
+          'hidden?': 'boolean'
+        }]
+      })
+
+      unSafeESTest(data.id, 'number', 'custom msg').min(0).max(50)
     }
 
     res.json({ message: "ok" });
@@ -148,46 +156,42 @@ app.listen(port, () => {
 });
 ```
 
-### `ESTestForLibrary(input, type, message)`
+### `ESTestForLibrary(input: any, type: string, message: string)`
 
-- Get clear, actionable `bug reports` (for library authors/maintainers).
+**Library's own default message**
 
 ```js
 import { ESTestForLibrary } from "escss-estest";
 
-// Encapsulate ESTestForLibrary to provide your library's own default message
 function ESTest(
   input,
   type,
-  message = "[libraryName] your message for others to help debugging",
+  message = "[LibraryName] default message for others to help debugging",
 ) {
   return ESTestForLibrary(input, type, message);
 }
 ```
 
-## Auxiliary API
+## Helper API
 
 ### `globalThis.__ESCSS_ESTEST__.information`
 
-- Show library information
+- Show information
 
 <img width="648" alt="information" src="https://github.com/user-attachments/assets/c19d91cc-6346-4f6d-bceb-2a9024538a30" />
 
 ### `globalThis.__ESCSS_ESTEST__.message`
 
-- Captures `internal bug reports` (for company teams)
+- Set default message for your project.
 
 ```js
-// Set in the entry point, e.g., main.js, App.vue, or App.jsx...
 globalThis.__ESCSS_ESTEST__.message = "Please report this issue to ...";
 ```
 
 ### `globalThis.__ESCSS_ESTEST__.isESTestDisabled`
 
-- Why have this feature?
-
-  - Avoids vendor lock-in for long-term project flexibility.
-  - Optimizes production performance by enabling in dev and disabling in prod.
+  - true: Disable to get high-performance. (for production)
+  - false: Show Bug detail.
 
   _Note: `unSafeESTest` will not be affected (for security reasons)_
 
@@ -203,8 +207,9 @@ function sum(a, b) {
   return a + b;
 }
 
-// same as below
+// same as 
 function sum(a, b) {
+
   return a + b;
 }
 ```
