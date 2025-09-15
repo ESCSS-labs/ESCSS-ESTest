@@ -6,7 +6,7 @@ Just a guy who wants to survive in a **massive**, **legacy** JavaScript/TypeScri
 
 ## Features
 
-- 💪 JS version of TS + Zod: Ditch any & complexity.
+- 💪 JavaScript version of TypeScript + Zod: Ditch any & complexity.
 - 💣 No vender lock-in.
 - 🐛 Find bug quickly.
 - ❤️‍🔥 DX first, DX first, DX first and security!
@@ -26,34 +26,51 @@ Just a guy who wants to survive in a **massive**, **legacy** JavaScript/TypeScri
   npm add escss-estest
 ```
 
+## Table of Contents
+
+- [Core Concept](#core-concept)
+- [Core API](#core-api)
+  - [ESTest](#estestinput-any-type-string-message-string)
+    - [Validate Type (TypeScript Part)](#validate-type-typescript-part)
+    - [Validate Schema (Zod Part)](#validate-schema-zod-part)
+  - [unSafeESTest](#unsafeestestinput-any-type-string-message-string)
+    - Usage is exactly the same as ESTest
+  - [ESTestForLibrary](#estestforlibraryinput-any-type-string-message-string)
+    - Usage is exactly the same as ESTest
+- [Helper API](#helper-api)
+  - [globalThis.**ESCSS_ESTEST**.information](#globalthis__escss_estest__information)
+  - [globalThis.**ESCSS_ESTEST**.message](#globalthis__escss_estest__message)
+  - [globalThis.**ESCSS_ESTEST**.isESTestDisabled](#globalthis__escss_estest__isestestdisabled)
+  - [globalThis.**ESCSS_ESTEST**.analysis](#globalthis__escss_estest__analysis)
+- [Thanks](#thanks)
+
 ## Core Concept
 
-- `ESTest`: console.error --> decoupling / disabled for performance
+- `ESTest`: console.error --> decoupling / isESTestDisabled = true for high-performance
 - `unSafeESTest`: throw new Error
 - `ESTestForLibrary`: The default message is separated from `ESTest` & `unSafeESTest`
 
-```
-
 ## Core API
 
-### `ESTest(input: any, type: string, message: string)`
+### `ESTest(input: unknown, type: string, message: string)`
 
-**validate type (TS part)**
+#### Validate Type (TypeScript Part)
 
 ```js
 import { ESTest } from "escss-estest";
 
 function sum(a, b) {
   {
+    // validate type
     ESTest(a, "number");
     ESTest(b, "number");
   }
 
-  return a + b;
+  // do something
 }
 ```
 
-**Validate Schema (Zod part)**
+#### Validate Schema (Zod Part)
 
 ```js
 import { ESTest } from "escss-estest";
@@ -66,39 +83,44 @@ async function getApi() {
   //   id: 1,
   //   name: 'Mike',
   //   info: {
-  //     title: "Developer",
-  //     completed: false
+  //     title: "developer",
+  //     more: [
+  //       {
+  //         msg: 'Hello!',
+  //       },
+  //       {
+  //         msg: 'Hi!',
+  //       }
+  //     ]
   //   },
-  //   more: [{
-  //     msg: 'Hi!',
-  //     hidden: false 
-  //   }]
   // }
 
   {
-    ESTest(data, 'object', 'schema mismatch').schema({
-      id: 'number',
-      name: 'string',
+    // validate schema
+    ESTest(data, "object", "schema mismatch").schema({
+      id: "number",
+      "name?": "string",
       info: {
-        title: 'string',
-        'completed?': 'boolean'
+        title: "string",
+        more: [
+          {
+            msg: "string",
+          },
+        ],
       },
-      more: [{
-        msg: 'string'
-        'hidden?': 'boolean'
-      }]
-    })
+    });
 
-    ESTest(data.id, 'number', 'custom msg').min(0).max(50)
+    // validate detail
+    ESTest(data.id, "number", "custom msg").min(0).max(50);
   }
 
-  return data;
+  // do something
 }
 
 getApi();
 ```
 
-### `unSafeESTest(input: any, type: string, message: string)`
+### `unSafeESTest(input: unknown, type: string, message: string)`
 
 **Usage is exactly the same as ESTest**
 
@@ -119,31 +141,38 @@ app.post("/demo", (req, res) => {
     //   id: 1,
     //   name: 'Mike',
     //   info: {
-    //     title: "Developer",
-    //     completed: false
+    //     title: "developer",
+    //     more: [
+    //       {
+    //         msg: 'Hello!',
+    //       },
+    //       {
+    //         msg: 'Hi!',
+    //       }
+    //     ]
     //   },
-    //   more: [{
-    //     msg: 'Hi!',
-    //     hidden: false 
-    //   }]
     // }
 
     {
-      unSafeESTest(data, 'object', 'schema mismatch').schema({
-        id: 'number',
-        name: 'string',
+      // validate schema
+      ESTest(data, "object", "schema mismatch").schema({
+        id: "number",
+        "name?": "string",
         info: {
-          title: 'string',
-          'completed?': 'boolean'
+          title: "string",
+          more: [
+            {
+              msg: "string",
+            },
+          ],
         },
-        more: [{
-          msg: 'string'
-          'hidden?': 'boolean'
-        }]
-      })
+      });
 
-      unSafeESTest(data.id, 'number', 'custom msg').min(0).max(50)
+      // validate detail
+      unSafeESTest(data.id, "number", "custom msg").min(0).max(50);
     }
+
+    // do something
 
     res.json({ message: "ok" });
   } catch (err) {
@@ -156,7 +185,7 @@ app.listen(port, () => {
 });
 ```
 
-### `ESTestForLibrary(input: any, type: string, message: string)`
+### `ESTestForLibrary(input: unknown, type: string, message: string)`
 
 **Library's own default message**
 
@@ -190,10 +219,10 @@ globalThis.__ESCSS_ESTEST__.message = "Please report this issue to ...";
 
 ### `globalThis.__ESCSS_ESTEST__.isESTestDisabled`
 
-  - true: Disable to get high-performance. (for production)
-  - false: Show Bug detail.
+- `true`: Disable to get high-performance. (for production)
+- `false`: Show Bug detail.
 
-  _Note: `unSafeESTest` will not be affected (for security reasons)_
+Note: `unSafeESTest` will not be affected (for security reasons)
 
 ```js
 globalThis.__ESCSS_ESTEST__.isESTestDisabled = true;
@@ -207,9 +236,8 @@ function sum(a, b) {
   return a + b;
 }
 
-// same as 
+// same as
 function sum(a, b) {
-
   return a + b;
 }
 ```
@@ -220,10 +248,9 @@ function sum(a, b) {
 
 <img width="800" alt="analysis" src="https://github.com/user-attachments/assets/85166a84-14e8-4e37-98b4-06ad9f62331b" />
 
-### Thanks
-
-This project is heavily inspired by the following:
+## Thanks
 
 - [Zod](https://zod.dev/)
+- [ArkType](https://arktype.io/)
 - [Joi](https://joi.dev/)
 - [ilyaliao](https://github.com/ilyaliao)
