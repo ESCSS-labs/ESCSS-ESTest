@@ -318,7 +318,7 @@ const _classType = {
         );
       }
 
-      if (this.input < inputValue === false) {
+      if (!(this.input < inputValue)) {
         _err(
           this.input,
           this.type,
@@ -346,7 +346,7 @@ const _classType = {
         );
       }
 
-      if (this.input <= inputValue === false) {
+      if (!(this.input <= inputValue)) {
         _err(
           this.input,
           this.type,
@@ -374,7 +374,7 @@ const _classType = {
         );
       }
 
-      if (this.input > inputValue === false) {
+      if (!(this.input > inputValue)) {
         _err(
           this.input,
           this.type,
@@ -402,7 +402,7 @@ const _classType = {
         );
       }
 
-      if (this.input >= inputValue === false) {
+      if (!(this.input >= inputValue)) {
         _err(
           this.input,
           this.type,
@@ -418,7 +418,7 @@ const _classType = {
 
     integer() {
       globalThis.__ESCSS_ESTEST__.analysis._Number.integer += 1;
-      if (Number.isInteger(this.input) === false) {
+      if (!Number.isInteger(this.input)) {
         _err(
           this.input,
           this.type,
@@ -433,7 +433,7 @@ const _classType = {
 
     positive() {
       globalThis.__ESCSS_ESTEST__.analysis._Number.positive += 1;
-      if (this.input > 0 === false) {
+      if (!(this.input > 0)) {
         _err(
           this.input,
           this.type,
@@ -448,7 +448,7 @@ const _classType = {
 
     negative() {
       globalThis.__ESCSS_ESTEST__.analysis._Number.negative += 1;
-      if (this.input < 0 === false) {
+      if (!(this.input < 0)) {
         _err(
           this.input,
           this.type,
@@ -475,7 +475,7 @@ const _classType = {
         );
       }
 
-      if ((this.input % inputValue === 0) === false) {
+      if (!(this.input % inputValue === 0)) {
         _err(
           this.input,
           this.type,
@@ -509,7 +509,7 @@ const _classType = {
         );
       }
 
-      if (this.input < inputValue === false) {
+      if (!(this.input < inputValue)) {
         _err(
           this.input,
           this.type,
@@ -537,7 +537,7 @@ const _classType = {
         );
       }
 
-      if (this.input <= inputValue === false) {
+      if (!(this.input <= inputValue)) {
         _err(
           this.input,
           this.type,
@@ -565,7 +565,7 @@ const _classType = {
         );
       }
 
-      if (this.input > inputValue === false) {
+      if (!(this.input > inputValue)) {
         _err(
           this.input,
           this.type,
@@ -593,7 +593,7 @@ const _classType = {
         );
       }
 
-      if (this.input >= inputValue === false) {
+      if (!(this.input >= inputValue)) {
         _err(
           this.input,
           this.type,
@@ -609,7 +609,7 @@ const _classType = {
 
     positive() {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.positive += 1;
-      if (this.input > 0n === false) {
+      if (!(this.input > 0n)) {
         _err(
           this.input,
           this.type,
@@ -624,7 +624,7 @@ const _classType = {
 
     negative() {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.negative += 1;
-      if (this.input < 0n === false) {
+      if (!(this.input < 0n)) {
         _err(
           this.input,
           this.type,
@@ -651,7 +651,7 @@ const _classType = {
         );
       }
 
-      if ((this.input % inputValue === 0n) === false) {
+      if (!(this.input % inputValue === 0n)) {
         _err(
           this.input,
           this.type,
@@ -685,7 +685,7 @@ const _classType = {
         );
       }
 
-      if (this.input?.length <= inputValue === false) {
+      if (!(this.input?.length <= inputValue)) {
         _err(
           this.input?.length,
           this.type,
@@ -713,7 +713,7 @@ const _classType = {
         );
       }
 
-      if (this.input?.length >= inputValue === false) {
+      if (!(this.input?.length >= inputValue)) {
         _err(
           this.input?.length,
           this.type,
@@ -741,7 +741,7 @@ const _classType = {
         );
       }
 
-      if ((this.input?.length === inputValue) === false) {
+      if (!(this.input?.length === inputValue)) {
         _err(
           this.input?.length,
           this.type,
@@ -787,7 +787,7 @@ const _classType = {
             /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/;
       }
 
-      if (email.test(this.input) === false) {
+      if (!email.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -808,7 +808,7 @@ const _classType = {
       const uuid4 =
         /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
 
-      if (uuid4.test(this.input) === false) {
+      if (!uuid4.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -829,7 +829,7 @@ const _classType = {
       const uuid7 =
         /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
 
-      if (uuid7.test(this.input) === false) {
+      if (!uuid7.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -858,7 +858,7 @@ const _classType = {
         );
       }
 
-      if (inputValue.test(this.input) === false) {
+      if (!inputValue.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -879,7 +879,7 @@ const _classType = {
       const base64 =
         /^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$/;
 
-      if (base64.test(this.input) === false) {
+      if (!base64.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -899,7 +899,7 @@ const _classType = {
       globalThis.__ESCSS_ESTEST__.analysis._String.base64url += 1;
       const base64url = /^[A-Za-z0-9_-]*$/;
 
-      if (base64url.test(this.input) === false) {
+      if (!base64url.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -920,7 +920,7 @@ const _classType = {
       const ip4 =
         /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
 
-      if (ip4.test(this.input) === false) {
+      if (!ip4.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -941,7 +941,7 @@ const _classType = {
       const ip6 =
         /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})$/;
 
-      if (ip6.test(this.input) === false) {
+      if (!ip6.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -962,7 +962,7 @@ const _classType = {
       const cidr4 =
         /^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\/([0-9]|[1-2][0-9]|3[0-2])$/;
 
-      if (cidr4.test(this.input) === false) {
+      if (!cidr4.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -983,7 +983,7 @@ const _classType = {
       const cidr6 =
         /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
 
-      if (cidr6.test(this.input) === false) {
+      if (!cidr6.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -1003,7 +1003,7 @@ const _classType = {
       globalThis.__ESCSS_ESTEST__.analysis._String.emoji += 1;
       const emoji = /^(?:\p{Extended_Pictographic}|\p{Emoji_Component})+$/u;
 
-      if (emoji.test(this.input) === false) {
+      if (!emoji.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -1023,7 +1023,7 @@ const _classType = {
       globalThis.__ESCSS_ESTEST__.analysis._String.e164 += 1;
       const e164 = /^\+(?:[0-9]){6,14}[0-9]$/;
 
-      if (e164.test(this.input) === false) {
+      if (!e164.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -1045,7 +1045,7 @@ const _classType = {
       // regex for string with no uppercase letters
       const lowercase = /^[^A-Z]*$/;
 
-      if (lowercase.test(this.input) === false) {
+      if (!lowercase.test(this.input)) {
         _err(
           this.input,
           this.type,
@@ -1328,7 +1328,7 @@ const _classType = {
         );
       }
 
-      if (this.input?.length >= inputValue === false) {
+      if (!(this.input?.length >= inputValue)) {
         _err(
           this.input?.length,
           this.type,
@@ -1356,7 +1356,7 @@ const _classType = {
         );
       }
 
-      if (this.input?.length <= inputValue === false) {
+      if (!(this.input?.length <= inputValue)) {
         _err(
           this.input?.length,
           this.type,
@@ -1384,7 +1384,7 @@ const _classType = {
         );
       }
 
-      if ((this.input?.length === inputValue) === false) {
+      if (!(this.input?.length === inputValue)) {
         _err(
           this.input?.length,
           this.type,
@@ -1591,7 +1591,7 @@ function _err(
   };
 
   // For ESTest
-  if (isUnSafe === false) {
+  if (!isUnSafe) {
     console.error(` 📝 Message: ${message}`);
 
     // production situation
