@@ -1635,7 +1635,6 @@ function _test(
 ) {
   // invalid type
   if (!_ALLOWED_TYPES.includes(type)) {
-    // is a valid message?
     if (typeof message !== "string") {
       _err(input, "undefined", message, isUnSafe, "_errLogArg3");
     }
@@ -1645,7 +1644,6 @@ function _test(
 
   // valid type
   else {
-    // is a valid number?
     if (
       _typeof(input) === "number" &&
       !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
@@ -1653,7 +1651,6 @@ function _test(
       _err(input, type, message, isUnSafe, "_errLogNumber");
     }
 
-    // is a valid message?
     if (typeof message !== "string") {
       _err(input, type, message, isUnSafe, "_errLogArg3");
     }
@@ -1661,7 +1658,7 @@ function _test(
     // "string?" case
     if (type.endsWith("?")) {
       // "number" !== "string?" case
-      if (input !== undefined && _typeof(input) !== type.slice(0, -1)) {
+      if (_typeof(input) !== type.slice(0, -1) && input !== undefined) {
         _err(input, type, message, isUnSafe, "_errLogArg1");
       }
 
@@ -1677,7 +1674,7 @@ function _test(
     }
   }
 
-  // return object for chain method. e.g., ESTest(1, 'number').max(10)
+  // Returns an object for method chaining. e.g., ESTest(1, 'number').min(0).max(10)
   return new _classType[type](input, type, message, isUnSafe);
 }
 
