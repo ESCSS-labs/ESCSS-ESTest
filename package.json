@@ -1,12 +1,14 @@
 {
   "name": "escss-estest",
   "version": "2.4.0",
-  "description": "A passive, non-intrusive JavaScript runtime validator for full function coverage.",
+  "description": "Non-intrusive JavaScript validator",
   "keywords": [
     "JavaScript",
-    "test",
-    "runtime-validation",
-    "zero-dependency"
+    "TypeScript",
+    "zero-dependency",
+    "schema-validation",
+    "zod",
+    "non-intrusive"
   ],
   "license": "(AGPL-3.0-only OR Commercial)",
   "author": "Mike Lee",
