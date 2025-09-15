@@ -925,6 +925,568 @@ describe("ESTest", () => {
         expect(information).toHaveBeenCalledTimes(2);
       });
     });
+
+    describe("schema", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        const arr_obj = [{
+          a: 1,
+          b: 1,
+
+          info: {
+            x: 1,
+            y: 1,
+
+          }
+        }]
+
+        const arr_arr = [{
+          a: 1,
+          b: 1,
+
+          info: [{
+            x: 1,
+            y: 1,
+
+          }]
+        }]
+
+        ESTest(arr_obj, 'array').schema({
+          a: 'number',
+          'b?': 'number',
+          'c?': 'number',
+          info: [{
+            x: 'number',
+            'y?': 'number',
+            'z?': 'number',
+          }]
+        })
+
+        ESTest(arr_arr, 'array').schema({
+          a: 'number',
+          'b?': 'number',
+          'c?': 'number',
+          info: {
+            x: 'number',
+            'y?': 'number',
+            'z?': 'number',
+          }
+        })
+
+
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+
+  ESTest([{
+    name: '1',
+    age: 1,
+    info: {}
+  }], 'array').schema({
+    name: 'string',
+    age: 'number',
+    info: {
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }
+  })
+
+
+
+  ESTest([{
+    name: 'string',
+    age: 1,
+    info: {
+      a: 1,
+      b: 1,
+      c: 1
+    }
+  }], 'array').schema({
+  })
+
+
+
+        ESTest(null, 'array').schema({
+          name: 'string',
+          age: 'number',
+          info: [{
+            a: 'number',
+            b: 'number',
+            c: 'number'
+          }]
+        })
+
+        ESTest([], 'array').schema({
+          name: 'string',
+          age: 'number',
+          info: [{
+            a: 'number',
+            b: 'number',
+            c: 'number'
+          }]
+        })
+
+        ESTest([null, 123], 'array').schema({
+          name: 'string',
+          age: 'number',
+          info: [{
+            a: 'number',
+            b: 'number',
+            c: 'number'
+          }]
+        })
+
+        ESTest([{
+          name: '1',
+          age: 1,
+          info: [{
+            a: true,
+            b: true,
+          }]
+        }], 'array').schema({
+          name: 'string',
+          age: 'number',
+          info: [{
+            a: 'number',
+            b: 'number',
+          }]
+        })
+
+        ESTest([{
+
+
+          info: [{
+            a: true,
+            b: 1,
+
+
+          }]
+        }], 'array').schema({
+
+          info: [{
+            'a?': 'number',
+            'b?': 'number',
+            'c?': 'number',
+          }]
+        })
+
+
+        ESTest([{
+          name: '1',
+          age: 1,
+          info: []
+        }], 'array').schema({
+          name: 'string',
+          age: 'number',
+          info: [{
+            a: 'number',
+            b: 'number',
+            c: 'number'
+          }]
+        })
+
+        ESTest([{
+          name: 'string',
+          age: 1,
+          info: [{
+            a: 1,
+            b: 1,
+            c: 1
+          }]
+        }], 'array').schema({})
+
+
+
+        ESTest({
+          name: '1',
+          age: 1,
+          info: [{
+            a: 1,
+            b: 1,
+            c: 1
+          }]
+        }, 'array').schema({
+          name: 'string',
+          age: 'number',
+          info: [{
+            a: 'number',
+            b: 'number',
+            c: 'number'
+          }]
+        })
+
+          ESTest(null, 'array').schema({
+    name: 'string',
+    age: 'number',
+    info: {
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }
+  })
+
+
+
+  ESTest([{
+    name: '1',
+    age: 1,
+    info: {
+      a: true,
+      b: true,
+
+    }
+  }], 'array').schema({
+    name: 'string',
+    age: 'number',
+    info: {
+      a: 'number',
+      b: 'number',
+    }
+  })
+
+
+
+  ESTest([{
+
+
+    info: {
+      a: true,
+      b: 1,
+
+
+    }
+  }], 'array').schema({
+
+    info: {
+      'a?': 'number',
+      'b?': 'number',
+      'c?': 'number',
+    }
+  })
+
+
+
+  ESTest([123, true], 'array').schema({
+    name: 'string',
+    age: 'number',
+    info: {
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }
+  })
+
+    ESTest(123, 'array').schema({
+      name: 'string',
+      age: 'number',
+      info: {
+        a: 'number',
+        b: 'number',
+        c: 'number'
+      }
+    })
+
+        expect(message).toHaveBeenCalledTimes(22);
+        expect(information).toHaveBeenCalledTimes(22);
+      });
+    });
+  });
+
+  describe("object", () => {
+    describe("schema", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+
+  ESTest({
+    name: '1',
+    age: 1,
+    info: [{
+      a: 1,
+      b: 1,
+      c: 1
+    }]
+  }, 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: [{
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }]
+  })
+
+
+  ESTest({
+    name: '1',
+    age: 1,
+    info: {
+      a: 1,
+      b: 1,
+      c: 1
+    }
+  }, 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: {
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }
+  })
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+  ESTest(null, 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: [{
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }]
+  })
+
+
+  ESTest({
+    name: '1',
+    age: 1,
+    info: [{
+      a: true,
+      b: true,
+    }]
+  }, 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: [{
+      a: 'number',
+      b: 'number',
+    }]
+  })
+
+
+
+  ESTest({
+
+
+    info: [{
+      a: true,
+      b: 1,
+
+
+    }]
+  }, 'object').schema({
+
+    info: [{
+      'a?': 'number',
+      'b?': 'number',
+      'c?': 'number',
+    }]
+  })
+
+
+
+
+  ESTest({
+    name: '1',
+    age: 1,
+    info: [{}]
+  }, 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: [{
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }]
+  })
+
+
+
+  ESTest({
+    name: '1',
+    age: 1,
+    info: []
+  }, 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: [{
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }]
+  })
+
+
+
+
+  ESTest( {
+    name: 'string',
+    age: 1,
+    info: [{
+      a: 1,
+      b: 1,
+      c: 1
+    }]
+  }, 'object').schema({})
+
+
+
+
+  ESTest([{
+    name: '1',
+    age: 1,
+    info: {
+      a: 1,
+      b: 1,
+      c: 1
+    }
+  }], 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: [{
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }]
+  })
+
+
+  ESTest(null, 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: {
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }
+  })
+
+
+
+  ESTest({
+    name: '1',
+    age: 1,
+    info: {
+      a: true,
+      b: true,
+
+    }
+  }, 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: {
+      a: 'number',
+      b: 'number',
+    }
+  })
+
+
+
+  ESTest({
+
+
+    info: {
+      a: true,
+      b: 1,
+
+
+    }
+  }, 'object').schema({
+
+    info: {
+      'a?': 'number',
+      'b?': 'number',
+      'c?': 'number',
+    }
+  })
+
+
+
+  ESTest({
+    name: '1',
+    age: 1,
+    info: {}
+  }, 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: {
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }
+  })
+
+
+
+  ESTest({
+    name: 'string',
+    age: 1,
+    info: {
+      a: 1,
+      b: 1,
+      c: 1
+    }
+  }, 'object').schema({
+  })
+
+
+
+
+  ESTest([{
+    name: '1',
+    age: 1,
+    info: {
+      a: 1,
+      b: 1,
+      c: 1
+    }
+  }], 'object').schema({
+    name: 'string',
+    age: 'number',
+    info: {
+      a: 'number',
+      b: 'number',
+      c: 'number'
+    }
+  })
+
+
+
+
+
+
+
+
+        expect(message).toHaveBeenCalledTimes(21);
+        expect(information).toHaveBeenCalledTimes(21);
+      });
+    });
+
   });
 
   describe("bigint", () => {
@@ -2164,6 +2726,668 @@ describe("unSafeESTest", () => {
         expect(() => unSafeESTest([1], "array?").min(10)).toThrowError();
         expect(() => unSafeESTest([1], "array").min(10)).toThrowError();
       });
+    });
+
+    describe("schema", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest(
+          [
+            {
+              a: 1,
+              b: 1,
+
+              info: {
+                x: 1,
+                y: 1,
+              },
+            },
+          ],
+          "array",
+        ).schema({
+          a: "number",
+          "b?": "number",
+          "c?": "number",
+          info: [
+            {
+              x: "number",
+              "y?": "number",
+              "z?": "number",
+            },
+          ],
+        });
+
+        unSafeESTest(
+          [
+            {
+              a: 1,
+              b: 1,
+
+              info: [
+                {
+                  x: 1,
+                  y: 1,
+                },
+              ],
+            },
+          ],
+          "array",
+        ).schema({
+          a: "number",
+          "b?": "number",
+          "c?": "number",
+          info: {
+            x: "number",
+            "y?": "number",
+            "z?": "number",
+          },
+        });
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                name: "1",
+                age: 1,
+                info: {},
+              },
+            ],
+            "array",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                name: "string",
+                age: 1,
+                info: {
+                  a: 1,
+                  b: 1,
+                  c: 1,
+                },
+              },
+            ],
+            "array",
+          ).schema({}),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(null, "array").schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+                c: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest([], "array").schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+                c: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest([null, 123], "array").schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+                c: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                name: "1",
+                age: 1,
+                info: [
+                  {
+                    a: true,
+                    b: true,
+                  },
+                ],
+              },
+            ],
+            "array",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                info: [
+                  {
+                    a: true,
+                    b: 1,
+                  },
+                ],
+              },
+            ],
+            "array",
+          ).schema({
+            info: [
+              {
+                "a?": "number",
+                "b?": "number",
+                "c?": "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                name: "1",
+                age: 1,
+                info: [],
+              },
+            ],
+            "array",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+                c: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                name: "string",
+                age: 1,
+                info: [
+                  {
+                    a: 1,
+                    b: 1,
+                    c: 1,
+                  },
+                ],
+              },
+            ],
+            "array",
+          ).schema({}),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            {
+              name: "1",
+              age: 1,
+              info: [
+                {
+                  a: 1,
+                  b: 1,
+                  c: 1,
+                },
+              ],
+            },
+            "array",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+                c: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(null, "array").schema({
+            name: "string",
+            age: "number",
+            info: {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                name: "1",
+                age: 1,
+                info: {
+                  a: true,
+                  b: true,
+                },
+              },
+            ],
+            "array",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: {
+              a: "number",
+              b: "number",
+            },
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                info: {
+                  a: true,
+                  b: 1,
+                },
+              },
+            ],
+            "array",
+          ).schema({
+            info: {
+              "a?": "number",
+              "b?": "number",
+              "c?": "number",
+            },
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest([123, true], "array").schema({
+            name: "string",
+            age: "number",
+            info: {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(123, "array").schema({
+            name: "string",
+            age: "number",
+            info: {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          }),
+        ).toThrowError();
+      });
+    });
+  });
+
+  describe("schema", () => {
+    test("success", () => {
+      const message = vi.spyOn(console, "error").mockImplementation(() => {});
+      const information = vi
+        .spyOn(console, "trace")
+        .mockImplementation(() => {});
+
+      unSafeESTest(
+        {
+          name: "1",
+          age: 1,
+          info: [
+            {
+              a: 1,
+              b: 1,
+              c: 1,
+            },
+          ],
+        },
+        "object",
+      ).schema({
+        name: "string",
+        age: "number",
+        info: [
+          {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        ],
+      });
+
+      unSafeESTest(
+        {
+          name: "1",
+          age: 1,
+          info: {
+            a: 1,
+            b: 1,
+            c: 1,
+          },
+        },
+        "object",
+      ).schema({
+        name: "string",
+        age: "number",
+        info: {
+          a: "number",
+          b: "number",
+          c: "number",
+        },
+      });
+
+      expect(message).toHaveBeenCalledTimes(0);
+      expect(information).toHaveBeenCalledTimes(0);
+    });
+
+    test("fail", () => {
+      expect(() =>
+        unSafeESTest(null, "object").schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          {
+            name: "1",
+            age: 1,
+            info: [
+              {
+                a: true,
+                b: true,
+              },
+            ],
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+            },
+          ],
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          {
+            info: [
+              {
+                a: true,
+                b: 1,
+              },
+            ],
+          },
+          "object",
+        ).schema({
+          info: [
+            {
+              "a?": "number",
+              "b?": "number",
+              "c?": "number",
+            },
+          ],
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          {
+            name: "1",
+            age: 1,
+            info: [{}],
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          {
+            name: "1",
+            age: 1,
+            info: [],
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          {
+            name: "string",
+            age: 1,
+            info: [
+              {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            ],
+          },
+          "object",
+        ).schema({}),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          [
+            {
+              name: "1",
+              age: 1,
+              info: {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            },
+          ],
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(null, "object").schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          {
+            name: "1",
+            age: 1,
+            info: {
+              a: true,
+              b: true,
+            },
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+          },
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          {
+            info: {
+              a: true,
+              b: 1,
+            },
+          },
+          "object",
+        ).schema({
+          info: {
+            "a?": "number",
+            "b?": "number",
+            "c?": "number",
+          },
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          {
+            name: "1",
+            age: 1,
+            info: {},
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        }),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          {
+            name: "string",
+            age: 1,
+            info: {
+              a: 1,
+              b: 1,
+              c: 1,
+            },
+          },
+          "object",
+        ).schema({}),
+      ).toThrowError();
+
+      expect(() =>
+        unSafeESTest(
+          [
+            {
+              name: "1",
+              age: 1,
+              info: {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            },
+          ],
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        }),
+      ).toThrowError();
     });
   });
 
