@@ -933,51 +933,55 @@ describe("ESTest", () => {
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
-        const arr_obj = [{
-          a: 1,
-          b: 1,
+        const arr_obj = [
+          {
+            a: 1,
+            b: 1,
 
+            info: {
+              x: 1,
+              y: 1,
+            },
+          },
+        ];
+
+        const arr_arr = [
+          {
+            a: 1,
+            b: 1,
+
+            info: [
+              {
+                x: 1,
+                y: 1,
+              },
+            ],
+          },
+        ];
+
+        ESTest(arr_obj, "array").schema({
+          a: "number",
+          "b?": "number",
+          "c?": "number",
+          info: [
+            {
+              x: "number",
+              "y?": "number",
+              "z?": "number",
+            },
+          ],
+        });
+
+        ESTest(arr_arr, "array").schema({
+          a: "number",
+          "b?": "number",
+          "c?": "number",
           info: {
-            x: 1,
-            y: 1,
-
-          }
-        }]
-
-        const arr_arr = [{
-          a: 1,
-          b: 1,
-
-          info: [{
-            x: 1,
-            y: 1,
-
-          }]
-        }]
-
-        ESTest(arr_obj, 'array').schema({
-          a: 'number',
-          'b?': 'number',
-          'c?': 'number',
-          info: [{
-            x: 'number',
-            'y?': 'number',
-            'z?': 'number',
-          }]
-        })
-
-        ESTest(arr_arr, 'array').schema({
-          a: 'number',
-          'b?': 'number',
-          'c?': 'number',
-          info: {
-            x: 'number',
-            'y?': 'number',
-            'z?': 'number',
-          }
-        })
-
-
+            x: "number",
+            "y?": "number",
+            "z?": "number",
+          },
+        });
 
         expect(message).toHaveBeenCalledTimes(0);
         expect(information).toHaveBeenCalledTimes(0);
@@ -989,215 +993,254 @@ describe("ESTest", () => {
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
+        ESTest(
+          [
+            {
+              name: "1",
+              age: 1,
+              info: {},
+            },
+          ],
+          "array",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        });
 
-  ESTest([{
-    name: '1',
-    age: 1,
-    info: {}
-  }], 'array').schema({
-    name: 'string',
-    age: 'number',
-    info: {
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }
-  })
+        ESTest(
+          [
+            {
+              name: "string",
+              age: 1,
+              info: {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            },
+          ],
+          "array",
+        ).schema({});
 
+        ESTest(null, "array").schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
+        ESTest([], "array").schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
-  ESTest([{
-    name: 'string',
-    age: 1,
-    info: {
-      a: 1,
-      b: 1,
-      c: 1
-    }
-  }], 'array').schema({
-  })
+        ESTest([null, 123], "array").schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
+        ESTest(
+          [
+            {
+              name: "1",
+              age: 1,
+              info: [
+                {
+                  a: true,
+                  b: true,
+                },
+              ],
+            },
+          ],
+          "array",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+            },
+          ],
+        });
 
+        ESTest(
+          [
+            {
+              info: [
+                {
+                  a: true,
+                  b: 1,
+                },
+              ],
+            },
+          ],
+          "array",
+        ).schema({
+          info: [
+            {
+              "a?": "number",
+              "b?": "number",
+              "c?": "number",
+            },
+          ],
+        });
 
-        ESTest(null, 'array').schema({
-          name: 'string',
-          age: 'number',
-          info: [{
-            a: 'number',
-            b: 'number',
-            c: 'number'
-          }]
-        })
+        ESTest(
+          [
+            {
+              name: "1",
+              age: 1,
+              info: [],
+            },
+          ],
+          "array",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
-        ESTest([], 'array').schema({
-          name: 'string',
-          age: 'number',
-          info: [{
-            a: 'number',
-            b: 'number',
-            c: 'number'
-          }]
-        })
+        ESTest(
+          [
+            {
+              name: "string",
+              age: 1,
+              info: [
+                {
+                  a: 1,
+                  b: 1,
+                  c: 1,
+                },
+              ],
+            },
+          ],
+          "array",
+        ).schema({});
 
-        ESTest([null, 123], 'array').schema({
-          name: 'string',
-          age: 'number',
-          info: [{
-            a: 'number',
-            b: 'number',
-            c: 'number'
-          }]
-        })
+        ESTest(
+          {
+            name: "1",
+            age: 1,
+            info: [
+              {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            ],
+          },
+          "array",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
-        ESTest([{
-          name: '1',
-          age: 1,
-          info: [{
-            a: true,
-            b: true,
-          }]
-        }], 'array').schema({
-          name: 'string',
-          age: 'number',
-          info: [{
-            a: 'number',
-            b: 'number',
-          }]
-        })
+        ESTest(null, "array").schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        });
 
-        ESTest([{
+        ESTest(
+          [
+            {
+              name: "1",
+              age: 1,
+              info: {
+                a: true,
+                b: true,
+              },
+            },
+          ],
+          "array",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+          },
+        });
 
+        ESTest(
+          [
+            {
+              info: {
+                a: true,
+                b: 1,
+              },
+            },
+          ],
+          "array",
+        ).schema({
+          info: {
+            "a?": "number",
+            "b?": "number",
+            "c?": "number",
+          },
+        });
 
-          info: [{
-            a: true,
-            b: 1,
+        ESTest([123, true], "array").schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        });
 
-
-          }]
-        }], 'array').schema({
-
-          info: [{
-            'a?': 'number',
-            'b?': 'number',
-            'c?': 'number',
-          }]
-        })
-
-
-        ESTest([{
-          name: '1',
-          age: 1,
-          info: []
-        }], 'array').schema({
-          name: 'string',
-          age: 'number',
-          info: [{
-            a: 'number',
-            b: 'number',
-            c: 'number'
-          }]
-        })
-
-        ESTest([{
-          name: 'string',
-          age: 1,
-          info: [{
-            a: 1,
-            b: 1,
-            c: 1
-          }]
-        }], 'array').schema({})
-
-
-
-        ESTest({
-          name: '1',
-          age: 1,
-          info: [{
-            a: 1,
-            b: 1,
-            c: 1
-          }]
-        }, 'array').schema({
-          name: 'string',
-          age: 'number',
-          info: [{
-            a: 'number',
-            b: 'number',
-            c: 'number'
-          }]
-        })
-
-          ESTest(null, 'array').schema({
-    name: 'string',
-    age: 'number',
-    info: {
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }
-  })
-
-
-
-  ESTest([{
-    name: '1',
-    age: 1,
-    info: {
-      a: true,
-      b: true,
-
-    }
-  }], 'array').schema({
-    name: 'string',
-    age: 'number',
-    info: {
-      a: 'number',
-      b: 'number',
-    }
-  })
-
-
-
-  ESTest([{
-
-
-    info: {
-      a: true,
-      b: 1,
-
-
-    }
-  }], 'array').schema({
-
-    info: {
-      'a?': 'number',
-      'b?': 'number',
-      'c?': 'number',
-    }
-  })
-
-
-
-  ESTest([123, true], 'array').schema({
-    name: 'string',
-    age: 'number',
-    info: {
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }
-  })
-
-    ESTest(123, 'array').schema({
-      name: 'string',
-      age: 'number',
-      info: {
-        a: 'number',
-        b: 'number',
-        c: 'number'
-      }
-    })
+        ESTest(123, "array").schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        });
 
         expect(message).toHaveBeenCalledTimes(22);
         expect(information).toHaveBeenCalledTimes(22);
@@ -1213,43 +1256,51 @@ describe("ESTest", () => {
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
+        ESTest(
+          {
+            name: "1",
+            age: 1,
+            info: [
+              {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            ],
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
-  ESTest({
-    name: '1',
-    age: 1,
-    info: [{
-      a: 1,
-      b: 1,
-      c: 1
-    }]
-  }, 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: [{
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }]
-  })
-
-
-  ESTest({
-    name: '1',
-    age: 1,
-    info: {
-      a: 1,
-      b: 1,
-      c: 1
-    }
-  }, 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: {
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }
-  })
+        ESTest(
+          {
+            name: "1",
+            age: 1,
+            info: {
+              a: 1,
+              b: 1,
+              c: 1,
+            },
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        });
 
         expect(message).toHaveBeenCalledTimes(0);
         expect(information).toHaveBeenCalledTimes(0);
@@ -1261,232 +1312,241 @@ describe("ESTest", () => {
           .spyOn(console, "trace")
           .mockImplementation(() => {});
 
-  ESTest(null, 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: [{
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }]
-  })
+        ESTest(null, "object").schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
+        ESTest(
+          {
+            name: "1",
+            age: 1,
+            info: [
+              {
+                a: true,
+                b: true,
+              },
+            ],
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+            },
+          ],
+        });
 
-  ESTest({
-    name: '1',
-    age: 1,
-    info: [{
-      a: true,
-      b: true,
-    }]
-  }, 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: [{
-      a: 'number',
-      b: 'number',
-    }]
-  })
+        ESTest(
+          {
+            info: [
+              {
+                a: true,
+                b: 1,
+              },
+            ],
+          },
+          "object",
+        ).schema({
+          info: [
+            {
+              "a?": "number",
+              "b?": "number",
+              "c?": "number",
+            },
+          ],
+        });
 
+        ESTest(
+          {
+            name: "1",
+            age: 1,
+            info: [{}],
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
+        ESTest(
+          {
+            name: "1",
+            age: 1,
+            info: [],
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
-  ESTest({
+        ESTest(
+          {
+            name: "string",
+            age: 1,
+            info: [
+              {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            ],
+          },
+          "object",
+        ).schema({});
 
+        ESTest(
+          [
+            {
+              name: "1",
+              age: 1,
+              info: {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            },
+          ],
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: [
+            {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
 
-    info: [{
-      a: true,
-      b: 1,
+        ESTest(null, "object").schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        });
 
+        ESTest(
+          {
+            name: "1",
+            age: 1,
+            info: {
+              a: true,
+              b: true,
+            },
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+          },
+        });
 
-    }]
-  }, 'object').schema({
+        ESTest(
+          {
+            info: {
+              a: true,
+              b: 1,
+            },
+          },
+          "object",
+        ).schema({
+          info: {
+            "a?": "number",
+            "b?": "number",
+            "c?": "number",
+          },
+        });
 
-    info: [{
-      'a?': 'number',
-      'b?': 'number',
-      'c?': 'number',
-    }]
-  })
+        ESTest(
+          {
+            name: "1",
+            age: 1,
+            info: {},
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        });
 
+        ESTest(
+          {
+            name: "string",
+            age: 1,
+            info: {
+              a: 1,
+              b: 1,
+              c: 1,
+            },
+          },
+          "object",
+        ).schema({});
 
-
-
-  ESTest({
-    name: '1',
-    age: 1,
-    info: [{}]
-  }, 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: [{
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }]
-  })
-
-
-
-  ESTest({
-    name: '1',
-    age: 1,
-    info: []
-  }, 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: [{
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }]
-  })
-
-
-
-
-  ESTest( {
-    name: 'string',
-    age: 1,
-    info: [{
-      a: 1,
-      b: 1,
-      c: 1
-    }]
-  }, 'object').schema({})
-
-
-
-
-  ESTest([{
-    name: '1',
-    age: 1,
-    info: {
-      a: 1,
-      b: 1,
-      c: 1
-    }
-  }], 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: [{
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }]
-  })
-
-
-  ESTest(null, 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: {
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }
-  })
-
-
-
-  ESTest({
-    name: '1',
-    age: 1,
-    info: {
-      a: true,
-      b: true,
-
-    }
-  }, 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: {
-      a: 'number',
-      b: 'number',
-    }
-  })
-
-
-
-  ESTest({
-
-
-    info: {
-      a: true,
-      b: 1,
-
-
-    }
-  }, 'object').schema({
-
-    info: {
-      'a?': 'number',
-      'b?': 'number',
-      'c?': 'number',
-    }
-  })
-
-
-
-  ESTest({
-    name: '1',
-    age: 1,
-    info: {}
-  }, 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: {
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }
-  })
-
-
-
-  ESTest({
-    name: 'string',
-    age: 1,
-    info: {
-      a: 1,
-      b: 1,
-      c: 1
-    }
-  }, 'object').schema({
-  })
-
-
-
-
-  ESTest([{
-    name: '1',
-    age: 1,
-    info: {
-      a: 1,
-      b: 1,
-      c: 1
-    }
-  }], 'object').schema({
-    name: 'string',
-    age: 'number',
-    info: {
-      a: 'number',
-      b: 'number',
-      c: 'number'
-    }
-  })
-
-
-
-
-
-
-
+        ESTest(
+          [
+            {
+              name: "1",
+              age: 1,
+              info: {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            },
+          ],
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
+            a: "number",
+            b: "number",
+            c: "number",
+          },
+        });
 
         expect(message).toHaveBeenCalledTimes(21);
         expect(information).toHaveBeenCalledTimes(21);
       });
     });
-
   });
 
   describe("bigint", () => {

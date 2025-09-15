@@ -25,7 +25,7 @@ declare type _ALLOWED_TYPES__SCHEMA =
   | "symbol"
   | "function"
   | "array"
-  | "date"
+  | "date";
 
 declare type _Chain<T extends _ALLOWED_TYPES> = T extends "undefined"
   ? _Undefined
@@ -295,7 +295,7 @@ declare interface _Object extends _Common<"object"> {
   /**
    * @example
    * Note: schema() only accepts 'object'.
-   * 
+   *
    * ESTest(data, 'object', 'custom error msg').schema({
    *   name: 'string',
    *   'msg?': 'string',
@@ -304,7 +304,7 @@ declare interface _Object extends _Common<"object"> {
    *     'b?': 'number',
    *   }
    * })
-   * 
+   *
    * ESTest(data, 'object', 'custom error msg').schema({
    *   name: 'string',
    *   'msg?': 'string',
@@ -314,7 +314,9 @@ declare interface _Object extends _Common<"object"> {
    *   }]
    * })
    */
-  schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(key: T): _Chain<"object">;
+  schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(
+    key: T,
+  ): _Chain<"object">;
 }
 
 declare interface _Array extends _Common<"array"> {
@@ -342,7 +344,7 @@ declare interface _Array extends _Common<"array"> {
   /**
    * @example
    * Note: schema() only accepts 'object'.
-   * 
+   *
    * ESTest(data, 'array', 'custom error msg').schema({
    *   name: 'string',
    *   'msg?': 'string',
@@ -351,7 +353,7 @@ declare interface _Array extends _Common<"array"> {
    *     'b?': 'number',
    *   }
    * })
-   * 
+   *
    * ESTest(data, 'array', 'custom error msg').schema({
    *   name: 'string',
    *   'msg?': 'string',
@@ -361,7 +363,9 @@ declare interface _Array extends _Common<"array"> {
    *   }]
    * })
    */
-  schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(key: T): _Chain<"array">;
+  schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(
+    key: T,
+  ): _Chain<"array">;
 }
 
 /**

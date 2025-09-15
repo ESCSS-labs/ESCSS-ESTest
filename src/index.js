@@ -1079,8 +1079,8 @@ const _chain = {
     }
 
     // same as array
-    #validate(data, schema, path = '<data>') {
-      if (!(_typeof(data) === 'object' || _typeof(data) === 'array')) {
+    #validate(data, schema, path = "<data>") {
+      if (!(_typeof(data) === "object" || _typeof(data) === "array")) {
         return _err(
           this.input,
           this.type,
@@ -1090,11 +1090,11 @@ const _chain = {
         );
       }
 
-      const newData = _typeof(data) === 'array'? data[0]: data
-      const newSchema = _typeof(schema) === 'array'? schema[0]: schema
-      const newPath = _typeof(data) === 'array'? `${path}[0]`: `${path}`
+      const newData = _typeof(data) === "array" ? data[0] : data;
+      const newSchema = _typeof(schema) === "array" ? schema[0] : schema;
+      const newPath = _typeof(data) === "array" ? `${path}[0]` : `${path}`;
 
-      if (_typeof(data) === 'object') {
+      if (_typeof(data) === "object") {
         if (Object.keys(newSchema).length < Object.keys(newData).length) {
           return _err(
             this.input,
@@ -1104,11 +1104,12 @@ const _chain = {
             "_errLogKeyLess",
           );
         }
-      }
-
-      else if (_typeof(data) === 'array') {
+      } else if (_typeof(data) === "array") {
         // [{...}, {...}]
-        if (typeof data[0] === 'object' && typeof data[data.length - 1] === 'object') {
+        if (
+          typeof data[0] === "object" &&
+          typeof data[data.length - 1] === "object"
+        ) {
           if (Object.keys(newSchema).length < Object.keys(newData).length) {
             return _err(
               this.input,
@@ -1128,20 +1129,24 @@ const _chain = {
             this.message,
             this.isUnSafe,
             "_errLogSchemaMismatch",
-            path
+            path,
           );
         }
       }
 
-      Object.keys(newSchema).forEach(key => {
-        const dataKey = key.endsWith('?') ? newData[key.slice(0, -1)] : newData[key]
-        const schemaKey = newSchema[key]
-        const pathOptional = key.endsWith('?') ? `${newPath}.${key.slice(0, -1)}` : `${newPath}.${key}`
+      Object.keys(newSchema).forEach((key) => {
+        const dataKey = key.endsWith("?")
+          ? newData[key.slice(0, -1)]
+          : newData[key];
+        const schemaKey = newSchema[key];
+        const pathOptional = key.endsWith("?")
+          ? `${newPath}.${key.slice(0, -1)}`
+          : `${newPath}.${key}`;
 
         if (dataKey === undefined) {
           // 'name?' - no check
-          if (key.endsWith('?')) return 
-          
+          if (key.endsWith("?")) return;
+
           // 'name' - property missing
           return _err(
             this.input,
@@ -1149,16 +1154,26 @@ const _chain = {
             this.message,
             this.isUnSafe,
             "_errLogPropertyMissing",
-            pathOptional
+            pathOptional,
           );
-        } 
-
-        // schema key is {...} or [{...}, {...}] 
-        else if (['object', 'array'].includes(_typeof(schemaKey))) {
-          return this.#validate(dataKey, schemaKey, pathOptional)
         }
 
-        else if (["null", "boolean", "number", "bigint", "string", "symbol", "function", "array", "date"].includes(schemaKey)) {
+        // schema key is {...} or [{...}, {...}]
+        else if (["object", "array"].includes(_typeof(schemaKey))) {
+          return this.#validate(dataKey, schemaKey, pathOptional);
+        } else if (
+          [
+            "null",
+            "boolean",
+            "number",
+            "bigint",
+            "string",
+            "symbol",
+            "function",
+            "array",
+            "date",
+          ].includes(schemaKey)
+        ) {
           if (_typeof(dataKey) !== schemaKey) {
             return _err(
               this.input,
@@ -1168,17 +1183,17 @@ const _chain = {
               "_errLogTypeMismatch",
               pathOptional,
               _typeof(dataKey),
-              schemaKey
+              schemaKey,
             );
           }
-        } 
-      })
+        }
+      });
     }
 
     schema(schema) {
       globalThis.__ESCSS_ESTEST__.analysis._Object.schema += 1;
-      this.#validate(this.input, schema)
-      return this
+      this.#validate(this.input, schema);
+      return this;
     }
   },
   array: class _Array extends _Common {
@@ -1186,10 +1201,10 @@ const _chain = {
       super(...args);
       globalThis.__ESCSS_ESTEST__.analysis._Array._count += 1;
     }
-    
+
     // same as object
-    #validate(data, schema, path = '<data>') {
-      if (!(_typeof(data) === 'object' || _typeof(data) === 'array')) {
+    #validate(data, schema, path = "<data>") {
+      if (!(_typeof(data) === "object" || _typeof(data) === "array")) {
         return _err(
           this.input,
           this.type,
@@ -1199,11 +1214,11 @@ const _chain = {
         );
       }
 
-      const newData = _typeof(data) === 'array'? data[0]: data
-      const newSchema = _typeof(schema) === 'array'? schema[0]: schema
-      const newPath = _typeof(data) === 'array'? `${path}[0]`: `${path}`
+      const newData = _typeof(data) === "array" ? data[0] : data;
+      const newSchema = _typeof(schema) === "array" ? schema[0] : schema;
+      const newPath = _typeof(data) === "array" ? `${path}[0]` : `${path}`;
 
-      if (_typeof(data) === 'object') {
+      if (_typeof(data) === "object") {
         if (Object.keys(newSchema).length < Object.keys(newData).length) {
           return _err(
             this.input,
@@ -1213,11 +1228,12 @@ const _chain = {
             "_errLogKeyLess",
           );
         }
-      }
-
-      else if (_typeof(data) === 'array') {
+      } else if (_typeof(data) === "array") {
         // [{...}, {...}]
-        if (typeof data[0] === 'object' && typeof data[data.length - 1] === 'object') {
+        if (
+          typeof data[0] === "object" &&
+          typeof data[data.length - 1] === "object"
+        ) {
           if (Object.keys(newSchema).length < Object.keys(newData).length) {
             return _err(
               this.input,
@@ -1237,20 +1253,24 @@ const _chain = {
             this.message,
             this.isUnSafe,
             "_errLogSchemaMismatch",
-            path
+            path,
           );
         }
       }
 
-      Object.keys(newSchema).forEach(key => {
-        const dataKey = key.endsWith('?') ? newData[key.slice(0, -1)] : newData[key]
-        const schemaKey = newSchema[key]
-        const pathOptional = key.endsWith('?') ? `${newPath}.${key.slice(0, -1)}` : `${newPath}.${key}`
+      Object.keys(newSchema).forEach((key) => {
+        const dataKey = key.endsWith("?")
+          ? newData[key.slice(0, -1)]
+          : newData[key];
+        const schemaKey = newSchema[key];
+        const pathOptional = key.endsWith("?")
+          ? `${newPath}.${key.slice(0, -1)}`
+          : `${newPath}.${key}`;
 
         if (dataKey === undefined) {
           // 'name?' - no check
-          if (key.endsWith('?')) return 
-          
+          if (key.endsWith("?")) return;
+
           // 'name' - property missing
           return _err(
             this.input,
@@ -1258,16 +1278,26 @@ const _chain = {
             this.message,
             this.isUnSafe,
             "_errLogPropertyMissing",
-            pathOptional
+            pathOptional,
           );
-        } 
-
-        // schema key is {...} or [{...}, {...}] 
-        else if (['object', 'array'].includes(_typeof(schemaKey))) {
-          return this.#validate(dataKey, schemaKey, pathOptional)
         }
 
-        else if (["null", "boolean", "number", "bigint", "string", "symbol", "function", "array", "date"].includes(schemaKey)) {
+        // schema key is {...} or [{...}, {...}]
+        else if (["object", "array"].includes(_typeof(schemaKey))) {
+          return this.#validate(dataKey, schemaKey, pathOptional);
+        } else if (
+          [
+            "null",
+            "boolean",
+            "number",
+            "bigint",
+            "string",
+            "symbol",
+            "function",
+            "array",
+            "date",
+          ].includes(schemaKey)
+        ) {
           if (_typeof(dataKey) !== schemaKey) {
             return _err(
               this.input,
@@ -1277,12 +1307,11 @@ const _chain = {
               "_errLogTypeMismatch",
               pathOptional,
               _typeof(dataKey),
-              schemaKey
+              schemaKey,
             );
           }
-        }   
-
-      })
+        }
+      });
     }
 
     min(inputValue) {
@@ -1371,8 +1400,8 @@ const _chain = {
 
     schema(schema) {
       globalThis.__ESCSS_ESTEST__.analysis._Array.schema += 1;
-      this.#validate(this.input, schema)
-      return this
+      this.#validate(this.input, schema);
+      return this;
     }
   },
 };
@@ -1516,9 +1545,7 @@ function _err(
         input,
       ),
     _errLogOnlyObjArr: (logType) =>
-      console[logType](
-        ` \n 🥲 <data> only "object" or "array".`,
-      ),
+      console[logType](` \n 🥲 <data> only "object" or "array".`),
     _errLogKeyLess: (logType) =>
       console[logType](
         ` \n 🥲 <schemaKey> less than <dataKey>, can not be validated.`,
@@ -1555,7 +1582,7 @@ function _err(
     _errLogInteger: `[unSafeESTest(input).integer()] Expected: input is an integer`,
     _errLogPositive: `[unSafeESTest(input).integer()] Expected: input is a positive number/bigint`,
     _errLogNegative: `[unSafeESTest(input).integer()] Expected: input is a negative number/bigint`,
-    
+
     _errLogOnlyObjArr: `[unSafeESTest(input).schema()] <data> only "object" or "array".`,
     _errLogKeyLess: `[unSafeESTest(input).schema()] <schemaKey> less than <dataKey>, can not be validated.`,
     _errLogSchemaMismatch: `[unSafeESTest(input).schema()] schema mismatch.`,
@@ -1654,7 +1681,7 @@ function _test(
       }
     }
   }
-  
+
   // Happy path (return an object for chaining methods) e.g., ESTest(1, 'number').max(10)
   return new _chain[type](input, type, message, isUnSafe);
 }

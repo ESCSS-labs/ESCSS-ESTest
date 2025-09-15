@@ -89,9 +89,9 @@ async function getApi() {
   const data = await apiData.json();
 
   // const data = {
-  //   userId: 1, 
-  //   id: 1, 
-  //   title: "delectus aut autem", 
+  //   userId: 1,
+  //   id: 1,
+  //   title: "delectus aut autem",
   //   completed: false
   // }
 
@@ -105,7 +105,7 @@ async function getApi() {
   return data;
 }
 
-getApi()
+getApi();
 ```
 
 ### `unSafeESTest(input, type = "null", message = globalThis.__ESCSS_ESTEST__.message)`
@@ -216,7 +216,9 @@ function sum(a, b) {
 <img width="800" alt="analysis" src="https://github.com/user-attachments/assets/85166a84-14e8-4e37-98b4-06ad9f62331b" />
 
 ### Thanks
+
 This project is heavily inspired by the following:
+
 - [Zod](https://zod.dev/)
 - [Joi](https://joi.dev/)
 - [ilyaliao](https://github.com/ilyaliao)
