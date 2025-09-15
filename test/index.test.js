@@ -926,6 +926,34 @@ describe("ESTest", () => {
       });
     });
 
+    describe("length", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest([1], "array?").length(1);
+        ESTest([1], "array").length(1);
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        ESTest([1], "array?").length(3);
+        ESTest([1], "array").length(3);
+
+        expect(message).toHaveBeenCalledTimes(2);
+        expect(information).toHaveBeenCalledTimes(2);
+      });
+    });
+
     describe("schema", () => {
       test("success", () => {
         const message = vi.spyOn(console, "error").mockImplementation(() => {});
@@ -2785,6 +2813,26 @@ describe("unSafeESTest", () => {
       test("fail", () => {
         expect(() => unSafeESTest([1], "array?").min(10)).toThrowError();
         expect(() => unSafeESTest([1], "array").min(10)).toThrowError();
+      });
+    });
+
+    describe("length", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        unSafeESTest([1], "array?").length(1);
+        unSafeESTest([1], "array").length(1);
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        expect(() => unSafeESTest([1], "array?").length(3)).toThrowError();
+        expect(() => unSafeESTest([1], "array").length(3)).toThrowError();
       });
     });
 
