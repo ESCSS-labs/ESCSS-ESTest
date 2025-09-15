@@ -389,10 +389,9 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
 ): _ClassType<T>;
 
 /**
- * Get clear, actionable bug reports (for library authors/maintainers).
  * @example
  *
- * // Encapsulate ESTestForLibrary to provide your library's own default message
+ * // provide default error message for library
  * function ESTest(input, type, message = "[libraryName] your message for others to help debugging") {
  *  return ESTestForLibrary(input, type, message)
  * }
@@ -414,9 +413,7 @@ declare global {
     information: string;
 
     /**
-     * Captures internal bug reports (for company teams)
      * @example
-     * // Set in the entry point, e.g., main.js, App.vue, or App.jsx...
      * globalThis.__ESCSS_ESTEST__.message = "Please report this issue to ...";
      *
      * @see https://github.com/ESCSS-labs/ESCSS-ESTest
@@ -424,11 +421,10 @@ declare global {
     message: string;
 
     /**
-     *  Why have this feature?
-     *  - Avoids vendor lock-in for long-term project flexibility.
-     *  - Optimizes production performance by enabling in dev and disabling in prod.
+     *  - true: Enables a high-performance mode for production use.
+     *  - false (default): Logs detailed errors for debugging.
      *
-     * *Note: unSafeESTest will not be affected (for security reasons)*
+     * *Note: unSafeESTest() will not be affected (for security reasons)*
      *
      * @see https://github.com/ESCSS-labs/ESCSS-ESTest
      */
