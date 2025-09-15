@@ -2,7 +2,7 @@
 
 # Why ESCSS-ESTest?
 
-Just a guy who wants to survive in a **massive**, **legacy** JavaScript/TypeScript codebase.
+Just for a guy who wants to survive in a **massive**, **legacy** JavaScript/TypeScript codebase.
 
 ## Features
 
