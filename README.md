@@ -148,20 +148,20 @@ app.listen(port, () => {
 });
 ```
 
-### `createESTest(input, type, message)`
+### `ESTestForLibrary(input, type, message)`
 
 - Get clear, actionable `bug reports` (for library authors/maintainers).
 
 ```js
-import { createESTest } from "escss-estest";
+import { ESTestForLibrary } from "escss-estest";
 
-// Encapsulate createESTest to provide your library's own default message
+// Encapsulate ESTestForLibrary to provide your library's own default message
 function ESTest(
   input,
   type,
   message = "[libraryName] your message for others to help debugging",
 ) {
-  return createESTest(input, type, message);
+  return ESTestForLibrary(input, type, message);
 }
 ```
 

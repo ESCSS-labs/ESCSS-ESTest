@@ -1705,7 +1705,7 @@ function unSafeESTest(input, type, message) {
   return _test(input, type, message, true);
 }
 
-function createESTest(input, type, message) {
+function ESTestForLibrary(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
     // To prevent the app from breaking when set to true
     return new _classType.undefined();
@@ -1718,4 +1718,4 @@ function createESTest(input, type, message) {
   return _test(input, type, message, false);
 }
 
-export { ESTest, unSafeESTest, createESTest };
+export { ESTest, unSafeESTest, ESTestForLibrary };

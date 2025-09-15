@@ -392,14 +392,14 @@ export declare function unSafeESTest<T extends _ALLOWED_TYPES>(
  * Get clear, actionable bug reports (for library authors/maintainers).
  * @example
  *
- * // Encapsulate createESTest to provide your library's own default message
+ * // Encapsulate ESTestForLibrary to provide your library's own default message
  * function ESTest(input, type, message = "[libraryName] your message for others to help debugging") {
- *  return createESTest(input, type, message)
+ *  return ESTestForLibrary(input, type, message)
  * }
  *
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
  */
-export declare function createESTest<T extends _ALLOWED_TYPES>(
+export declare function ESTestForLibrary<T extends _ALLOWED_TYPES>(
   input: unknown,
   type: T,
   message?: string,
