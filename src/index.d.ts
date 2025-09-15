@@ -27,6 +27,11 @@ declare type _ALLOWED_TYPES__SCHEMA =
   | "array"
   | "date";
 
+declare type _SCHEMA_DEFINITION =
+  | _ALLOWED_TYPES__SCHEMA
+  | { [key: string]: _SCHEMA_DEFINITION | _SCHEMA_DEFINITION[] }
+  | _SCHEMA_DEFINITION[];
+
 declare type _ClassType<T extends _ALLOWED_TYPES> = T extends "undefined"
   ? _Undefined
   : T extends "null"
@@ -314,9 +319,7 @@ declare interface _Object extends _Common<"object"> {
    *   }]
    * })
    */
-  schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(
-    key: T,
-  ): _ClassType<"object">;
+  schema(T: { [key: string]: _SCHEMA_DEFINITION }): _ClassType<"object">;
 }
 
 declare interface _Array extends _Common<"array"> {
@@ -363,10 +366,10 @@ declare interface _Array extends _Common<"array"> {
    *   }]
    * })
    */
-  schema<T extends Record<string, _ALLOWED_TYPES__SCHEMA>>(
-    key: T,
-  ): _ClassType<"array">;
+  schema(T: { [key: string]: _SCHEMA_DEFINITION }): _ClassType<"array">;
 }
+
+declare interface _Array extends _Common<"array"> {}
 
 /**
  * Non-breaking error logging via console.error(...)
