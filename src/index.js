@@ -1467,7 +1467,7 @@ function _err(
 ) {
   // bigint in Template strings will be changed: `1n` -> `1`, so add "n" back
   const isBigint =
-    typeof inputValue === "bigint" ? inputValue + "n" : inputValue;
+    typeof inputValue === "bigint" ? `${inputValue}n` : inputValue;
 
   const _ESTestLog = {
     _errLogHiddenInfo: (logType) =>
