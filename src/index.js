@@ -1261,9 +1261,7 @@ function _err(
 
   const _ESTestLog = {
     _errLogHiddenInfo: (logType) =>
-      console[logType](
-        ` 🚫 Details not allowed. Check dev mode.`,
-      ),
+      console[logType](` 🚫 Details not allowed. Check dev mode.`),
 
     _errLogArg1: (logType) =>
       console[logType](
@@ -1335,22 +1333,20 @@ function _err(
         input,
       ),
     _errLogOnlyObjArr: (logType) =>
-      console[logType](`🥲 <input> only "object" or "array".`),
+      console[logType](`🥲 <input> ONLY "object" or "array".`),
     _errLogKeyLess: (logType) =>
       console[logType](
         `🥲 Cannot be validated. <schemaKey> less than <inputKey>.`,
       ),
     _errLogSchemaMismatch: (logType) =>
       console[logType](
-        `🥲 [${inputValue}]: Schema mismatch. Should be [{...}, {...}].`,
+        `🥲 ${inputValue} -> schema mismatch. Should be [{...}, {...}].`,
       ),
     _errLogPropertyMissing: (logType) =>
-      console[logType](
-        `🥲 [${inputValue}]: Property is missing. But required.`,
-      ),
+      console[logType](`🥲 ${inputValue}: value is missing. But required.`),
     _errLogTypeMismatch: (logType) =>
       console[logType](
-        `🥲 [${inputValue}]: Type '${_typeof(inputValue2)}' is not assignable to type '${inputValue3}'.`,
+        `🥲 ${inputValue} -> type '${_typeof(inputValue2)}' is not assignable to type '${inputValue3}'.`,
       ),
   };
 
@@ -1373,10 +1369,10 @@ function _err(
     _errLogPositive: `[unSafeESTest(input).integer()] Expected: input is a positive number/bigint`,
     _errLogNegative: `[unSafeESTest(input).integer()] Expected: input is a negative number/bigint`,
 
-    _errLogOnlyObjArr: `[unSafeESTest(input).schema()] <input> only "object" or "array".`,
-    _errLogKeyLess: `[unSafeESTest(input).schema()] <schemaKey> less than <inputKey>, can not be validated.`,
+    _errLogOnlyObjArr: `[unSafeESTest(input).schema()] <input> ONLY "object" or "array".`,
+    _errLogKeyLess: `[unSafeESTest(input).schema()] Cannot be validated. <schemaKey> less than <inputKey>.`,
     _errLogSchemaMismatch: `[unSafeESTest(input).schema()] schema mismatch.`,
-    _errLogPropertyMissing: `[unSafeESTest(input).schema()] Property is missing, but required.`,
+    _errLogPropertyMissing: `[unSafeESTest(input).schema()] value is missing. But required`,
     _errLogTypeMismatch: `[unSafeESTest(input).schema()] type mismatch`,
   };
 
