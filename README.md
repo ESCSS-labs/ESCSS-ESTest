@@ -6,7 +6,7 @@ Just for a guy who wants to survive in a **massive**, **legacy** JavaScript/Type
 
 ## Features
 
-- 💪 JavaScript version of TypeScript + Zod: Ditch any & complexity.
+- 💪 JavaScript version of TypeScript + Zod: Ditch `any` & complexity.
 - 💣 No vender lock-in.
 - 🐛 Find bug quickly.
 - ❤️‍🔥 DX first, DX first, DX first and security!
@@ -155,7 +155,7 @@ app.post("/demo", (req, res) => {
 
     {
       // validate schema
-      ESTest(data, "object", "schema mismatch").schema({
+      unSafeESTest(data, "object", "schema mismatch").schema({
         id: "number",
         "name?": "string",
         info: {
