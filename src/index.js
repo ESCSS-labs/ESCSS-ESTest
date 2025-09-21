@@ -1417,7 +1417,6 @@ function _validate(schema, path, input, type, message, isUnSafe) {
   const newSchema = _typeof(schema) === "array" ? schema[0] : schema;
   const newPath = _typeof(input) === "array" ? `${path}[0]` : `${path}`;
 
-  // Edge Case: not [{...}, {...}] situation, like [1, 'hi']
   if (
     _typeof(input) === "array" &&
     _typeof(input.at(0)) !== "object" &&
@@ -1450,8 +1449,8 @@ function _validate(schema, path, input, type, message, isUnSafe) {
       );
     }
 
-    // schema key is {...} or [{...}, {...}]
-    else if (["object", "array"].includes(_typeof(schemaValue))) {
+    // recursion
+    if (_typeof(schemaValue) === "array" || _typeof(schemaValue) === "object") {
       return _validate(
         schemaValue,
         pathOptional,
@@ -1460,31 +1459,19 @@ function _validate(schema, path, input, type, message, isUnSafe) {
         message,
         isUnSafe,
       );
-    } else if (
-      [
-        "null",
-        "boolean",
-        "number",
-        "bigint",
-        "string",
-        "symbol",
-        "function",
-        "array",
-        "date",
-      ].includes(schemaValue)
-    ) {
-      if (_typeof(inputValue) !== schemaValue) {
-        return _err(
-          input,
-          type,
-          message,
-          isUnSafe,
-          "_errLogTypeMismatch",
-          pathOptional,
-          _typeof(inputValue),
-          schemaValue,
-        );
-      }
+    }
+
+    if (_typeof(inputValue) !== schemaValue) {
+      return _err(
+        input,
+        type,
+        message,
+        isUnSafe,
+        "_errLogTypeMismatch",
+        pathOptional,
+        _typeof(inputValue),
+        schemaValue,
+      );
     }
   });
 }
