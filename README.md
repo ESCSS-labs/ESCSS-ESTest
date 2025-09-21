@@ -38,7 +38,6 @@ Just for a guy who wants to survive in a **massive**, **legacy** JavaScript/Type
   - [ESTestForLibrary](#estestforlibraryinput-any-type-string-message-string)
     - Usage is exactly the same as ESTest
 - [Helper API](#helper-api)
-  - [globalThis.\_\_ESCSS_ESTEST\_\_.information](#globalthis__escss_estest__information)
   - [globalThis.\_\_ESCSS_ESTEST\_\_.message](#globalthis__escss_estest__message)
   - [globalThis.\_\_ESCSS_ESTEST\_\_.isESTestDisabled](#globalthis__escss_estest__isestestdisabled)
   - [globalThis.\_\_ESCSS_ESTEST\_\_.analysis](#globalthis__escss_estest__analysis)
@@ -202,12 +201,6 @@ function ESTest(
 ```
 
 ## Helper API
-
-### `globalThis.__ESCSS_ESTEST__.information`
-
-- Show information
-
-<img width="648" alt="information" src="https://github.com/user-attachments/assets/c19d91cc-6346-4f6d-bceb-2a9024538a30" />
 
 ### `globalThis.__ESCSS_ESTEST__.message`
 

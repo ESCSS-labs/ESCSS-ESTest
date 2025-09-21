@@ -410,12 +410,6 @@ export declare function ESTestForLibrary<T extends _ALLOWED_TYPES>(
 declare global {
   var __ESCSS_ESTEST__: {
     /**
-     * Show library information
-     * @see https://github.com/ESCSS-labs/ESCSS-ESTest
-     */
-    information: string;
-
-    /**
      * @example
      * globalThis.__ESCSS_ESTEST__.message = "Please report this issue to ...";
      *
