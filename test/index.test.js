@@ -1270,8 +1270,8 @@ describe("ESTest", () => {
           },
         });
 
-        expect(message).toHaveBeenCalledTimes(22);
-        expect(information).toHaveBeenCalledTimes(22);
+        expect(message).toHaveBeenCalledTimes(20);
+        expect(information).toHaveBeenCalledTimes(20);
       });
     });
   });
@@ -1571,8 +1571,8 @@ describe("ESTest", () => {
           },
         });
 
-        expect(message).toHaveBeenCalledTimes(21);
-        expect(information).toHaveBeenCalledTimes(21);
+        expect(message).toHaveBeenCalledTimes(19);
+        expect(information).toHaveBeenCalledTimes(19);
       });
     });
   });
@@ -2922,23 +2922,6 @@ describe("unSafeESTest", () => {
         ).toThrowError();
 
         expect(() =>
-          unSafeESTest(
-            [
-              {
-                name: "string",
-                age: 1,
-                info: {
-                  a: 1,
-                  b: 1,
-                  c: 1,
-                },
-              },
-            ],
-            "array",
-          ).schema({}),
-        ).toThrowError();
-
-        expect(() =>
           unSafeESTest(null, "array").schema({
             name: "string",
             age: "number",
@@ -3052,25 +3035,6 @@ describe("unSafeESTest", () => {
               },
             ],
           }),
-        ).toThrowError();
-
-        expect(() =>
-          unSafeESTest(
-            [
-              {
-                name: "string",
-                age: 1,
-                info: [
-                  {
-                    a: 1,
-                    b: 1,
-                    c: 1,
-                  },
-                ],
-              },
-            ],
-            "array",
-          ).schema({}),
         ).toThrowError();
 
         expect(() =>
@@ -3345,23 +3309,6 @@ describe("unSafeESTest", () => {
 
       expect(() =>
         unSafeESTest(
-          {
-            name: "string",
-            age: 1,
-            info: [
-              {
-                a: 1,
-                b: 1,
-                c: 1,
-              },
-            ],
-          },
-          "object",
-        ).schema({}),
-      ).toThrowError();
-
-      expect(() =>
-        unSafeESTest(
           [
             {
               name: "1",
@@ -3455,21 +3402,6 @@ describe("unSafeESTest", () => {
             c: "number",
           },
         }),
-      ).toThrowError();
-
-      expect(() =>
-        unSafeESTest(
-          {
-            name: "string",
-            age: 1,
-            info: {
-              a: 1,
-              b: 1,
-              c: 1,
-            },
-          },
-          "object",
-        ).schema({}),
       ).toThrowError();
 
       expect(() =>

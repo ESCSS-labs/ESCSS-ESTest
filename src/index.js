@@ -1334,10 +1334,6 @@ function _err(
       ),
     _errLogOnlyObjArr: (logType) =>
       console[logType](`🥲 <input> ONLY "object" or "array".`),
-    _errLogKeyLess: (logType) =>
-      console[logType](
-        `🥲 Cannot be validated. <schemaKey> less than <inputKey>.`,
-      ),
     _errLogSchemaMismatch: (logType) =>
       console[logType](
         `🥲 ${inputValue} -> schema mismatch. Should be [{...}, {...}].`,
@@ -1370,7 +1366,6 @@ function _err(
     _errLogNegative: `[unSafeESTest(input).integer()] Expected: input is a negative number/bigint`,
 
     _errLogOnlyObjArr: `[unSafeESTest(input).schema()] <input> ONLY "object" or "array".`,
-    _errLogKeyLess: `[unSafeESTest(input).schema()] Cannot be validated. <schemaKey> less than <inputKey>.`,
     _errLogSchemaMismatch: `[unSafeESTest(input).schema()] schema mismatch.`,
     _errLogPropertyMissing: `[unSafeESTest(input).schema()] value is missing. But required`,
     _errLogTypeMismatch: `[unSafeESTest(input).schema()] type mismatch`,
@@ -1422,32 +1417,13 @@ function _validate(schema, path, input, type, message, isUnSafe) {
   const newSchema = _typeof(schema) === "array" ? schema[0] : schema;
   const newPath = _typeof(input) === "array" ? `${path}[0]` : `${path}`;
 
-  if (_typeof(input) === "object") {
-    if (Object.keys(newSchema).length < Object.keys(newInput).length) {
-      return _err(input, type, message, isUnSafe, "_errLogKeyLess");
-    }
-  } else if (_typeof(input) === "array") {
-    // [{...}, {...}]
-    if (
-      typeof input[0] === "object" &&
-      typeof input[input.length - 1] === "object"
-    ) {
-      if (Object.keys(newSchema).length < Object.keys(newInput).length) {
-        return _err(input, type, message, isUnSafe, "_errLogKeyLess");
-      }
-    }
-
-    // [] or [1, true, 'hi']
-    else {
-      return _err(
-        input,
-        type,
-        message,
-        isUnSafe,
-        "_errLogSchemaMismatch",
-        path,
-      );
-    }
+  // Edge Case: not [{...}, {...}] situation, like [1, 'hi']
+  if (
+    _typeof(input) === "array" &&
+    _typeof(input.at(0)) !== "object" &&
+    _typeof(input.at(-1)) !== "object"
+  ) {
+    return _err(input, type, message, isUnSafe, "_errLogSchemaMismatch", path);
   }
 
   Object.keys(newSchema).forEach((key) => {
