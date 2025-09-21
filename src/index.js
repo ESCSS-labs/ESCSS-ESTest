@@ -1371,39 +1371,29 @@ function _err(
     _errLogTypeMismatch: `[unSafeESTest(input).schema()] type mismatch`,
   };
 
-  // For ESTest
+  // ESTest
   if (!isUnSafe) {
     console.error(` 📝 Message: ${message}`);
 
-    // production situation
     if (process.env.NODE_ENV === "production") {
       _ESTestLog._errLogHiddenInfo("error");
-    }
-
-    // development situation
-    else {
+    } else {
       // browser
       if (typeof window === "object") {
         _ESTestLog[logToken]("error");
-      }
-
-      // node / webworker
-      else {
+      } else {
         _ESTestLog[logToken]("trace");
       }
     }
   }
 
-  // For unSafeESTest
+  // unSafeESTest
   else {
-    // Use the default error message if the third argument (message) is not provided
-    if (message === globalThis.__ESCSS_ESTEST__.message) {
-      throw new Error(_unSafeESTestLog[logToken]);
-    }
-
     // customized error message
-    else {
+    if (message !== globalThis.__ESCSS_ESTEST__.message) {
       throw new Error(message);
+    } else {
+      throw new Error(_unSafeESTestLog[logToken]);
     }
   }
 }
