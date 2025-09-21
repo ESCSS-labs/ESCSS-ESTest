@@ -1427,15 +1427,15 @@ function _validate(schema, path, input, type, message, isUnSafe) {
   }
 
   Object.keys(newSchema).forEach((key) => {
-    const inputKey = key.endsWith("?")
+    const inputValue = key.endsWith("?")
       ? newInput[key.slice(0, -1)]
       : newInput[key];
-    const schemaKey = newSchema[key];
+    const schemaValue = newSchema[key];
     const pathOptional = key.endsWith("?")
       ? `${newPath}.${key.slice(0, -1)}`
       : `${newPath}.${key}`;
 
-    if (inputKey === undefined) {
+    if (inputValue === undefined) {
       // 'name?' - no check
       if (key.endsWith("?")) return;
 
@@ -1451,11 +1451,11 @@ function _validate(schema, path, input, type, message, isUnSafe) {
     }
 
     // schema key is {...} or [{...}, {...}]
-    else if (["object", "array"].includes(_typeof(schemaKey))) {
+    else if (["object", "array"].includes(_typeof(schemaValue))) {
       return _validate(
-        schemaKey,
+        schemaValue,
         pathOptional,
-        inputKey,
+        inputValue,
         type,
         message,
         isUnSafe,
@@ -1471,9 +1471,9 @@ function _validate(schema, path, input, type, message, isUnSafe) {
         "function",
         "array",
         "date",
-      ].includes(schemaKey)
+      ].includes(schemaValue)
     ) {
-      if (_typeof(inputKey) !== schemaKey) {
+      if (_typeof(inputValue) !== schemaValue) {
         return _err(
           input,
           type,
@@ -1481,8 +1481,8 @@ function _validate(schema, path, input, type, message, isUnSafe) {
           isUnSafe,
           "_errLogTypeMismatch",
           pathOptional,
-          _typeof(inputKey),
-          schemaKey,
+          _typeof(inputValue),
+          schemaValue,
         );
       }
     }
