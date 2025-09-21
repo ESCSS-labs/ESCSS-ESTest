@@ -1342,7 +1342,7 @@ function _err(
       console[logType](`🥲 ${inputValue}: value is missing. But required.`),
     _errLogTypeMismatch: (logType) =>
       console[logType](
-        `🥲 ${inputValue} -> type '${_typeof(inputValue2)}' is not assignable to type '${inputValue3}'.`,
+        `🥲 ${inputValue} -> type '${inputValue2}' is not assignable to type '${inputValue3}'.`,
       ),
   };
 
