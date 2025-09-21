@@ -1336,13 +1336,13 @@ function _err(
       console[logType](`🥲 <input> ONLY "object" or "array".`),
     _errLogSchemaMismatch: (logType) =>
       console[logType](
-        `🥲 ${inputValue} -> schema mismatch. Should be [{...}, {...}].`,
+        `🥲 ${inputValue}: schema mismatch. Should be [{...}, {...}].`,
       ),
     _errLogPropertyMissing: (logType) =>
-      console[logType](`🥲 ${inputValue}: value is missing. But required.`),
+      console[logType](`🥲 ${inputValue} is missing. But required.`),
     _errLogTypeMismatch: (logType) =>
       console[logType](
-        `🥲 ${inputValue} -> type '${inputValue2}' is not assignable to type '${inputValue3}'.`,
+        `🥲 ${inputValue}: type '${inputValue2}' is not assignable to type '${inputValue3}'.`,
       ),
   };
 
