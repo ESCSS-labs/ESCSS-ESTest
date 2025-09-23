@@ -1373,7 +1373,10 @@ function _err(
   if (!isUnSafe) {
     console.error(` 📝 Message: ${message}`);
 
-    if (process.env.NODE_ENV === "production") {
+    if (
+      typeof process !== "undefined" &&
+      process.env.NODE_ENV === "production"
+    ) {
       _ESTestLog._errLogHiddenInfo("error");
     } else {
       // browser
