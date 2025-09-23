@@ -1477,15 +1477,15 @@ function _test(
 
   // valid type
   else {
+    if (typeof message !== "string") {
+      _err(input, type, message, isUnSafe, "_errLogArg3");
+    }
+
     if (
       _typeof(input) === "number" &&
       !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
     ) {
       _err(input, type, message, isUnSafe, "_errLogNumber");
-    }
-
-    if (typeof message !== "string") {
-      _err(input, type, message, isUnSafe, "_errLogArg3");
     }
 
     if (_typeof(input) !== type) {
