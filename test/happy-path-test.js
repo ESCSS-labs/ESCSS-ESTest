@@ -30,8 +30,6 @@ ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334/16", "string").cidr6();
 ESTest("🌀", "string").emoji();
 ESTest("+886912345678", "string").e164();
 ESTest("foobar", "string").lowercase();
-ESTest(undefined, "string?");
-ESTest(undefined, "string?").description("test");
 
 ESTest(1, "number");
 ESTest(1, "number").description("test");
@@ -43,26 +41,18 @@ ESTest(15, "number").integer();
 ESTest(15, "number").positive();
 ESTest(-15, "number").negative();
 ESTest(15, "number").multiple(3);
-ESTest(undefined, "number?");
-ESTest(undefined, "number?").description("test");
 
 ESTest([], "array");
 ESTest([], "array").description("test");
 ESTest([1, 2, 3], "array").min(3);
 ESTest([1, 2, 3], "array").max(3);
 ESTest([1, 2, 3], "array").length(3);
-ESTest(undefined, "array?");
-ESTest(undefined, "array?").description("test");
 
 ESTest({}, "object");
 ESTest({}, "object").description("test");
-ESTest(undefined, "object?");
-ESTest(undefined, "object?").description("test");
 
 ESTest(true, "boolean");
 ESTest(true, "boolean").description("test");
-ESTest(undefined, "boolean?");
-ESTest(undefined, "boolean?").description("test");
 
 ESTest(1n, "bigint");
 ESTest(1n, "bigint").description("test");
@@ -73,8 +63,6 @@ ESTest(15n, "bigint").min(10n);
 ESTest(15n, "bigint").positive();
 ESTest(-15n, "bigint").negative();
 ESTest(15n, "bigint").multiple(3n);
-ESTest(undefined, "bigint?");
-ESTest(undefined, "bigint?").description("test");
 
 ESTest(undefined, "undefined");
 ESTest(undefined, "undefined").description("test");
@@ -113,8 +101,6 @@ unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334/16", "string").cidr6();
 unSafeESTest("🌀", "string").emoji();
 unSafeESTest("+886912345678", "string").e164();
 unSafeESTest("foobar", "string").lowercase();
-unSafeESTest(undefined, "string?");
-unSafeESTest(undefined, "string?").description("test");
 
 unSafeESTest(1, "number");
 unSafeESTest(1, "number").description("test");
@@ -126,26 +112,18 @@ unSafeESTest(15, "number").integer();
 unSafeESTest(15, "number").positive();
 unSafeESTest(-15, "number").negative();
 unSafeESTest(15, "number").multiple(3);
-unSafeESTest(undefined, "number?");
-unSafeESTest(undefined, "number?").description("test");
 
 unSafeESTest([], "array");
 unSafeESTest([], "array").description("test");
 unSafeESTest([1, 2, 3], "array").min(3);
 unSafeESTest([1, 2, 3], "array").max(3);
 unSafeESTest([1, 2, 3], "array").length(3);
-unSafeESTest(undefined, "array?");
-unSafeESTest(undefined, "array?").description("test");
 
 unSafeESTest({}, "object");
 unSafeESTest({}, "object").description("test");
-unSafeESTest(undefined, "object?");
-unSafeESTest(undefined, "object?").description("test");
 
 unSafeESTest(true, "boolean");
 unSafeESTest(true, "boolean").description("test");
-unSafeESTest(undefined, "boolean?");
-unSafeESTest(undefined, "boolean?").description("test");
 
 unSafeESTest(1n, "bigint");
 unSafeESTest(1n, "bigint").description("test");
@@ -156,8 +134,6 @@ unSafeESTest(15n, "bigint").min(10n);
 unSafeESTest(15n, "bigint").positive();
 unSafeESTest(-15n, "bigint").negative();
 unSafeESTest(15n, "bigint").multiple(3n);
-unSafeESTest(undefined, "bigint?");
-unSafeESTest(undefined, "bigint?").description("test");
 
 unSafeESTest(undefined, "undefined");
 unSafeESTest(undefined, "undefined").description("test");
@@ -200,8 +176,6 @@ ESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334/16", "string").cidr6();
 ESTest("🌀", "string").emoji();
 ESTest("+886912345678", "string").e164();
 ESTest("foobar", "string").lowercase();
-ESTest(undefined, "string?");
-ESTest(undefined, "string?").description("test");
 
 ESTest(1, "number");
 ESTest(1, "number").description("test");
@@ -213,26 +187,18 @@ ESTest(15, "number").integer();
 ESTest(15, "number").positive();
 ESTest(-15, "number").negative();
 ESTest(15, "number").multiple(3);
-ESTest(undefined, "number?");
-ESTest(undefined, "number?").description("test");
 
 ESTest([], "array");
 ESTest([], "array").description("test");
 ESTest([1, 2, 3], "array").min(3);
 ESTest([1, 2, 3], "array").max(3);
 ESTest([1, 2, 3], "array").length(3);
-ESTest(undefined, "array?");
-ESTest(undefined, "array?").description("test");
 
 ESTest({}, "object");
 ESTest({}, "object").description("test");
-ESTest(undefined, "object?");
-ESTest(undefined, "object?").description("test");
 
 ESTest(true, "boolean");
 ESTest(true, "boolean").description("test");
-ESTest(undefined, "boolean?");
-ESTest(undefined, "boolean?").description("test");
 
 ESTest(1n, "bigint");
 ESTest(1n, "bigint").description("test");
@@ -243,8 +209,6 @@ ESTest(15n, "bigint").min(10n);
 ESTest(15n, "bigint").positive();
 ESTest(-15n, "bigint").negative();
 ESTest(15n, "bigint").multiple(3n);
-ESTest(undefined, "bigint?");
-ESTest(undefined, "bigint?").description("test");
 
 ESTest(undefined, "undefined");
 ESTest(undefined, "undefined").description("test");
@@ -282,8 +246,6 @@ unSafeESTest("2001:0db8:85a3:0000:0000:8a2e:0370:7334/16", "string").cidr6();
 unSafeESTest("🌀", "string").emoji();
 unSafeESTest("+886912345678", "string").e164();
 unSafeESTest("foobar", "string").lowercase();
-unSafeESTest(undefined, "string?");
-unSafeESTest(undefined, "string?").description("test");
 
 unSafeESTest(1, "number");
 unSafeESTest(1, "number").description("test");
@@ -295,26 +257,18 @@ unSafeESTest(15, "number").integer();
 unSafeESTest(15, "number").positive();
 unSafeESTest(-15, "number").negative();
 unSafeESTest(15, "number").multiple(3);
-unSafeESTest(undefined, "number?");
-unSafeESTest(undefined, "number?").description("test");
 
 unSafeESTest([], "array");
 unSafeESTest([], "array").description("test");
 unSafeESTest([1, 2, 3], "array").min(3);
 unSafeESTest([1, 2, 3], "array").max(3);
 unSafeESTest([1, 2, 3], "array").length(3);
-unSafeESTest(undefined, "array?");
-unSafeESTest(undefined, "array?").description("test");
 
 unSafeESTest({}, "object");
 unSafeESTest({}, "object").description("test");
-unSafeESTest(undefined, "object?");
-unSafeESTest(undefined, "object?").description("test");
 
 unSafeESTest(true, "boolean");
 unSafeESTest(true, "boolean").description("test");
-unSafeESTest(undefined, "boolean?");
-unSafeESTest(undefined, "boolean?").description("test");
 
 unSafeESTest(1n, "bigint");
 unSafeESTest(1n, "bigint").description("test");
@@ -325,8 +279,6 @@ unSafeESTest(15n, "bigint").min(10n);
 unSafeESTest(15n, "bigint").positive();
 unSafeESTest(-15n, "bigint").negative();
 unSafeESTest(15n, "bigint").multiple(3n);
-unSafeESTest(undefined, "bigint?");
-unSafeESTest(undefined, "bigint?").description("test");
 
 unSafeESTest(undefined, "undefined");
 unSafeESTest(undefined, "undefined").description("test");

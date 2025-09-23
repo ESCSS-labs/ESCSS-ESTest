@@ -8,13 +8,7 @@ declare type _ALLOWED_TYPES =
   | "symbol"
   | "function"
   | "object"
-  | "array"
-  // optional(?)
-  | "boolean?"
-  | "number?"
-  | "string?"
-  | "object?"
-  | "array?";
+  | "array";
 
 declare type _ALLOWED_TYPES__SCHEMA =
   | "null"
@@ -36,21 +30,21 @@ declare type _ClassType<T extends _ALLOWED_TYPES> = T extends "undefined"
   ? _Undefined
   : T extends "null"
     ? _Null
-    : T extends "boolean" | "boolean?"
+    : T extends "boolean"
       ? _Boolean
-      : T extends "number" | "number?"
+      : T extends "number"
         ? _Number
-        : T extends "bigint" | "bigint?"
+        : T extends "bigint"
           ? _BigInt
-          : T extends "string" | "string?"
+          : T extends "string"
             ? _String
             : T extends "symbol"
               ? _Symbol
               : T extends "function"
                 ? _Function
-                : T extends "object" | "object?"
+                : T extends "object"
                   ? _Object
-                  : T extends "array" | "array?"
+                  : T extends "array"
                     ? _Array
                     : never;
 

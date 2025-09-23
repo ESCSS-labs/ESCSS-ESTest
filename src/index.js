@@ -116,13 +116,6 @@ const _ALLOWED_TYPES = [
   "function",
   "object",
   "array",
-  // optional(?)
-  "boolean?",
-  "number?",
-  "bigint?",
-  "string?",
-  "object?",
-  "array?",
 ];
 
 class _Common {
@@ -1495,22 +1488,8 @@ function _test(
       _err(input, type, message, isUnSafe, "_errLogArg3");
     }
 
-    // "string?" case
-    if (type.endsWith("?")) {
-      // "number" !== "string?" case
-      if (_typeof(input) !== type.slice(0, -1) && input !== undefined) {
-        _err(input, type, message, isUnSafe, "_errLogArg1");
-      }
-
-      type = type.slice(0, -1);
-    }
-
-    // "string" case
-    else {
-      // "number" !== "string" case
-      if (_typeof(input) !== type) {
-        _err(input, type, message, isUnSafe, "_errLogArg1");
-      }
+    if (_typeof(input) !== type) {
+      _err(input, type, message, isUnSafe, "_errLogArg1");
     }
   }
 
