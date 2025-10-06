@@ -149,6 +149,8 @@ class _Common {
         inputValue,
         "string",
       );
+
+      return this;
     }
 
     return this;
@@ -319,6 +321,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input < inputValue)) {
@@ -330,6 +334,8 @@ const _classType = {
           "_errLogLess",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -347,6 +353,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input <= inputValue)) {
@@ -358,6 +366,8 @@ const _classType = {
           "_errLogMax",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -375,6 +385,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input > inputValue)) {
@@ -386,6 +398,8 @@ const _classType = {
           "_errLogGreater",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -403,6 +417,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input >= inputValue)) {
@@ -414,6 +430,8 @@ const _classType = {
           "_errLogMin",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -429,6 +447,8 @@ const _classType = {
           this.isUnSafe,
           "_errLogInteger",
         );
+
+        return this;
       }
 
       return this;
@@ -444,6 +464,8 @@ const _classType = {
           this.isUnSafe,
           "_errLogPositive",
         );
+
+        return this;
       }
 
       return this;
@@ -459,6 +481,8 @@ const _classType = {
           this.isUnSafe,
           "_errLogNegative",
         );
+
+        return this;
       }
 
       return this;
@@ -476,6 +500,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input % inputValue === 0)) {
@@ -487,6 +513,8 @@ const _classType = {
           "_errLogMultiple",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -510,6 +538,8 @@ const _classType = {
           inputValue,
           "bigint",
         );
+
+        return this;
       }
 
       if (!(this.input < inputValue)) {
@@ -521,6 +551,8 @@ const _classType = {
           "_errLogLess",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -538,6 +570,8 @@ const _classType = {
           inputValue,
           "bigint",
         );
+
+        return this;
       }
 
       if (!(this.input <= inputValue)) {
@@ -549,6 +583,8 @@ const _classType = {
           "_errLogMax",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -566,6 +602,8 @@ const _classType = {
           inputValue,
           "bigint",
         );
+
+        return this;
       }
 
       if (!(this.input > inputValue)) {
@@ -577,6 +615,8 @@ const _classType = {
           "_errLogGreater",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -594,6 +634,8 @@ const _classType = {
           inputValue,
           "bigint",
         );
+
+        return this;
       }
 
       if (!(this.input >= inputValue)) {
@@ -605,6 +647,8 @@ const _classType = {
           "_errLogMin",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -620,6 +664,8 @@ const _classType = {
           this.isUnSafe,
           "_errLogPositive",
         );
+
+        return this;
       }
 
       return this;
@@ -635,6 +681,8 @@ const _classType = {
           this.isUnSafe,
           "_errLogNegative",
         );
+
+        return this;
       }
 
       return this;
@@ -652,6 +700,8 @@ const _classType = {
           inputValue,
           "bigint",
         );
+
+        return this;
       }
 
       if (!(this.input % inputValue === 0n)) {
@@ -663,6 +713,8 @@ const _classType = {
           "_errLogMultiple",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -686,6 +738,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input?.length <= inputValue)) {
@@ -697,6 +751,8 @@ const _classType = {
           "_errLogMax",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -714,6 +770,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input?.length >= inputValue)) {
@@ -725,6 +783,8 @@ const _classType = {
           "_errLogMin",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -742,6 +802,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input?.length === inputValue)) {
@@ -753,6 +815,8 @@ const _classType = {
           "_errLogLength",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -800,6 +864,8 @@ const _classType = {
           null,
           `email(${inputValue})`,
         );
+
+        return this;
       }
 
       return this;
@@ -821,6 +887,8 @@ const _classType = {
           null,
           "uuid4",
         );
+
+        return this;
       }
 
       return this;
@@ -842,6 +910,8 @@ const _classType = {
           null,
           "uuid7",
         );
+
+        return this;
       }
 
       return this;
@@ -859,6 +929,8 @@ const _classType = {
           inputValue,
           "object",
         );
+
+        return this;
       }
 
       if (!inputValue.test(this.input)) {
@@ -871,6 +943,8 @@ const _classType = {
           null,
           "object",
         );
+
+        return this;
       }
 
       return this;
@@ -892,6 +966,8 @@ const _classType = {
           null,
           "base64",
         );
+
+        return this;
       }
 
       return this;
@@ -912,6 +988,8 @@ const _classType = {
           null,
           "base64url",
         );
+
+        return this;
       }
 
       return this;
@@ -933,6 +1011,8 @@ const _classType = {
           null,
           "ip4",
         );
+
+        return this;
       }
 
       return this;
@@ -954,6 +1034,8 @@ const _classType = {
           null,
           "ip6",
         );
+
+        return this;
       }
 
       return this;
@@ -975,6 +1057,8 @@ const _classType = {
           null,
           "cidr4",
         );
+
+        return this;
       }
 
       return this;
@@ -996,6 +1080,8 @@ const _classType = {
           null,
           "cidr6",
         );
+
+        return this;
       }
 
       return this;
@@ -1016,6 +1102,8 @@ const _classType = {
           null,
           "emoji",
         );
+
+        return this;
       }
 
       return this;
@@ -1036,6 +1124,8 @@ const _classType = {
           null,
           "e164",
         );
+
+        return this;
       }
 
       return this;
@@ -1058,6 +1148,8 @@ const _classType = {
           null,
           "lowercase",
         );
+
+        return this;
       }
 
       return this;
@@ -1186,6 +1278,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input?.length >= inputValue)) {
@@ -1197,6 +1291,8 @@ const _classType = {
           "_errLogMin",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -1214,6 +1310,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input?.length <= inputValue)) {
@@ -1225,6 +1323,8 @@ const _classType = {
           "_errLogMax",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -1242,6 +1342,8 @@ const _classType = {
           inputValue,
           "number",
         );
+
+        return this;
       }
 
       if (!(this.input?.length === inputValue)) {
@@ -1253,6 +1355,8 @@ const _classType = {
           "_errLogLength",
           inputValue,
         );
+
+        return this;
       }
 
       return this;
@@ -1565,25 +1669,25 @@ function _test(
     }
 
     _err(input, type, message, isUnSafe, "_errLogArg3");
+    return new _classType[type](input, type, message, isUnSafe);
   }
 
-  // check valid type
-  else if (!_ALLOWED_TYPES.includes(type)) {
+  if (!_ALLOWED_TYPES.includes(type)) {
     _err(input, "undefined", message, isUnSafe, "_errLogArg2");
     return new _classType["undefined"](input, "undefined", message, isUnSafe);
   }
 
-  // check valid number
-  else if (
+  if (
     _typeof(input) === "number" &&
     !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
   ) {
     _err(input, type, message, isUnSafe, "_errLogNumber");
+    return new _classType[type](input, type, message, isUnSafe);
   }
 
-  // check match type
-  else if (_typeof(input) !== type) {
+  if (_typeof(input) !== type) {
     _err(input, type, message, isUnSafe, "_errLogArg1");
+    return new _classType[type](input, type, message, isUnSafe);
   }
 
   // Returns an object for method chaining. e.g., ESTest(1, 'number').min(0).max(10)
