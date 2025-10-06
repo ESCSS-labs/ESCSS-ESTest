@@ -1176,12 +1176,12 @@ const _classType = {
     schema(schema) {
       globalThis.__ESCSS_ESTEST__.analysis._Object.schema += 1;
       _validate(
-        schema,
-        "<input>",
         this.input,
         this.type,
         this.message,
         this.isUnSafe,
+        schema,
+        "<input>",
       );
       return this;
     }
@@ -1365,12 +1365,12 @@ const _classType = {
     schema(schema) {
       globalThis.__ESCSS_ESTEST__.analysis._Array.schema += 1;
       _validate(
-        schema,
-        "<input>",
         this.input,
         this.type,
         this.message,
         this.isUnSafe,
+        schema,
+        "<input>",
       );
       return this;
     }
@@ -1593,7 +1593,7 @@ function _err(
   }
 }
 
-function _validate(schema, path, input, type, message, isUnSafe) {
+function _validate(input, type, message, isUnSafe, schema, path) {
   if (_typeof(path) !== "string") {
     throw new Error(
       `[Internal Error] path should be 'string', received ${path}`,
@@ -1643,12 +1643,12 @@ function _validate(schema, path, input, type, message, isUnSafe) {
     // recursion
     if (_typeof(schemaValue) === "array" || _typeof(schemaValue) === "object") {
       return _validate(
-        schemaValue,
-        pathOptional,
         inputValue,
         type,
         message,
         isUnSafe,
+        schemaValue,
+        pathOptional,
       );
     }
 
