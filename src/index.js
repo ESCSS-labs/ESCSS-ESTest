@@ -1435,6 +1435,12 @@ function _err(
   inputValue2,
   inputValue3,
 ) {
+  if (_typeof(logToken) !== "string") {
+    throw new Error(
+      `[Internal Error] logToken should be 'string', received ${logToken}`,
+    );
+  }
+
   // bigint in Template strings will be changed: `1n` -> `1`, so add "n" back
   const isBigint =
     _typeof(inputValue) === "bigint" ? `${inputValue}n` : inputValue;
@@ -1588,6 +1594,12 @@ function _err(
 }
 
 function _validate(schema, path, input, type, message, isUnSafe) {
+  if (_typeof(path) !== "string") {
+    throw new Error(
+      `[Internal Error] path should be 'string', received ${path}`,
+    );
+  }
+
   if (!(_typeof(input) === "object" || _typeof(input) === "array")) {
     return _err(input, type, message, isUnSafe, "_errLogOnlyObjArr");
   }
@@ -1661,6 +1673,12 @@ function _test(
   message = globalThis.__ESCSS_ESTEST__.message,
   isUnSafe,
 ) {
+  if (_typeof(isUnSafe) !== "boolean") {
+    throw new Error(
+      `[Internal Error] isUnSafe should be 'boolean', received ${isUnSafe}`,
+    );
+  }
+
   if (_typeof(message) !== "string") {
     if (!_ALLOWED_TYPES.includes(type)) {
       _err(input, "undefined", message, isUnSafe, "_errLogArg3");
