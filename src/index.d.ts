@@ -52,9 +52,9 @@ declare interface _Common<T extends _ALLOWED_TYPES> {
   /**
    * @example
    * // more information, doesn't do anything
-   * ESTest('foo', 'string').description('a helpful information')
+   * ESTest('foo', 'string').describe('a helpful information')
    */
-  description(): _ClassType<T>;
+  describe(): _ClassType<T>;
 }
 
 declare interface _Undefined extends _Common<"undefined"> {}

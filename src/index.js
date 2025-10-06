@@ -10,11 +10,11 @@ globalThis.__ESCSS_ESTEST__ = {
     },
     _Common: {
       _count: 0,
-      description: 0,
+      describe: 0,
     },
     _Undefined: {
       _count: 0,
-      description: 0,
+      describe: 0,
       less: 0,
       max: 0,
       greater: 0,
@@ -137,8 +137,8 @@ class _Common {
     globalThis.__ESCSS_ESTEST__.analysis._Common._count += 1;
   }
 
-  description(inputValue) {
-    globalThis.__ESCSS_ESTEST__.analysis._Common.description += 1;
+  describe(inputValue) {
+    globalThis.__ESCSS_ESTEST__.analysis._Common.describe += 1;
     if (typeof inputValue !== "string") {
       _err(
         this.input,
@@ -161,8 +161,8 @@ const _classType = {
     constructor() {
       globalThis.__ESCSS_ESTEST__.analysis._Undefined._count += 1;
     }
-    description() {
-      globalThis.__ESCSS_ESTEST__.analysis._Undefined.description += 1;
+    describe() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.describe += 1;
       return this;
     }
 

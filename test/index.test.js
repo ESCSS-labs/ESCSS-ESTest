@@ -84,16 +84,16 @@ describe("ESTest", () => {
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
-      ESTest("a", "string").description("test");
-      ESTest(1, "number").description("test");
-      ESTest([], "array").description("test");
-      ESTest({}, "object").description("test");
-      ESTest(true, "boolean").description("test");
-      ESTest(1n, "bigint").description("test");
-      ESTest(undefined, "undefined").description("test");
-      ESTest(null, "null").description("test");
-      ESTest(Symbol("a"), "symbol").description("test");
-      ESTest(() => {}, "function").description("test");
+      ESTest("a", "string").describe("test");
+      ESTest(1, "number").describe("test");
+      ESTest([], "array").describe("test");
+      ESTest({}, "object").describe("test");
+      ESTest(true, "boolean").describe("test");
+      ESTest(1n, "bigint").describe("test");
+      ESTest(undefined, "undefined").describe("test");
+      ESTest(null, "null").describe("test");
+      ESTest(Symbol("a"), "symbol").describe("test");
+      ESTest(() => {}, "function").describe("test");
 
       expect(message).toHaveBeenCalledTimes(0);
       expect(information).toHaveBeenCalledTimes(0);
@@ -1863,16 +1863,16 @@ describe("unSafeESTest", () => {
         .spyOn(console, "trace")
         .mockImplementation(() => {});
 
-      unSafeESTest("a", "string").description("test");
-      unSafeESTest(1, "number").description("test");
-      unSafeESTest([], "array").description("test");
-      unSafeESTest({}, "object").description("test");
-      unSafeESTest(true, "boolean").description("test");
-      unSafeESTest(1n, "bigint").description("test");
-      unSafeESTest(undefined, "undefined").description("test");
-      unSafeESTest(null, "null").description("test");
-      unSafeESTest(Symbol("a"), "symbol").description("test");
-      unSafeESTest(() => {}, "function").description("test");
+      unSafeESTest("a", "string").describe("test");
+      unSafeESTest(1, "number").describe("test");
+      unSafeESTest([], "array").describe("test");
+      unSafeESTest({}, "object").describe("test");
+      unSafeESTest(true, "boolean").describe("test");
+      unSafeESTest(1n, "bigint").describe("test");
+      unSafeESTest(undefined, "undefined").describe("test");
+      unSafeESTest(null, "null").describe("test");
+      unSafeESTest(Symbol("a"), "symbol").describe("test");
+      unSafeESTest(() => {}, "function").describe("test");
 
       expect(message).toHaveBeenCalledTimes(0);
       expect(information).toHaveBeenCalledTimes(0);
