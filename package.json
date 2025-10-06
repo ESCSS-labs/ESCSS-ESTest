@@ -31,6 +31,6 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "check": "pnpm format && pnpm lint && pnpm vitest",
-    "test": "node ./src/index.js"
+    "test": "clear && node ./src/index.js"
   }
 }
