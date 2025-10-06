@@ -158,7 +158,7 @@ class _Common {
 }
 
 const _classType = {
-  // Prevent crashes if globalThis.__ESCSS_ESTEST__.isESTestDisabled = true
+  // To prevent the app from breaking
   undefined: class _Undefined {
     constructor() {
       globalThis.__ESCSS_ESTEST__.analysis._Undefined._count += 1;
@@ -1662,10 +1662,9 @@ function _test(
   isUnSafe,
 ) {
   if (typeof message !== "string") {
-    // edge case
     if (!_ALLOWED_TYPES.includes(type)) {
       _err(input, "undefined", message, isUnSafe, "_errLogArg3");
-      return new _classType["undefined"](input, "undefined", message, isUnSafe);
+      return new _classType.undefined();
     }
 
     _err(input, type, message, isUnSafe, "_errLogArg3");
@@ -1674,7 +1673,7 @@ function _test(
 
   if (!_ALLOWED_TYPES.includes(type)) {
     _err(input, "undefined", message, isUnSafe, "_errLogArg2");
-    return new _classType["undefined"](input, "undefined", message, isUnSafe);
+    return new _classType.undefined();
   }
 
   if (
@@ -1695,11 +1694,24 @@ function _test(
 }
 
 function ESTest(input, type, message) {
-  // To prevent the app from breaking when set to true
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
+    // early return and set 'undefined' type to prevent breaking
     return new _classType.undefined();
   }
 
+  globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
+
+  // console.error()
+  return _test(input, type, message, false);
+}
+
+function ESTestForLibrary(input, type, message) {
+  if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
+    // early return and set 'undefined' type to prevent breaking
+    return new _classType.undefined();
+  }
+
+  globalThis.__ESCSS_ESTEST__.message = message;
   globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
 
   // console.error()
@@ -1711,19 +1723,6 @@ function unSafeESTest(input, type, message) {
 
   // throw new Error()
   return _test(input, type, message, true);
-}
-
-function ESTestForLibrary(input, type, message) {
-  if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
-    // To prevent the app from breaking when set to true
-    return new _classType.undefined();
-  }
-
-  globalThis.__ESCSS_ESTEST__.message = message;
-  globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
-
-  // console.error()
-  return _test(input, type, message, false);
 }
 
 export { ESTest, unSafeESTest, ESTestForLibrary };
