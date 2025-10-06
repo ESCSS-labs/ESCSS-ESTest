@@ -139,7 +139,7 @@ class _Common {
 
   describe(inputValue) {
     globalThis.__ESCSS_ESTEST__.analysis._Common.describe += 1;
-    if (typeof inputValue !== "string") {
+    if (_typeof(inputValue) !== "string") {
       _err(
         this.input,
         this.type,
@@ -311,7 +311,7 @@ const _classType = {
 
     less(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.less += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -343,7 +343,7 @@ const _classType = {
 
     max(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.max += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -375,7 +375,7 @@ const _classType = {
 
     greater(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.greater += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -407,7 +407,7 @@ const _classType = {
 
     min(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.min += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -490,7 +490,7 @@ const _classType = {
 
     multiple(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Number.multiple += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -528,7 +528,7 @@ const _classType = {
 
     less(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.less += 1;
-      if (typeof inputValue !== "bigint") {
+      if (_typeof(inputValue) !== "bigint") {
         _err(
           this.input,
           this.type,
@@ -560,7 +560,7 @@ const _classType = {
 
     max(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.max += 1;
-      if (typeof inputValue !== "bigint") {
+      if (_typeof(inputValue) !== "bigint") {
         _err(
           this.input,
           this.type,
@@ -592,7 +592,7 @@ const _classType = {
 
     greater(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.greater += 1;
-      if (typeof inputValue !== "bigint") {
+      if (_typeof(inputValue) !== "bigint") {
         _err(
           this.input,
           this.type,
@@ -624,7 +624,7 @@ const _classType = {
 
     min(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.min += 1;
-      if (typeof inputValue !== "bigint") {
+      if (_typeof(inputValue) !== "bigint") {
         _err(
           this.input,
           this.type,
@@ -690,7 +690,7 @@ const _classType = {
 
     multiple(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._BigInt.multiple += 1;
-      if (typeof inputValue !== "bigint") {
+      if (_typeof(inputValue) !== "bigint") {
         _err(
           this.input,
           this.type,
@@ -728,7 +728,7 @@ const _classType = {
 
     max(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._String.max += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -760,7 +760,7 @@ const _classType = {
 
     min(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._String.min += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -792,7 +792,7 @@ const _classType = {
 
     length(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._String.length += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -1191,7 +1191,7 @@ const _classType = {
 
       const result = fn(this.input);
 
-      if (typeof message !== "string") {
+      if (_typeof(message) !== "string") {
         return _err(
           this.input,
           this.type,
@@ -1203,7 +1203,7 @@ const _classType = {
         );
       }
 
-      if (typeof result !== "boolean") {
+      if (_typeof(result) !== "boolean") {
         return _err(
           this.input,
           this.type,
@@ -1233,7 +1233,7 @@ const _classType = {
 
       const ctx = {
         addIssue: (message) => {
-          if (typeof message !== "string") {
+          if (_typeof(message) !== "string") {
             return _err(
               this.input,
               this.type,
@@ -1268,7 +1268,7 @@ const _classType = {
 
     min(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Array.min += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -1300,7 +1300,7 @@ const _classType = {
 
     max(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Array.max += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -1332,7 +1332,7 @@ const _classType = {
 
     length(inputValue) {
       globalThis.__ESCSS_ESTEST__.analysis._Array.length += 1;
-      if (typeof inputValue !== "number") {
+      if (_typeof(inputValue) !== "number") {
         _err(
           this.input,
           this.type,
@@ -1437,7 +1437,7 @@ function _err(
 ) {
   // bigint in Template strings will be changed: `1n` -> `1`, so add "n" back
   const isBigint =
-    typeof inputValue === "bigint" ? `${inputValue}n` : inputValue;
+    _typeof(inputValue) === "bigint" ? `${inputValue}n` : inputValue;
 
   const _ESTestLog = {
     _errLogHiddenInfo: (logType) =>
@@ -1562,7 +1562,7 @@ function _err(
     console.error(` 📝 Message: ${message}`);
 
     if (
-      typeof process !== "undefined" &&
+      _typeof(process) !== "undefined" &&
       process.env.NODE_ENV === "production"
     ) {
       _ESTestLog._errLogHiddenInfo("error");
@@ -1661,7 +1661,7 @@ function _test(
   message = globalThis.__ESCSS_ESTEST__.message,
   isUnSafe,
 ) {
-  if (typeof message !== "string") {
+  if (_typeof(message) !== "string") {
     if (!_ALLOWED_TYPES.includes(type)) {
       _err(input, "undefined", message, isUnSafe, "_errLogArg3");
       return new _classType.undefined();
