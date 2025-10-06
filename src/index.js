@@ -38,6 +38,7 @@ globalThis.__ESCSS_ESTEST__ = {
       e164: 0,
       lowercase: 0,
       schema: 0,
+      refine: 0,
     },
     _Null: {
       _count: 0,
@@ -94,6 +95,7 @@ globalThis.__ESCSS_ESTEST__ = {
     _Object: {
       _count: 0,
       schema: 0,
+      refine: 0,
     },
     _Array: {
       _count: 0,
@@ -275,6 +277,10 @@ const _classType = {
     schema() {
       globalThis.__ESCSS_ESTEST__.analysis._Undefined.schema += 1;
       return this;
+    }
+
+    refine() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.refine += 1;
     }
   },
   null: class _Null extends _Common {
@@ -1081,6 +1087,48 @@ const _classType = {
       );
       return this;
     }
+
+    refine(fn, message = this.message) {
+      globalThis.__ESCSS_ESTEST__.analysis._Object.refine += 1;
+
+      const result = fn(this.input);
+
+      if (typeof message !== "string") {
+        return _err(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "_errLogType",
+          message,
+          "string",
+        );
+      }
+
+      if (typeof result !== "boolean") {
+        return _err(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "_errLogType",
+          result,
+          "boolean",
+        );
+      }
+
+      if (!result) {
+        this.message = message;
+
+        return _err(
+          this.input,
+          this.type,
+          this.message,
+          this.isUnSafe,
+          "_errLogRefine",
+        );
+      }
+    }
   },
   array: class _Array extends _Common {
     constructor(...args) {
@@ -1335,6 +1383,8 @@ function _err(
       console[logType](
         `🥲 ${inputValue}: type '${inputValue2}' is not assignable to type '${inputValue3}'.`,
       ),
+    _errLogRefine: (logType) =>
+      console[logType](` \n 🥲  refine() condition mismatch`),
   };
 
   const _unSafeESTestLog = {
@@ -1360,6 +1410,7 @@ function _err(
     _errLogSchemaMismatch: `[unSafeESTest(input).schema()] schema mismatch.`,
     _errLogPropertyMissing: `[unSafeESTest(input).schema()] value is missing. But required`,
     _errLogTypeMismatch: `[unSafeESTest(input).schema()] type mismatch`,
+    _errLogRefine: `[unSafeESTest(input).refine()] condition mismatch`,
   };
 
   // ESTest

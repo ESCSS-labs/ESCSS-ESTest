@@ -314,6 +314,25 @@ declare interface _Object extends _Common<"object"> {
    * })
    */
   schema(T: { [key: string]: _SCHEMA_DEFINITION }): _ClassType<"object">;
+
+  /**
+   * @example
+   * // "single case" cross field validation
+   *
+   * const data = {
+   *   password: '123'
+   *   checkPassword: '123'
+   * }
+   *
+   * // pass
+   * ESTest(data, 'object')
+   *  .schema({
+   *    password: 'string',
+   *    checkPassword: 'string',
+   *  })
+   *  .refine(val => val.password === val.checkPassword, 'password mismatch')
+   */
+  refine<T>(fn: (arg: T) => boolean, message: string): void;
 }
 
 declare interface _Array extends _Common<"array"> {
@@ -369,8 +388,8 @@ declare interface _Array extends _Common<"array"> {}
  * Non-breaking error logging via console.error(...)
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
  */
-export declare function ESTest<T extends _ALLOWED_TYPES>(
-  input: unknown,
+export declare function ESTest<K, T extends _ALLOWED_TYPES>(
+  input: K,
   type: T,
   message?: string,
 ): _ClassType<T>;

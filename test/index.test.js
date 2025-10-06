@@ -1382,6 +1382,99 @@ describe("ESTest", () => {
         expect(information).toHaveBeenCalledTimes(19);
       });
     });
+
+    describe("refine", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        const data = {
+          password: "1234",
+          confirmPassword: "1234",
+        };
+
+        ESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine(
+            (val) => val.password === val.confirmPassword,
+            "password mismatch",
+          );
+
+        ESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine((val) => val.password === val.confirmPassword);
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        const data = {
+          password: "1234",
+          confirmPassword: "xyz",
+        };
+
+        ESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine(() => "over");
+
+        ESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine(() => "over", 123);
+
+        ESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine(() => "over", {
+            message: 123,
+          });
+
+        ESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine((val) => val.password === val.confirmPassword);
+
+        ESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine((val) => val.password === val.confirmPassword, 1);
+
+        ESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine((val) => val.password === val.confirmPassword, true);
+
+        expect(message).toHaveBeenCalledTimes(6);
+        expect(information).toHaveBeenCalledTimes(6);
+      });
+    });
   });
 
   describe("bigint", () => {
@@ -2563,288 +2656,386 @@ describe("unSafeESTest", () => {
     });
   });
 
-  describe("schema", () => {
-    test("success", () => {
-      const message = vi.spyOn(console, "error").mockImplementation(() => {});
-      const information = vi
-        .spyOn(console, "trace")
-        .mockImplementation(() => {});
+  describe("object", () => {
+    describe("schema", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
 
-      unSafeESTest(
-        {
-          name: "1",
-          age: 1,
+        unSafeESTest(
+          {
+            name: "1",
+            age: 1,
+            info: [
+              {
+                a: 1,
+                b: 1,
+                c: 1,
+              },
+            ],
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
           info: [
             {
+              a: "number",
+              b: "number",
+              c: "number",
+            },
+          ],
+        });
+
+        unSafeESTest(
+          {
+            name: "1",
+            age: 1,
+            info: {
               a: 1,
               b: 1,
               c: 1,
             },
-          ],
-        },
-        "object",
-      ).schema({
-        name: "string",
-        age: "number",
-        info: [
-          {
+          },
+          "object",
+        ).schema({
+          name: "string",
+          age: "number",
+          info: {
             a: "number",
             b: "number",
             c: "number",
           },
-        ],
+        });
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
       });
 
-      unSafeESTest(
-        {
-          name: "1",
-          age: 1,
-          info: {
-            a: 1,
-            b: 1,
-            c: 1,
-          },
-        },
-        "object",
-      ).schema({
-        name: "string",
-        age: "number",
-        info: {
-          a: "number",
-          b: "number",
-          c: "number",
-        },
-      });
+      test("fail", () => {
+        expect(() =>
+          unSafeESTest(null, "object").schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+                c: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
 
-      expect(message).toHaveBeenCalledTimes(0);
-      expect(information).toHaveBeenCalledTimes(0);
-    });
-
-    test("fail", () => {
-      expect(() =>
-        unSafeESTest(null, "object").schema({
-          name: "string",
-          age: "number",
-          info: [
+        expect(() =>
+          unSafeESTest(
             {
+              name: "1",
+              age: 1,
+              info: [
+                {
+                  a: true,
+                  b: true,
+                },
+              ],
+            },
+            "object",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            {
+              info: [
+                {
+                  a: true,
+                  b: 1,
+                },
+              ],
+            },
+            "object",
+          ).schema({
+            info: [
+              {
+                "a?": "number",
+                "b?": "number",
+                "c?": "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            {
+              name: "1",
+              age: 1,
+              info: [{}],
+            },
+            "object",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+                c: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            {
+              name: "1",
+              age: 1,
+              info: [],
+            },
+            "object",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+                c: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                name: "1",
+                age: 1,
+                info: {
+                  a: 1,
+                  b: 1,
+                  c: 1,
+                },
+              },
+            ],
+            "object",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: [
+              {
+                a: "number",
+                b: "number",
+                c: "number",
+              },
+            ],
+          }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(null, "object").schema({
+            name: "string",
+            age: "number",
+            info: {
               a: "number",
               b: "number",
               c: "number",
             },
-          ],
-        }),
-      ).toThrowError();
+          }),
+        ).toThrowError();
 
-      expect(() =>
-        unSafeESTest(
-          {
-            name: "1",
-            age: 1,
-            info: [
-              {
+        expect(() =>
+          unSafeESTest(
+            {
+              name: "1",
+              age: 1,
+              info: {
                 a: true,
                 b: true,
               },
-            ],
-          },
-          "object",
-        ).schema({
-          name: "string",
-          age: "number",
-          info: [
-            {
+            },
+            "object",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: {
               a: "number",
               b: "number",
             },
-          ],
-        }),
-      ).toThrowError();
+          }),
+        ).toThrowError();
 
-      expect(() =>
-        unSafeESTest(
-          {
-            info: [
-              {
+        expect(() =>
+          unSafeESTest(
+            {
+              info: {
                 a: true,
                 b: 1,
               },
-            ],
-          },
-          "object",
-        ).schema({
-          info: [
-            {
+            },
+            "object",
+          ).schema({
+            info: {
               "a?": "number",
               "b?": "number",
               "c?": "number",
             },
-          ],
-        }),
-      ).toThrowError();
+          }),
+        ).toThrowError();
 
-      expect(() =>
-        unSafeESTest(
-          {
-            name: "1",
-            age: 1,
-            info: [{}],
-          },
-          "object",
-        ).schema({
-          name: "string",
-          age: "number",
-          info: [
-            {
-              a: "number",
-              b: "number",
-              c: "number",
-            },
-          ],
-        }),
-      ).toThrowError();
-
-      expect(() =>
-        unSafeESTest(
-          {
-            name: "1",
-            age: 1,
-            info: [],
-          },
-          "object",
-        ).schema({
-          name: "string",
-          age: "number",
-          info: [
-            {
-              a: "number",
-              b: "number",
-              c: "number",
-            },
-          ],
-        }),
-      ).toThrowError();
-
-      expect(() =>
-        unSafeESTest(
-          [
+        expect(() =>
+          unSafeESTest(
             {
               name: "1",
               age: 1,
-              info: {
-                a: 1,
-                b: 1,
-                c: 1,
-              },
+              info: {},
             },
-          ],
-          "object",
-        ).schema({
-          name: "string",
-          age: "number",
-          info: [
-            {
+            "object",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: {
               a: "number",
               b: "number",
               c: "number",
             },
-          ],
-        }),
-      ).toThrowError();
+          }),
+        ).toThrowError();
 
-      expect(() =>
-        unSafeESTest(null, "object").schema({
-          name: "string",
-          age: "number",
-          info: {
-            a: "number",
-            b: "number",
-            c: "number",
-          },
-        }),
-      ).toThrowError();
-
-      expect(() =>
-        unSafeESTest(
-          {
-            name: "1",
-            age: 1,
-            info: {
-              a: true,
-              b: true,
-            },
-          },
-          "object",
-        ).schema({
-          name: "string",
-          age: "number",
-          info: {
-            a: "number",
-            b: "number",
-          },
-        }),
-      ).toThrowError();
-
-      expect(() =>
-        unSafeESTest(
-          {
-            info: {
-              a: true,
-              b: 1,
-            },
-          },
-          "object",
-        ).schema({
-          info: {
-            "a?": "number",
-            "b?": "number",
-            "c?": "number",
-          },
-        }),
-      ).toThrowError();
-
-      expect(() =>
-        unSafeESTest(
-          {
-            name: "1",
-            age: 1,
-            info: {},
-          },
-          "object",
-        ).schema({
-          name: "string",
-          age: "number",
-          info: {
-            a: "number",
-            b: "number",
-            c: "number",
-          },
-        }),
-      ).toThrowError();
-
-      expect(() =>
-        unSafeESTest(
-          [
-            {
-              name: "1",
-              age: 1,
-              info: {
-                a: 1,
-                b: 1,
-                c: 1,
+        expect(() =>
+          unSafeESTest(
+            [
+              {
+                name: "1",
+                age: 1,
+                info: {
+                  a: 1,
+                  b: 1,
+                  c: 1,
+                },
               },
+            ],
+            "object",
+          ).schema({
+            name: "string",
+            age: "number",
+            info: {
+              a: "number",
+              b: "number",
+              c: "number",
             },
-          ],
-          "object",
-        ).schema({
-          name: "string",
-          age: "number",
-          info: {
-            a: "number",
-            b: "number",
-            c: "number",
-          },
-        }),
-      ).toThrowError();
+          }),
+        ).toThrowError();
+      });
+    });
+
+    describe("refine", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        const data = {
+          password: "1234",
+          confirmPassword: "1234",
+        };
+
+        unSafeESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine((val) => val.password === val.confirmPassword, "test");
+
+        unSafeESTest(data, "object")
+          .schema({
+            password: "string",
+            confirmPassword: "string",
+          })
+          .refine((val) => val.password === val.confirmPassword);
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const data = {
+          password: "1234",
+          confirmPassword: "xyz",
+        };
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              password: "string",
+              confirmPassword: "string",
+            })
+            .refine(() => "over"),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              password: "string",
+              confirmPassword: "string",
+            })
+            .refine(() => "over", 123),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              password: "string",
+              confirmPassword: "string",
+            })
+            .refine(() => "over", {
+              message: 123,
+            }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              password: "string",
+              confirmPassword: "string",
+            })
+            .refine((val) => val.password === val.confirmPassword),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              password: "string",
+              confirmPassword: "string",
+            })
+            .refine((val) => val.password === val.confirmPassword, 1),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              password: "string",
+              confirmPassword: "string",
+            })
+            .refine((val) => val.password === val.confirmPassword, {
+              message: 1,
+            }),
+        ).toThrowError();
+      });
     });
   });
 
