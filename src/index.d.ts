@@ -333,6 +333,46 @@ declare interface _Object extends _Common<"object"> {
    *  .refine(val => val.password === val.checkPassword, 'password mismatch')
    */
   refine<T>(fn: (arg: T) => boolean, message: string): void;
+
+  /**
+   * @example
+   * // "multiple cases" cross field validation
+   *
+   * const data {
+   *   name: 'mike',
+   *   checkName: 'mike',
+   *   password: '123'
+   *   checkPassword: '123'
+   * }
+   *
+   * // pass
+   * ESTest(data, 'object')
+   *  .schema({
+   *    name: 'string',
+   *    checkName: 'string',
+   *    password: 'string',
+   *    checkPassword: 'string',
+   *  })
+   *  .superRefine((val, ctx) => {
+   *    // case 1
+   *    if (val.name !== val.checkName) {
+   *      ctx.addIssue('name mismatch')
+   *    }
+   *
+   *    // case 2
+   *    if (val.password !== val.checkPassword) {
+   *      ctx.addIssue('password mismatch')
+   *    }
+   *  })
+   */
+  superRefine<T>(
+    fn: (
+      arg: T,
+      ctx: {
+        addIssue: (message: string) => void;
+      },
+    ) => void,
+  ): void;
 }
 
 declare interface _Array extends _Common<"array"> {

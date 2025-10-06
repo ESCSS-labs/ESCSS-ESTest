@@ -39,6 +39,7 @@ globalThis.__ESCSS_ESTEST__ = {
       lowercase: 0,
       schema: 0,
       refine: 0,
+      superRefine: 0,
     },
     _Null: {
       _count: 0,
@@ -96,6 +97,7 @@ globalThis.__ESCSS_ESTEST__ = {
       _count: 0,
       schema: 0,
       refine: 0,
+      superRefine: 0,
     },
     _Array: {
       _count: 0,
@@ -281,6 +283,10 @@ const _classType = {
 
     refine() {
       globalThis.__ESCSS_ESTEST__.analysis._Undefined.refine += 1;
+    }
+
+    superRefine() {
+      globalThis.__ESCSS_ESTEST__.analysis._Undefined.superRefine += 1;
     }
   },
   null: class _Null extends _Common {
@@ -1129,6 +1135,38 @@ const _classType = {
         );
       }
     }
+
+    superRefine(fn) {
+      globalThis.__ESCSS_ESTEST__.analysis._Object.superRefine += 1;
+
+      const ctx = {
+        addIssue: (message) => {
+          if (typeof message !== "string") {
+            return _err(
+              this.input,
+              this.type,
+              this.message,
+              this.isUnSafe,
+              "_errLogType",
+              message,
+              "string",
+            );
+          }
+
+          this.message = message;
+
+          _err(
+            this.input,
+            this.type,
+            this.message,
+            this.isUnSafe,
+            "_errLogSuperRefine",
+          );
+        },
+      };
+
+      fn(this.input, ctx);
+    }
   },
   array: class _Array extends _Common {
     constructor(...args) {
@@ -1385,6 +1423,8 @@ function _err(
       ),
     _errLogRefine: (logType) =>
       console[logType](` \n 🥲  refine() condition mismatch`),
+    _errLogSuperRefine: (logType) =>
+      console[logType](` \n 🥲  superRefine() condition mismatch`),
   };
 
   const _unSafeESTestLog = {
@@ -1411,6 +1451,7 @@ function _err(
     _errLogPropertyMissing: `[unSafeESTest(input).schema()] value is missing. But required`,
     _errLogTypeMismatch: `[unSafeESTest(input).schema()] type mismatch`,
     _errLogRefine: `[unSafeESTest(input).refine()] condition mismatch`,
+    _errLogSuperRefine: `[unSafeESTest(input).superRefine()] condition mismatch`,
   };
 
   // ESTest

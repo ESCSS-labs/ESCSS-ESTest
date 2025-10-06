@@ -1475,6 +1475,136 @@ describe("ESTest", () => {
         expect(information).toHaveBeenCalledTimes(6);
       });
     });
+
+    describe("superRefine", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        const data = {
+          name: "mike",
+          checkName: "mike",
+          password: "1234",
+          confirmPassword: "1234",
+        };
+
+        ESTest(data, "object")
+          .schema({
+            name: "string",
+            checkName: "string",
+            password: "string",
+            confirmPassword: "string",
+          })
+          .superRefine((val, ctx) => {
+            if (val.name !== val.checkName) {
+              ctx.addIssue("name mismatch");
+            }
+
+            if (val.password !== val.confirmPassword) {
+              ctx.addIssue("password mismatch");
+            }
+          });
+
+        ESTest(data, "object")
+          .schema({
+            name: "string",
+            checkName: "string",
+            password: "string",
+            confirmPassword: "string",
+          })
+          .superRefine((val, ctx) => {
+            if (val.name !== val.checkName) {
+              ctx.addIssue("name mismatch");
+            }
+
+            if (val.password !== val.confirmPassword) {
+              ctx.addIssue("password mismatch");
+            }
+          });
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        const data = {
+          name: "mike",
+          checkName: "leo",
+          password: "1234",
+          confirmPassword: "5678",
+        };
+
+        ESTest(data, "object")
+          .schema({
+            name: "string",
+            checkName: "string",
+            password: "string",
+            confirmPassword: "string",
+          })
+          .superRefine((val, ctx) => {
+            if (val.name !== val.checkName) {
+              ctx.addIssue("name mismatch");
+            }
+
+            if (val.password !== val.confirmPassword) {
+              ctx.addIssue("password mismatch");
+            }
+          });
+
+        ESTest(data, "object")
+          .schema({
+            name: "string",
+            checkName: "string",
+            password: "string",
+            confirmPassword: "string",
+          })
+          .superRefine((val, ctx) => {
+            if (val.name !== val.checkName) {
+              ctx.addIssue(1);
+            }
+
+            if (val.password !== val.confirmPassword) {
+              ctx.addIssue(true);
+            }
+          });
+
+        ESTest(data, "object")
+          .schema({
+            name: "string",
+            checkName: "string",
+            password: "string",
+            confirmPassword: "string",
+          })
+          .superRefine((val, ctx) => {
+            if (val.name !== val.checkName) {
+              ctx.addIssue("name mismatch");
+            }
+          });
+
+        ESTest(data, "object")
+          .schema({
+            name: "string",
+            checkName: "string",
+            password: "string",
+            confirmPassword: "string",
+          })
+          .superRefine((val, ctx) => {
+            if (val.name !== val.checkName) {
+              ctx.addIssue({});
+            }
+          });
+
+        expect(message).toHaveBeenCalledTimes(6);
+        expect(information).toHaveBeenCalledTimes(6);
+      });
+    });
   });
 
   describe("bigint", () => {
@@ -3033,6 +3163,132 @@ describe("unSafeESTest", () => {
             })
             .refine((val) => val.password === val.confirmPassword, {
               message: 1,
+            }),
+        ).toThrowError();
+      });
+    });
+
+    describe("superRefine", () => {
+      test("success", () => {
+        const message = vi.spyOn(console, "error").mockImplementation(() => {});
+        const information = vi
+          .spyOn(console, "trace")
+          .mockImplementation(() => {});
+
+        const data = {
+          name: "mike",
+          checkName: "leo",
+          password: "1234",
+          confirmPassword: "5678",
+        };
+
+        unSafeESTest(data, "object")
+          .schema({
+            name: "string",
+            checkName: "string",
+            password: "string",
+            confirmPassword: "string",
+          })
+          .superRefine((val, ctx) => {
+            if (val.name === val.checkName) {
+              ctx.addIssue("name mismatch");
+            }
+
+            if (val.password === val.confirmPassword) {
+              ctx.addIssue("password mismatch");
+            }
+          });
+
+        unSafeESTest(data, "object")
+          .schema({
+            name: "string",
+            checkName: "string",
+            password: "string",
+            confirmPassword: "string",
+          })
+          .superRefine((val, ctx) => {
+            if (val.name === val.checkName) {
+              ctx.addIssue("name mismatch");
+            }
+          });
+
+        expect(message).toHaveBeenCalledTimes(0);
+        expect(information).toHaveBeenCalledTimes(0);
+      });
+
+      test("fail", () => {
+        const data = {
+          name: "mike",
+          checkName: "leo",
+          password: "1234",
+          confirmPassword: "5678",
+        };
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              name: "string",
+              checkName: "string",
+              password: "string",
+              confirmPassword: "string",
+            })
+            .superRefine((val, ctx) => {
+              if (val.name !== val.checkName) {
+                ctx.addIssue("name mismatch");
+              }
+
+              if (val.password !== val.confirmPassword) {
+                ctx.addIssue("password mismatch");
+              }
+            }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              name: "string",
+              checkName: "string",
+              password: "string",
+              confirmPassword: "string",
+            })
+            .superRefine((val, ctx) => {
+              if (val.name !== val.checkName) {
+                ctx.addIssue(1);
+              }
+
+              if (val.password !== val.confirmPassword) {
+                ctx.addIssue(true);
+              }
+            }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              name: "string",
+              checkName: "string",
+              password: "string",
+              confirmPassword: "string",
+            })
+            .superRefine((val, ctx) => {
+              if (val.name !== val.checkName) {
+                ctx.addIssue("name mismatch");
+              }
+            }),
+        ).toThrowError();
+
+        expect(() =>
+          unSafeESTest(data, "object")
+            .schema({
+              name: "string",
+              checkName: "string",
+              password: "string",
+              confirmPassword: "string",
+            })
+            .superRefine((val, ctx) => {
+              if (val.name !== val.checkName) {
+                ctx.addIssue({});
+              }
             }),
         ).toThrowError();
       });
