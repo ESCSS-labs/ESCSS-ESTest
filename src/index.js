@@ -1711,7 +1711,7 @@ function _test(
   return new _classType[type](input, type, message, isUnSafe);
 }
 
-function ESTest(input, type, message) {
+export function ESTest(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
     // early return and set 'undefined' type to prevent breaking
     return new _classType.undefined();
@@ -1723,7 +1723,14 @@ function ESTest(input, type, message) {
   return _test(input, type, message, false);
 }
 
-function ESTestForLibrary(input, type, message) {
+export function unSafeESTest(input, type, message) {
+  globalThis.__ESCSS_ESTEST__.analysis.unSafeESTest._count += 1;
+
+  // throw new Error()
+  return _test(input, type, message, true);
+}
+
+export function ESTestForLibrary(input, type, message) {
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
     // early return and set 'undefined' type to prevent breaking
     return new _classType.undefined();
@@ -1735,12 +1742,3 @@ function ESTestForLibrary(input, type, message) {
   // console.error()
   return _test(input, type, message, false);
 }
-
-function unSafeESTest(input, type, message) {
-  globalThis.__ESCSS_ESTEST__.analysis.unSafeESTest._count += 1;
-
-  // throw new Error()
-  return _test(input, type, message, true);
-}
-
-export { ESTest, unSafeESTest, ESTestForLibrary };
