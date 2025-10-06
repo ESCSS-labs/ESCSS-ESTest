@@ -1553,7 +1553,7 @@ function _validate(schema, path, input, type, message, isUnSafe) {
 
 function _test(
   input,
-  type = "null",
+  type,
   message = globalThis.__ESCSS_ESTEST__.message,
   isUnSafe,
 ) {

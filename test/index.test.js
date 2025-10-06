@@ -24,6 +24,10 @@ describe("ESTest", () => {
         .mockImplementation(() => {});
 
       expect(ESTest()).toBeTypeOf("object");
+      expect(ESTest().min(10)).toBeTypeOf("object");
+      expect(ESTest(1, "1", 1).min(0)).toBeTypeOf("object");
+      expect(ESTest(1, 1, "1").min(0)).toBeTypeOf("object");
+      expect(ESTest(1, 1, 1).min(0)).toBeTypeOf("object");
       expect(ESTest(/a/, "string")).toBeTypeOf("object");
       expect(ESTest("a", "number")).toBeTypeOf("object");
       expect(ESTest(NaN, "number")).toBeTypeOf("object");
@@ -36,8 +40,8 @@ describe("ESTest", () => {
       expect(ESTest(NaN, "symbol")).toBeTypeOf("object");
       expect(ESTest(Symbol("a"), "function")).toBeTypeOf("object");
 
-      expect(message).toHaveBeenCalledTimes(12);
-      expect(information).toHaveBeenCalledTimes(12);
+      expect(message).toHaveBeenCalledTimes(16);
+      expect(information).toHaveBeenCalledTimes(16);
     });
   });
 
@@ -1811,6 +1815,11 @@ describe("unSafeESTest", () => {
     });
 
     test("fail", () => {
+      expect(() => unSafeESTest()).toThrow();
+      expect(() => unSafeESTest().min(10)).toThrow();
+      expect(() => unSafeESTest(1, "1", 1).min(0)).toThrow();
+      expect(() => unSafeESTest(1, 1, "1").min(0)).toThrow();
+      expect(() => unSafeESTest(1, 1, 1).min(0)).toThrow();
       expect(() => unSafeESTest()).toThrow();
       expect(() => unSafeESTest(undefined)).toThrow();
       expect(() => unSafeESTest(/a/, "string")).toThrow();
