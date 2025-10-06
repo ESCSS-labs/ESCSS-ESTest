@@ -10,21 +10,10 @@ declare type _ALLOWED_TYPES =
   | "object"
   | "array";
 
-declare type _ALLOWED_TYPES__SCHEMA =
-  | "null"
-  | "boolean"
-  | "number"
-  | "bigint"
-  | "string"
-  | "symbol"
-  | "function"
-  | "array"
-  | "date";
-
-declare type _SCHEMA_DEFINITION =
-  | _ALLOWED_TYPES__SCHEMA
-  | { [key: string]: _SCHEMA_DEFINITION | _SCHEMA_DEFINITION[] }
-  | _SCHEMA_DEFINITION[];
+declare type _SCHEMA =
+  | _ALLOWED_TYPES
+  | { [key: string]: _SCHEMA | _SCHEMA[] }
+  | _SCHEMA[];
 
 declare type _ClassType<T extends _ALLOWED_TYPES> = T extends "undefined"
   ? _Undefined
@@ -313,7 +302,7 @@ declare interface _Object extends _Common<"object"> {
    *   }]
    * })
    */
-  schema(T: { [key: string]: _SCHEMA_DEFINITION }): _ClassType<"object">;
+  schema(T: { [key: string]: _SCHEMA }): _ClassType<"object">;
 
   /**
    * @example
@@ -419,7 +408,7 @@ declare interface _Array extends _Common<"array"> {
    *   }]
    * })
    */
-  schema(T: { [key: string]: _SCHEMA_DEFINITION }): _ClassType<"array">;
+  schema(T: { [key: string]: _SCHEMA }): _ClassType<"array">;
 }
 
 declare interface _Array extends _Common<"array"> {}
