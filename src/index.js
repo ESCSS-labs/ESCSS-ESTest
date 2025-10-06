@@ -1557,31 +1557,33 @@ function _test(
   message = globalThis.__ESCSS_ESTEST__.message,
   isUnSafe,
 ) {
-  // invalid type
-  if (!_ALLOWED_TYPES.includes(type)) {
-    if (typeof message !== "string") {
+  if (typeof message !== "string") {
+    // edge case
+    if (!_ALLOWED_TYPES.includes(type)) {
       _err(input, "undefined", message, isUnSafe, "_errLogArg3");
+      return new _classType["undefined"](input, "undefined", message, isUnSafe);
     }
 
-    _err(input, "undefined", message, isUnSafe, "_errLogArg2");
+    _err(input, type, message, isUnSafe, "_errLogArg3");
   }
 
-  // valid type
-  else {
-    if (typeof message !== "string") {
-      _err(input, type, message, isUnSafe, "_errLogArg3");
-    }
+  // check valid type
+  else if (!_ALLOWED_TYPES.includes(type)) {
+    _err(input, "undefined", message, isUnSafe, "_errLogArg2");
+    return new _classType["undefined"](input, "undefined", message, isUnSafe);
+  }
 
-    if (
-      _typeof(input) === "number" &&
-      !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
-    ) {
-      _err(input, type, message, isUnSafe, "_errLogNumber");
-    }
+  // check valid number
+  else if (
+    _typeof(input) === "number" &&
+    !(Number.MIN_SAFE_INTEGER <= input && input <= Number.MAX_SAFE_INTEGER)
+  ) {
+    _err(input, type, message, isUnSafe, "_errLogNumber");
+  }
 
-    if (_typeof(input) !== type) {
-      _err(input, type, message, isUnSafe, "_errLogArg1");
-    }
+  // check match type
+  else if (_typeof(input) !== type) {
+    _err(input, type, message, isUnSafe, "_errLogArg1");
   }
 
   // Returns an object for method chaining. e.g., ESTest(1, 'number').min(0).max(10)
