@@ -1300,8 +1300,7 @@ function _typeof(input) {
       break;
     case "number":
       if (Number.isNaN(input)) {
-        // for internal usage to check edge case of number
-        newType = "nan";
+        newType = "NaN";
       } else {
         newType = "number";
       }
