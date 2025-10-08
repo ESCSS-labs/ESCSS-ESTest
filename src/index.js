@@ -8,6 +8,9 @@ globalThis.__ESCSS_ESTEST__ = {
     unSafeESTest: {
       _count: 0,
     },
+    ESTestForLibrary: {
+      _count: 0,
+    },
     _Common: {
       _count: 0,
       describe: 0,
@@ -1714,12 +1717,12 @@ function _test(
 }
 
 export function ESTest(input, type, message) {
+  globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
+
+  // early return and set 'undefined' type to prevent breaking
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
-    // early return and set 'undefined' type to prevent breaking
     return new _classType.undefined();
   }
-
-  globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
 
   // console.error()
   return _test(input, type, message, false);
@@ -1733,13 +1736,14 @@ export function unSafeESTest(input, type, message) {
 }
 
 export function ESTestForLibrary(input, type, message) {
+  globalThis.__ESCSS_ESTEST__.analysis.ESTestForLibrary._count += 1;
+
+  // early return and set 'undefined' type to prevent breaking
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
-    // early return and set 'undefined' type to prevent breaking
     return new _classType.undefined();
   }
 
   globalThis.__ESCSS_ESTEST__.message = message;
-  globalThis.__ESCSS_ESTEST__.analysis.ESTest._count += 1;
 
   // console.error()
   return _test(input, type, message, false);
