@@ -1565,31 +1565,33 @@ function _err(
 
   // ESTest
   if (!isUnSafe) {
+    // Public Message: visible in dev/prod for bug tracking
     console.error(` 📝 Message: ${message}`);
 
-    if (
-      _typeof(process) !== "undefined" &&
-      process.env.NODE_ENV === "production"
-    ) {
-      _ESTestLog._errLogHiddenInfo("error");
-    } else {
-      // browser
-      if (typeof window === "object") {
-        _ESTestLog[logToken]("error");
-      } else {
-        _ESTestLog[logToken]("trace");
-      }
+    // Private Message:
+    // - hidden detail in prod
+    // - show detail in dev
+    if (process?.env.NODE_ENV === "production") {
+      return _ESTestLog._errLogHiddenInfo("error");
     }
+
+    // browser
+    if (typeof window === "object") {
+      return _ESTestLog[logToken]("error");
+    }
+
+    // node
+    _ESTestLog[logToken]("trace");
   }
 
   // unSafeESTest
-  else {
-    // customized error message
+  if (isUnSafe) {
+    // user set their error msg
     if (message !== globalThis.__ESCSS_ESTEST__.message) {
       throw new Error(message);
-    } else {
-      throw new Error(_unSafeESTestLog[logToken]);
     }
+
+    throw new Error(_unSafeESTestLog[logToken]);
   }
 }
 
