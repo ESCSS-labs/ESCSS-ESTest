@@ -10,7 +10,7 @@ Just for a guy who wants to survive in a **massive**, **legacy** JavaScript/Type
 - 💣 No vender lock-in.
 - 🐛 Find bug quickly.
 - ❤️‍🔥 DX first, DX first, DX first and security!
-- 🪶 3.65 kB (minified + gzipped), 0 dependencies.
+- 🪶 ~4 kB (minified + gzipped), 0 dependencies.
 - ✅ Autocompletion support.
 - ⚡ (Optional) The definitive choice for high-performance.
 
@@ -75,42 +75,59 @@ function sum(a, b) {
 import { ESTest } from "escss-estest";
 
 async function getApi() {
-  const apiData = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  const apiData = await fetch("https://jsonplaceholder.typicode.com/users/1");
   const data = await apiData.json();
 
   // const data = {
   //   id: 1,
-  //   name: 'Mike',
-  //   info: {
-  //     title: "developer",
-  //     more: [
-  //       {
-  //         msg: 'Hello!',
-  //       },
-  //       {
-  //         msg: 'Hi!',
-  //       }
-  //     ]
+  //   name: "Leanne Graham",
+  //   username: "Bret",
+  //   email: "Sincere@april.biz",
+  //   address: {
+  //     street: "Kulas Light",
+  //     suite: "Apt. 556",
+  //     city: "Gwenborough",
+  //     zipcode: "92998-3874",
+  //     geo: {
+  //       lat: "-37.3159",
+  //       lng: "81.1496"
+  //     }
   //   },
+  //   phone: "1-770-736-8031 x56442",
+  //   website: "hildegard.org",
+  //   company: {
+  //     name: "Romaguera-Crona",
+  //     catchPhrase: "Multi-layered client-server neural-net",
+  //     bs: "harness real-time e-markets"
+  //   }
   // }
 
   {
-    // validate schema
-    ESTest(data, "object", "schema mismatch").schema({
+    // API validate from the backend failed -> console.error('your text')
+    // pass
+    ESTest(data, "object", "schema do not match").schema({
       id: "number",
-      "name?": "string",
-      info: {
-        title: "string",
-        more: [
-          {
-            msg: "string",
-          },
-        ],
+      name: "string",
+      username: "string",
+      email: "string",
+      address: {
+        street: "string",
+        suite: "string",
+        city: "string",
+        zipcode: "string",
+        geo: {
+          lat: "string",
+          lng: "string",
+        },
+      },
+      phone: "string",
+      website: "string",
+      company: {
+        name: "string",
+        catchPhrase: "string",
+        bs: "string",
       },
     });
-
-    // validate detail
-    ESTest(data.id, "number", "custom msg").min(0).max(50);
   }
 
   // do something
@@ -132,47 +149,32 @@ const port = 3000;
 
 app.use(express.json());
 
-app.post("/demo", (req, res) => {
+app.post("/api/login", (req, res) => {
   try {
     const data = req.body;
 
     // const data = {
-    //   id: 1,
-    //   name: 'Mike',
-    //   info: {
-    //     title: "developer",
-    //     more: [
-    //       {
-    //         msg: 'Hello!',
-    //       },
-    //       {
-    //         msg: 'Hi!',
-    //       }
-    //     ]
-    //   },
+    //   username: 'abcd',
+    //   password: '1234',
+    //   confirmPassword: '1234'
     // }
 
     {
-      // validate schema
-      unSafeESTest(data, "object", "schema mismatch").schema({
-        id: "number",
-        "name?": "string",
-        info: {
-          title: "string",
-          more: [
-            {
-              msg: "string",
-            },
-          ],
-        },
-      });
-
-      // validate detail
-      unSafeESTest(data.id, "number", "custom msg").min(0).max(50);
+      // Schema or password validation failed -> throw new Error('your text')
+      // pass
+      unSafeESTest(data, "object", "schema do not match")
+        .schema({
+          username: "string",
+          password: "string",
+          confirmPassword: "string",
+        })
+        .refine(
+          (val) => val.password === val.confirmPassword,
+          "passwords do not match",
+        );
     }
 
     // do something
-
     res.json({ message: "ok" });
   } catch (err) {
     res.status(400).json({ message: err.message });
