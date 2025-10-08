@@ -1584,7 +1584,7 @@ function _err(
     }
 
     // node
-    _ESTestLog[logToken]("trace");
+    return _ESTestLog[logToken]("trace");
   }
 
   // unSafeESTest
