@@ -1626,7 +1626,7 @@ function _validate(input, type, message, isUnSafe, schema, path) {
       ? newInput[key.slice(0, -1)]
       : newInput[key];
     const schemaValue = newSchema[key];
-    const pathOptional = key.endsWith("?")
+    const pathway = key.endsWith("?")
       ? `${newPath}.${key.slice(0, -1)}`
       : `${newPath}.${key}`;
 
@@ -1641,7 +1641,7 @@ function _validate(input, type, message, isUnSafe, schema, path) {
         message,
         isUnSafe,
         "_errLogPropertyMissing",
-        pathOptional,
+        pathway,
       );
     }
 
@@ -1653,7 +1653,7 @@ function _validate(input, type, message, isUnSafe, schema, path) {
         message,
         isUnSafe,
         schemaValue,
-        pathOptional,
+        pathway,
       );
     }
 
@@ -1664,7 +1664,7 @@ function _validate(input, type, message, isUnSafe, schema, path) {
         message,
         isUnSafe,
         "_errLogTypeMismatch",
-        pathOptional,
+        pathway,
         _typeof(inputValue),
         schemaValue,
       );
