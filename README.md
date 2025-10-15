@@ -14,12 +14,6 @@ Just for a guy who wants to survive in a **massive**, **legacy** JavaScript/Type
 - ✅ Autocompletion support.
 - ⚡ (Optional) The definitive choice for high-performance.
 
-## benchmark
-
-<img width="800" alt="benchmark" src="https://github.com/user-attachments/assets/0f367922-a8fb-4436-ac65-3f6f34819772" />
-
-**source**: [ESTest-benchmark-repo](https://github.com/ESCSS-labs/ESTest-benchmark-repo)
-
 ## Installation
 
 ```bash
