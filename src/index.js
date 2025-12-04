@@ -1566,7 +1566,7 @@ function _err(
     _errLogSuperRefine: `[unSafeESTest(input).superRefine()] condition mismatch`,
   };
 
-  // ESTest
+  // ESTest() case
   if (!isUnSafe) {
     // Public Message: visible in dev/prod for bug tracking
     console.error(` 📝 Message: ${message}`);
@@ -1587,8 +1587,8 @@ function _err(
     return _ESTestLog[logToken]("trace");
   }
 
-  // unSafeESTest
-  if (isUnSafe) {
+  // unSafeESTest() case
+  else if (isUnSafe) {
     // user set their error msg
     if (message !== globalThis.__ESCSS_ESTEST__.message) {
       throw new Error(message);
