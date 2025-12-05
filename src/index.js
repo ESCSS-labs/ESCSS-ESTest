@@ -1521,7 +1521,7 @@ function _err(
         ` \n ✅ Expected: input is a negative number/bigint \n ❌ Received input:`,
         input,
       ),
-    _errLogOnlyObjArr: (logType) =>
+    _errLogOnlyObjOrArr: (logType) =>
       console[logType](`🥲 <input> ONLY "object" or "array".`),
     _errLogSchemaMismatch: (logType) =>
       console[logType](
@@ -1558,7 +1558,7 @@ function _err(
     _errLogPositive: `[unSafeESTest(input).integer()] Expected: input is a positive number/bigint`,
     _errLogNegative: `[unSafeESTest(input).integer()] Expected: input is a negative number/bigint`,
 
-    _errLogOnlyObjArr: `[unSafeESTest(input).schema()] <input> ONLY "object" or "array".`,
+    _errLogOnlyObjOrArr: `[unSafeESTest(input).schema()] <input> ONLY "object" or "array".`,
     _errLogSchemaMismatch: `[unSafeESTest(input).schema()] schema mismatch.`,
     _errLogPropertyMissing: `[unSafeESTest(input).schema()] value is missing. But required`,
     _errLogTypeMismatch: `[unSafeESTest(input).schema()] type mismatch`,
@@ -1605,8 +1605,8 @@ function _validate(input, type, message, isUnSafe, schema, path) {
     );
   }
 
-  if (!(_typeof(input) === "object" || _typeof(input) === "array")) {
-    return _err(input, type, message, isUnSafe, "_errLogOnlyObjArr");
+  if (!["object", "array"].includes(_typeof(input))) {
+    return _err(input, type, message, isUnSafe, "_errLogOnlyObjOrArr");
   }
 
   const newInput = _typeof(input) === "array" ? input[0] : input;
