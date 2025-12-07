@@ -40,7 +40,7 @@ declare type _ClassType<
               : Type extends "function"
                 ? _Function
                 : Type extends "object"
-                  ? _Object<Input extends object ? Input : object> // <-- 傳遞 INPUT，並確保它是物件
+                  ? _Object<Input extends object ? Input : object>
                   : Type extends "array"
                     ? _Array<Input>
                     : never;
@@ -48,7 +48,7 @@ declare type _ClassType<
 declare interface _Common<Type extends _ALLOWED_TYPES, Input = unknown> {
   /**
    * @example
-   * // more information, doesn't do anything
+   * // more helpful information
    * ESTest('foo', 'string').describe('a helpful information')
    */
   describe(): _ClassType<Type, Input>;
@@ -66,35 +66,35 @@ declare interface _Number extends _Common<"number"> {
    * // 5 < 10
    * ESTest(5, 'number').less(10) // pass
    */
-  less(): _Number;
+  less(inputValue: number): _Number;
 
   /**
    * @example
    * // 5 <= 10
    * ESTest(5, 'number').max(10) // pass
    */
-  max(): _Number;
+  max(inputValue: number): _Number;
 
   /**
    * @example
    * // 15 > 10
    * ESTest(15, 'number').greater(10) // pass
    */
-  greater(): _Number;
+  greater(inputValue: number): _Number;
 
   /**
    * @example
    * // 15 >= 10
    * ESTest(15, 'number').min(10) // pass
    */
-  min(): _Number;
+  min(inputValue: number): _Number;
 
   /**
    * @example
    * // Number.isInteger(15)
    * ESTest(15, 'number').integer() // pass
    */
-  integer(): _Number;
+  integer(inputValue: number): _Number;
 
   /**
    * @example
@@ -115,7 +115,7 @@ declare interface _Number extends _Common<"number"> {
    * // 15 % 3 === 0
    * ESTest(15, 'number').multiple(3) // pass
    */
-  multiple(): _Number;
+  multiple(inputValue: number): _Number;
 }
 
 declare interface _BigInt extends _Common<"bigint"> {
@@ -124,28 +124,28 @@ declare interface _BigInt extends _Common<"bigint"> {
    * // 5n < 10n
    * ESTest(5n, 'bigint').less(10n) // pass
    */
-  less(): _BigInt;
+  less(inputValue: bigint): _BigInt;
 
   /**
    * @example
    * // 5n <= 10n
    * ESTest(5n, 'bigint').max(10n) // pass
    */
-  max(): _BigInt;
+  max(inputValue: bigint): _BigInt;
 
   /**
    * @example
    * // 15n > 10n
    * ESTest(15n, 'bigint').greater(10n) // pass
    */
-  greater(): _BigInt;
+  greater(inputValue: bigint): _BigInt;
 
   /**
    * @example
    * // 15n >= 10n
    * ESTest(15n, 'bigint').min(10n) // pass
    */
-  min(): _BigInt;
+  min(inputValue: bigint): _BigInt;
 
   /**
    * @example
@@ -166,7 +166,7 @@ declare interface _BigInt extends _Common<"bigint"> {
    * // 15n % 3n === 0n
    * ESTest(15n, 'bigint').multiple(3n) // pass
    */
-  multiple(): _BigInt;
+  multiple(inputValue: bigint): _BigInt;
 }
 
 declare interface _String extends _Common<"string"> {
@@ -175,21 +175,21 @@ declare interface _String extends _Common<"string"> {
    * // 'foo'.length <= 10
    * ESTest('foo', 'string').max(10) // pass
    */
-  max(): _String;
+  max(inputValue: number): _String;
 
   /**
    * @example
-   * // 'foo'.length >= 10
-   * ESTest('foo', 'string').min(10) // pass
+   * // 'foo'.length >= 1
+   * ESTest('foo', 'string').min(1) // pass
    */
-  min(): _String;
+  min(inputValue: number): _String;
 
   /**
    * @example
-   * // 'foo'.length === 10
-   * ESTest('foo', 'string').length(10) // pass
+   * // 'foo'.length === 3
+   * ESTest('foo', 'string').length(3) // pass
    */
-  length(): _String;
+  length(inputValue: number): _String;
 
   /**
    * @example
@@ -205,7 +205,7 @@ declare interface _String extends _Common<"string"> {
    * // A loose regex that allows Unicode characters, enforces length limits, and that's about it.
    * ESTest("user.name123@example-domain.com", "string").email("unicodeEmail"); // pass
    */
-  email(): _String;
+  email(inputValue: string): _String;
 
   /**
    * @example
@@ -223,7 +223,7 @@ declare interface _String extends _Common<"string"> {
    * @example
    * ESTest('foo bar', 'string').regex(/(foo|bar)/) // pass
    */
-  regex(): _String;
+  regex(inputValue: RegExp): _String;
 
   /**
    * @example
@@ -380,21 +380,21 @@ declare interface _Array<Input> extends _Common<"array", Input> {
    * // [1, 2, 3].length >= 3
    * ESTest([1, 2, 3], 'array').min(3) // pass
    */
-  min(): _Array<Input>;
+  min(inputValue: number): _Array<Input>;
 
   /**
    * @example
    * // [1, 2, 3].length <= 3
    * ESTest([1, 2, 3], 'array').max(3) // pass
    */
-  max(): _Array<Input>;
+  max(inputValue: number): _Array<Input>;
 
   /**
    * @example
    * // [1, 2, 3].length === 3
    * ESTest([1, 2, 3], 'array').length(3) // pass
    */
-  length(): _Array<Input>;
+  length(inputValue: number): _Array<Input>;
 
   /**
    * @example
@@ -485,8 +485,13 @@ declare interface _Array<Input> extends _Common<"array", Input> {
 }
 
 /**
- * Non-breaking error logging via console.error(...)
+ * output a `console.error(...)`
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
+ * @example
+ * ESTest("Hello world", "string", "custom message here") // pass
+ * ESTest(1, "number").max(10) // pass
+ * ESTest([1, '123'], "array") // pass
+ * ESTest({name: 'Mark'}, "object") // pass
  */
 export declare function ESTest<Type extends _ALLOWED_TYPES, Input>(
   input: Input,
@@ -495,8 +500,13 @@ export declare function ESTest<Type extends _ALLOWED_TYPES, Input>(
 ): _ClassType<Type, Input>;
 
 /**
- * Breaking error throwing via throw new Error(...)
+ * output a `throw new Error(...)`
  * @see https://github.com/ESCSS-labs/ESCSS-ESTest
+ * @example
+ * unSafeESTest("Hello world", "string", "custom message here") // pass
+ * unSafeESTest(1, "number").max(10) // pass
+ * unSafeESTest([1, '123'], "array") // pass
+ * unSafeESTest({name: 'Mark'}, "object") // pass
  */
 export declare function unSafeESTest<Type extends _ALLOWED_TYPES, Input>(
   input: Input,
@@ -505,14 +515,13 @@ export declare function unSafeESTest<Type extends _ALLOWED_TYPES, Input>(
 ): _ClassType<Type, Input>;
 
 /**
+ * output a `console.error(...)`
+ * @see https://github.com/ESCSS-labs/ESCSS-ESTest
  * @example
- *
- * // provide default error message for library
- * function ESTest(input, type, message = "[libraryName] your message for others to help debugging") {
+ * // wrap the function to provide a default message scope for the library
+ * function ESTest(input, type, message = "[libraryName] your message for others to help debugging!!") {
  *  return ESTestForLibrary(input, type, message)
  * }
- *
- * @see https://github.com/ESCSS-labs/ESCSS-ESTest
  */
 export declare function ESTestForLibrary<Type extends _ALLOWED_TYPES, Input>(
   input: Input,
@@ -531,10 +540,10 @@ declare global {
     message: string;
 
     /**
-     *  - true: Enables a high-performance mode for production use.
-     *  - false (default): Logs detailed errors for debugging.
+     *  - true: disable checking for performance
+     *  - false (default): output a `console.error(...)`
      *
-     * Note: unSafeESTest() will not be affected (for security reasons)*
+     * Note: `unSafeESTest()` will not be affected (security)
      *
      * @see https://github.com/ESCSS-labs/ESCSS-ESTest
      */
