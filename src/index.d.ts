@@ -1,14 +1,14 @@
 declare type _ALLOWED_TYPES =
-  | "undefined"
-  | "null"
-  | "boolean"
-  | "number"
+  | "array"
   | "bigint"
+  | "boolean"
+  | "function"
+  | "null"
+  | "number"
+  | "object"
   | "string"
   | "symbol"
-  | "function"
-  | "object"
-  | "array";
+  | "undefined";
 
 type _ArraySchema<Type> = Type extends (infer U)[] ? U : Type;
 
@@ -23,26 +23,26 @@ type _ObjectSchema<Type> = {
 declare type _TypeClass<
   Type extends _ALLOWED_TYPES,
   Input,
-> = Type extends "undefined"
-  ? _Undefined
-  : Type extends "null"
-    ? _Null
+> = Type extends "array"
+  ? _Array<Input>
+  : Type extends "bigint"
+    ? _BigInt
     : Type extends "boolean"
       ? _Boolean
-      : Type extends "number"
-        ? _Number
-        : Type extends "bigint"
-          ? _BigInt
-          : Type extends "string"
-            ? _String
-            : Type extends "symbol"
-              ? _Symbol
-              : Type extends "function"
-                ? _Function
-                : Type extends "object"
-                  ? _Object<Input extends object ? Input : object>
-                  : Type extends "array"
-                    ? _Array<Input>
+      : Type extends "function"
+        ? _Function
+        : Type extends "null"
+          ? _Null
+          : Type extends "number"
+            ? _Number
+            : Type extends "object"
+              ? _Object<Input extends object ? Input : object>
+              : Type extends "string"
+                ? _String
+                : Type extends "symbol"
+                  ? _Symbol
+                  : Type extends "undefined"
+                    ? _Undefined
                     : never;
 
 declare interface _Common<Type extends _ALLOWED_TYPES, Input = unknown> {
@@ -54,11 +54,172 @@ declare interface _Common<Type extends _ALLOWED_TYPES, Input = unknown> {
   describe(): _TypeClass<Type, Input>;
 }
 
-declare interface _Undefined extends _Common<"undefined"> {}
+declare interface _Array<Input> extends _Common<"array", Input> {
+  /**
+   * @example
+   * // [1, 2, 3].length >= 3
+   * ESTest([1, 2, 3], 'array').min(3) // pass
+   */
+  min(inputValue: number): _Array<Input>;
 
-declare interface _Null extends _Common<"null"> {}
+  /**
+   * @example
+   * // [1, 2, 3].length <= 3
+   * ESTest([1, 2, 3], 'array').max(3) // pass
+   */
+  max(inputValue: number): _Array<Input>;
+
+  /**
+   * @example
+   * // [1, 2, 3].length === 3
+   * ESTest([1, 2, 3], 'array').length(3) // pass
+   */
+  length(inputValue: number): _Array<Input>;
+
+  /**
+   * @example
+   * // Note: schema() only accepts 'object'.
+   *
+   * ESTest(data, 'array', 'custom error msg').schema({
+   *   name: 'string',
+   *   'msg?': 'string',
+   *   more: {
+   *     a: 'number',
+   *     'b?': 'number',
+   *   }
+   * })
+   *
+   * ESTest(data, 'array', 'custom error msg').schema({
+   *   name: 'string',
+   *   'msg?': 'string',
+   *   more: [{
+   *     a: 'number',
+   *     'b?': 'number',
+   *   }]
+   * })
+   */
+  schema(
+    arg: _ArraySchema<Input> extends object
+      ? _ObjectSchema<_ArraySchema<Input>>
+      : never,
+  ): _Array<Input>;
+
+  /**
+   * @example
+   * // "single case" cross field validation
+   *
+   * const data = [{
+   *   password: '123',
+   *   checkPassword: '123'
+   * }]
+   *
+   * // pass
+   * ESTest(data, 'array')
+   *  .schema({
+   *    password: 'string',
+   *    checkPassword: 'string',
+   *  })
+   *  .refine(val => val[0].password === val[0].checkPassword, 'password mismatch')
+   */
+  refine(fn: (arg: Input) => boolean, message: string): void;
+
+  /**
+   * @example
+   * // "multiple cases" cross field validation
+   *
+   * const data = [{
+   *   name: 'mike',
+   *   checkName: 'mike',
+   *   password: '123',
+   *   checkPassword: '123'
+   * }]
+   *
+   * // pass
+   * ESTest(data, 'array')
+   *  .schema({
+   *    name: 'string',
+   *    checkName: 'string',
+   *    password: 'string',
+   *    checkPassword: 'string',
+   *  })
+   *  .superRefine((val, ctx) => {
+   *    // case 1
+   *    if (val[0].name !== val[0].checkName) {
+   *      ctx.addIssue('name mismatch')
+   *    }
+   *
+   *    // case 2
+   *    if (val[0].password !== val[0].checkPassword) {
+   *      ctx.addIssue('password mismatch')
+   *    }
+   *  })
+   */
+  superRefine(
+    fn: (
+      arg: Input,
+      ctx: {
+        addIssue: (message: string) => void;
+      },
+    ) => void,
+  ): void;
+}
+
+declare interface _BigInt extends _Common<"bigint"> {
+  /**
+   * @example
+   * // 5n < 10n
+   * ESTest(5n, 'bigint').less(10n) // pass
+   */
+  less(inputValue: bigint): _BigInt;
+
+  /**
+   * @example
+   * // 5n <= 10n
+   * ESTest(5n, 'bigint').max(10n) // pass
+   */
+  max(inputValue: bigint): _BigInt;
+
+  /**
+   * @example
+   * // 15n > 10n
+   * ESTest(15n, 'bigint').greater(10n) // pass
+   */
+  greater(inputValue: bigint): _BigInt;
+
+  /**
+   * @example
+   * // 15n >= 10n
+   * ESTest(15n, 'bigint').min(10n) // pass
+   */
+  min(inputValue: bigint): _BigInt;
+
+  /**
+   * @example
+   * // 15n > 0n
+   * ESTest(15n, 'bigint').positive() // pass
+   */
+  positive(): _BigInt;
+
+  /**
+   * @example
+   * // -15n < 0n
+   * ESTest(-15n, 'bigint').negative() // pass
+   */
+  negative(): _BigInt;
+
+  /**
+   * @example
+   * // 15n % 3n === 0n
+   * ESTest(15n, 'bigint').multiple(3n) // pass
+   */
+  multiple(inputValue: bigint): _BigInt;
+}
 
 declare interface _Boolean extends _Common<"boolean"> {}
+
+declare interface _Function extends _Common<"function"> {}
+
+declare interface _Null extends _Common<"null"> {}
 
 declare interface _Number extends _Common<"number"> {
   /**
@@ -118,55 +279,91 @@ declare interface _Number extends _Common<"number"> {
   multiple(inputValue: number): _Number;
 }
 
-declare interface _BigInt extends _Common<"bigint"> {
+declare interface _Object<Input extends object = object>
+  extends _Common<"object", Input> {
   /**
    * @example
-   * // 5n < 10n
-   * ESTest(5n, 'bigint').less(10n) // pass
+   * // Note: schema() only accepts 'object'.
+   *
+   * ESTest(data, 'object', 'demo is {}').schema({
+   *   a: 'string',
+   *   demo: {
+   *     x: 'number',
+   *     'y?': 'number',
+   *   }
+   * })
+   *
+   * ESTest(data, 'object', 'demo is {}[]').schema({
+   *   a: 'string',
+   *   demo: [{
+   *     x: 'number',
+   *     'y?': 'number',
+   *   }]
+   * })
    */
-  less(inputValue: bigint): _BigInt;
+  schema(arg: _ObjectSchema<Input>): _Object<Input>;
 
   /**
    * @example
-   * // 5n <= 10n
-   * ESTest(5n, 'bigint').max(10n) // pass
+   * // "single case" cross field validation
+   *
+   * const data = {
+   *   password: '123',
+   *   checkPassword: '123'
+   * }
+   *
+   * // pass
+   * ESTest(data, 'object')
+   *  .schema({
+   *    password: 'string',
+   *    checkPassword: 'string',
+   *  })
+   *  .refine(val => val.password === val.checkPassword, 'password mismatch')
    */
-  max(inputValue: bigint): _BigInt;
+  refine(fn: (arg: Input) => boolean, message: string): void;
 
   /**
    * @example
-   * // 15n > 10n
-   * ESTest(15n, 'bigint').greater(10n) // pass
+   * // "multiple cases" cross field validation
+   *
+   * const data = {
+   *   name: 'mike',
+   *   checkName: 'mike',
+   *   password: '123',
+   *   checkPassword: '123'
+   * }
+   *
+   * // pass
+   * ESTest(data, 'object')
+   *  .schema({
+   *    name: 'string',
+   *    checkName: 'string',
+   *    password: 'string',
+   *    checkPassword: 'string',
+   *  })
+   *  .superRefine((val, ctx) => {
+   *    // case 1
+   *    if (val.name !== val.checkName) {
+   *      ctx.addIssue('name mismatch') // create an error msg
+   *    }
+   *
+   *    // case 2
+   *    if (val.password !== val.checkPassword) {
+   *      ctx.addIssue('password mismatch') // create an error msg
+   *    }
+   *  })
    */
-  greater(inputValue: bigint): _BigInt;
-
-  /**
-   * @example
-   * // 15n >= 10n
-   * ESTest(15n, 'bigint').min(10n) // pass
-   */
-  min(inputValue: bigint): _BigInt;
-
-  /**
-   * @example
-   * // 15n > 0n
-   * ESTest(15n, 'bigint').positive() // pass
-   */
-  positive(): _BigInt;
-
-  /**
-   * @example
-   * // -15n < 0n
-   * ESTest(-15n, 'bigint').negative() // pass
-   */
-  negative(): _BigInt;
-
-  /**
-   * @example
-   * // 15n % 3n === 0n
-   * ESTest(15n, 'bigint').multiple(3n) // pass
-   */
-  multiple(inputValue: bigint): _BigInt;
+  superRefine(
+    fn: (
+      arg: Input,
+      ctx: {
+        /**
+         * create an error msg
+         */
+        addIssue: (message: string) => void;
+      },
+    ) => void,
+  ): void;
 }
 
 declare interface _String extends _Common<"string"> {
@@ -285,204 +482,7 @@ declare interface _String extends _Common<"string"> {
 
 declare interface _Symbol extends _Common<"symbol"> {}
 
-declare interface _Function extends _Common<"function"> {}
-
-declare interface _Object<Input extends object = object>
-  extends _Common<"object", Input> {
-  /**
-   * @example
-   * // Note: schema() only accepts 'object'.
-   *
-   * ESTest(data, 'object', 'demo is {}').schema({
-   *   a: 'string',
-   *   demo: {
-   *     x: 'number',
-   *     'y?': 'number',
-   *   }
-   * })
-   *
-   * ESTest(data, 'object', 'demo is {}[]').schema({
-   *   a: 'string',
-   *   demo: [{
-   *     x: 'number',
-   *     'y?': 'number',
-   *   }]
-   * })
-   */
-  schema(arg: _ObjectSchema<Input>): _Object<Input>;
-
-  /**
-   * @example
-   * // "single case" cross field validation
-   *
-   * const data = {
-   *   password: '123',
-   *   checkPassword: '123'
-   * }
-   *
-   * // pass
-   * ESTest(data, 'object')
-   *  .schema({
-   *    password: 'string',
-   *    checkPassword: 'string',
-   *  })
-   *  .refine(val => val.password === val.checkPassword, 'password mismatch')
-   */
-  refine(fn: (arg: Input) => boolean, message: string): void;
-
-  /**
-   * @example
-   * // "multiple cases" cross field validation
-   *
-   * const data = {
-   *   name: 'mike',
-   *   checkName: 'mike',
-   *   password: '123',
-   *   checkPassword: '123'
-   * }
-   *
-   * // pass
-   * ESTest(data, 'object')
-   *  .schema({
-   *    name: 'string',
-   *    checkName: 'string',
-   *    password: 'string',
-   *    checkPassword: 'string',
-   *  })
-   *  .superRefine((val, ctx) => {
-   *    // case 1
-   *    if (val.name !== val.checkName) {
-   *      ctx.addIssue('name mismatch') // create an error msg
-   *    }
-   *
-   *    // case 2
-   *    if (val.password !== val.checkPassword) {
-   *      ctx.addIssue('password mismatch') // create an error msg
-   *    }
-   *  })
-   */
-  superRefine(
-    fn: (
-      arg: Input,
-      ctx: {
-        /**
-         * create an error msg
-         */
-        addIssue: (message: string) => void;
-      },
-    ) => void,
-  ): void;
-}
-
-declare interface _Array<Input> extends _Common<"array", Input> {
-  /**
-   * @example
-   * // [1, 2, 3].length >= 3
-   * ESTest([1, 2, 3], 'array').min(3) // pass
-   */
-  min(inputValue: number): _Array<Input>;
-
-  /**
-   * @example
-   * // [1, 2, 3].length <= 3
-   * ESTest([1, 2, 3], 'array').max(3) // pass
-   */
-  max(inputValue: number): _Array<Input>;
-
-  /**
-   * @example
-   * // [1, 2, 3].length === 3
-   * ESTest([1, 2, 3], 'array').length(3) // pass
-   */
-  length(inputValue: number): _Array<Input>;
-
-  /**
-   * @example
-   * // Note: schema() only accepts 'object'.
-   *
-   * ESTest(data, 'array', 'custom error msg').schema({
-   *   name: 'string',
-   *   'msg?': 'string',
-   *   more: {
-   *     a: 'number',
-   *     'b?': 'number',
-   *   }
-   * })
-   *
-   * ESTest(data, 'array', 'custom error msg').schema({
-   *   name: 'string',
-   *   'msg?': 'string',
-   *   more: [{
-   *     a: 'number',
-   *     'b?': 'number',
-   *   }]
-   * })
-   */
-  schema(
-    arg: _ArraySchema<Input> extends object
-      ? _ObjectSchema<_ArraySchema<Input>>
-      : never,
-  ): _Array<Input>;
-
-  /**
-   * @example
-   * // "single case" cross field validation
-   *
-   * const data = [{
-   *   password: '123',
-   *   checkPassword: '123'
-   * }]
-   *
-   * // pass
-   * ESTest(data, 'array')
-   *  .schema({
-   *    password: 'string',
-   *    checkPassword: 'string',
-   *  })
-   *  .refine(val => val[0].password === val[0].checkPassword, 'password mismatch')
-   */
-  refine(fn: (arg: Input) => boolean, message: string): void;
-
-  /**
-   * @example
-   * // "multiple cases" cross field validation
-   *
-   * const data = [{
-   *   name: 'mike',
-   *   checkName: 'mike',
-   *   password: '123',
-   *   checkPassword: '123'
-   * }]
-   *
-   * // pass
-   * ESTest(data, 'array')
-   *  .schema({
-   *    name: 'string',
-   *    checkName: 'string',
-   *    password: 'string',
-   *    checkPassword: 'string',
-   *  })
-   *  .superRefine((val, ctx) => {
-   *    // case 1
-   *    if (val[0].name !== val[0].checkName) {
-   *      ctx.addIssue('name mismatch')
-   *    }
-   *
-   *    // case 2
-   *    if (val[0].password !== val[0].checkPassword) {
-   *      ctx.addIssue('password mismatch')
-   *    }
-   *  })
-   */
-  superRefine(
-    fn: (
-      arg: Input,
-      ctx: {
-        addIssue: (message: string) => void;
-      },
-    ) => void,
-  ): void;
-}
+declare interface _Undefined extends _Common<"undefined"> {}
 
 /**
  * output a `console.error(...)`
