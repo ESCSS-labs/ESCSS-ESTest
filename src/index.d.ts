@@ -20,7 +20,7 @@ type _ObjectSchema<Type> = {
       : _ALLOWED_TYPES;
 };
 
-declare type _ClassType<
+declare type _TypeClass<
   Type extends _ALLOWED_TYPES,
   Input,
 > = Type extends "undefined"
@@ -51,7 +51,7 @@ declare interface _Common<Type extends _ALLOWED_TYPES, Input = unknown> {
    * // more helpful information
    * ESTest('foo', 'string').describe('a helpful information')
    */
-  describe(): _ClassType<Type, Input>;
+  describe(): _TypeClass<Type, Input>;
 }
 
 declare interface _Undefined extends _Common<"undefined"> {}
@@ -497,7 +497,7 @@ export declare function ESTest<Type extends _ALLOWED_TYPES, Input>(
   input: Input,
   type: Type,
   message?: string,
-): _ClassType<Type, Input>;
+): _TypeClass<Type, Input>;
 
 /**
  * output a `throw new Error(...)`
@@ -512,7 +512,7 @@ export declare function unSafeESTest<Type extends _ALLOWED_TYPES, Input>(
   input: Input,
   type: Type,
   message?: string,
-): _ClassType<Type, Input>;
+): _TypeClass<Type, Input>;
 
 /**
  * output a `console.error(...)`
@@ -527,7 +527,7 @@ export declare function ESTestForLibrary<Type extends _ALLOWED_TYPES, Input>(
   input: Input,
   type: Type,
   message?: string,
-): _ClassType<Type, Input>;
+): _TypeClass<Type, Input>;
 
 declare global {
   var __ESCSS_ESTEST__: {

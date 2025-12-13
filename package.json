@@ -1,14 +1,12 @@
 {
   "name": "escss-estest",
   "version": "2.6.1",
-  "description": "Non-intrusive JavaScript validator",
+  "description": "Non-intrusive JavaScript runtime validator",
   "keywords": [
     "JavaScript",
-    "TypeScript",
     "zero-dependency",
-    "schema-validation",
-    "zod",
-    "non-intrusive"
+    "runtime-testing",
+    "schema-validation"
   ],
   "license": "(AGPL-3.0-only OR Commercial)",
   "author": "Mike Lee",
