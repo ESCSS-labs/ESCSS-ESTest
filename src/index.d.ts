@@ -279,8 +279,10 @@ declare interface _Number extends _Common<"number"> {
   multiple(inputValue: number): _Number;
 }
 
-declare interface _Object<Input extends object = object>
-  extends _Common<"object", Input> {
+declare interface _Object<Input extends object = object> extends _Common<
+  "object",
+  Input
+> {
   /**
    * @example
    * // Note: schema() only accepts 'object'.
