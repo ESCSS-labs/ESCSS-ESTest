@@ -1,5 +1,5 @@
 import { _Common } from "./extends/_Common";
-import { _typeof, _error, _validate } from "./src/utils";
+import { _typeof, _error, _validate } from "../utils";
 
 export class _Array extends _Common {
   constructor(...args) {

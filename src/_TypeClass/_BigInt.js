@@ -1,5 +1,5 @@
 import { _Common } from "./extends/_Common";
-import { _typeof, _error } from "./src/utils";
+import { _typeof, _error } from "../utils";
 
 export class _BigInt extends _Common {
   constructor(...args) {
