@@ -1,5 +1,5 @@
 import { _Array } from "./_Array";
-import { _BigInt } from "./_Bigint";
+import { _BigInt } from "./_BigInt";
 import { _Boolean } from "./_Boolean";
 import { _Function } from "./_Function";
 import { _Null } from "./_Null";
