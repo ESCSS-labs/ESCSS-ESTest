@@ -8,27 +8,32 @@
     "runtime-testing",
     "schema-validation"
   ],
-  "license": "(AGPL-3.0-only OR Commercial)",
+  "repository": "https://github.com/ESCSS-labs",
   "author": "Mike Lee",
+  "license": "(AGPL-3.0-only OR Commercial)",
   "type": "module",
-  "exports": "./src/index.js",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
   "main": "./src/index.js",
-  "types": "./src/index.d.ts",
   "files": [
     "src"
   ],
+  "scripts": {
+    "format": "prettier src test --write --cache",
+    "lint": "eslint src test --fix --cache",
+    "check": "pnpm format && pnpm lint && pnpm vitest",
+    "format:check": "prettier --check .",
+    "test": "clear && node ./src/index.js"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "eslint": "^9.39.2",
     "globals": "^16.5.0",
     "prettier": "^3.7.4",
     "vitest": "^4.0.15"
-  },
-  "scripts": {
-    "format": "prettier . --write",
-    "format:check": "prettier --check .",
-    "lint": "eslint .",
-    "check": "pnpm format && pnpm lint && pnpm vitest",
-    "test": "clear && node ./src/index.js"
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { _Common } from "./extends/_Common";
 import { _typeof, _error } from "../utils";
 
@@ -119,7 +120,6 @@ export class _String extends _Common {
       /** The classic emailregex.com regex for RFC 5322-compliant emails */
       case "rfc5322Email":
         email =
-          // eslint-disable-next-line no-useless-escape
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         break;
 
@@ -131,7 +131,6 @@ export class _String extends _Common {
       /** Zod's default email regex (Gmail rules) */
       default:
         email =
-          // eslint-disable-next-line no-useless-escape
           /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/;
     }
 
