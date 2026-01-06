@@ -19,7 +19,7 @@ const _ALLOWED_TYPES = [
  * Use in following cases to test input:
  * - `ESTest()`
  * - `unsSafeESTest()`
- * - `ESTestForLibrary()`
+ * - `createESTest()`
  * @param {*} input
  * @param {string} type
  * @param {string} message

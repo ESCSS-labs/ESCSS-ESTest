@@ -29,7 +29,7 @@ Just for a guy who wants to survive in a **massive**, **legacy** JavaScript/Type
     - [Validate Schema (Zod Part)](#validate-schema-zod-part)
   - [unSafeESTest](#unsafeestestinput-any-type-string-message-string)
     - Usage is exactly the same as ESTest
-  - [ESTestForLibrary](#estestforlibraryinput-any-type-string-message-string)
+  - [createESTest](#createESTestinput-any-type-string-message-string)
     - Usage is exactly the same as ESTest
 - [Helper API](#helper-api)
   - [globalThis.\_\_ESCSS_ESTEST\_\_.message](#globalthis__escss_estest__message)
@@ -41,7 +41,7 @@ Just for a guy who wants to survive in a **massive**, **legacy** JavaScript/Type
 
 - `ESTest`: console.error --> decoupling / isESTestDisabled = true for high-performance
 - `unSafeESTest`: throw new Error
-- `ESTestForLibrary`: The default message is separated from `ESTest` & `unSafeESTest`
+- `createESTest`: The default message is separated from `ESTest` & `unSafeESTest`
 
 ## Core API
 
@@ -180,19 +180,19 @@ app.listen(port, () => {
 });
 ```
 
-### `ESTestForLibrary(input: unknown, type: string, message: string)`
+### `createESTest(input: unknown, type: string, message: string)`
 
 **Library's own default message**
 
 ```js
-import { ESTestForLibrary } from "escss-estest";
+import { createESTest } from "escss-estest";
 
 function ESTest(
   input,
   type,
   message = "[LibraryName] default message for others to help debugging",
 ) {
-  return ESTestForLibrary(input, type, message);
+  return createESTest(input, type, message);
 }
 ```
 
