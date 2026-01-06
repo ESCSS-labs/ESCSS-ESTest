@@ -522,10 +522,10 @@ export declare function unSafeESTest<Type extends _ALLOWED_TYPES, Input>(
  * @example
  * // wrap the function to provide a default message scope for the library
  * function ESTest(input, type, message = "[libraryName] your message for others to help debugging!!") {
- *  return ESTestForLibrary(input, type, message)
+ *  return createESTest(input, type, message)
  * }
  */
-export declare function ESTestForLibrary<Type extends _ALLOWED_TYPES, Input>(
+export declare function createESTest<Type extends _ALLOWED_TYPES, Input>(
   input: Input,
   type: Type,
   message?: string,

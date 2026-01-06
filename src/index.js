@@ -11,7 +11,7 @@ globalThis.__ESCSS_ESTEST__ = {
     unSafeESTest: {
       _count: 0,
     },
-    ESTestForLibrary: {
+    createESTest: {
       _count: 0,
     },
     _Common: {
@@ -134,8 +134,8 @@ export function unSafeESTest(input, type, message) {
   return _coreTest(input, type, message, true);
 }
 
-export function ESTestForLibrary(input, type, message) {
-  globalThis.__ESCSS_ESTEST__.analysis.ESTestForLibrary._count += 1;
+export function createESTest(input, type, message) {
+  globalThis.__ESCSS_ESTEST__.analysis.createESTest._count += 1;
 
   // early return and set 'undefined' type to prevent breaking
   if (globalThis.__ESCSS_ESTEST__.isESTestDisabled) {
